@@ -1,0 +1,366 @@
+"use client";
+
+import {
+  Diamond,
+  Download,
+  Eye,
+  Gem,
+  Plus,
+  Search,
+  ShieldCheck,
+  TrendingUp,
+} from "lucide-react";
+
+import InventorySidebar from "../InventorySidebar";
+
+const diamonds = [
+  {
+    id: 1,
+    stoneId: "DIA-000245",
+    shape: "Round Brilliant",
+    carat: "1.25 ct",
+    color: "F",
+    clarity: "VS1",
+    cut: "Excellent",
+    stock: "Available",
+    value: "₹ 4,85,000",
+  },
+  {
+    id: 2,
+    stoneId: "DIA-000246",
+    shape: "Princess",
+    carat: "0.85 ct",
+    color: "G",
+    clarity: "VVS2",
+    cut: "Very Good",
+    stock: "Available",
+    value: "₹ 2,95,000",
+  },
+  {
+    id: 3,
+    stoneId: "DIA-000247",
+    shape: "Oval",
+    carat: "1.50 ct",
+    color: "E",
+    clarity: "VS2",
+    cut: "Excellent",
+    stock: "Reserved",
+    value: "₹ 6,25,000",
+  },
+  {
+    id: 4,
+    stoneId: "DIA-000248",
+    shape: "Emerald",
+    carat: "0.75 ct",
+    color: "H",
+    clarity: "SI1",
+    cut: "Good",
+    stock: "Available",
+    value: "₹ 1,85,000",
+  },
+];
+
+export default function DiamondInventory() {
+  return (
+    <div className="min-h-screen bg-[#090a09] text-white">
+
+      <InventorySidebar />
+
+      <main className="ml-64 min-h-screen p-5">
+
+        {/* HEADER */}
+        <div className="mb-6 flex items-start justify-between">
+
+          <div>
+            <p className="text-sm text-gray-500">
+              Inventory / Diamond Inventory
+            </p>
+
+            <h1 className="mt-2 text-3xl font-bold">
+              Diamond Inventory
+            </h1>
+
+            <p className="mt-1 text-gray-400">
+              Manage diamonds, certificates, grading and stock valuation.
+            </p>
+          </div>
+
+          <div className="flex gap-3">
+
+            <button className="flex items-center gap-2 rounded-lg border border-[#40351a] px-4 py-2 text-sm text-gray-300 hover:border-[#d9a928] hover:text-[#e4b52d]">
+              <Download size={16} />
+              Export
+            </button>
+
+            <button className="flex items-center gap-2 rounded-lg bg-[#d9a928] px-4 py-2 text-sm font-semibold text-black hover:bg-[#f0c43c]">
+              <Plus size={17} />
+              Add Diamond
+            </button>
+
+          </div>
+
+        </div>
+
+        {/* KPI CARDS */}
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+
+          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+
+            <div className="flex items-center justify-between">
+              <Diamond
+                size={27}
+                className="text-[#e4b52d]"
+              />
+
+              <TrendingUp
+                size={18}
+                className="text-green-400"
+              />
+            </div>
+
+            <p className="mt-5 text-xs text-gray-500">
+              TOTAL DIAMONDS
+            </p>
+
+            <h2 className="mt-2 text-2xl font-bold">
+              1,248
+            </h2>
+
+          </div>
+
+          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+
+            <div className="flex items-center justify-between">
+              <Gem
+                size={27}
+                className="text-[#e4b52d]"
+              />
+            </div>
+
+            <p className="mt-5 text-xs text-gray-500">
+              TOTAL CARAT WEIGHT
+            </p>
+
+            <h2 className="mt-2 text-2xl font-bold">
+              856.75 ct
+            </h2>
+
+          </div>
+
+          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+
+            <div className="flex items-center justify-between">
+              <ShieldCheck
+                size={27}
+                className="text-[#e4b52d]"
+              />
+            </div>
+
+            <p className="mt-5 text-xs text-gray-500">
+              CERTIFIED DIAMONDS
+            </p>
+
+            <h2 className="mt-2 text-2xl font-bold text-green-400">
+              1,086
+            </h2>
+
+          </div>
+
+          <div className="rounded-xl border border-[#7b5c17] bg-[#17140c] p-5">
+
+            <div className="flex items-center justify-between">
+              <Diamond
+                size={27}
+                className="text-[#e4b52d]"
+              />
+            </div>
+
+            <p className="mt-5 text-xs text-gray-500">
+              TOTAL STOCK VALUE
+            </p>
+
+            <h2 className="mt-2 text-2xl font-bold text-[#e4b52d]">
+              ₹ 18.45 Cr
+            </h2>
+
+          </div>
+
+        </div>
+
+        {/* FILTERS */}
+        <div className="mt-5 rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+
+            <div className="flex items-center gap-3 rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3">
+
+              <Search
+                size={18}
+                className="text-gray-500"
+              />
+
+              <input
+                type="text"
+                placeholder="Search diamond..."
+                className="w-full bg-transparent text-sm text-gray-300 outline-none placeholder:text-gray-600"
+              />
+
+            </div>
+
+            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none">
+
+              <option>All Shapes</option>
+              <option>Round Brilliant</option>
+              <option>Princess</option>
+              <option>Oval</option>
+              <option>Emerald</option>
+
+            </select>
+
+            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none">
+
+              <option>All Colors</option>
+              <option>D</option>
+              <option>E</option>
+              <option>F</option>
+              <option>G</option>
+              <option>H</option>
+
+            </select>
+
+            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none">
+
+              <option>All Clarity</option>
+              <option>FL</option>
+              <option>VVS1</option>
+              <option>VVS2</option>
+              <option>VS1</option>
+              <option>VS2</option>
+              <option>SI1</option>
+
+            </select>
+
+            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none">
+
+              <option>All Stock</option>
+              <option>Available</option>
+              <option>Reserved</option>
+              <option>Sold</option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+        {/* DIAMOND TABLE */}
+        <div className="mt-5 rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+
+          <div className="mb-5 border-b border-[#302b1d] pb-4">
+
+            <h2 className="font-semibold text-[#e4b52d]">
+              DIAMOND STOCK
+            </h2>
+
+            <p className="mt-1 text-xs text-gray-500">
+              View and manage all diamond inventory
+            </p>
+
+          </div>
+
+          <div className="overflow-x-auto rounded-lg border border-[#302b1d]">
+
+            <table className="w-full min-w-[1200px] text-left text-sm">
+
+              <thead className="bg-[#171711] text-xs text-gray-400">
+
+                <tr>
+                  <th className="px-4 py-4">STONE ID</th>
+                  <th className="px-4 py-4">SHAPE</th>
+                  <th className="px-4 py-4">CARAT</th>
+                  <th className="px-4 py-4">COLOR</th>
+                  <th className="px-4 py-4">CLARITY</th>
+                  <th className="px-4 py-4">CUT</th>
+                  <th className="px-4 py-4">STOCK</th>
+                  <th className="px-4 py-4">VALUE</th>
+                  <th className="px-4 py-4">ACTION</th>
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                {diamonds.map((diamond) => (
+
+                  <tr
+                    key={diamond.id}
+                    className="border-t border-[#302b1d] text-gray-300"
+                  >
+
+                    <td className="px-4 py-4 text-[#e4b52d]">
+                      {diamond.stoneId}
+                    </td>
+
+                    <td className="px-4 py-4 font-medium text-white">
+                      {diamond.shape}
+                    </td>
+
+                    <td className="px-4 py-4">
+                      {diamond.carat}
+                    </td>
+
+                    <td className="px-4 py-4 text-[#e4b52d]">
+                      {diamond.color}
+                    </td>
+
+                    <td className="px-4 py-4">
+                      {diamond.clarity}
+                    </td>
+
+                    <td className="px-4 py-4">
+                      {diamond.cut}
+                    </td>
+
+                    <td className="px-4 py-4">
+
+                      <span
+                        className={
+                          diamond.stock === "Available"
+                            ? "rounded-md border border-green-900 bg-green-950/30 px-3 py-1 text-xs text-green-400"
+                            : "rounded-md border border-yellow-900 bg-yellow-950/30 px-3 py-1 text-xs text-yellow-400"
+                        }
+                      >
+                        {diamond.stock}
+                      </span>
+
+                    </td>
+
+                    <td className="px-4 py-4 font-semibold text-[#e4b52d]">
+                      {diamond.value}
+                    </td>
+
+                    <td className="px-4 py-4">
+
+                      <button className="text-gray-400 hover:text-[#e4b52d]">
+                        <Eye size={17} />
+                      </button>
+
+                    </td>
+
+                  </tr>
+
+                ))}
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </main>
+
+    </div>
+  );
+}
