@@ -68,9 +68,9 @@ export default function RepairSidebar() {
   ];
 
   return (
-    <aside className="w-72 min-h-screen bg-[#111111] border-r border-yellow-500/20">
+    <aside className="w-72 min-h-screen bg-[#111111] border-r border-yellow-500/20 flex flex-col">
 
-      {/* Logo Section */}
+      {/* Logo */}
 
       <div className="h-28 border-b border-yellow-500/20 flex items-center justify-center">
 
@@ -88,7 +88,7 @@ export default function RepairSidebar() {
               Luxury Gold ERP
             </h1>
 
-            <p className="text-gray-400 text-sm mt-1">
+            <p className="text-sm text-gray-400">
               Jewellery Management
             </p>
 
@@ -98,16 +98,17 @@ export default function RepairSidebar() {
 
       </div>
 
-      {/* Navigation */}
+      {/* Menu */}
 
-      <nav className="p-5 space-y-2">
+      <nav className="flex-1 p-5 space-y-2">
 
         {menuItems.map((item) => {
           const Icon = item.icon;
 
           const active =
-            pathname === item.href ||
-            pathname.startsWith(item.href + "/");
+            item.href === "/repair"
+              ? pathname === "/repair"
+              : pathname === item.href;
 
           return (
             <Link
@@ -122,11 +123,38 @@ export default function RepairSidebar() {
               <Icon size={20} />
 
               <span>{item.title}</span>
+
             </Link>
           );
         })}
 
       </nav>
+
+      {/* Footer */}
+
+      <div className="border-t border-yellow-500/20 p-5">
+
+        <div className="flex items-center gap-3">
+
+          <div className="w-11 h-11 rounded-full bg-black border border-gray-700 flex items-center justify-center text-white font-bold">
+            N
+          </div>
+
+          <div>
+
+            <p className="text-white font-medium">
+              Admin
+            </p>
+
+            <p className="text-xs text-gray-400">
+              Luxury Gold ERP
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
 
     </aside>
   );

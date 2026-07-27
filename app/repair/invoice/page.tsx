@@ -1,0 +1,204 @@
+"use client";
+
+import Link from "next/link";
+import {
+  ArrowLeft,
+  Printer,
+  Download,
+  Eye,
+  Pencil,
+} from "lucide-react";
+
+export default function RepairInvoicePage() {
+  return (
+    <main className="min-h-screen bg-[#0B0B0B] text-white p-8">
+
+      {/* Header */}
+
+      <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-5 mb-8">
+
+        <div>
+
+          <h1 className="text-4xl font-bold text-yellow-500">
+            Repair Invoice
+          </h1>
+
+          <p className="text-gray-400 mt-2">
+            Invoice for completed repair
+          </p>
+
+        </div>
+
+        <div className="flex flex-wrap gap-3">
+
+          <Link
+            href="/repair"
+            className="flex items-center gap-2 border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black px-5 py-3 rounded-xl transition"
+          >
+            <ArrowLeft size={18} />
+            Back
+          </Link>
+
+          <Link
+            href="/repair/details/REP001"
+            className="flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-white px-5 py-3 rounded-xl transition"
+          >
+            <Eye size={18} />
+            Details
+          </Link>
+
+          <Link
+            href="/repair/edit/REP001"
+            className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-black px-5 py-3 rounded-xl transition"
+          >
+            <Pencil size={18} />
+            Edit
+          </Link>
+
+        </div>
+
+      </div>
+
+      {/* Invoice Card */}
+
+      <div className="max-w-6xl mx-auto bg-[#141414] border border-yellow-500/20 rounded-2xl p-8">
+
+        <div className="grid md:grid-cols-2 gap-8">
+
+          <div>
+
+            <h2 className="text-2xl font-bold text-yellow-500 mb-6">
+              Customer Details
+            </h2>
+
+            <div className="space-y-4">
+
+              <p><strong>Name:</strong> Rahul Patel</p>
+
+              <p><strong>Mobile:</strong> 9876543210</p>
+
+              <p><strong>Invoice No:</strong> INV-2026-001</p>
+
+              <p><strong>Repair ID:</strong> REP001</p>
+
+              <p><strong>Date:</strong> 28 Jul 2026</p>
+
+            </div>
+
+          </div>
+
+          <div>
+
+            <h2 className="text-2xl font-bold text-yellow-500 mb-6">
+              Repair Summary
+            </h2>
+
+            <div className="space-y-4">
+
+              <p><strong>Product:</strong> Gold Ring</p>
+
+              <p><strong>Repair Type:</strong> Ring Resize</p>
+
+              <p><strong>Worker:</strong> Ramesh</p>
+
+              <p><strong>Status:</strong> Completed</p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* Charges */}
+
+        <div className="mt-10">
+
+          <table className="w-full border border-gray-700">
+
+            <thead className="bg-[#1B1B1B]">
+
+              <tr>
+
+                <th className="p-4 text-left text-yellow-500">
+                  Description
+                </th>
+
+                <th className="p-4 text-right text-yellow-500">
+                  Amount
+                </th>
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr className="border-t border-gray-700">
+
+                <td className="p-4">
+                  Repair Charges
+                </td>
+
+                <td className="p-4 text-right">
+                  ₹1,500
+                </td>
+
+              </tr>
+
+              <tr className="border-t border-gray-700">
+
+                <td className="p-4">
+                  GST
+                </td>
+
+                <td className="p-4 text-right">
+                  ₹270
+                </td>
+
+              </tr>
+
+              <tr className="border-t border-gray-700 font-bold">
+
+                <td className="p-4 text-yellow-500">
+                  Total
+                </td>
+
+                <td className="p-4 text-right text-yellow-500">
+                  ₹1,770
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+        {/* Buttons */}
+
+        <div className="flex flex-wrap gap-4 mt-10">
+
+          <button
+            onClick={() => window.print()}
+            className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-black px-6 py-3 rounded-xl font-semibold transition"
+          >
+            <Printer size={18} />
+            Print Invoice
+          </button>
+
+          <button
+            onClick={() => alert("Invoice Downloaded")}
+            className="flex items-center gap-2 bg-green-500 hover:bg-green-400 text-black px-6 py-3 rounded-xl font-semibold transition"
+          >
+            <Download size={18} />
+            Download PDF
+          </button>
+
+        </div>
+
+      </div>
+
+    </main>
+  );
+}
