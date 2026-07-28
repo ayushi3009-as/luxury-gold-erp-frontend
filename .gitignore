@@ -39,3 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Dependencies
+node_modules/
+
+# Next.js build files
+.next/
+out/
+
+# Ignore nested projects
+**/node_modules/
+**/.next/
+
+# Environment files
+.env
+.env.local
