@@ -102,7 +102,7 @@ export default function InventorySidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed left-0 top-0 z-50 h-screen w-64 overflow-y-auto border-r border-[#3d3218] bg-[#0d0f0d] p-4 text-white">
+    <aside className="sticky top-0 z-50 h-screen w-64 overflow-y-auto border-r border-[#3d3218] bg-[#0d0f0d] p-4 text-white">
 
       {/* Header */}
       <div className="mb-6 border-b border-[#3d3218] pb-5">
