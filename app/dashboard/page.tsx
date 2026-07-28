@@ -241,10 +241,10 @@ export default function Home() {
           </header>
 
           {/* CONTENT */}
-          <div className="p-5">
+          <div className="p-4 xl:p-5">
 
             {/* STATS */}
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-6">
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
 
               {stats.map((stat) => {
                 const Icon = stat.icon;
@@ -309,7 +309,7 @@ export default function Home() {
             </div>
 
             {/* MIDDLE SECTION */}
-            <div className="mt-5 grid gap-5 xl:grid-cols-3">
+            <div className="mt-5 grid gap-5 xl:grid-cols-3 2xl:grid-cols-3">
 
               {/* SALES */}
               <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
@@ -458,7 +458,7 @@ export default function Home() {
             </div>
 
             {/* LOWER SECTION */}
-            <div className="mt-5 grid gap-5 xl:grid-cols-3">
+            <div className="mt-5 grid gap-5 xl:grid-cols-3 2xl:grid-cols-3">
 
               {/* INVENTORY */}
               <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
