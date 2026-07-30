@@ -1,94 +1,180 @@
 "use client";
 
-import { ShoppingCart, PackageCheck, FileText, Download, Filter, Plus, Truck, RotateCcw } from "lucide-react";
+import { useState, useEffect } from "react";
+import {
+  ArrowUpRight,
+  ClipboardList,
+  CalendarDays,
+  ChevronDown,
+  IndianRupee,
+  PackageCheck,
+  ShoppingCart,
+  Users,
+  Loader2
+} from "lucide-react";
 
 export default function PurchaseDashboard() {
+  const [data, setData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchDashboard() {
+      try {
+        const res = await fetch('/api/purchase/dashboard');
+        if (res.ok) {
+          const json = await res.json();
+          setData(json);
+        }
+      } catch (error) {
+        console.error("Failed to fetch purchase dashboard data", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchDashboard();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center">
+        <Loader2 className="animate-spin text-accent-gold" size={40} />
+      </div>
+    );
+  }
+
+  const m = data?.metrics || { totalPurchaseValue: 0, totalOrders: 0, pendingOrders: 0, totalSuppliers: 0 };
+  const recentOrders = data?.recentOrders || [];
+
   return (
-    <main className="p-8 text-text-primary min-h-screen">
-      <div className="flex justify-between items-center mb-8">
-        <div>
-          <h1 className="text-3xl font-bold text-accent-gold flex items-center gap-3">
-            <ShoppingCart size={32} />
-            Purchase Management
-          </h1>
-          <p className="text-text-secondary mt-1">Manage purchase orders, suppliers, and received stock.</p>
-        </div>
-        <button className="flex items-center gap-2 bg-accent-gold text-black px-4 py-2 rounded-md font-medium hover:bg-accent-gold">
-          <Plus size={18} />
-          Create Purchase Order
-        </button>
-      </div>
+    <div className="relative min-h-[80vh] p-6 text-text-primary">
+      {/* Decorative Blur */}
+      <div className="absolute top-[0%] right-[10%] w-[400px] h-[400px] rounded-full bg-accent-gold/5 blur-3xl pointer-events-none"></div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {[
-          { title: "Total Purchases", value: "₹ 45.2L", icon: ShoppingCart, color: "text-blue-400" },
-          { title: "Pending Orders", value: "12", icon: FileText, color: "text-accent-gold" },
-          { title: "Stock Received", value: "320", icon: PackageCheck, color: "text-green-400" },
-          { title: "Active Suppliers", value: "48", icon: Truck, color: "text-purple-400" },
-        ].map((kpi, idx) => {
-          const Icon = kpi.icon;
-          return (
-            <div key={idx} className="bg-background-secondary border border-border-theme rounded-xl p-6 flex items-center justify-between">
-              <div>
-                <p className="text-sm text-text-secondary mb-1">{kpi.title}</p>
-                <h3 className="text-2xl font-bold text-text-primary">{kpi.value}</h3>
-              </div>
-              <div className={`p-3 rounded-lg bg-background-tertiary ${kpi.color}`}>
-                <Icon size={24} />
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <div className="relative z-10">
+        {/* HEADER */}
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-accent-gold/80">Purchase Module</p>
+            <h1 className="mt-1 text-3xl font-bold bg-gradient-to-r from-accent-gold to-yellow-200 bg-clip-text text-transparent">Purchase Dashboard</h1>
+            <p className="mt-1 text-sm text-text-secondary">Monitor supplier orders, goods receipt, and expenses.</p>
+          </div>
 
-      <div className="bg-background-secondary border border-border-theme rounded-xl">
-        <div className="p-6 border-b border-border-theme flex justify-between items-center">
-          <h2 className="text-xl font-semibold text-accent-gold">Recent Purchase Orders</h2>
-          <div className="flex gap-4">
-             <button className="flex items-center gap-2 bg-background-tertiary text-text-secondary border border-border-theme px-4 py-2 rounded-md text-sm hover:text-accent-gold">
-               <Filter size={16} />
-               Filter
-             </button>
-             <button className="flex items-center gap-2 bg-background-tertiary text-text-secondary border border-border-theme px-4 py-2 rounded-md text-sm hover:text-accent-gold">
-               <Download size={16} />
-               Export
-             </button>
+          <div className="flex items-center gap-3">
+            <button className="flex items-center gap-2 rounded-xl border border-white/10 bg-background-secondary/50 backdrop-blur-md px-5 py-2.5 text-sm font-medium text-white transition-all hover:border-accent-gold/50">
+              <CalendarDays size={16} className="text-accent-gold" />
+              This Month
+              <ChevronDown size={15} />
+            </button>
+            <button className="rounded-xl bg-accent-gold px-6 py-2.5 text-sm font-bold text-black transition-all hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-[1.02]">
+              New Purchase Order
+            </button>
           </div>
         </div>
-        
-        <div className="overflow-x-auto">
-          <table className="w-full text-left">
-            <thead className="bg-background-secondary text-text-secondary text-xs uppercase tracking-wider">
-              <tr>
-                <th className="px-6 py-4">PO Number</th>
-                <th className="px-6 py-4">Supplier</th>
-                <th className="px-6 py-4">Amount</th>
-                <th className="px-6 py-4">Date</th>
-                <th className="px-6 py-4 text-right">Status</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#2b2617] text-sm">
-              {[
-                { po: "PO-2026-001", supplier: "Global Gold Traders", amount: "₹ 12,50,000", date: "29-07-2026", status: "Completed", color: "text-green-400 bg-green-500/20" },
-                { po: "PO-2026-002", supplier: "Surat Diamond Co", amount: "₹ 8,75,000", date: "28-07-2026", status: "Pending", color: "text-accent-gold bg-accent-gold/20" },
-                { po: "PO-2026-003", supplier: "Mumbai Gems & Jewels", amount: "₹ 4,20,000", date: "25-07-2026", status: "In Transit", color: "text-blue-400 bg-blue-500/20" },
-              ].map((order, idx) => (
-                <tr key={idx} className="hover:bg-background-secondary transition-colors">
-                  <td className="px-6 py-4 font-medium text-text-primary">{order.po}</td>
-                  <td className="px-6 py-4 text-text-secondary">{order.supplier}</td>
-                  <td className="px-6 py-4 text-text-secondary">{order.amount}</td>
-                  <td className="px-6 py-4 text-text-secondary">{order.date}</td>
-                  <td className="px-6 py-4 text-right">
-                    <span className={`px-2 py-1 rounded-full text-xs ${order.color}`}>
-                      {order.status}
-                    </span>
-                  </td>
+
+        {/* KPI CARDS */}
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <StatCard
+            title="TOTAL PURCHASE VALUE"
+            value={`₹ ${m.totalPurchaseValue.toLocaleString()}`}
+            change="Approved only"
+            icon={<IndianRupee size={22} />}
+          />
+          <StatCard
+            title="TOTAL PURCHASE ORDERS"
+            value={m.totalOrders.toLocaleString()}
+            change="All time"
+            icon={<ShoppingCart size={22} />}
+          />
+          <StatCard
+            title="PENDING APPROVALS"
+            value={m.pendingOrders.toLocaleString()}
+            change="Requires action"
+            icon={<ClipboardList size={22} />}
+          />
+          <StatCard
+            title="ACTIVE SUPPLIERS"
+            value={m.totalSuppliers.toString()}
+            change="Registered"
+            icon={<Users size={22} />}
+          />
+        </div>
+
+        {/* RECENT ORDERS */}
+        <div className="mt-8 rounded-2xl border border-white/5 bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/20 via-transparent to-transparent"></div>
+          
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="text-lg font-bold tracking-wide text-white">RECENT PURCHASE ORDERS</h2>
+              <p className="mt-0.5 text-xs text-text-secondary">Latest orders sent to suppliers</p>
+            </div>
+            <span className="cursor-pointer text-xs font-semibold text-accent-gold hover:text-yellow-400 transition-colors">View All →</span>
+          </div>
+
+          <div className="overflow-x-auto rounded-xl border border-white/10 bg-black/20">
+            <table className="w-full text-left text-sm">
+              <thead className="border-b border-white/10 bg-white/5 text-xs font-semibold tracking-wider text-text-secondary">
+                <tr>
+                  <th className="px-5 py-4">PO NUMBER</th>
+                  <th className="px-5 py-4">SUPPLIER</th>
+                  <th className="px-5 py-4">DATE</th>
+                  <th className="px-5 py-4">STATUS</th>
+                  <th className="px-5 py-4 text-right">AMOUNT</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                {recentOrders.length === 0 ? (
+                  <tr>
+                    <td colSpan={5} className="px-5 py-8 text-center text-text-secondary">No purchase orders found.</td>
+                  </tr>
+                ) : (
+                  recentOrders.map((order: any, idx: number) => (
+                    <tr key={idx} className="transition-colors hover:bg-white/5 group">
+                      <td className="px-5 py-4">
+                        <span className="font-mono text-white/70 group-hover:text-white transition-colors">{order.id}</span>
+                      </td>
+                      <td className="px-5 py-4 font-semibold text-white">{order.supplier}</td>
+                      <td className="px-5 py-4 text-text-secondary">{new Date(order.date).toLocaleDateString()}</td>
+                      <td className="px-5 py-4">
+                        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border ${
+                          order.status === 'APPROVED' ? 'bg-green-400/10 text-green-400 border-green-400/20' :
+                          order.status === 'PENDING' ? 'bg-yellow-400/10 text-yellow-400 border-yellow-400/20' :
+                          'bg-white/10 text-white/70 border-white/20'
+                        }`}>
+                          {order.status}
+                        </span>
+                      </td>
+                      <td className="px-5 py-4 text-right font-bold text-accent-gold">{order.amount}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </main>
+    </div>
+  );
+}
+
+function StatCard({ title, value, change, icon }: { title: string; value: string; change: string; icon: React.ReactNode; }) {
+  return (
+    <div className="group rounded-2xl border border-white/5 bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl transition-all hover:border-accent-gold/30 hover:bg-white/5 hover:shadow-[0_0_30px_rgba(212,175,55,0.05)] relative overflow-hidden">
+      <div className="absolute top-0 right-0 p-32 bg-accent-gold/5 rounded-full blur-3xl -mr-16 -mt-16 transition-opacity opacity-0 group-hover:opacity-100"></div>
+      
+      <div className="relative z-10">
+        <div className="flex items-center justify-between">
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-gold/10 text-accent-gold ring-1 ring-accent-gold/20 shadow-inner">
+            {icon}
+          </div>
+          <span className="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/60">
+            {change}
+          </span>
+        </div>
+
+        <p className="mt-6 text-xs font-semibold tracking-wider text-text-secondary group-hover:text-white/70 transition-colors">{title}</p>
+        <h3 className="mt-1 text-3xl font-bold text-white tracking-tight">{value}</h3>
+      </div>
+    </div>
   );
 }

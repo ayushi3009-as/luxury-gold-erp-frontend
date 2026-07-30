@@ -14,7 +14,6 @@ export default function AppLayout({ children, userRole }: { children: React.Reac
     pathname === "/" || 
     pathname === "/login" || 
     pathname.startsWith("/shop") || 
-    pathname.startsWith("/product") || 
     pathname.startsWith("/cart");
 
   if (isPublicPage) {

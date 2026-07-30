@@ -1,14 +1,20 @@
-"use client";
+import React from "react";
+import PurchaseNav from "./PurchaseNav";
 
-import PurchaseNav from "@/components/layout/PurchaseNav";
-
-export default function PurchaseLayout({ children }: { children: React.ReactNode }) {
+export default function PurchaseLayout({
+  children
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <div className="flex flex-col min-h-screen bg-background-primary">
+    <div className="flex h-screen flex-col overflow-hidden bg-background-primary text-white">
+      {/* Top Navigation */}
       <PurchaseNav />
-      <div className="flex-1 overflow-y-auto">
+
+      {/* Main Content */}
+      <main className="flex-1 overflow-y-auto">
         {children}
-      </div>
+      </main>
     </div>
   );
 }

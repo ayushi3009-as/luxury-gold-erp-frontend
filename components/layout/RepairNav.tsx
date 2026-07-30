@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import { useState, useRef, useEffect } from "react";
 import {
-  Gem,
+  Wrench,
   LayoutDashboard,
   PlusCircle,
-  ClipboardList,
-  Users,
   Activity,
   Truck,
+  ChevronDown,
+  Users,
   Receipt,
   BarChart3,
   Bell,
@@ -18,8 +18,21 @@ import {
 
 export default function RepairNav() {
   const pathname = usePathname();
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const menuItems = [
+  // Close dropdown on click outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsMoreOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const primaryItems = [
     {
       title: "Repair Dashboard",
       href: "/repair",
@@ -31,16 +44,6 @@ export default function RepairNav() {
       icon: PlusCircle,
     },
     {
-      title: "Repair Tracking",
-      href: "/repair/tracking",
-      icon: ClipboardList,
-    },
-    {
-      title: "Worker Assignment",
-      href: "/repair/worker-assignment",
-      icon: Users,
-    },
-    {
       title: "Repair Status",
       href: "/repair/status",
       icon: Activity,
@@ -50,114 +53,103 @@ export default function RepairNav() {
       href: "/repair/delivery",
       icon: Truck,
     },
+  ];
+
+  const moreItems = [
+    {
+      title: "Worker Assignment",
+      href: "/repair/worker-assignment",
+      icon: Users,
+    },
     {
       title: "Repair Invoice",
       href: "/repair/invoice",
       icon: Receipt,
     },
     {
-      title: "Repair Reports",
+      title: "Reports",
       href: "/repair/reports",
       icon: BarChart3,
     },
     {
-      title: "Customer Notifications",
+      title: "Notifications",
       href: "/repair/notifications",
       icon: Bell,
     },
   ];
 
+  const isActive = (href: string) => {
+    if (href === "/repair") return pathname === "/repair";
+    return pathname.startsWith(href);
+  };
+
   return (
-    <nav className="flex items-center gap-2 overflow-x-auto border-b border-border-theme bg-background-primary px-6 py-3 w-full [&::-webkit-scrollbar]:hidden">
+    <nav className="relative z-[100] flex items-center justify-between border-b border-white/5 bg-[#111111]/80 backdrop-blur-xl px-6 py-4 w-full">
+      <div className="flex items-center gap-6">
+        <span className="text-sm font-bold tracking-widest uppercase text-accent-gold hidden md:block">
+          Repair Modules
+        </span>
+        <div className="flex items-center gap-2">
+          {primaryItems.map((item) => {
+            const Icon = item.icon;
+            const active = isActive(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-300 ${
+                  active
+                    ? "bg-accent-gold text-black font-bold shadow-[0_0_15px_rgba(212,175,55,0.3)]"
+                    : "text-text-secondary hover:bg-white/5 hover:text-white"
+                }`}
+              >
+                <Icon size={18} />
+                <span className="text-sm font-semibold">{item.title}</span>
+              </Link>
+            );
+          })}
 
-    
-
-      {/* Logo */}
-
-      <div className="h-28 border-b border-border-theme flex items-center justify-center">
-
-        <div className="flex items-center gap-4">
-
-          <div className="w-14 h-14 rounded-2xl bg-accent-gold/10 border border-border-theme flex items-center justify-center">
-
-            <Gem className="w-8 h-8 text-accent-gold" />
-
-          </div>
-
-          <div>
-
-            
-
-            <p className="text-sm text-text-secondary">
-              Jewellery Management
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      {/* Menu */}
-
-      
-
-        {menuItems.map((item) => {
-          const Icon = item.icon;
-
-          const active =
-            item.href === "/repair"
-              ? pathname === "/repair"
-              : pathname === item.href;
-
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
-                active
-                  ? "bg-accent-gold text-black font-semibold shadow-lg"
-                  : "text-text-secondary hover:bg-background-tertiary hover:text-accent-gold"
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setIsMoreOpen(!isMoreOpen)}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-300 ${
+                isMoreOpen || moreItems.some((i) => isActive(i.href))
+                  ? "bg-white/10 text-white font-bold"
+                  : "text-text-secondary hover:bg-white/5 hover:text-white"
               }`}
             >
-              <Icon size={20} />
+              <span className="text-sm font-semibold">More</span>
+              <ChevronDown size={18} className={`transition-transform ${isMoreOpen ? 'rotate-180' : ''}`} />
+            </button>
 
-              <span>{item.title}</span>
-
-            </Link>
-          );
-        })}
-
-      
-
-      {/* Footer */}
-
-      <div className="border-t border-border-theme p-5">
-
-        <div className="flex items-center gap-3">
-
-          <div className="w-11 h-11 rounded-full bg-background-primary border border-gray-700 flex items-center justify-center text-text-primary font-bold">
-            N
+            {isMoreOpen && (
+              <div className="absolute top-full left-0 mt-2 w-56 rounded-xl border border-white/10 bg-[#151515] shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2">
+                <div className="p-2 flex flex-col gap-1">
+                  {moreItems.map((item) => {
+                    const Icon = item.icon;
+                    const active = isActive(item.href);
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setIsMoreOpen(false)}
+                        className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
+                          active
+                            ? "bg-accent-gold/20 text-accent-gold"
+                            : "text-text-secondary hover:bg-white/5 hover:text-white"
+                        }`}
+                      >
+                        <Icon size={16} />
+                        <span className="text-sm font-medium">{item.title}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
-
-          <div>
-
-            <p className="text-text-primary font-medium">
-              Admin
-            </p>
-
-            <p className="text-xs text-text-secondary">
-              Luxury Gold ERP
-            </p>
-
-          </div>
-
         </div>
-
       </div>
-
-    
-  
     </nav>
   );
 }

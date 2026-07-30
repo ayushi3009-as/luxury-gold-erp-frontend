@@ -1,95 +1,166 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { Search, Filter, Plus, Box, Loader2, Sparkles } from "lucide-react";
 
-import ProductSearch from "@/components/products/ProductSearch";
-import ProductFilter from "@/components/products/ProductFilter";
-import ProductTable from "@/components/products/ProductTable";
+export default function ProductsPage() {
+  const [data, setData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
-export default function ProductPage() {
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("");
-  const [status, setStatus] = useState("");
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  async function fetchProducts() {
+    try {
+      const res = await fetch('/api/products');
+      if (res.ok) {
+        const json = await res.json();
+        setData(json);
+      }
+    } catch (error) {
+      console.error("Failed to fetch products:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center">
+        <Loader2 className="animate-spin text-accent-gold" size={40} />
+      </div>
+    );
+  }
+
+  const m = data?.metrics || { totalProducts: 0, goldProducts: 0, diamondProducts: 0 };
+  const products = data?.products || [];
+
+  const filteredProducts = products.filter((p: any) => 
+    p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    p.sku.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <main className="min-h-screen bg-background-primary text-text-primary p-8">
+    <div className="relative min-h-[80vh] p-6 text-text-primary">
+      {/* Decorative Blur */}
+      <div className="absolute top-[-5%] left-[20%] w-[500px] h-[500px] rounded-full bg-accent-gold/5 blur-3xl pointer-events-none"></div>
 
-      {/* Header */}
+      <div className="relative z-10">
+        {/* HEADER */}
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-accent-gold to-yellow-200 bg-clip-text text-transparent flex items-center gap-3">
+              <Box size={28} className="text-accent-gold" />
+              Product Management
+            </h1>
+            <p className="mt-1 text-sm text-text-secondary">View and manage all jewellery pieces in your ERP.</p>
+          </div>
 
-      <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-5 mb-8">
-
-        <div>
-          <h1 className="text-4xl font-bold text-accent-gold">
-            Product Management
-          </h1>
-
-          <p className="text-text-secondary mt-2">
-            Manage all jewellery products
-          </p>
+          <Link href="/products/add">
+            <button className="flex items-center gap-2 rounded-xl bg-accent-gold px-6 py-2.5 text-sm font-bold text-black transition-all hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-[1.02]">
+              <Plus size={18} />
+              Add Product
+            </button>
+          </Link>
         </div>
 
-        <Link
-          href="/products/add"
-          className="flex items-center gap-2 bg-accent-gold hover:bg-accent-gold-hover text-black font-semibold px-6 py-3 rounded-xl transition"
-        >
-          <Plus size={20} />
-          Add Product
-        </Link>
+        {/* METRICS */}
+        <div className="grid gap-6 md:grid-cols-4 mb-8">
+          <div className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl p-6 border border-white/5 relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
+            <h3 className="text-xs tracking-widest uppercase font-semibold text-text-secondary">Total Products</h3>
+            <p className="text-4xl font-bold mt-2 text-white group-hover:text-accent-gold transition-colors">
+              {m.totalProducts}
+            </p>
+          </div>
+          <div className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl p-6 border border-white/5 relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
+            <h3 className="text-xs tracking-widest uppercase font-semibold text-text-secondary">Gold Items</h3>
+            <p className="text-4xl font-bold mt-2 text-white">
+              {m.goldProducts}
+            </p>
+          </div>
+          <div className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl p-6 border border-white/5 relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
+            <h3 className="text-xs tracking-widest uppercase font-semibold text-text-secondary flex items-center gap-2">
+              <Sparkles size={12} className="text-accent-gold" /> Diamond Items
+            </h3>
+            <p className="text-4xl font-bold mt-2 text-white">
+              {m.diamondProducts}
+            </p>
+          </div>
+        </div>
 
+        {/* PRODUCT TABLE */}
+        <div className="rounded-2xl border border-white/5 bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/20 via-transparent to-transparent"></div>
+          
+          <div className="flex justify-between items-center mb-6">
+            <div className="relative w-72">
+              <Search className="absolute left-3 top-2.5 text-white/40" size={18} />
+              <input 
+                type="text" 
+                placeholder="Search SKU or Name..." 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-black/30 border border-white/10 rounded-xl py-2 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-accent-gold/50 focus:ring-1 focus:ring-accent-gold/50 transition-all placeholder-white/20"
+              />
+            </div>
+            <button className="flex items-center gap-2 border border-white/10 bg-white/5 px-4 py-2 rounded-xl text-sm font-medium text-text-secondary hover:text-white hover:bg-white/10 transition-colors">
+              <Filter size={16} /> Filter
+            </button>
+          </div>
+
+          <div className="overflow-x-auto rounded-xl border border-white/10 bg-black/20">
+            <table className="w-full text-left text-sm">
+              <thead className="border-b border-white/10 bg-white/5 text-xs font-semibold tracking-wider text-text-secondary uppercase">
+                <tr>
+                  <th className="px-6 py-4">SKU</th>
+                  <th className="px-6 py-4">Product Name</th>
+                  <th className="px-6 py-4">Category</th>
+                  <th className="px-6 py-4">Type</th>
+                  <th className="px-6 py-4">Weight (g)</th>
+                  <th className="px-6 py-4">Status</th>
+                  <th className="px-6 py-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                {filteredProducts.length === 0 ? (
+                  <tr>
+                    <td colSpan={7} className="px-6 py-12 text-center text-text-secondary">
+                      No products found. Add a new product to get started.
+                    </td>
+                  </tr>
+                ) : (
+                  filteredProducts.map((p: any) => (
+                    <tr key={p.id} className="transition-colors hover:bg-white/5 group">
+                      <td className="px-6 py-4 font-mono font-medium text-white/60 group-hover:text-white transition-colors">{p.sku}</td>
+                      <td className="px-6 py-4 font-bold text-white">{p.name}</td>
+                      <td className="px-6 py-4 text-text-secondary">{p.category}</td>
+                      <td className="px-6 py-4">
+                        <span className={`px-2.5 py-1 rounded-md text-xs font-semibold ${
+                          p.metalType === 'Gold' ? 'bg-yellow-500/10 text-yellow-500' : 'bg-blue-400/10 text-blue-400'
+                        }`}>
+                          {p.metalType}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 font-medium text-accent-gold">{p.grossWeight} g</td>
+                      <td className="px-6 py-4">
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold border bg-green-400/10 text-green-400 border-green-400/20">
+                          {p.status.replace('_', ' ')}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <button className="text-xs font-semibold text-text-secondary hover:text-accent-gold transition-colors mr-3">Edit</button>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-
-      {/* Statistics */}
-
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-
-        <div className="bg-background-secondary rounded-2xl p-6 border border-border-theme">
-          <h3 className="text-text-secondary">Total Products</h3>
-          <p className="text-3xl font-bold mt-3">420</p>
-        </div>
-
-        <div className="bg-background-secondary rounded-2xl p-6 border border-border-theme">
-          <h3 className="text-text-secondary">Gold Products</h3>
-          <p className="text-3xl font-bold mt-3">180</p>
-        </div>
-
-        <div className="bg-background-secondary rounded-2xl p-6 border border-border-theme">
-          <h3 className="text-text-secondary">Diamond Products</h3>
-          <p className="text-3xl font-bold mt-3">150</p>
-        </div>
-
-        <div className="bg-background-secondary rounded-2xl p-6 border border-border-theme">
-          <h3 className="text-text-secondary">Categories</h3>
-          <p className="text-3xl font-bold mt-3">25</p>
-        </div>
-
-      </div>
-
-      {/* Search */}
-
-      <div className="mb-6">
-        <ProductSearch
-          value={search}
-          onChange={setSearch}
-        />
-      </div>
-
-      {/* Filter */}
-
-      <div className="mb-8">
-        <ProductFilter
-          category={category}
-          status={status}
-          onCategoryChange={setCategory}
-          onStatusChange={setStatus}
-        />
-      </div>
-
-      {/* Product Table */}
-
-      <ProductTable />
-
-    </main>
+    </div>
   );
 }

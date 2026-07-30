@@ -1,160 +1,31 @@
 "use client";
 
-import Link from "next/link";
-import {
-  ArrowLeft,
-  Bell,
-  Send,
-  MessageCircle,
-  Mail,
-} from "lucide-react";
+import { Bell } from "lucide-react";
 
-export default function RepairNotificationsPage() {
+export default function NotificationsPage() {
   return (
-    <main className="min-h-screen bg-background-primary text-text-primary p-8">
+    <div className="relative min-h-[80vh] p-8 text-text-primary">
+      <div className="absolute top-[-5%] left-[50%] w-[500px] h-[500px] rounded-full bg-pink-500/5 blur-3xl pointer-events-none"></div>
 
-      {/* Header */}
+      <div className="relative z-10 max-w-7xl mx-auto">
+        <div className="mb-8 flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-pink-400 to-pink-200 bg-clip-text text-transparent flex items-center gap-3">
+              <Bell size={28} className="text-pink-400" />
+              Customer Notifications
+            </h1>
+            <p className="mt-1 text-sm text-text-secondary">Send automated SMS and Email alerts to customers for their repairs.</p>
+          </div>
+        </div>
 
-      <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-5 mb-8">
-
-        <div>
-
-          <h1 className="text-4xl font-bold text-accent-gold">
-            Customer Notifications
-          </h1>
-
-          <p className="text-text-secondary mt-2">
-            Send repair updates to customers
+        <div className="rounded-2xl border border-white/5 bg-[#111111]/40 backdrop-blur-xl p-12 shadow-2xl flex flex-col items-center justify-center text-center">
+          <Bell size={64} className="text-white/10 mb-4" />
+          <h2 className="text-xl font-bold text-white mb-2">Notifications Module Coming Soon</h2>
+          <p className="text-text-secondary max-w-md">
+            The SMS and Email notification system is currently being provisioned.
           </p>
-
         </div>
-
-        <Link
-          href="/repair"
-          className="flex items-center gap-2 border border-yellow-500 text-accent-gold hover:bg-accent-gold hover:text-black px-5 py-3 rounded-xl transition"
-        >
-          <ArrowLeft size={18} />
-          Back
-        </Link>
-
       </div>
-
-      <div className="max-w-5xl mx-auto bg-background-secondary border border-border-theme rounded-2xl p-8">
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-          <div>
-
-            <label className="block mb-2 text-accent-gold">
-              Customer Name
-            </label>
-
-            <input
-              type="text"
-              defaultValue="Rahul Patel"
-              className="w-full bg-background-tertiary border border-gray-700 rounded-xl px-4 py-3"
-            />
-
-          </div>
-
-          <div>
-
-            <label className="block mb-2 text-accent-gold">
-              Mobile Number
-            </label>
-
-            <input
-              type="text"
-              defaultValue="9876543210"
-              className="w-full bg-background-tertiary border border-gray-700 rounded-xl px-4 py-3"
-            />
-
-          </div>
-
-          <div>
-
-            <label className="block mb-2 text-accent-gold">
-              Email
-            </label>
-
-            <input
-              type="email"
-              defaultValue="rahul@gmail.com"
-              className="w-full bg-background-tertiary border border-gray-700 rounded-xl px-4 py-3"
-            />
-
-          </div>
-
-          <div>
-
-            <label className="block mb-2 text-accent-gold">
-              Notification Type
-            </label>
-
-            <select className="w-full bg-background-tertiary border border-gray-700 rounded-xl px-4 py-3">
-
-              <option>Repair Completed</option>
-              <option>Ready for Delivery</option>
-              <option>Repair Delayed</option>
-
-            </select>
-
-          </div>
-
-        </div>
-
-        <div className="mt-6">
-
-          <label className="block mb-2 text-accent-gold">
-            Message
-          </label>
-
-          <textarea
-            rows={6}
-            defaultValue="Dear Customer, your jewellery repair has been completed successfully and is ready for delivery."
-            className="w-full bg-background-tertiary border border-gray-700 rounded-xl px-4 py-3"
-          />
-
-        </div>
-
-        <div className="flex flex-wrap gap-4 mt-8">
-
-          <button
-            onClick={() => alert("SMS Sent Successfully")}
-            className="flex items-center gap-2 bg-accent-gold hover:bg-accent-gold-hover text-black px-6 py-3 rounded-xl font-semibold transition"
-          >
-            <Bell size={18} />
-            Send SMS
-          </button>
-
-          <button
-            onClick={() => alert("WhatsApp Message Sent")}
-            className="flex items-center gap-2 bg-green-500 hover:bg-green-400 text-black px-6 py-3 rounded-xl font-semibold transition"
-          >
-            <MessageCircle size={18} />
-            WhatsApp
-          </button>
-
-          <button
-            onClick={() => alert("Email Sent Successfully")}
-            className="flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-text-primary px-6 py-3 rounded-xl font-semibold transition"
-          >
-            <Mail size={18} />
-            Email
-          </button>
-
-          <button
-            onClick={() => alert("Notification Sent")}
-            className="flex items-center gap-2 bg-purple-500 hover:bg-purple-400 text-text-primary px-6 py-3 rounded-xl font-semibold transition"
-          >
-            <Send size={18} />
-            Send All
-          </button>
-
-        </div>
-
-      </div>
-
-    </main>
+    </div>
   );
 }

@@ -8,14 +8,17 @@ export const metadata: Metadata = {
   description: "Premium Jewellery Management System",
 };
 
+import { Outfit } from "next/font/google";
 import { getSession } from "@/lib/session";
+
+const outfit = Outfit({ subsets: ["latin"] });
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession();
   
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className={outfit.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

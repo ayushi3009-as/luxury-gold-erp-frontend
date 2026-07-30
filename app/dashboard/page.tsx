@@ -1,81 +1,27 @@
-"use client";
-
 import {
-  LayoutDashboard,
   Receipt,
-  Package,
-  ShoppingCart,
   Users,
-  Factory,
-  Wrench,
-  CircleDollarSign,
-  Wallet,
-  UserRound,
   FileText,
-  BarChart3,
-  Settings,
-  Database,
-  Search,
-  Bell,
-  ChevronRight,
+  Wallet,
+  IndianRupee,
+  Box,
   TrendingUp,
   TrendingDown,
   AlertTriangle,
-  Box,
-  IndianRupee,
   CalendarDays,
   Bot,
   ArrowUpRight,
-  RefreshCw,
   MapPin,
   Clock,
   CheckCircle2,
 } from "lucide-react";
-
-const stats = [
-  {
-    title: "TOTAL SALES REVENUE",
-    value: "₹ 12,85,250",
-    change: "18.2%",
-    positive: true,
-    icon: IndianRupee,
-  },
-  {
-    title: "TOTAL ORDERS",
-    value: "1,248",
-    change: "12.5%",
-    positive: true,
-    icon: Receipt,
-  },
-  {
-    title: "TOTAL CUSTOMERS",
-    value: "856",
-    change: "8.6%",
-    positive: true,
-    icon: Users,
-  },
-  {
-    title: "PENDING ORDERS",
-    value: "32",
-    change: "2.4%",
-    positive: false,
-    icon: FileText,
-  },
-  {
-    title: "LOW STOCK ITEMS",
-    value: "18",
-    change: "6.7%",
-    positive: false,
-    icon: Box,
-  },
-  {
-    title: "OUTSTANDING AMOUNT",
-    value: "₹ 4,65,320",
-    change: "15.3%",
-    positive: false,
-    icon: Wallet,
-  },
-];
+import { 
+  getDashboardStats, 
+  getSalesByCategory, 
+  getLiveMetalRates, 
+  getRecentTransactions, 
+  getLowStockProducts 
+} from "@/lib/actions/dashboard.actions";
 
 function MiniChart() {
   return (
@@ -91,7 +37,71 @@ function MiniChart() {
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const [statsData, categoryData, metalRates, transactions, lowStock] = await Promise.all([
+    getDashboardStats(),
+    getSalesByCategory(),
+    getLiveMetalRates(),
+    getRecentTransactions(),
+    getLowStockProducts()
+  ]);
+
+  const fallbackStats = {
+    totalSales: 0, totalOrders: 0, totalCustomers: 0, pendingOrders: 0, lowStockItems: 0, outstandingAmount: 0,
+    changes: { sales: 0, orders: 0, customers: 0, pending: 0, lowStock: 0, outstanding: 0 }
+  };
+  const ds = statsData || fallbackStats;
+
+  const formatIN = (num: number) => new Intl.NumberFormat('en-IN').format(num);
+
+  const stats = [
+    {
+      title: "TOTAL SALES REVENUE",
+      value: `₹ ${formatIN(ds.totalSales)}`,
+      change: `${ds.changes.sales}%`,
+      positive: ds.changes.sales >= 0,
+      icon: IndianRupee,
+    },
+    {
+      title: "TOTAL ORDERS",
+      value: formatIN(ds.totalOrders),
+      change: `${ds.changes.orders}%`,
+      positive: ds.changes.orders >= 0,
+      icon: Receipt,
+    },
+    {
+      title: "TOTAL CUSTOMERS",
+      value: formatIN(ds.totalCustomers),
+      change: `${ds.changes.customers}%`,
+      positive: ds.changes.customers >= 0,
+      icon: Users,
+    },
+    {
+      title: "PENDING ORDERS",
+      value: formatIN(ds.pendingOrders),
+      change: `${ds.changes.pending}%`,
+      positive: ds.changes.pending <= 0,
+      icon: FileText,
+    },
+    {
+      title: "LOW STOCK ITEMS",
+      value: formatIN(ds.lowStockItems),
+      change: `${ds.changes.lowStock}%`,
+      positive: ds.changes.lowStock <= 0,
+      icon: Box,
+    },
+    {
+      title: "OUTSTANDING AMOUNT",
+      value: `₹ ${formatIN(ds.outstandingAmount)}`,
+      change: `${ds.changes.outstanding}%`,
+      positive: ds.changes.outstanding <= 0,
+      icon: Wallet,
+    },
+  ];
+
+  const catVal = categoryData || { total: 0, gold: 0, diamond: 0, silver: 0, platinum: 0 };
+  const shortTotal = catVal.total > 100000 ? `₹${(catVal.total/100000).toFixed(1)}L` : `₹${formatIN(catVal.total)}`;
+
   return (
     <div className="p-5">
       {/* STATS */}
@@ -109,13 +119,9 @@ export default function Home() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-gold/10 text-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.2)]">
                     <Icon size={20} />
                   </div>
-                  <span className="text-[10px] text-text-secondary">
-                    THIS MONTH
-                  </span>
+                  <span className="text-[10px] text-text-secondary">THIS MONTH</span>
                 </div>
-                <p className="mt-4 text-[10px] text-text-secondary">
-                  {stat.title}
-                </p>
+                <p className="mt-4 text-[10px] text-text-secondary">{stat.title}</p>
                 <h3 className="mt-1 text-xl font-semibold">{stat.value}</h3>
                 <div className="mt-2 flex items-center gap-1 text-xs">
                   {stat.positive ? (
@@ -123,11 +129,7 @@ export default function Home() {
                   ) : (
                     <TrendingDown size={13} className="text-red-400" />
                   )}
-                  <span
-                    className={
-                      stat.positive ? "text-green-400" : "text-red-400"
-                    }
-                  >
+                  <span className={stat.positive ? "text-green-400" : "text-red-400"}>
                     {stat.change}
                   </span>
                   <span className="text-text-secondary">vs Yesterday</span>
@@ -141,14 +143,12 @@ export default function Home() {
 
       {/* MIDDLE SECTION */}
       <div className="mt-5 grid gap-5 xl:grid-cols-3">
-        {/* SALES */}
+        {/* SALES OVERVIEW */}
         <div className="relative overflow-hidden rounded-2xl border border-border-theme bg-background-secondary p-6 shadow-sm">
           <div className="absolute top-0 right-0 w-32 h-32 bg-accent-gold/5 blur-3xl rounded-full" />
           <div className="relative z-10">
             <div className="flex items-center justify-between">
-              <h3 className="font-semibold text-accent-gold">
-                TOTAL SALES REVENUE OVERVIEW
-              </h3>
+              <h3 className="font-semibold text-accent-gold">TOTAL SALES REVENUE OVERVIEW</h3>
               <select className="rounded-md border border-border-theme bg-background-tertiary px-2 py-1 text-xs text-text-secondary">
                 <option>This Month</option>
                 <option>Last Month</option>
@@ -156,19 +156,13 @@ export default function Home() {
               </select>
             </div>
             <div className="mt-5 flex items-center justify-between">
-              <span className="text-2xl font-semibold">₹ 12,85,250</span>
-              <span className="text-xs text-green-400">▲ 18.2%</span>
+              <span className="text-2xl font-semibold">₹ {formatIN(ds.totalSales)}</span>
+              <span className="text-xs text-green-400">▲ {ds.changes.sales}%</span>
             </div>
             <div className="mt-7 flex h-44 items-end gap-2 border-b border-l border-border-theme px-3">
-              {[30, 42, 35, 55, 42, 65, 48, 75, 58, 82, 65, 90].map(
-                (height, index) => (
-                  <div
-                    key={index}
-                    className="flex-1 rounded-t bg-accent-gold"
-                    style={{ height: `${height}%` }}
-                  />
-                ),
-              )}
+              {[30, 42, 35, 55, 42, 65, 48, 75, 58, 82, 65, 90].map((height, index) => (
+                <div key={index} className="flex-1 rounded-t bg-accent-gold" style={{ height: `${height}%` }} />
+              ))}
             </div>
           </div>
         </div>
@@ -180,24 +174,14 @@ export default function Home() {
             <div className="flex h-36 w-36 items-center justify-center rounded-full border-[22px] border-accent-gold">
               <div className="text-center">
                 <p className="text-xs text-text-secondary">Total</p>
-                <p className="font-semibold">₹12.8L</p>
+                <p className="font-semibold">{shortTotal}</p>
               </div>
             </div>
             <div className="space-y-3 text-sm">
-              <p>
-                🟡 Gold Jewellery{" "}
-                <span className="ml-5 text-text-secondary">55%</span>
-              </p>
-              <p>
-                ⚪ Diamond{" "}
-                <span className="ml-10 text-text-secondary">20%</span>
-              </p>
-              <p>
-                ⚫ Silver <span className="ml-12 text-text-secondary">10%</span>
-              </p>
-              <p>
-                🟤 Platinum <span className="ml-7 text-text-secondary">5%</span>
-              </p>
+              <p>🟡 Gold Jewellery <span className="ml-5 text-text-secondary">{catVal.gold}%</span></p>
+              <p>⚪ Diamond <span className="ml-10 text-text-secondary">{catVal.diamond}%</span></p>
+              <p>⚫ Silver <span className="ml-12 text-text-secondary">{catVal.silver}%</span></p>
+              <p>🟤 Platinum <span className="ml-7 text-text-secondary">{catVal.platinum}%</span></p>
             </div>
           </div>
         </div>
@@ -207,30 +191,22 @@ export default function Home() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-accent-gold/5 blur-3xl rounded-full" />
           <div className="relative z-10">
             <div className="flex items-center justify-between">
-              <h3 className="font-semibold text-accent-gold">
-                LIVE METAL RATES
-              </h3>
-              <span className="cursor-pointer text-xs text-accent-gold">
-                View All →
-              </span>
+              <h3 className="font-semibold text-accent-gold">LIVE METAL RATES</h3>
+              <span className="cursor-pointer text-xs text-accent-gold">View All →</span>
             </div>
             <div className="mt-5 space-y-5">
               {[
-                ["Gold (24K)", "₹ 7,620 /gm", "▲ 0.35%"],
-                ["Silver", "₹ 85 /gm", "▲ 0.20%"],
-                ["Platinum", "₹ 3,450 /gm", "▼ 0.15%"],
+                ["Gold (24K)", `₹ ${formatIN(metalRates?.gold24k || 7620)} /gm`, "▲ 0.35%"],
+                ["Gold (22K)", `₹ ${formatIN(metalRates?.gold22k || 7010)} /gm`, "▲ 0.30%"],
+                ["Silver", `₹ ${formatIN(metalRates?.silver || 85)} /gm`, "▲ 0.20%"],
+                ["Platinum", `₹ ${formatIN(metalRates?.platinum || 3450)} /gm`, "▼ 0.15%"],
               ].map((rate) => (
-                <div
-                  key={rate[0]}
-                  className="flex items-center justify-between border-b border-border-theme pb-3"
-                >
+                <div key={rate[0]} className="flex items-center justify-between border-b border-border-theme pb-3">
                   <div>
                     <p className="text-sm">{rate[0]}</p>
-                    <p className="mt-1 font-semibold text-accent-gold">
-                      {rate[1]}
-                    </p>
+                    <p className="mt-1 font-semibold text-accent-gold">{rate[1]}</p>
                   </div>
-                  <span className="text-xs text-green-400">{rate[2]}</span>
+                  <span className={rate[2].startsWith('▲') ? "text-xs text-green-400" : "text-xs text-red-400"}>{rate[2]}</span>
                 </div>
               ))}
             </div>
@@ -247,9 +223,7 @@ export default function Home() {
             <div className="flex h-32 w-32 items-center justify-center rounded-full border-[20px] border-accent-gold">
               <div className="text-center">
                 <p className="text-2xl font-bold">76%</p>
-                <p className="text-[10px] text-text-secondary">
-                  Total Inventory Value
-                </p>
+                <p className="text-[10px] text-text-secondary">Total Inventory Value</p>
               </div>
             </div>
             <div className="space-y-3 text-xs text-text-secondary">
@@ -266,29 +240,21 @@ export default function Home() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-accent-gold/5 blur-3xl rounded-full" />
           <div className="relative z-10">
             <div className="flex items-center justify-between">
-              <h3 className="font-semibold text-accent-gold">
-                RECENT TRANSACTION LOGS
-              </h3>
+              <h3 className="font-semibold text-accent-gold">RECENT TRANSACTION LOGS</h3>
               <span className="text-xs text-accent-gold">View All →</span>
             </div>
             <div className="mt-5 space-y-4 text-xs">
-              {[
-                ["Customer A", "Sale", "₹280.00"],
-                ["Customer B", "Purchase", "₹80.00"],
-                ["Customer C", "Sale", "₹290.00"],
-                ["Customer D", "Purchase", "₹200.00"],
-              ].map((transaction, index) => (
-                <div
-                  key={index}
-                  className="grid grid-cols-3 border-b border-border-theme pb-3"
-                >
-                  <span>{transaction[0]}</span>
-                  <span className="text-text-secondary">{transaction[1]}</span>
-                  <span className="text-right text-accent-gold">
-                    {transaction[2]}
-                  </span>
-                </div>
-              ))}
+              {transactions && transactions.length > 0 ? (
+                transactions.map((tx) => (
+                  <div key={tx.id} className="grid grid-cols-3 border-b border-border-theme pb-3">
+                    <span>{tx.customer?.name || 'Walk-in Customer'}</span>
+                    <span className="text-text-secondary">Sale</span>
+                    <span className="text-right text-accent-gold">₹ {formatIN(tx.totalAmount)}</span>
+                  </div>
+                ))
+              ) : (
+                <div className="text-text-secondary py-5 text-center">No recent transactions</div>
+              )}
             </div>
           </div>
         </div>
@@ -298,26 +264,20 @@ export default function Home() {
           <div className="absolute top-0 right-0 w-32 h-32 bg-accent-gold/5 blur-3xl rounded-full" />
           <div className="relative z-10">
             <div className="flex items-center justify-between">
-              <h3 className="font-semibold text-accent-gold">
-                CURRENT STOCK ALERTS
-              </h3>
+              <h3 className="font-semibold text-accent-gold">CURRENT STOCK ALERTS</h3>
               <AlertTriangle size={18} className="text-accent-gold" />
             </div>
             <div className="mt-5 space-y-3">
-              {[
-                "18K Diamond Rings - 3 units left",
-                "24K Gold Chains - 5 units left",
-                "Gold Bangles - 2 units left",
-                "Diamond Earrings - 4 units left",
-              ].map((alert) => (
-                <div
-                  key={alert}
-                  className="flex items-center gap-3 rounded-lg border border-border-theme bg-background-secondary p-3 text-xs"
-                >
-                  <AlertTriangle size={15} className="text-accent-gold" />
-                  {alert}
-                </div>
-              ))}
+              {lowStock && lowStock.length > 0 ? (
+                lowStock.map((alert) => (
+                  <div key={alert.id} className="flex items-center gap-3 rounded-lg border border-border-theme bg-background-secondary p-3 text-xs">
+                    <AlertTriangle size={15} className="text-accent-gold" />
+                    {alert.product.name} - {alert.quantity} units left
+                  </div>
+                ))
+              ) : (
+                <div className="text-text-secondary py-5 text-center">Stock levels are healthy</div>
+              )}
             </div>
           </div>
         </div>
@@ -327,12 +287,8 @@ export default function Home() {
       <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="font-semibold text-accent-gold">
-              BRANCH PERFORMANCE
-            </h3>
-            <p className="mt-1 text-xs text-text-secondary">
-              Performance overview across all branches
-            </p>
+            <h3 className="font-semibold text-accent-gold">BRANCH PERFORMANCE</h3>
+            <p className="mt-1 text-xs text-text-secondary">Performance overview across all branches</p>
           </div>
           <MapPin size={20} className="text-accent-gold" />
         </div>
@@ -343,118 +299,25 @@ export default function Home() {
             ["Delhi Branch", "₹ 2,45,600", "69%"],
             ["Rajkot Branch", "₹ 1,28,600", "58%"],
           ].map((branch) => (
-            <div
-              key={branch[0]}
-              className="rounded-lg border border-border-theme bg-background-secondary p-4"
-            >
+            <div key={branch[0]} className="rounded-lg border border-border-theme bg-background-secondary p-4">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-medium">{branch[0]}</p>
                 <ArrowUpRight size={16} className="text-green-400" />
               </div>
-              <p className="mt-3 text-lg font-semibold text-accent-gold">
-                {branch[1]}
-              </p>
+              <p className="mt-3 text-lg font-semibold text-accent-gold">{branch[1]}</p>
               <div className="mt-3 h-2 rounded-full bg-background-tertiary">
-                <div
-                  className="h-2 rounded-full bg-accent-gold"
-                  style={{ width: branch[2] }}
-                />
+                <div className="h-2 rounded-full bg-accent-gold" style={{ width: branch[2] }} />
               </div>
-              <p className="mt-2 text-xs text-text-secondary">
-                Performance: {branch[2]}
-              </p>
+              <p className="mt-2 text-xs text-text-secondary">Performance: {branch[2]}</p>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* LOW STOCK + REMINDERS */}
-      <div className="mt-5 grid gap-5 xl:grid-cols-2">
-        {/* LOW STOCK ALERTS */}
-        <div className="relative overflow-hidden rounded-2xl border border-border-theme bg-background-secondary p-6 shadow-sm">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-accent-gold/5 blur-3xl rounded-full" />
-          <div className="relative z-10">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="font-semibold text-accent-gold">
-                  LOW STOCK ALERTS
-                </h3>
-                <p className="mt-1 text-xs text-text-secondary">
-                  Items that require immediate restocking
-                </p>
-              </div>
-              <AlertTriangle size={20} className="text-accent-gold" />
-            </div>
-            <div className="mt-5 space-y-3">
-              {[
-                ["Gold Chain 22K", "3 units left"],
-                ["Gold Bangles 22K", "5 units left"],
-                ["Diamond Earrings", "2 units left"],
-              ].map((item) => (
-                <div
-                  key={item[0]}
-                  className="flex items-center justify-between rounded-lg border border-border-theme bg-background-secondary p-4"
-                >
-                  <div>
-                    <p className="text-sm font-medium">{item[0]}</p>
-                    <p className="mt-1 text-xs text-red-400">{item[1]}</p>
-                  </div>
-                  <button className="rounded-md border border-border-theme px-3 py-2 text-xs text-accent-gold transition hover:bg-background-tertiary">
-                    Reorder
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* REMINDERS */}
-        <div className="relative overflow-hidden rounded-2xl border border-border-theme bg-background-secondary p-6 shadow-sm">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-accent-gold/5 blur-3xl rounded-full" />
-          <div className="relative z-10">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="font-semibold text-accent-gold">
-                  TODAY'S REMINDERS
-                </h3>
-                <p className="mt-1 text-xs text-text-secondary">
-                  Important activities for today
-                </p>
-              </div>
-              <CalendarDays size={20} className="text-accent-gold" />
-            </div>
-            <div className="mt-5 space-y-3">
-              {[
-                ["10:00 AM", "Customer Meeting"],
-                ["01:00 PM", "Vendor Payment"],
-                ["03:00 PM", "Physical Stock Counting"],
-                ["05:30 PM", "Gold Rate Update"],
-              ].map((reminder) => (
-                <div
-                  key={reminder[0]}
-                  className="flex items-center gap-4 rounded-lg border border-border-theme bg-background-secondary p-4"
-                >
-                  <div className="flex items-center gap-2 text-xs text-accent-gold">
-                    <Clock size={15} />
-                    {reminder[0]}
-                  </div>
-                  <div className="h-6 w-px bg-border-theme" />
-                  <span className="text-sm text-text-secondary">
-                    {reminder[1]}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
 
       {/* SHORTCUTS */}
       <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
         <div className="flex items-center justify-between">
-          <h3 className="font-semibold text-accent-gold">
-            BUSINESS & MANAGEMENT SHORTCUTS
-          </h3>
+          <h3 className="font-semibold text-accent-gold">BUSINESS & MANAGEMENT SHORTCUTS</h3>
           <button className="rounded-md border border-border-theme px-3 py-2 text-xs text-accent-gold hover:bg-background-tertiary">
             Customize Dashboard
           </button>
@@ -492,12 +355,8 @@ export default function Home() {
               <Bot size={25} />
             </div>
             <div>
-              <h3 className="font-semibold text-accent-gold">
-                Luxury AI Assistant
-              </h3>
-              <p className="mt-1 text-sm text-text-secondary">
-                Your intelligent business assistant is ready to help.
-              </p>
+              <h3 className="font-semibold text-accent-gold">Luxury AI Assistant</h3>
+              <p className="mt-1 text-sm text-text-secondary">Your intelligent business assistant is ready to help.</p>
             </div>
           </div>
           <button className="flex items-center justify-center gap-2 rounded-lg bg-accent-gold px-5 py-3 text-sm font-semibold text-black transition hover:bg-yellow-500">
@@ -508,15 +367,11 @@ export default function Home() {
         <div className="mt-5 grid gap-3 md:grid-cols-3">
           <div className="rounded-lg border border-border-theme bg-background-secondary p-4 relative z-10">
             <p className="text-xs text-text-secondary">AI INSIGHT</p>
-            <p className="mt-2 text-sm text-text-secondary">
-              Sales are expected to increase by 18% next month.
-            </p>
+            <p className="mt-2 text-sm text-text-secondary">Sales are expected to increase by 18% next month.</p>
           </div>
           <div className="rounded-lg border border-border-theme bg-background-secondary p-4 relative z-10">
             <p className="text-xs text-text-secondary">AI RECOMMENDATION</p>
-            <p className="mt-2 text-sm text-text-secondary">
-              Consider restocking Gold Chain 22K products.
-            </p>
+            <p className="mt-2 text-sm text-text-secondary">Consider restocking Gold Chain 22K products.</p>
           </div>
           <div className="rounded-lg border border-border-theme bg-background-secondary p-4 relative z-10">
             <p className="text-xs text-text-secondary">AI STATUS</p>

@@ -708,8 +708,11 @@ model Invoice {
   customer    Customer      @relation(fields: [customerId], references: [id])
   items       InvoiceItem[]
   payments    Payment[]
-  totalAmount Float
-  status      String        @default("PENDING")
+  totalAmount   Float
+  subTotal      Float        @default(0)
+  taxTotal      Float        @default(0)
+  discountTotal Float        @default(0)
+  status        String       @default("PENDING")
 
   salesReturns         SalesReturn[]
   exchangeTransactions ExchangeTransaction[]
@@ -726,9 +729,13 @@ model InvoiceItem {
   invoice   Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
   productId String
   product   Product @relation(fields: [productId], references: [id])
-  quantity  Int     @default(1)
-  weight    Float?
-  amount    Float
+  quantity     Int     @default(1)
+  weight       Float?
+  amount       Float
+  unitPrice    Float   @default(0)
+  taxPercent   Float   @default(0)
+  makingCharge Float   @default(0)
+  metalRate    Float   @default(0)
 }
 
 model Payment {
@@ -1169,3 +1176,23 @@ model StoreSettings {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
+
+// ==========================================
+// REPAIR MANAGEMENT
+// ==========================================
+model RepairOrder {
+  id              String   @id @default(uuid())
+  repairNumber    String   @unique
+  customerName    String
+  customerPhone   String
+  itemName        String
+  description     String?
+  estimatedCost   Float?
+  advancePaid     Float    @default(0)
+  status          String   @default("PENDING") // PENDING, IN_PROGRESS, COMPLETED, DELIVERED
+  expectedDate    DateTime?
+  workerAssigned  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+

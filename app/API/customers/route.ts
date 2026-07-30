@@ -32,16 +32,26 @@ export async function POST(request: Request) {
       pincode
     } = body;
 
-    const newCustomer = await prisma.customer.create({
-      data: {
-        name: body.name || (body.firstName + ' ' + (body.lastName || '')).trim(),
-        mobile: body.mobile || body.phone,
+    const mobileNo = body.mobile || body.phone || "9999999999";
+    const nameStr = body.name || (body.firstName + ' ' + (body.lastName || '')).trim() || "Walk-in Customer";
+
+    // Use upsert to avoid unique constraint errors on mobile number
+    const newCustomer = await prisma.customer.upsert({
+      where: { mobile: mobileNo },
+      update: {
+        name: nameStr,
+        email: body.email || null,
+        address: body.address || null,
+      },
+      create: {
+        name: nameStr,
+        mobile: mobileNo,
         email: body.email,
         address: body.address,
       }
     });
 
-    return NextResponse.json(newCustomer, { status: 201 });
+    return NextResponse.json(newCustomer, { status: 200 });
   } catch (error) {
     console.error('Error creating customer:', error);
     return NextResponse.json({ error: 'Failed to create customer' }, { status: 500 });

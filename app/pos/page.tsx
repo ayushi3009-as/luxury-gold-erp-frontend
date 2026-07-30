@@ -71,9 +71,8 @@ export default function POSBilling() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          firstName: customerName.split(' ')[0] || "Walk-in",
-          lastName: customerName.split(' ')[1] || "Customer",
-          phone: "9999999999"
+          name: customerName || "Walk-in Customer",
+          phone: "9999999999" // TODO: Add a phone number input to the UI
         })
       });
       const customer = await customerRes.json();

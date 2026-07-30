@@ -5,67 +5,60 @@ export async function GET() {
   try {
     const products = await prisma.product.findMany({
       include: {
-        inventory: true,
+        category: true
       },
-      orderBy: {
-        createdAt: 'desc',
-      }
+      orderBy: { createdAt: 'desc' }
     });
-    return NextResponse.json(products);
+
+    const metrics = {
+      totalProducts: products.length,
+      goldProducts: products.filter(p => p.metalType === 'Gold').length,
+      diamondProducts: products.filter(p => p.metalType === 'Diamond').length,
+    };
+
+    return NextResponse.json({
+      products: products.map(p => ({
+        id: p.id,
+        sku: p.sku,
+        name: p.name,
+        category: p.category.name,
+        metalType: p.metalType,
+        grossWeight: p.grossWeight,
+        status: p.status
+      })),
+      metrics
+    });
   } catch (error) {
     console.error('Error fetching products:', error);
     return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(req: Request) {
   try {
-    const body = await request.json();
-    const { 
-      productCode, 
-      barcode, 
-      name, 
-      description, 
-      category, 
-      purity, 
-      weight, 
-      makingCharge, 
-      costPrice, 
-      sellingPrice,
-      quantity,
-      minimumStock,
-      type 
-    } = body;
+    const data = await req.json();
+    
+    // Auto-generate SKU if not provided
+    const sku = data.sku || `SKU-${Math.floor(100000 + Math.random() * 900000)}`;
 
-    // Create Product and associated Inventory in a single transaction
-    const newProduct = await prisma.product.create({
+    const product = await prisma.product.create({
       data: {
-        productCode,
-        barcode,
-        name,
-        description,
-        category,
-        purity,
-        weight: weight ? parseFloat(weight) : null,
-        makingCharge: makingCharge ? parseFloat(makingCharge) : null,
-        costPrice: costPrice ? parseFloat(costPrice) : null,
-        sellingPrice: sellingPrice ? parseFloat(sellingPrice) : null,
-        inventory: {
-          create: {
-            quantity: quantity ? parseInt(quantity, 10) : 0,
-            minimumStock: minimumStock ? parseInt(minimumStock, 10) : 5,
-            type: type || 'FINISHED_GOOD'
-          }
-        }
-      },
-      include: {
-        inventory: true
+        sku,
+        name: data.name,
+        categoryId: data.categoryId,
+        metalType: data.metalType || 'Gold',
+        purity: data.purity || '22K',
+        grossWeight: Number(data.grossWeight) || 0,
+        netWeight: Number(data.netWeight) || 0,
+        makingChargeType: data.makingChargeType || 'PER_GRAM',
+        makingCharge: Number(data.makingCharge) || 0,
+        status: 'IN_STOCK'
       }
     });
 
-    return NextResponse.json(newProduct, { status: 201 });
+    return NextResponse.json(product, { status: 201 });
   } catch (error) {
-    console.error('Error adding product:', error);
-    return NextResponse.json({ error: 'Failed to add product' }, { status: 500 });
+    console.error('Error creating product:', error);
+    return NextResponse.json({ error: 'Failed to create product' }, { status: 500 });
   }
 }

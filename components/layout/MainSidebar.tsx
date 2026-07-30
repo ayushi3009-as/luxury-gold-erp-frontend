@@ -69,7 +69,10 @@ export default function MainSidebar({ userRole }: { userRole?: string }) {
     <div className="hidden lg:flex flex-col w-[230px] fixed inset-y-0 left-0 bg-background-primary border-r border-border-theme h-full z-50">
       {/* Logo Section */}
       <div className="flex flex-col items-center justify-center py-6 border-b border-border-theme">
-        <div className="text-accent-gold text-2xl mb-1">◇</div>
+        <div className="mb-2 relative w-16 h-16 rounded-xl overflow-hidden ring-1 ring-accent-gold/20 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.jpg" alt="Luxury Gold Logo" className="w-full h-full object-cover" />
+        </div>
         <h1 className="text-accent-gold font-bold text-lg tracking-wider">Luxury Gold</h1>
         <p className="text-text-secondary text-[10px] uppercase tracking-widest mt-1">Jewellery ERP System</p>
       </div>

@@ -43,14 +43,20 @@ export async function POST(request: Request) {
           subTotal,
           taxTotal,
           discountTotal,
-          grandTotal,
-          paymentMethod,
+          totalAmount: grandTotal,
+          status: "COMPLETED",
+          payments: {
+            create: {
+              paymentMode: paymentMethod || "CASH",
+              amount: grandTotal,
+            }
+          },
           items: {
             create: items.map((item: any) => ({
               productId: item.productId,
               quantity: item.quantity,
               unitPrice: item.unitPrice,
-              totalPrice: item.totalPrice,
+              amount: item.totalPrice, // Note: the schema has 'amount', not 'totalPrice' for the line item total
               makingCharge: item.makingCharge || 0,
               metalRate: item.metalRate || 0,
               taxPercent: item.taxPercent || 3, // Default 3% GST for jewelry
@@ -59,7 +65,8 @@ export async function POST(request: Request) {
         },
         include: {
           items: true,
-          customer: true
+          customer: true,
+          payments: true
         }
       });
 

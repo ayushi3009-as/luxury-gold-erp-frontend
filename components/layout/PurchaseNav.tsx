@@ -23,83 +23,59 @@ export default function PurchaseNav() {
     },
     {
       title: "Add Purchase",
-      href: "/purchase/add",
+      href: "/purchase/purchase-entry",
       icon: PlusCircle,
     },
     {
       title: "Purchase Orders",
-      href: "/purchase/orders",
+      href: "/purchase/purchase-order",
       icon: ShoppingCart,
     },
     {
       title: "Suppliers",
-      href: "/purchase/suppliers",
+      href: "/purchase/supplier-payment",
       icon: Truck,
     },
     {
       title: "Purchase Return",
-      href: "/purchase/returns",
+      href: "/purchase/purchase-return",
       icon: RotateCcw,
     },
     {
       title: "Received Stock",
-      href: "/purchase/received",
+      href: "/purchase/goods-receipt",
       icon: PackageCheck,
     },
     {
-      title: "Purchase History",
-      href: "/purchase/history",
+      title: "History",
+      href: "/purchase/purchase-reports",
       icon: ClipboardList,
     },
   ];
 
   return (
-    <nav className="flex items-center gap-2 overflow-x-auto border-b border-border-theme bg-background-primary px-6 py-3 w-full [&::-webkit-scrollbar]:hidden">
-
-    
-
-      {/* Logo */}
-
-      <div className="p-6 border-b border-border-theme">
-
-        
-
-        <p className="text-text-secondary text-sm mt-2">
-          Purchase Module
-        </p>
-
-      </div>
-
-      {/* Menu */}
-
-      
-
+    <nav className="flex items-center gap-1 overflow-x-auto border-b border-border-theme bg-background-primary px-4 py-3 w-full [&::-webkit-scrollbar]:hidden text-sm">
+      <div className="flex items-center gap-3">
+        <span className="font-semibold text-text-secondary mr-2 hidden md:block">Purchase:</span>
         {menuItems.map((item) => {
           const Icon = item.icon;
-
-          const active =
-            pathname === item.href ||
-            pathname.startsWith(item.href + "/");
-
+          const active = pathname === item.href || pathname.startsWith(item.href + "/");
           return (
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl transition ${
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg whitespace-nowrap transition ${
                 active
                   ? "bg-accent-gold text-black font-semibold"
                   : "text-text-secondary hover:bg-background-tertiary hover:text-accent-gold"
               }`}
             >
-              <Icon size={20} />
-
+              <Icon size={16} />
               <span>{item.title}</span>
             </Link>
           );
         })}
-      
-    
-  
+      </div>
     </nav>
   );
 }
