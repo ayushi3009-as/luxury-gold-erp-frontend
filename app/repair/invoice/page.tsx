@@ -11,7 +11,7 @@ import {
 
 export default function RepairInvoicePage() {
   return (
-    <main className="min-h-screen bg-[#0B0B0B] text-white p-8">
+    <main className="min-h-screen bg-background-primary text-text-primary p-8">
 
       {/* Header */}
 
@@ -19,11 +19,11 @@ export default function RepairInvoicePage() {
 
         <div>
 
-          <h1 className="text-4xl font-bold text-yellow-500">
+          <h1 className="text-4xl font-bold text-accent-gold">
             Repair Invoice
           </h1>
 
-          <p className="text-gray-400 mt-2">
+          <p className="text-text-secondary mt-2">
             Invoice for completed repair
           </p>
 
@@ -33,7 +33,7 @@ export default function RepairInvoicePage() {
 
           <Link
             href="/repair"
-            className="flex items-center gap-2 border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black px-5 py-3 rounded-xl transition"
+            className="flex items-center gap-2 border border-yellow-500 text-accent-gold hover:bg-accent-gold hover:text-black px-5 py-3 rounded-xl transition"
           >
             <ArrowLeft size={18} />
             Back
@@ -41,7 +41,7 @@ export default function RepairInvoicePage() {
 
           <Link
             href="/repair/details/REP001"
-            className="flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-white px-5 py-3 rounded-xl transition"
+            className="flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-text-primary px-5 py-3 rounded-xl transition"
           >
             <Eye size={18} />
             Details
@@ -49,7 +49,7 @@ export default function RepairInvoicePage() {
 
           <Link
             href="/repair/edit/REP001"
-            className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-black px-5 py-3 rounded-xl transition"
+            className="flex items-center gap-2 bg-accent-gold hover:bg-accent-gold-hover text-black px-5 py-3 rounded-xl transition"
           >
             <Pencil size={18} />
             Edit
@@ -61,13 +61,13 @@ export default function RepairInvoicePage() {
 
       {/* Invoice Card */}
 
-      <div className="max-w-6xl mx-auto bg-[#141414] border border-yellow-500/20 rounded-2xl p-8">
+      <div className="max-w-6xl mx-auto bg-background-secondary border border-border-theme rounded-2xl p-8">
 
         <div className="grid md:grid-cols-2 gap-8">
 
           <div>
 
-            <h2 className="text-2xl font-bold text-yellow-500 mb-6">
+            <h2 className="text-2xl font-bold text-accent-gold mb-6">
               Customer Details
             </h2>
 
@@ -89,7 +89,7 @@ export default function RepairInvoicePage() {
 
           <div>
 
-            <h2 className="text-2xl font-bold text-yellow-500 mb-6">
+            <h2 className="text-2xl font-bold text-accent-gold mb-6">
               Repair Summary
             </h2>
 
@@ -115,15 +115,15 @@ export default function RepairInvoicePage() {
 
           <table className="w-full border border-gray-700">
 
-            <thead className="bg-[#1B1B1B]">
+            <thead className="bg-background-tertiary">
 
               <tr>
 
-                <th className="p-4 text-left text-yellow-500">
+                <th className="p-4 text-left text-accent-gold">
                   Description
                 </th>
 
-                <th className="p-4 text-right text-yellow-500">
+                <th className="p-4 text-right text-accent-gold">
                   Amount
                 </th>
 
@@ -159,11 +159,11 @@ export default function RepairInvoicePage() {
 
               <tr className="border-t border-gray-700 font-bold">
 
-                <td className="p-4 text-yellow-500">
+                <td className="p-4 text-accent-gold">
                   Total
                 </td>
 
-                <td className="p-4 text-right text-yellow-500">
+                <td className="p-4 text-right text-accent-gold">
                   ₹1,770
                 </td>
 
@@ -181,7 +181,7 @@ export default function RepairInvoicePage() {
 
           <button
             onClick={() => window.print()}
-            className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-black px-6 py-3 rounded-xl font-semibold transition"
+            className="flex items-center gap-2 bg-accent-gold hover:bg-accent-gold-hover text-black px-6 py-3 rounded-xl font-semibold transition"
           >
             <Printer size={18} />
             Print Invoice

@@ -35,41 +35,41 @@ export default function ProductHistoryTable() {
   ];
 
   return (
-    <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl overflow-hidden">
+    <div className="bg-background-secondary border border-border-theme rounded-2xl overflow-hidden">
 
       <div className="overflow-x-auto">
 
         <table className="w-full">
 
-          <thead className="bg-[#1B1B1B]">
+          <thead className="bg-background-tertiary">
 
             <tr>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Image
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Product
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 SKU
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Action
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 User
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Date
               </th>
 
-              <th className="px-6 py-4 text-center text-yellow-500">
+              <th className="px-6 py-4 text-center text-accent-gold">
                 Details
               </th>
 
@@ -83,14 +83,14 @@ export default function ProductHistoryTable() {
 
               <tr
                 key={item.id}
-                className="border-t border-gray-800 hover:bg-[#1A1A1A] transition"
+                className="border-t border-border-theme hover:bg-[#1A1A1A] transition"
               >
 
                 <td className="px-6 py-4">
                   <img
                     src={item.image}
                     alt={item.product}
-                    className="w-16 h-16 rounded-lg object-cover border border-yellow-500/20"
+                    className="w-16 h-16 rounded-lg object-cover border border-border-theme"
                   />
                 </td>
 
@@ -110,7 +110,7 @@ export default function ProductHistoryTable() {
                         item.action === "Created"
                           ? "bg-green-500/20 text-green-400"
                           : item.action === "Updated"
-                          ? "bg-yellow-500/20 text-yellow-400"
+                          ? "bg-accent-gold/20 text-accent-gold"
                           : "bg-red-500/20 text-red-400"
                       }`}
                   >
@@ -123,7 +123,7 @@ export default function ProductHistoryTable() {
                   {item.user}
                 </td>
 
-                <td className="px-6 py-4 text-gray-400">
+                <td className="px-6 py-4 text-text-secondary">
                   {item.date}
                 </td>
 

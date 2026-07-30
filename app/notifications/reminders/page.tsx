@@ -1,5 +1,5 @@
 "use client";
-import NotificationsSidebar from "../NotificationsSidebar";
+
 
 import {
   Clock3,
@@ -47,16 +47,16 @@ const reminders = [
 
 export default function RemindersPage() {
   return (
-  <div className="min-h-screen bg-[#090a09] text-white">
+  <div className="min-h-screen bg-background-primary text-text-primary">
 
-    <NotificationsSidebar />
+    
 
-    <main className="ml-64 min-h-screen p-8">
+    <main className=" min-h-screen p-8">
 
         {/* HEADER */}
         <div>
 
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-text-secondary">
             Notifications / Reminders
           </p>
 
@@ -65,17 +65,17 @@ export default function RemindersPage() {
             <div className="rounded-xl bg-[#211c0d] p-3">
               <Clock3
                 size={25}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
-            <h1 className="text-3xl font-bold text-[#f0c43c]">
+            <h1 className="text-3xl font-bold text-accent-gold">
               Reminders
             </h1>
 
           </div>
 
-          <p className="mt-3 text-sm text-gray-400">
+          <p className="mt-3 text-sm text-text-secondary">
             Keep track of important upcoming activities and deadlines.
           </p>
 
@@ -84,9 +84,9 @@ export default function RemindersPage() {
         {/* SUMMARY CARDS */}
         <div className="mt-8 grid grid-cols-4 gap-5">
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               Total Reminders
             </p>
 
@@ -94,7 +94,7 @@ export default function RemindersPage() {
               18
             </h2>
 
-            <p className="mt-2 text-xs text-gray-400">
+            <p className="mt-2 text-xs text-text-secondary">
               All upcoming reminders
             </p>
 
@@ -102,7 +102,7 @@ export default function RemindersPage() {
 
           <div className="rounded-xl border border-red-900/40 bg-[#11130f] p-5">
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               Due Today
             </p>
 
@@ -116,25 +116,25 @@ export default function RemindersPage() {
 
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               This Week
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold text-[#e4b52d]">
+            <h2 className="mt-3 text-3xl font-bold text-accent-gold">
               12
             </h2>
 
-            <p className="mt-2 text-xs text-gray-400">
+            <p className="mt-2 text-xs text-text-secondary">
               Scheduled this week
             </p>
 
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               Completed
             </p>
 
@@ -142,7 +142,7 @@ export default function RemindersPage() {
               42
             </h2>
 
-            <p className="mt-2 text-xs text-gray-400">
+            <p className="mt-2 text-xs text-text-secondary">
               Completed this month
             </p>
 
@@ -151,17 +151,17 @@ export default function RemindersPage() {
         </div>
 
         {/* REMINDER LIST */}
-        <div className="mt-6 rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+        <div className="mt-6 rounded-xl border border-border-theme bg-[#11130f] p-6">
 
           <div className="flex items-center justify-between">
 
             <div>
 
-              <h2 className="text-lg font-semibold text-[#f0c43c]">
+              <h2 className="text-lg font-semibold text-accent-gold">
                 Upcoming Reminders
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Important tasks and activities scheduled for you
               </p>
 
@@ -190,7 +190,7 @@ export default function RemindersPage() {
                     <div className="rounded-lg bg-[#211c0d] p-3">
                       <Icon
                         size={20}
-                        className="text-[#e4b52d]"
+                        className="text-accent-gold"
                       />
                     </div>
 
@@ -200,11 +200,11 @@ export default function RemindersPage() {
                         {reminder.title}
                       </h3>
 
-                      <p className="mt-1 text-xs text-gray-400">
+                      <p className="mt-1 text-xs text-text-secondary">
                         {reminder.description}
                       </p>
 
-                      <div className="mt-2 flex items-center gap-2 text-[10px] text-gray-500">
+                      <div className="mt-2 flex items-center gap-2 text-[10px] text-text-secondary">
 
                         <CalendarDays size={12} />
 
@@ -227,14 +227,14 @@ export default function RemindersPage() {
                         reminder.priority === "High"
                           ? "bg-red-500/10 text-red-400"
                           : reminder.priority === "Medium"
-                            ? "bg-yellow-500/10 text-yellow-400"
+                            ? "bg-accent-gold/10 text-accent-gold"
                             : "bg-green-500/10 text-green-400"
                       }`}
                     >
                       {reminder.priority}
                     </span>
 
-                    <button className="rounded-lg border border-[#40351b] px-3 py-2 text-[10px] text-gray-400 hover:border-green-500/50 hover:text-green-400">
+                    <button className="rounded-lg border border-border-theme px-3 py-2 text-[10px] text-text-secondary hover:border-green-500/50 hover:text-green-400">
                       Complete
                     </button>
 
@@ -263,11 +263,11 @@ export default function RemindersPage() {
 
             <div>
 
-              <h2 className="font-semibold text-[#f0c43c]">
+              <h2 className="font-semibold text-accent-gold">
                 Reminder Management
               </h2>
 
-              <p className="mt-2 text-sm leading-6 text-gray-300">
+              <p className="mt-2 text-sm leading-6 text-text-secondary">
                 Never miss important payments, customer follow-ups, inventory
                 activities, or business deadlines.
               </p>

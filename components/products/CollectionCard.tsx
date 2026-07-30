@@ -21,7 +21,7 @@ export default function CollectionCard({
   status,
 }: CollectionCardProps) {
   return (
-    <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-6 hover:border-yellow-500 transition">
+    <div className="bg-background-secondary border border-border-theme rounded-2xl p-6 hover:border-yellow-500 transition">
 
       {/* Image */}
 
@@ -35,15 +35,15 @@ export default function CollectionCard({
 
       <div className="mt-5">
 
-        <h2 className="text-2xl font-semibold text-white">
+        <h2 className="text-2xl font-semibold text-text-primary">
           {name}
         </h2>
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           Category : {category}
         </p>
 
-        <p className="text-yellow-400 mt-2 font-semibold">
+        <p className="text-accent-gold mt-2 font-semibold">
           {products} Products
         </p>
 
@@ -72,7 +72,7 @@ export default function CollectionCard({
 
         <Link
           href={`/products/collections/edit/${id}`}
-          className="text-yellow-500 hover:text-yellow-400"
+          className="text-accent-gold hover:text-accent-gold"
         >
           <Pencil size={22} />
         </Link>

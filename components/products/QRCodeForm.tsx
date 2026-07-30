@@ -10,9 +10,9 @@ export default function QRCodeForm({
   buttonText,
 }: QRCodeFormProps) {
   return (
-    <form className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-8 max-w-5xl mx-auto">
+    <form className="bg-background-secondary border border-border-theme rounded-2xl p-8 max-w-5xl mx-auto">
 
-      <h2 className="text-3xl font-bold text-yellow-500 mb-8">
+      <h2 className="text-3xl font-bold text-accent-gold mb-8">
         Generate Product QR Code
       </h2>
 
@@ -22,12 +22,12 @@ export default function QRCodeForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             Product
           </label>
 
           <select
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
           >
             <option>Select Product</option>
             <option>Gold Ring</option>
@@ -41,14 +41,14 @@ export default function QRCodeForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             SKU
           </label>
 
           <input
             type="text"
             placeholder="GLD001"
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
           />
 
         </div>
@@ -57,14 +57,14 @@ export default function QRCodeForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             QR Code Value
           </label>
 
           <input
             type="text"
             placeholder="https://luxurygolderp.com/product/GLD001"
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
           />
 
         </div>
@@ -73,12 +73,12 @@ export default function QRCodeForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             QR Type
           </label>
 
           <select
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
           >
             <option>Product URL</option>
             <option>SKU</option>
@@ -93,7 +93,7 @@ export default function QRCodeForm({
 
       <div className="mt-10">
 
-        <h3 className="text-xl font-semibold text-yellow-500 mb-4">
+        <h3 className="text-xl font-semibold text-accent-gold mb-4">
           QR Code Preview
         </h3>
 
@@ -115,14 +115,14 @@ export default function QRCodeForm({
 
         <button
           type="submit"
-          className="bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-8 py-3 rounded-xl transition"
+          className="bg-accent-gold hover:bg-accent-gold-hover text-black font-semibold px-8 py-3 rounded-xl transition"
         >
           {buttonText}
         </button>
 
         <button
           type="button"
-          className="border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black px-8 py-3 rounded-xl transition"
+          className="border border-yellow-500 text-accent-gold hover:bg-accent-gold hover:text-black px-8 py-3 rounded-xl transition"
         >
           Download QR Code
         </button>

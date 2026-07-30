@@ -12,7 +12,7 @@ export default function GoldFilter() {
 
         <Filter
           size={18}
-          className="absolute left-3 top-1/2 -translate-y-1/2 text-yellow-500"
+          className="absolute left-3 top-1/2 -translate-y-1/2 text-accent-gold"
         />
 
         <select
@@ -20,13 +20,13 @@ export default function GoldFilter() {
             w-full
             sm:w-52
             rounded-xl
-            bg-[#141414]
+            bg-background-secondary
             border
-            border-yellow-500/30
+            border-border-theme
             py-3
             pl-10
             pr-4
-            text-white
+            text-text-primary
             outline-none
             focus:border-yellow-500
           "
@@ -46,12 +46,12 @@ export default function GoldFilter() {
           w-full
           sm:w-48
           rounded-xl
-          bg-[#141414]
+          bg-background-secondary
           border
-          border-yellow-500/30
+          border-border-theme
           py-3
           px-4
-          text-white
+          text-text-primary
           outline-none
           focus:border-yellow-500
         "

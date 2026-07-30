@@ -32,37 +32,37 @@ export default function ProductImageTable() {
   ];
 
   return (
-    <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl overflow-hidden">
+    <div className="bg-background-secondary border border-border-theme rounded-2xl overflow-hidden">
 
       <div className="overflow-x-auto">
 
         <table className="w-full">
 
-          <thead className="bg-[#1B1B1B]">
+          <thead className="bg-background-tertiary">
 
             <tr>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Image
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Product
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Total Images
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Primary
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Last Updated
               </th>
 
-              <th className="px-6 py-4 text-center text-yellow-500">
+              <th className="px-6 py-4 text-center text-accent-gold">
                 Actions
               </th>
 
@@ -76,7 +76,7 @@ export default function ProductImageTable() {
 
               <tr
                 key={item.id}
-                className="border-t border-gray-800 hover:bg-[#1A1A1A] transition"
+                className="border-t border-border-theme hover:bg-[#1A1A1A] transition"
               >
 
                 <td className="px-6 py-4">
@@ -103,7 +103,7 @@ export default function ProductImageTable() {
                     className={`px-3 py-1 rounded-full text-sm ${
                       item.primary === "Yes"
                         ? "bg-green-500/20 text-green-400"
-                        : "bg-gray-500/20 text-gray-400"
+                        : "bg-gray-500/20 text-text-secondary"
                     }`}
                   >
                     {item.primary}
@@ -111,7 +111,7 @@ export default function ProductImageTable() {
 
                 </td>
 
-                <td className="px-6 py-4 text-gray-400">
+                <td className="px-6 py-4 text-text-secondary">
                   {item.updated}
                 </td>
 
@@ -128,7 +128,7 @@ export default function ProductImageTable() {
 
                     <Link
                       href={`/products/images/upload?id=${item.id}`}
-                      className="text-yellow-500 hover:text-yellow-400"
+                      className="text-accent-gold hover:text-accent-gold"
                     >
                       <Pencil size={20} />
                     </Link>

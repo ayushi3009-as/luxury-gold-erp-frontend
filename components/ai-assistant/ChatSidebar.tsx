@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Plus, History, Sparkles, Settings } from "lucide-react";
 import ConversationCard from "./ConversationCard";
 
@@ -29,13 +30,13 @@ const conversations = [
 
 export default function ChatSidebar() {
   return (
-    <aside className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-6 h-full">
+    <aside className="bg-background-secondary border border-border-theme rounded-2xl p-6 h-full">
 
       {/* New Chat */}
 
       <Link
         href="/ai-assistant/new"
-        className="flex items-center justify-center gap-2 w-full bg-yellow-500 hover:bg-yellow-400 text-black font-semibold py-3 rounded-xl transition"
+        className="flex items-center justify-center gap-2 w-full bg-accent-gold hover:bg-accent-gold-hover text-black font-semibold py-3 rounded-xl transition"
       >
         <Plus size={20} />
         New Chat
@@ -46,8 +47,8 @@ export default function ChatSidebar() {
       <div className="mt-8">
 
         <div className="flex items-center gap-2 mb-4">
-          <History size={20} className="text-yellow-500" />
-          <h2 className="text-lg font-semibold text-yellow-500">
+          <History size={20} className="text-accent-gold" />
+          <h2 className="text-lg font-semibold text-accent-gold">
             Recent Chats
           </h2>
         </div>
@@ -68,7 +69,7 @@ export default function ChatSidebar() {
 
       <div className="mt-8">
 
-        <h2 className="text-lg font-semibold text-yellow-500 mb-4">
+        <h2 className="text-lg font-semibold text-accent-gold mb-4">
           Quick Links
         </h2>
 
@@ -76,25 +77,25 @@ export default function ChatSidebar() {
 
           <Link
             href="/ai-assistant/history"
-            className="flex items-center gap-3 bg-[#1B1B1B] hover:bg-[#232323] rounded-xl p-3 transition"
+            className="flex items-center gap-3 bg-background-tertiary hover:bg-[#232323] rounded-xl p-3 transition"
           >
-            <History size={18} className="text-yellow-500" />
+            <History size={18} className="text-accent-gold" />
             <span>Chat History</span>
           </Link>
 
           <Link
             href="/ai-assistant/templates"
-            className="flex items-center gap-3 bg-[#1B1B1B] hover:bg-[#232323] rounded-xl p-3 transition"
+            className="flex items-center gap-3 bg-background-tertiary hover:bg-[#232323] rounded-xl p-3 transition"
           >
-            <Sparkles size={18} className="text-yellow-500" />
+            <Sparkles size={18} className="text-accent-gold" />
             <span>Templates</span>
           </Link>
 
           <Link
             href="/ai-assistant/settings"
-            className="flex items-center gap-3 bg-[#1B1B1B] hover:bg-[#232323] rounded-xl p-3 transition"
+            className="flex items-center gap-3 bg-background-tertiary hover:bg-[#232323] rounded-xl p-3 transition"
           >
-            <Settings size={18} className="text-yellow-500" />
+            <Settings size={18} className="text-accent-gold" />
             <span>Settings</span>
           </Link>
 
@@ -104,13 +105,13 @@ export default function ChatSidebar() {
 
       {/* AI Tips */}
 
-      <div className="mt-8 bg-[#1B1B1B] border border-yellow-500/20 rounded-xl p-4">
+      <div className="mt-8 bg-background-tertiary border border-border-theme rounded-xl p-4">
 
-        <h3 className="text-yellow-500 font-semibold mb-2">
+        <h3 className="text-accent-gold font-semibold mb-2">
           AI Tips
         </h3>
 
-        <p className="text-gray-400 text-sm leading-6">
+        <p className="text-text-secondary text-sm leading-6">
           Ask AI about inventory, sales, customers, repair orders,
           invoices and business reports.
         </p>

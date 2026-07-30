@@ -6,7 +6,7 @@ export default function AIAssistantLayout({
   children: ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[#0B0B0B] text-white">
+    <div className="min-h-screen bg-background-primary text-text-primary">
       {children}
     </div>
   );

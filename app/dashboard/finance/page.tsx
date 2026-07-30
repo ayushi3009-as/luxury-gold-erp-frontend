@@ -24,11 +24,11 @@ const monthlyData = [
 
 export default function FinanceDashboard() {
   return (
-    <div className="min-h-screen bg-[#090a09] p-5 text-white">
+    <div className="min-h-screen bg-background-primary p-5 text-text-primary">
 
       {/* HEADER */}
       <div className="mb-6">
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-text-secondary">
           Dashboard / Finance
         </p>
 
@@ -36,7 +36,7 @@ export default function FinanceDashboard() {
           Finance Dashboard
         </h1>
 
-        <p className="mt-1 text-gray-400">
+        <p className="mt-1 text-text-secondary">
           Monitor revenue, expenses, profit and financial performance.
         </p>
       </div>
@@ -82,15 +82,15 @@ export default function FinanceDashboard() {
       <div className="mt-5 grid gap-5 xl:grid-cols-3">
 
         {/* REVENUE CHART */}
-        <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5 xl:col-span-2">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-5 xl:col-span-2">
 
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="font-semibold text-[#e5b72e]">
+              <h2 className="font-semibold text-accent-gold">
                 REVENUE & PROFIT OVERVIEW
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Monthly financial performance
               </p>
             </div>
@@ -101,7 +101,7 @@ export default function FinanceDashboard() {
             </span>
           </div>
 
-          <div className="mt-8 flex h-64 items-end gap-4 border-b border-l border-[#302b1d] px-5">
+          <div className="mt-8 flex h-64 items-end gap-4 border-b border-l border-border-theme px-5">
 
             {monthlyData.map((item) => (
               <div
@@ -109,11 +109,11 @@ export default function FinanceDashboard() {
                 className="flex h-full flex-1 flex-col items-center justify-end gap-2"
               >
                 <div
-                  className="w-full max-w-[42px] rounded-t-md bg-[#d9a928]"
+                  className="w-full max-w-[42px] rounded-t-md bg-accent-gold"
                   style={{ height: `${item.value}%` }}
                 />
 
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-text-secondary">
                   {item.month}
                 </span>
               </div>
@@ -124,21 +124,21 @@ export default function FinanceDashboard() {
         </div>
 
         {/* PROFIT MARGIN */}
-        <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
-          <h2 className="font-semibold text-[#e5b72e]">
+          <h2 className="font-semibold text-accent-gold">
             PROFIT MARGIN
           </h2>
 
           <div className="mt-8 flex justify-center">
-            <div className="flex h-44 w-44 items-center justify-center rounded-full border-[22px] border-[#d9a928]">
+            <div className="flex h-44 w-44 items-center justify-center rounded-full border-[22px] border-accent-gold">
 
               <div className="text-center">
                 <p className="text-3xl font-bold">
                   66.9%
                 </p>
 
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-text-secondary">
                   Net Profit
                 </p>
               </div>
@@ -149,7 +149,7 @@ export default function FinanceDashboard() {
           <div className="mt-6 flex justify-between text-sm">
 
             <div>
-              <p className="text-gray-500">
+              <p className="text-text-secondary">
                 Revenue
               </p>
 
@@ -159,11 +159,11 @@ export default function FinanceDashboard() {
             </div>
 
             <div className="text-right">
-              <p className="text-gray-500">
+              <p className="text-text-secondary">
                 Profit
               </p>
 
-              <p className="mt-1 font-semibold text-[#e5b72e]">
+              <p className="mt-1 font-semibold text-accent-gold">
                 ₹ 8.59L
               </p>
             </div>
@@ -178,10 +178,10 @@ export default function FinanceDashboard() {
       <div className="mt-5 grid gap-5 xl:grid-cols-2">
 
         {/* EXPENSE BREAKDOWN */}
-        <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
           <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-[#e5b72e]">
+            <h2 className="font-semibold text-accent-gold">
               EXPENSE BREAKDOWN
             </h2>
 
@@ -222,10 +222,10 @@ export default function FinanceDashboard() {
         </div>
 
         {/* FINANCIAL ACCOUNTS */}
-        <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
           <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-[#e5b72e]">
+            <h2 className="font-semibold text-accent-gold">
               FINANCIAL ACCOUNTS
             </h2>
 
@@ -247,11 +247,11 @@ export default function FinanceDashboard() {
                 key={name}
                 className="flex items-center justify-between border-b border-[#29261c] pb-3"
               >
-                <span className="text-sm text-gray-300">
+                <span className="text-sm text-text-secondary">
                   {name}
                 </span>
 
-                <span className="font-semibold text-[#e5b72e]">
+                <span className="font-semibold text-accent-gold">
                   {value}
                 </span>
               </div>
@@ -264,10 +264,10 @@ export default function FinanceDashboard() {
       </div>
 
       {/* RECENT FINANCIAL TRANSACTIONS */}
-      <div className="mt-5 rounded-xl border border-[#40351a] bg-[#101210] p-5">
+      <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
 
         <div className="flex items-center justify-between">
-          <h2 className="font-semibold text-[#e5b72e]">
+          <h2 className="font-semibold text-accent-gold">
             RECENT FINANCIAL TRANSACTIONS
           </h2>
 
@@ -287,12 +287,12 @@ export default function FinanceDashboard() {
 
             <div
               key={String(transaction[0])}
-              className="rounded-lg border border-[#302b1d] bg-[#151610] p-4"
+              className="rounded-lg border border-border-theme bg-background-secondary p-4"
             >
 
               <div className="flex items-center justify-between">
 
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-text-secondary">
                   {transaction[0]}
                 </span>
 
@@ -351,11 +351,11 @@ function FinanceCard({
   icon: React.ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
+    <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
       <div className="flex items-center justify-between">
 
-        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#66521d] bg-[#211c0f] text-[#e6b92e]">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border-theme bg-background-tertiary text-accent-gold">
           {icon}
         </div>
 
@@ -377,7 +377,7 @@ function FinanceCard({
 
       </div>
 
-      <p className="mt-5 text-xs text-gray-500">
+      <p className="mt-5 text-xs text-text-secondary">
         {title}
       </p>
 
@@ -385,7 +385,7 @@ function FinanceCard({
         {value}
       </h3>
 
-      <p className="mt-2 text-xs text-gray-500">
+      <p className="mt-2 text-xs text-text-secondary">
         Compared to last month
       </p>
 
@@ -407,11 +407,11 @@ function ExpenseRow({
 
       <div className="flex justify-between text-sm">
 
-        <span className="text-gray-300">
+        <span className="text-text-secondary">
           {label}
         </span>
 
-        <span className="text-[#e5b72e]">
+        <span className="text-accent-gold">
           {percentage}
         </span>
 
@@ -420,7 +420,7 @@ function ExpenseRow({
       <div className="mt-2 h-2 rounded-full bg-[#29271d]">
 
         <div
-          className="h-2 rounded-full bg-[#d9a928]"
+          className="h-2 rounded-full bg-accent-gold"
           style={{
             width: percentage,
           }}
@@ -428,7 +428,7 @@ function ExpenseRow({
 
       </div>
 
-      <p className="mt-1 text-xs text-gray-500">
+      <p className="mt-1 text-xs text-text-secondary">
         {value}
       </p>
 

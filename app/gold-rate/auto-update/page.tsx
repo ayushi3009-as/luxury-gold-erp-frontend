@@ -12,7 +12,7 @@ import {
   Zap,
 } from "lucide-react";
 
-import GoldRateSidebar from "../GoldRateSidebar";
+
 
 type MetalRate = {
   name: string;
@@ -29,9 +29,11 @@ export default function AutoUpdatePage() {
     intervalMinutes * 60
   );
 
-  const [lastUpdated, setLastUpdated] = useState(
-    new Date()
-  );
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+
+  useEffect(() => {
+    setLastUpdated(new Date());
+  }, []);
 
   const [isSyncing, setIsSyncing] = useState(false);
 
@@ -126,17 +128,17 @@ export default function AutoUpdatePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#090a09] text-white">
+    <div className="min-h-screen bg-background-primary text-text-primary">
 
-      <GoldRateSidebar />
+      
 
-      <main className="ml-64 p-8">
+      <main className=" p-8">
 
         {/* HEADER */}
         <div className="mb-8 flex items-center justify-between">
 
           <div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-text-secondary">
               Gold Rate / Auto Update
             </p>
 
@@ -144,7 +146,7 @@ export default function AutoUpdatePage() {
               Auto Update
             </h1>
 
-            <p className="mt-2 text-gray-400">
+            <p className="mt-2 text-text-secondary">
               Automatically update precious metal rates.
             </p>
           </div>
@@ -172,7 +174,7 @@ export default function AutoUpdatePage() {
         </div>
 
         {/* AUTO UPDATE CONTROL */}
-        <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-6">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-6">
 
           <div className="flex items-center justify-between">
 
@@ -181,7 +183,7 @@ export default function AutoUpdatePage() {
               <div className="rounded-lg bg-[#211c0d] p-3">
                 <Zap
                   size={25}
-                  className="text-[#e4b52d]"
+                  className="text-accent-gold"
                 />
               </div>
 
@@ -190,7 +192,7 @@ export default function AutoUpdatePage() {
                   Automatic Rate Synchronization
                 </h2>
 
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-1 text-sm text-text-secondary">
                   Rates will automatically update at the selected interval.
                 </p>
               </div>
@@ -230,18 +232,18 @@ export default function AutoUpdatePage() {
         {/* STATUS CARDS */}
         <div className="mt-6 grid gap-5 md:grid-cols-3">
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <RefreshCw
               size={26}
-              className={`text-[#e4b52d] ${
+              className={`text-accent-gold ${
                 isSyncing
                   ? "animate-spin"
                   : ""
               }`}
             />
 
-            <p className="mt-5 text-sm text-gray-400">
+            <p className="mt-5 text-sm text-text-secondary">
               UPDATE STATUS
             </p>
 
@@ -253,14 +255,14 @@ export default function AutoUpdatePage() {
 
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <Clock
               size={26}
-              className="text-[#e4b52d]"
+              className="text-accent-gold"
             />
 
-            <p className="mt-5 text-sm text-gray-400">
+            <p className="mt-5 text-sm text-text-secondary">
               NEXT UPDATE IN
             </p>
 
@@ -272,19 +274,19 @@ export default function AutoUpdatePage() {
 
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <CheckCircle2
               size={26}
               className="text-green-400"
             />
 
-            <p className="mt-5 text-sm text-gray-400">
+            <p className="mt-5 text-sm text-text-secondary">
               LAST UPDATED
             </p>
 
             <h2 className="mt-2 text-xl font-bold">
-              {lastUpdated.toLocaleTimeString()}
+              {lastUpdated ? lastUpdated.toLocaleTimeString() : "--:--:--"}
             </h2>
 
           </div>
@@ -292,16 +294,16 @@ export default function AutoUpdatePage() {
         </div>
 
         {/* SETTINGS */}
-        <div className="mt-6 rounded-xl border border-[#3d3218] bg-[#101210] p-6">
+        <div className="mt-6 rounded-xl border border-border-theme bg-background-secondary p-6">
 
           <div className="flex items-center gap-3">
 
             <Settings2
               size={22}
-              className="text-[#e4b52d]"
+              className="text-accent-gold"
             />
 
-            <h2 className="text-lg font-semibold text-[#e4b52d]">
+            <h2 className="text-lg font-semibold text-accent-gold">
               UPDATE SETTINGS
             </h2>
 
@@ -311,7 +313,7 @@ export default function AutoUpdatePage() {
 
             <div>
 
-              <label className="text-sm text-gray-400">
+              <label className="text-sm text-text-secondary">
                 UPDATE INTERVAL
               </label>
 
@@ -322,7 +324,7 @@ export default function AutoUpdatePage() {
                     Number(event.target.value)
                   )
                 }
-                className="mt-3 w-full rounded-lg border border-[#4a3a18] bg-[#101210] px-4 py-3 text-sm text-white outline-none"
+                className="mt-3 w-full rounded-lg border border-[#4a3a18] bg-background-secondary px-4 py-3 text-sm text-text-primary outline-none"
               >
                 <option value={1}>
                   Every 1 Minute
@@ -350,11 +352,11 @@ export default function AutoUpdatePage() {
 
             <div>
 
-              <label className="text-sm text-gray-400">
+              <label className="text-sm text-text-secondary">
                 RATE DATA SOURCE
               </label>
 
-              <select className="mt-3 w-full rounded-lg border border-[#4a3a18] bg-[#101210] px-4 py-3 text-sm text-white outline-none">
+              <select className="mt-3 w-full rounded-lg border border-[#4a3a18] bg-background-secondary px-4 py-3 text-sm text-text-primary outline-none">
 
                 <option>
                   Live Market API
@@ -377,18 +379,18 @@ export default function AutoUpdatePage() {
         </div>
 
         {/* METAL RATES */}
-        <div className="mt-6 rounded-xl border border-[#3d3218] bg-[#101210] p-6">
+        <div className="mt-6 rounded-xl border border-border-theme bg-background-secondary p-6">
 
           <div className="flex items-center justify-between">
 
-            <h2 className="text-lg font-semibold text-[#e4b52d]">
+            <h2 className="text-lg font-semibold text-accent-gold">
               LIVE METAL RATES
             </h2>
 
             <button
               onClick={handleSyncNow}
               disabled={isSyncing}
-              className="flex items-center gap-2 rounded-lg border border-[#6d5318] bg-[#17150d] px-4 py-2 text-sm text-[#e4b52d]"
+              className="flex items-center gap-2 rounded-lg border border-[#6d5318] bg-[#17150d] px-4 py-2 text-sm text-accent-gold"
             >
 
               <RefreshCw
@@ -421,7 +423,7 @@ export default function AutoUpdatePage() {
                     {metal.name}
                   </p>
 
-                  <p className="mt-1 text-xs text-gray-500">
+                  <p className="mt-1 text-xs text-text-secondary">
                     Live synchronized rate
                   </p>
 
@@ -448,7 +450,7 @@ export default function AutoUpdatePage() {
         </div>
 
         {/* CONTROL */}
-        <div className="mt-6 flex items-center justify-between rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="mt-6 flex items-center justify-between rounded-xl border border-border-theme bg-background-secondary p-5">
 
           <div>
 
@@ -458,7 +460,7 @@ export default function AutoUpdatePage() {
                 : "Automatic Updates Paused"}
             </p>
 
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-text-secondary">
               {isAutoUpdate
                 ? "The system will automatically synchronize rates."
                 : "Enable automatic updates to resume synchronization."}

@@ -1,5 +1,5 @@
 "use client";
-import NotificationsSidebar from "../NotificationsSidebar";
+
 
 import {
   AlertTriangle,
@@ -39,15 +39,15 @@ const alerts = [
 
 export default function AlertsPage() {
   return (
-  <div className="min-h-screen bg-[#090a09] text-white">
+  <div className="min-h-screen bg-background-primary text-text-primary">
 
-    <NotificationsSidebar />
+    
 
-    <main className="ml-64 min-h-screen p-8">
+    <main className=" min-h-screen p-8">
 
         {/* HEADER */}
         <div>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-text-secondary">
             Notifications / Alerts
           </p>
 
@@ -56,17 +56,17 @@ export default function AlertsPage() {
             <div className="rounded-xl bg-[#211c0d] p-3">
               <AlertTriangle
                 size={25}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
-            <h1 className="text-3xl font-bold text-[#f0c43c]">
+            <h1 className="text-3xl font-bold text-accent-gold">
               Alerts
             </h1>
 
           </div>
 
-          <p className="mt-3 text-sm text-gray-400">
+          <p className="mt-3 text-sm text-text-secondary">
             Monitor important alerts and actions that require your attention.
           </p>
         </div>
@@ -74,8 +74,8 @@ export default function AlertsPage() {
         {/* SUMMARY CARDS */}
         <div className="mt-8 grid grid-cols-3 gap-5">
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
-            <p className="text-xs text-gray-500">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
+            <p className="text-xs text-text-secondary">
               Total Alerts
             </p>
 
@@ -83,13 +83,13 @@ export default function AlertsPage() {
               24
             </h2>
 
-            <p className="mt-2 text-xs text-gray-400">
+            <p className="mt-2 text-xs text-text-secondary">
               All active alerts
             </p>
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
-            <p className="text-xs text-gray-500">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
+            <p className="text-xs text-text-secondary">
               High Priority
             </p>
 
@@ -97,13 +97,13 @@ export default function AlertsPage() {
               6
             </h2>
 
-            <p className="mt-2 text-xs text-gray-400">
+            <p className="mt-2 text-xs text-text-secondary">
               Requires immediate attention
             </p>
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
-            <p className="text-xs text-gray-500">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
+            <p className="text-xs text-text-secondary">
               Resolved Today
             </p>
 
@@ -111,7 +111,7 @@ export default function AlertsPage() {
               18
             </h2>
 
-            <p className="mt-2 text-xs text-gray-400">
+            <p className="mt-2 text-xs text-text-secondary">
               Successfully completed
             </p>
           </div>
@@ -119,21 +119,21 @@ export default function AlertsPage() {
         </div>
 
         {/* ALERT LIST */}
-        <div className="mt-6 rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+        <div className="mt-6 rounded-xl border border-border-theme bg-[#11130f] p-6">
 
           <div className="flex items-center justify-between">
 
             <div>
-              <h2 className="text-lg font-semibold text-[#f0c43c]">
+              <h2 className="text-lg font-semibold text-accent-gold">
                 Active Alerts
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Recent notifications requiring your attention
               </p>
             </div>
 
-            <button className="rounded-lg border border-[#40351b] px-4 py-2 text-xs text-gray-300 hover:border-[#e4b52d] hover:text-[#e4b52d]">
+            <button className="rounded-lg border border-border-theme px-4 py-2 text-xs text-text-secondary hover:border-[#e4b52d] hover:text-accent-gold">
               Mark All as Read
             </button>
 
@@ -156,7 +156,7 @@ export default function AlertsPage() {
                     <div className="rounded-lg bg-[#211c0d] p-3">
                       <Icon
                         size={20}
-                        className="text-[#e4b52d]"
+                        className="text-accent-gold"
                       />
                     </div>
 
@@ -166,7 +166,7 @@ export default function AlertsPage() {
                         {alert.title}
                       </h3>
 
-                      <p className="mt-1 text-xs text-gray-400">
+                      <p className="mt-1 text-xs text-text-secondary">
                         {alert.description}
                       </p>
 
@@ -184,7 +184,7 @@ export default function AlertsPage() {
                       className={`rounded-full px-3 py-1 text-[10px] ${
                         alert.priority === "High"
                           ? "bg-red-500/10 text-red-400"
-                          : "bg-yellow-500/10 text-yellow-400"
+                          : "bg-accent-gold/10 text-accent-gold"
                       }`}
                     >
                       {alert.priority}
@@ -192,7 +192,7 @@ export default function AlertsPage() {
 
                     <CheckCircle2
                       size={18}
-                      className="text-gray-500"
+                      className="text-text-secondary"
                     />
 
                   </div>

@@ -40,15 +40,15 @@ const reportCards = [
 
 export default function ReportsDashboardPage() {
   return (
-    <main className="min-h-screen bg-[#0B0B0B] text-white p-8">
+    <main className="min-h-screen bg-background-primary text-text-primary p-8">
       {/* Header */}
 
       <div className="mb-10">
-        <h1 className="text-4xl font-bold text-yellow-500">
+        <h1 className="text-4xl font-bold text-accent-gold">
           Reports Dashboard
         </h1>
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           Overview of all reports in the Luxury Gold ERP System
         </p>
       </div>
@@ -63,9 +63,9 @@ export default function ReportsDashboardPage() {
             <div
               key={report.title}
               className="
-                bg-[#141414]
+                bg-background-secondary
                 border
-                border-yellow-500/20
+                border-border-theme
                 rounded-2xl
                 p-6
                 hover:border-yellow-500
@@ -73,18 +73,18 @@ export default function ReportsDashboardPage() {
               "
             >
               <div className="flex justify-between items-center">
-                <Icon size={34} className="text-yellow-500" />
+                <Icon size={34} className="text-accent-gold" />
 
-                <span className="text-3xl font-bold text-white">
+                <span className="text-3xl font-bold text-text-primary">
                   {report.value}
                 </span>
               </div>
 
-              <h2 className="text-xl font-semibold mt-6 text-yellow-500">
+              <h2 className="text-xl font-semibold mt-6 text-accent-gold">
                 {report.title}
               </h2>
 
-              <p className="text-gray-400 mt-2">
+              <p className="text-text-secondary mt-2">
                 {report.description}
               </p>
 
@@ -97,11 +97,11 @@ export default function ReportsDashboardPage() {
                   justify-between
                   border
                   border-yellow-500
-                  text-yellow-500
+                  text-accent-gold
                   rounded-xl
                   px-4
                   py-3
-                  hover:bg-yellow-500
+                  hover:bg-accent-gold
                   hover:text-black
                   transition
                 "
@@ -119,14 +119,14 @@ export default function ReportsDashboardPage() {
 
       <div
         className="
-          bg-[#141414]
+          bg-background-secondary
           border
-          border-yellow-500/20
+          border-border-theme
           rounded-2xl
           p-8
         "
       >
-        <h2 className="text-2xl font-bold text-yellow-500 mb-6">
+        <h2 className="text-2xl font-bold text-accent-gold mb-6">
           Quick Access
         </h2>
 

@@ -12,7 +12,7 @@ const prompts = [
 export default function SuggestedPrompts() {
   return (
     <div className="mb-6">
-      <h2 className="text-xl font-bold text-yellow-500 mb-4">
+      <h2 className="text-xl font-bold text-accent-gold mb-4">
         Suggested Prompts
       </h2>
 
@@ -24,12 +24,12 @@ export default function SuggestedPrompts() {
               px-4
               py-2
               rounded-xl
-              bg-[#141414]
+              bg-background-secondary
               border
-              border-yellow-500/20
-              text-gray-300
+              border-border-theme
+              text-text-secondary
               hover:border-yellow-500
-              hover:text-yellow-500
+              hover:text-accent-gold
               transition
             "
           >

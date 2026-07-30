@@ -5,7 +5,7 @@ import {
   Search,
 } from "lucide-react";
 
-import GoldRateSidebar from "../GoldRateSidebar";
+
 
 const rateHistory = [
   {
@@ -40,15 +40,15 @@ const rateHistory = [
 
 export default function GoldRateHistoryPage() {
   return (
-    <div className="min-h-screen bg-[#090a09] text-white">
-      <GoldRateSidebar />
+    <div className="min-h-screen bg-background-primary text-text-primary">
+      
 
-      <main className="ml-64 p-8">
+      <main className=" p-8">
 
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-text-secondary">
               Gold Rate / History
             </p>
 
@@ -56,12 +56,12 @@ export default function GoldRateHistoryPage() {
               Gold Rate History
             </h1>
 
-            <p className="mt-2 text-gray-400">
+            <p className="mt-2 text-text-secondary">
               View historical gold rate changes and market trends.
             </p>
           </div>
 
-          <button className="flex items-center gap-2 rounded-lg border border-[#6d5318] bg-[#17150d] px-4 py-2 text-sm text-[#e4b52d]">
+          <button className="flex items-center gap-2 rounded-lg border border-[#6d5318] bg-[#17150d] px-4 py-2 text-sm text-accent-gold">
             <CalendarDays size={16} />
             Select Date
           </button>
@@ -70,8 +70,8 @@ export default function GoldRateHistoryPage() {
         {/* Summary Cards */}
         <div className="grid gap-5 md:grid-cols-3">
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
-            <p className="text-sm text-gray-400">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
+            <p className="text-sm text-text-secondary">
               CURRENT 24K RATE
             </p>
 
@@ -85,22 +85,22 @@ export default function GoldRateHistoryPage() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
-            <p className="text-sm text-gray-400">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
+            <p className="text-sm text-text-secondary">
               HIGHEST RATE
             </p>
 
-            <h2 className="mt-3 text-2xl font-bold text-[#e4b52d]">
+            <h2 className="mt-3 text-2xl font-bold text-accent-gold">
               ₹ 9,850
             </h2>
 
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-text-secondary">
               24 July 2026
             </p>
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
-            <p className="text-sm text-gray-400">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
+            <p className="text-sm text-text-secondary">
               RATE CHANGE
             </p>
 
@@ -108,7 +108,7 @@ export default function GoldRateHistoryPage() {
               +₹ 230
             </h2>
 
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-text-secondary">
               Compared to previous day
             </p>
           </div>
@@ -117,45 +117,45 @@ export default function GoldRateHistoryPage() {
 
         {/* Search */}
         <div className="mt-8 flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-[#e4b52d]">
+          <h2 className="text-xl font-semibold text-accent-gold">
             RATE HISTORY
           </h2>
 
-          <div className="flex items-center gap-2 rounded-lg border border-[#3d3218] bg-[#101210] px-4 py-2">
-            <Search size={16} className="text-gray-500" />
+          <div className="flex items-center gap-2 rounded-lg border border-border-theme bg-background-secondary px-4 py-2">
+            <Search size={16} className="text-text-secondary" />
 
             <input
               type="text"
               placeholder="Search date..."
-              className="bg-transparent text-sm text-white outline-none placeholder:text-gray-600"
+              className="bg-transparent text-sm text-text-primary outline-none placeholder:text-gray-600"
             />
           </div>
         </div>
 
         {/* Table */}
-        <div className="mt-4 overflow-hidden rounded-xl border border-[#3d3218] bg-[#101210]">
+        <div className="mt-4 overflow-hidden rounded-xl border border-border-theme bg-background-secondary">
 
           <table className="w-full text-left">
 
-            <thead className="border-b border-[#3d3218] bg-[#151611]">
+            <thead className="border-b border-border-theme bg-[#151611]">
               <tr>
-                <th className="px-6 py-4 text-sm text-gray-400">
+                <th className="px-6 py-4 text-sm text-text-secondary">
                   DATE
                 </th>
 
-                <th className="px-6 py-4 text-sm text-gray-400">
+                <th className="px-6 py-4 text-sm text-text-secondary">
                   24K GOLD
                 </th>
 
-                <th className="px-6 py-4 text-sm text-gray-400">
+                <th className="px-6 py-4 text-sm text-text-secondary">
                   22K GOLD
                 </th>
 
-                <th className="px-6 py-4 text-sm text-gray-400">
+                <th className="px-6 py-4 text-sm text-text-secondary">
                   CHANGE
                 </th>
 
-                <th className="px-6 py-4 text-sm text-gray-400">
+                <th className="px-6 py-4 text-sm text-text-secondary">
                   STATUS
                 </th>
               </tr>
@@ -165,7 +165,7 @@ export default function GoldRateHistoryPage() {
               {rateHistory.map((rate) => (
                 <tr
                   key={rate.date}
-                  className="border-b border-[#292519] hover:bg-[#171711]"
+                  className="border-b border-[#292519] hover:bg-background-tertiary"
                 >
                   <td className="px-6 py-5 text-sm">
                     {rate.date}
@@ -198,7 +198,7 @@ export default function GoldRateHistoryPage() {
                   </td>
 
                   <td className="px-6 py-5">
-                    <span className="rounded-full border border-[#574719] bg-[#211c0d] px-3 py-1 text-xs text-[#e4b52d]">
+                    <span className="rounded-full border border-[#574719] bg-[#211c0d] px-3 py-1 text-xs text-accent-gold">
                       Recorded
                     </span>
                   </td>

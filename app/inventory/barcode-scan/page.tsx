@@ -11,7 +11,7 @@ import {
   X,
 } from "lucide-react";
 
-import InventorySidebar from "../InventorySidebar";
+
 
 const scannedItems = [
   {
@@ -36,17 +36,17 @@ const scannedItems = [
 
 export default function BarcodeScan() {
   return (
-    <div className="min-h-screen bg-[#090a09] text-white">
+    <div className="min-h-screen bg-background-primary text-text-primary">
 
-      <InventorySidebar />
+      
 
-      <main className="ml-64 min-h-screen p-5">
+      <main className=" min-h-screen p-5">
 
         {/* HEADER */}
         <div className="mb-6 flex items-start justify-between">
 
           <div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-text-secondary">
               Inventory / Barcode Scan
             </p>
 
@@ -54,12 +54,12 @@ export default function BarcodeScan() {
               Barcode Scan
             </h1>
 
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-text-secondary">
               Scan jewellery barcodes to quickly identify and manage inventory.
             </p>
           </div>
 
-          <button className="flex items-center gap-2 rounded-lg border border-[#40351a] px-4 py-2 text-sm text-gray-300 hover:border-[#d9a928] hover:text-[#e4b52d]">
+          <button className="flex items-center gap-2 rounded-lg border border-border-theme px-4 py-2 text-sm text-text-secondary hover:border-accent-gold hover:text-accent-gold">
             <X size={16} />
             Clear All
           </button>
@@ -70,20 +70,20 @@ export default function BarcodeScan() {
         <div className="grid gap-5 xl:grid-cols-2">
 
           {/* SCANNER */}
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-6">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-6">
 
-            <div className="mb-5 flex items-center gap-3 border-b border-[#302b1d] pb-4">
+            <div className="mb-5 flex items-center gap-3 border-b border-border-theme pb-4">
 
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#2a2413] text-[#e4b52d]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-background-tertiary text-accent-gold">
                 <ScanLine size={20} />
               </div>
 
               <div>
-                <h2 className="font-semibold text-[#e4b52d]">
+                <h2 className="font-semibold text-accent-gold">
                   BARCODE SCANNER
                 </h2>
 
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-text-secondary">
                   Scan or enter product barcode
                 </p>
               </div>
@@ -91,13 +91,13 @@ export default function BarcodeScan() {
             </div>
 
             {/* SCAN AREA */}
-            <div className="flex h-64 flex-col items-center justify-center rounded-xl border border-dashed border-[#7b5c17] bg-[#171711]">
+            <div className="flex h-64 flex-col items-center justify-center rounded-xl border border-dashed border-[#7b5c17] bg-background-tertiary">
 
-              <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full border border-[#7b5c17] bg-[#2a2413]">
+              <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full border border-[#7b5c17] bg-background-tertiary">
 
                 <Barcode
                   size={42}
-                  className="text-[#e4b52d]"
+                  className="text-accent-gold"
                 />
 
               </div>
@@ -106,11 +106,11 @@ export default function BarcodeScan() {
                 Ready to Scan
               </p>
 
-              <p className="mt-1 text-sm text-gray-500">
+              <p className="mt-1 text-sm text-text-secondary">
                 Place barcode in front of scanner
               </p>
 
-              <button className="mt-5 flex items-center gap-2 rounded-lg bg-[#d9a928] px-5 py-3 text-sm font-semibold text-black hover:bg-[#f0c43c]">
+              <button className="mt-5 flex items-center gap-2 rounded-lg bg-accent-gold px-5 py-3 text-sm font-semibold text-black hover:bg-accent-gold">
 
                 <Camera size={18} />
 
@@ -123,28 +123,28 @@ export default function BarcodeScan() {
             {/* MANUAL BARCODE */}
             <div className="mt-5">
 
-              <label className="mb-2 block text-xs text-gray-400">
+              <label className="mb-2 block text-xs text-text-secondary">
                 ENTER BARCODE MANUALLY
               </label>
 
               <div className="flex gap-3">
 
-                <div className="flex flex-1 items-center gap-3 rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3">
+                <div className="flex flex-1 items-center gap-3 rounded-lg border border-border-theme bg-background-tertiary px-4 py-3">
 
                   <Barcode
                     size={18}
-                    className="text-gray-500"
+                    className="text-text-secondary"
                   />
 
                   <input
                     type="text"
                     placeholder="Enter barcode number..."
-                    className="w-full bg-transparent text-sm text-gray-300 outline-none placeholder:text-gray-600"
+                    className="w-full bg-transparent text-sm text-text-secondary outline-none placeholder:text-gray-600"
                   />
 
                 </div>
 
-                <button className="rounded-lg bg-[#d9a928] px-5 text-sm font-semibold text-black hover:bg-[#f0c43c]">
+                <button className="rounded-lg bg-accent-gold px-5 text-sm font-semibold text-black hover:bg-accent-gold">
                   Scan
                 </button>
 
@@ -155,33 +155,33 @@ export default function BarcodeScan() {
           </div>
 
           {/* SCAN RESULT */}
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-6">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-6">
 
-            <div className="mb-5 flex items-center gap-3 border-b border-[#302b1d] pb-4">
+            <div className="mb-5 flex items-center gap-3 border-b border-border-theme pb-4">
 
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#2a2413] text-[#e4b52d]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-background-tertiary text-accent-gold">
                 <Package size={20} />
               </div>
 
               <div>
-                <h2 className="font-semibold text-[#e4b52d]">
+                <h2 className="font-semibold text-accent-gold">
                   LAST SCANNED PRODUCT
                 </h2>
 
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-text-secondary">
                   Product information from latest scan
                 </p>
               </div>
 
             </div>
 
-            <div className="rounded-lg border border-[#5a4617] bg-[#17140c] p-5">
+            <div className="rounded-lg border border-[#5a4617] bg-background-tertiary p-5">
 
               <div className="flex items-start justify-between">
 
                 <div>
 
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-text-secondary">
                     PRODUCT NAME
                   </p>
 
@@ -189,7 +189,7 @@ export default function BarcodeScan() {
                     Gold Necklace 22K
                   </h3>
 
-                  <p className="mt-2 text-sm text-[#e4b52d]">
+                  <p className="mt-2 text-sm text-accent-gold">
                     GLD-NEC-001
                   </p>
 
@@ -205,7 +205,7 @@ export default function BarcodeScan() {
               <div className="mt-5 grid grid-cols-2 gap-4">
 
                 <div>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-text-secondary">
                     BARCODE
                   </p>
 
@@ -215,7 +215,7 @@ export default function BarcodeScan() {
                 </div>
 
                 <div>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-text-secondary">
                     STOCK
                   </p>
 
@@ -225,7 +225,7 @@ export default function BarcodeScan() {
                 </div>
 
                 <div>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-text-secondary">
                     CATEGORY
                   </p>
 
@@ -235,7 +235,7 @@ export default function BarcodeScan() {
                 </div>
 
                 <div>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-text-secondary">
                     QUANTITY
                   </p>
 
@@ -253,42 +253,42 @@ export default function BarcodeScan() {
         </div>
 
         {/* SCAN HISTORY */}
-        <div className="mt-5 rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
 
-          <div className="mb-5 flex items-center justify-between border-b border-[#302b1d] pb-4">
+          <div className="mb-5 flex items-center justify-between border-b border-border-theme pb-4">
 
             <div>
-              <h2 className="font-semibold text-[#e4b52d]">
+              <h2 className="font-semibold text-accent-gold">
                 SCAN HISTORY
               </h2>
 
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Recently scanned inventory products
               </p>
             </div>
 
-            <div className="flex items-center gap-3 rounded-lg border border-[#40351a] bg-[#171711] px-4 py-2">
+            <div className="flex items-center gap-3 rounded-lg border border-border-theme bg-background-tertiary px-4 py-2">
 
               <Search
                 size={17}
-                className="text-gray-500"
+                className="text-text-secondary"
               />
 
               <input
                 type="text"
                 placeholder="Search scans..."
-                className="w-40 bg-transparent text-sm text-gray-300 outline-none placeholder:text-gray-600"
+                className="w-40 bg-transparent text-sm text-text-secondary outline-none placeholder:text-gray-600"
               />
 
             </div>
 
           </div>
 
-          <div className="overflow-x-auto rounded-lg border border-[#302b1d]">
+          <div className="overflow-x-auto rounded-lg border border-border-theme">
 
             <table className="w-full min-w-[1000px] text-left text-sm">
 
-              <thead className="bg-[#171711] text-xs text-gray-400">
+              <thead className="bg-background-tertiary text-xs text-text-secondary">
 
                 <tr>
                   <th className="px-4 py-4">BARCODE</th>
@@ -308,14 +308,14 @@ export default function BarcodeScan() {
 
                   <tr
                     key={item.id}
-                    className="border-t border-[#302b1d] text-gray-300"
+                    className="border-t border-border-theme text-text-secondary"
                   >
 
-                    <td className="px-4 py-4 text-[#e4b52d]">
+                    <td className="px-4 py-4 text-accent-gold">
                       {item.barcode}
                     </td>
 
-                    <td className="px-4 py-4 font-medium text-white">
+                    <td className="px-4 py-4 font-medium text-text-primary">
                       {item.product}
                     </td>
 
@@ -323,7 +323,7 @@ export default function BarcodeScan() {
                       {item.sku}
                     </td>
 
-                    <td className="px-4 py-4 text-gray-400">
+                    <td className="px-4 py-4 text-text-secondary">
                       {item.category}
                     </td>
 
@@ -368,21 +368,21 @@ export default function BarcodeScan() {
         {/* SUMMARY */}
         <div className="mt-5 grid gap-5 md:grid-cols-3">
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               TOTAL SCANS TODAY
             </p>
 
-            <p className="mt-2 text-2xl font-bold text-[#e4b52d]">
+            <p className="mt-2 text-2xl font-bold text-accent-gold">
               248
             </p>
 
           </div>
 
-          <div className="rounded-xl border border-green-900 bg-[#101210] p-5">
+          <div className="rounded-xl border border-green-900 bg-background-secondary p-5">
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               SUCCESSFUL SCANS
             </p>
 
@@ -392,9 +392,9 @@ export default function BarcodeScan() {
 
           </div>
 
-          <div className="rounded-xl border border-red-900 bg-[#101210] p-5">
+          <div className="rounded-xl border border-red-900 bg-background-secondary p-5">
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               FAILED SCANS
             </p>
 

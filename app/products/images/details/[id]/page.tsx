@@ -6,7 +6,7 @@ import { ArrowLeft, Star } from "lucide-react";
 
 export default function ProductImageDetailsPage() {
   return (
-    <main className="min-h-screen bg-[#0B0B0B] text-white p-8">
+    <main className="min-h-screen bg-background-primary text-text-primary p-8">
 
       {/* Header */}
 
@@ -14,11 +14,11 @@ export default function ProductImageDetailsPage() {
 
         <div>
 
-          <h1 className="text-4xl font-bold text-yellow-500">
+          <h1 className="text-4xl font-bold text-accent-gold">
             Product Image Details
           </h1>
 
-          <p className="text-gray-400 mt-2">
+          <p className="text-text-secondary mt-2">
             View uploaded product image information
           </p>
 
@@ -26,7 +26,7 @@ export default function ProductImageDetailsPage() {
 
         <Link
           href="/products/images"
-          className="flex items-center gap-2 border border-yellow-500 text-yellow-500 px-5 py-3 rounded-xl hover:bg-yellow-500 hover:text-black transition"
+          className="flex items-center gap-2 border border-yellow-500 text-accent-gold px-5 py-3 rounded-xl hover:bg-accent-gold hover:text-black transition"
         >
           <ArrowLeft size={18} />
           Back
@@ -36,7 +36,7 @@ export default function ProductImageDetailsPage() {
 
       {/* Main Card */}
 
-      <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-8 grid lg:grid-cols-2 gap-10">
+      <div className="bg-background-secondary border border-border-theme rounded-2xl p-8 grid lg:grid-cols-2 gap-10">
 
         {/* Image */}
 
@@ -50,7 +50,7 @@ export default function ProductImageDetailsPage() {
             className="rounded-xl object-cover w-full h-[500px]"
           />
 
-          <div className="absolute top-4 right-4 bg-yellow-500 text-black rounded-full p-3">
+          <div className="absolute top-4 right-4 bg-accent-gold text-black rounded-full p-3">
 
             <Star size={20} fill="black" />
 
@@ -62,33 +62,33 @@ export default function ProductImageDetailsPage() {
 
         <div className="space-y-5">
 
-          <h2 className="text-3xl font-bold text-yellow-500">
+          <h2 className="text-3xl font-bold text-accent-gold">
             Gold Ring
           </h2>
 
           <p>
-            <span className="text-gray-400">
+            <span className="text-text-secondary">
               Product ID :
             </span>{" "}
             GLD001
           </p>
 
           <p>
-            <span className="text-gray-400">
+            <span className="text-text-secondary">
               Category :
             </span>{" "}
             Gold Jewellery
           </p>
 
           <p>
-            <span className="text-gray-400">
+            <span className="text-text-secondary">
               Total Images :
             </span>{" "}
             5
           </p>
 
           <p>
-            <span className="text-gray-400">
+            <span className="text-text-secondary">
               Primary Image :
             </span>{" "}
             <span className="text-green-400">
@@ -97,14 +97,14 @@ export default function ProductImageDetailsPage() {
           </p>
 
           <p>
-            <span className="text-gray-400">
+            <span className="text-text-secondary">
               Uploaded By :
             </span>{" "}
             Admin
           </p>
 
           <p>
-            <span className="text-gray-400">
+            <span className="text-text-secondary">
               Upload Date :
             </span>{" "}
             24 July 2026
@@ -112,11 +112,11 @@ export default function ProductImageDetailsPage() {
 
           <div>
 
-            <h3 className="text-xl font-semibold text-yellow-500 mb-3">
+            <h3 className="text-xl font-semibold text-accent-gold mb-3">
               Description
             </h3>
 
-            <p className="text-gray-400 leading-8">
+            <p className="text-text-secondary leading-8">
               High-quality product image used for product listing,
               billing, inventory, catalogue, website, and customer
               display. This image is marked as the primary image for
@@ -129,7 +129,7 @@ export default function ProductImageDetailsPage() {
 
           <div>
 
-            <h3 className="text-xl font-semibold text-yellow-500 mb-4">
+            <h3 className="text-xl font-semibold text-accent-gold mb-4">
               Gallery
             </h3>
 

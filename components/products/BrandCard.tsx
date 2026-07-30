@@ -21,7 +21,7 @@ export default function BrandCard({
   status,
 }: BrandCardProps) {
   return (
-    <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-6 hover:border-yellow-500 transition">
+    <div className="bg-background-secondary border border-border-theme rounded-2xl p-6 hover:border-yellow-500 transition">
 
       {/* Logo */}
 
@@ -39,15 +39,15 @@ export default function BrandCard({
 
       <div className="mt-6 text-center">
 
-        <h2 className="text-2xl font-semibold text-white">
+        <h2 className="text-2xl font-semibold text-text-primary">
           {name}
         </h2>
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           {country}
         </p>
 
-        <p className="text-yellow-400 font-semibold mt-2">
+        <p className="text-accent-gold font-semibold mt-2">
           {products} Products
         </p>
 
@@ -76,7 +76,7 @@ export default function BrandCard({
 
         <Link
           href={`/products/brands/edit/${id}`}
-          className="text-yellow-500 hover:text-yellow-400"
+          className="text-accent-gold hover:text-accent-gold"
         >
           <Pencil size={22} />
         </Link>

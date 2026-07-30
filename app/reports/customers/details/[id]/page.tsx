@@ -33,8 +33,8 @@ export default function CustomerDetailsPage({
     <main
       className="
       min-h-screen
-      bg-[#0B0B0B]
-      text-white
+      bg-background-primary
+      text-text-primary
       p-8
       "
     >
@@ -49,11 +49,11 @@ export default function CustomerDetailsPage({
         mb-6
         border
         border-yellow-500
-        text-yellow-500
+        text-accent-gold
         px-5
         py-2
         rounded-xl
-        hover:bg-yellow-500
+        hover:bg-accent-gold
         hover:text-black
         transition
         "
@@ -75,14 +75,14 @@ export default function CustomerDetailsPage({
           className="
           text-4xl
           font-bold
-          text-yellow-500
+          text-accent-gold
           "
         >
           Customer Details
         </h1>
 
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           Customer ID: {params.id}
         </p>
 
@@ -98,9 +98,9 @@ export default function CustomerDetailsPage({
 
       <div
         className="
-        bg-[#141414]
+        bg-background-secondary
         border
-        border-yellow-500/20
+        border-border-theme
         rounded-2xl
         p-8
         "
@@ -115,7 +115,7 @@ export default function CustomerDetailsPage({
             className="
             text-2xl
             font-bold
-            text-yellow-500
+            text-accent-gold
             "
           >
             {customer.name}
@@ -125,8 +125,8 @@ export default function CustomerDetailsPage({
 
           <span
             className="
-            bg-yellow-500/10
-            text-yellow-500
+            bg-accent-gold/10
+            text-accent-gold
             px-4
             py-2
             rounded-full
@@ -159,7 +159,7 @@ export default function CustomerDetailsPage({
 
 
           <div>
-            <p className="text-gray-500">
+            <p className="text-text-secondary">
               Phone
             </p>
 
@@ -171,7 +171,7 @@ export default function CustomerDetailsPage({
 
 
           <div>
-            <p className="text-gray-500">
+            <p className="text-text-secondary">
               Email
             </p>
 
@@ -183,7 +183,7 @@ export default function CustomerDetailsPage({
 
 
           <div>
-            <p className="text-gray-500">
+            <p className="text-text-secondary">
               Address
             </p>
 
@@ -195,7 +195,7 @@ export default function CustomerDetailsPage({
 
 
           <div>
-            <p className="text-gray-500">
+            <p className="text-text-secondary">
               GSTIN
             </p>
 
@@ -207,7 +207,7 @@ export default function CustomerDetailsPage({
 
 
           <div>
-            <p className="text-gray-500">
+            <p className="text-text-secondary">
               Total Orders
             </p>
 
@@ -219,11 +219,11 @@ export default function CustomerDetailsPage({
 
 
           <div>
-            <p className="text-gray-500">
+            <p className="text-text-secondary">
               Total Purchase
             </p>
 
-            <p className="text-yellow-500 font-semibold">
+            <p className="text-accent-gold font-semibold">
               {customer.totalPurchase}
             </p>
           </div>
@@ -231,7 +231,7 @@ export default function CustomerDetailsPage({
 
 
           <div>
-            <p className="text-gray-500">
+            <p className="text-text-secondary">
               Last Purchase
             </p>
 
@@ -251,13 +251,13 @@ export default function CustomerDetailsPage({
         <button
           className="
           mt-8
-          bg-yellow-500
+          bg-accent-gold
           text-black
           px-8
           py-3
           rounded-xl
           font-semibold
-          hover:bg-yellow-400
+          hover:bg-accent-gold-hover
           transition
           "
         >

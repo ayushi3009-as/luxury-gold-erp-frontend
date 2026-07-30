@@ -35,15 +35,15 @@ const templates = [
 
 export default function TemplatesPage() {
   return (
-    <main className="min-h-screen bg-[#0B0B0B] text-white p-8">
+    <main className="min-h-screen bg-background-primary text-text-primary p-8">
 
       <div className="mb-8">
 
-        <h1 className="text-4xl font-bold text-yellow-500">
+        <h1 className="text-4xl font-bold text-accent-gold">
           AI Templates
         </h1>
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           Use ready-made AI prompts for faster reports.
         </p>
 
@@ -54,22 +54,22 @@ export default function TemplatesPage() {
         {templates.map((template) => (
           <div
             key={template.id}
-            className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-6 hover:border-yellow-500 transition cursor-pointer"
+            className="bg-background-secondary border border-border-theme rounded-2xl p-6 hover:border-yellow-500 transition cursor-pointer"
           >
-            <div className="w-12 h-12 rounded-xl bg-yellow-500 flex items-center justify-center mb-4">
+            <div className="w-12 h-12 rounded-xl bg-accent-gold flex items-center justify-center mb-4">
               <Sparkles className="text-black" size={22} />
             </div>
 
-            <h2 className="text-xl font-semibold text-white">
+            <h2 className="text-xl font-semibold text-text-primary">
               {template.title}
             </h2>
 
-            <p className="text-gray-400 mt-3 leading-6">
+            <p className="text-text-secondary mt-3 leading-6">
               {template.description}
             </p>
 
             <button
-              className="mt-6 w-full bg-yellow-500 hover:bg-yellow-400 text-black font-semibold py-3 rounded-xl transition"
+              className="mt-6 w-full bg-accent-gold hover:bg-accent-gold-hover text-black font-semibold py-3 rounded-xl transition"
             >
               Use Template
             </button>

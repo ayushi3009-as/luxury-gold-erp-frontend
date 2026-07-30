@@ -1,748 +1,217 @@
-"use client";
+import Link from "next/link";
+import Image from "next/image";
+import prisma from "@/lib/prisma";
+import { ArrowRight, Star, Truck, ShieldCheck, Diamond } from "lucide-react";
 
-import {
-  LayoutDashboard,
-  Receipt,
-  Package,
-  ShoppingCart,
-  Users,
-  Factory,
-  Wrench,
-  CircleDollarSign,
-  Wallet,
-  UserRound,
-  FileText,
-  BarChart3,
-  Settings,
-  Database,
-  Search,
-  Bell,
-  ChevronRight,
-  TrendingUp,
-  TrendingDown,
-  AlertTriangle,
-  Box,
-  IndianRupee,
-  CalendarDays,
-  Bot,
-  ArrowUpRight,
-  RefreshCw,
-  MapPin,
-  Clock,
-  CheckCircle2,
-} from "lucide-react";
+export default async function ECommerceHomepage() {
+  // Fetch featured products from the database
+  const featuredProducts = await prisma.product.findMany({
+    take: 4,
+    orderBy: { createdAt: 'desc' }
+  });
 
-const menuItems = [
-  { name: "Dashboard", icon: LayoutDashboard },
-  { name: "POS Billing", icon: Receipt },
-  { name: "Inventory", icon: Package },
-  { name: "Sales", icon: ShoppingCart },
-  { name: "Purchase", icon: ShoppingCart },
-  { name: "Customers", icon: Users },
-  { name: "Products", icon: Box },
-  { name: "Manufacturing", icon: Factory },
-  { name: "Repairs", icon: Wrench },
-  { name: "Gold Rate", icon: CircleDollarSign },
-  { name: "Finance", icon: Wallet },
-  { name: "HR & Payroll", icon: UserRound },
-  { name: "Reports", icon: FileText },
-  { name: "Analytics", icon: BarChart3 },
-  { name: "Settings", icon: Settings },
-  { name: "Backup & Restore", icon: Database },
-];
+  // Fetch dynamic store settings
+  const settings = await prisma.storeSettings.findFirst();
+  
+  const storeName = settings?.storeName || "Luxury Gold";
+  const tagline = settings?.tagline || "Elegance that lasts forever.";
+  const heroImage = settings?.heroImageUrl || "https://images.unsplash.com/photo-1599643478514-4a820cbf311e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80";
+  const brandColor = settings?.brandColor || "#e4b52d";
 
-const stats = [
-  {
-    title: "TOTAL SALES REVENUE",
-    value: "₹ 12,85,250",
-    change: "18.2%",
-    positive: true,
-    icon: IndianRupee,
-  },
-  {
-    title: "TOTAL ORDERS",
-    value: "1,248",
-    change: "12.5%",
-    positive: true,
-    icon: Receipt,
-  },
-  {
-    title: "TOTAL CUSTOMERS",
-    value: "856",
-    change: "8.6%",
-    positive: true,
-    icon: Users,
-  },
-  {
-    title: "PENDING ORDERS",
-    value: "32",
-    change: "2.4%",
-    positive: false,
-    icon: FileText,
-  },
-  {
-    title: "LOW STOCK ITEMS",
-    value: "18",
-    change: "6.7%",
-    positive: false,
-    icon: Box,
-  },
-  {
-    title: "OUTSTANDING AMOUNT",
-    value: "₹ 4,65,320",
-    change: "15.3%",
-    positive: false,
-    icon: Wallet,
-  },
-];
-
-function MiniChart() {
   return (
-    <div className="mt-3 flex h-10 items-end gap-1">
-      {[20, 28, 18, 32, 24, 42, 30, 48, 36, 55, 45, 65].map(
-        (height, index) => (
-          <div
-            key={index}
-            className="w-1.5 rounded-t bg-[#d9a928]"
-            style={{ height: `${height}%` }}
+    <div className="min-h-screen bg-background-primary text-text-primary font-sans">
+      {/* Injecting CSS Variable for dynamic brand color */}
+      <style>{`
+        :root {
+          --brand-color: ${brandColor};
+        }
+      `}</style>
+      
+      {/* 1. HERO SECTION */}
+      <section className="relative h-[85vh] flex flex-col justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={heroImage}
+            alt="Luxury Jewellery Collection"
+            fill
+            priority
+            className="object-cover opacity-60"
           />
-        )
-      )}
-    </div>
-  );
-}
-
-export default function Home() {
-  return (
-    <div className="p-5">
-
-            {/* STATS */}
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-6">
-
-              {stats.map((stat) => {
-                const Icon = stat.icon;
-
-                return (
-                  <div
-                    key={stat.title}
-                    className="rounded-xl border border-[#40351a] bg-[#101210] p-4 shadow-[0_0_20px_rgba(180,140,30,0.05)]"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#66521d] bg-[#211c0f] text-[#e6b92e]">
-                        <Icon size={20} />
-                      </div>
-
-                      <span className="text-[10px] text-gray-500">
-                        THIS MONTH
-                      </span>
-                    </div>
-
-                    <p className="mt-4 text-[10px] text-gray-400">
-                      {stat.title}
-                    </p>
-
-                    <h3 className="mt-1 text-xl font-semibold">
-                      {stat.value}
-                    </h3>
-
-                    <div className="mt-2 flex items-center gap-1 text-xs">
-
-                      {stat.positive ? (
-                        <TrendingUp
-                          size={13}
-                          className="text-green-400"
-                        />
-                      ) : (
-                        <TrendingDown
-                          size={13}
-                          className="text-red-400"
-                        />
-                      )}
-
-                      <span
-                        className={
-                          stat.positive
-                            ? "text-green-400"
-                            : "text-red-400"
-                        }
-                      >
-                        {stat.change}
-                      </span>
-
-                      <span className="text-gray-500">
-                        vs Yesterday
-                      </span>
-                    </div>
-
-                    <MiniChart />
-                  </div>
-                );
-              })}
-
-            </div>
-
-            {/* MIDDLE SECTION */}
-            <div className="mt-5 grid gap-5 xl:grid-cols-3">
-
-              {/* SALES */}
-              <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
-
-                <div className="flex items-center justify-between">
-
-                  <h3 className="font-semibold text-[#e5b72e]">
-                    TOTAL SALES REVENUE OVERVIEW
-                  </h3>
-
-                  <select className="rounded-md border border-[#51451f] bg-[#171711] px-2 py-1 text-xs text-gray-300">
-                    <option>This Month</option>
-                    <option>Last Month</option>
-                    <option>This Year</option>
-                  </select>
-                </div>
-
-                <div className="mt-5 flex items-center justify-between">
-
-                  <span className="text-2xl font-semibold">
-                    ₹ 12,85,250
-                  </span>
-
-                  <span className="text-xs text-green-400">
-                    ▲ 18.2%
-                  </span>
-                </div>
-
-                <div className="mt-7 flex h-44 items-end gap-2 border-b border-l border-[#302b1d] px-3">
-
-                  {[30, 42, 35, 55, 42, 65, 48, 75, 58, 82, 65, 90].map(
-                    (height, index) => (
-                      <div
-                        key={index}
-                        className="flex-1 rounded-t bg-[#c99d20]"
-                        style={{ height: `${height}%` }}
-                      />
-                    )
-                  )}
-
-                </div>
-              </div>
-
-              {/* SALES CATEGORY */}
-              <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
-
-                <h3 className="font-semibold text-[#e5b72e]">
-                  SALES BY CATEGORY
-                </h3>
-
-                <div className="mt-7 flex items-center gap-8">
-
-                  <div className="flex h-36 w-36 items-center justify-center rounded-full border-[22px] border-[#d9a928]">
-
-                    <div className="text-center">
-                      <p className="text-xs text-gray-400">
-                        Total
-                      </p>
-
-                      <p className="font-semibold">
-                        ₹12.8L
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3 text-sm">
-
-                    <p>
-                      🟡 Gold Jewellery
-                      <span className="ml-5 text-gray-400">
-                        55%
-                      </span>
-                    </p>
-
-                    <p>
-                      ⚪ Diamond
-                      <span className="ml-10 text-gray-400">
-                        20%
-                      </span>
-                    </p>
-
-                    <p>
-                      ⚫ Silver
-                      <span className="ml-12 text-gray-400">
-                        10%
-                      </span>
-                    </p>
-
-                    <p>
-                      🟤 Platinum
-                      <span className="ml-7 text-gray-400">
-                        5%
-                      </span>
-                    </p>
-
-                  </div>
-                </div>
-              </div>
-
-              {/* METAL RATES */}
-              <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
-
-                <div className="flex items-center justify-between">
-
-                  <h3 className="font-semibold text-[#e5b72e]">
-                    LIVE METAL RATES
-                  </h3>
-
-                  <span className="cursor-pointer text-xs text-[#e5b72e]">
-                    View All →
-                  </span>
-                </div>
-
-                <div className="mt-5 space-y-5">
-
-                  {[
-                    ["Gold (24K)", "₹ 7,620 /gm", "▲ 0.35%"],
-                    ["Silver", "₹ 85 /gm", "▲ 0.20%"],
-                    ["Platinum", "₹ 3,450 /gm", "▼ 0.15%"],
-                  ].map((rate) => (
-
-                    <div
-                      key={rate[0]}
-                      className="flex items-center justify-between border-b border-[#28251a] pb-3"
-                    >
-
-                      <div>
-                        <p className="text-sm">
-                          {rate[0]}
-                        </p>
-
-                        <p className="mt-1 font-semibold text-[#e8bb34]">
-                          {rate[1]}
-                        </p>
-                      </div>
-
-                      <span className="text-xs text-green-400">
-                        {rate[2]}
-                      </span>
-
-                    </div>
-                  ))}
-
-                </div>
-              </div>
-            </div>
-
-            {/* LOWER SECTION */}
-            <div className="mt-5 grid gap-5 xl:grid-cols-3">
-
-              {/* INVENTORY */}
-              <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
-
-                <h3 className="font-semibold text-[#e5b72e]">
-                  INVENTORY OVERVIEW
-                </h3>
-
-                <div className="mt-6 flex items-center gap-5">
-
-                  <div className="flex h-32 w-32 items-center justify-center rounded-full border-[20px] border-[#d9a928]">
-
-                    <div className="text-center">
-                      <p className="text-2xl font-bold">
-                        76%
-                      </p>
-
-                      <p className="text-[10px] text-gray-400">
-                        Total Inventory Value
-                      </p>
-                    </div>
-
-                  </div>
-
-                  <div className="space-y-3 text-xs text-gray-300">
-                    <p>🟡 Gold Jewellery — 66.9%</p>
-                    <p>⚪ Diamond Jewellery — 17.2%</p>
-                    <p>⚫ Silver Items — 10.5%</p>
-                    <p>🟤 Platinum Items — 5.4%</p>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* TRANSACTIONS */}
-              <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
-
-                <div className="flex items-center justify-between">
-
-                  <h3 className="font-semibold text-[#e5b72e]">
-                    RECENT TRANSACTION LOGS
-                  </h3>
-
-                  <span className="text-xs text-[#e5b72e]">
-                    View All →
-                  </span>
-                </div>
-
-                <div className="mt-5 space-y-4 text-xs">
-
-                  {[
-                    ["Customer A", "Sale", "₹280.00"],
-                    ["Customer B", "Purchase", "₹80.00"],
-                    ["Customer C", "Sale", "₹290.00"],
-                    ["Customer D", "Purchase", "₹200.00"],
-                  ].map((transaction, index) => (
-
-                    <div
-                      key={index}
-                      className="grid grid-cols-3 border-b border-[#252319] pb-3"
-                    >
-                      <span>
-                        {transaction[0]}
-                      </span>
-
-                      <span className="text-gray-400">
-                        {transaction[1]}
-                      </span>
-
-                      <span className="text-right text-[#e6b72e]">
-                        {transaction[2]}
-                      </span>
-                    </div>
-                  ))}
-
-                </div>
-              </div>
-
-              {/* STOCK ALERTS */}
-              <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
-
-                <div className="flex items-center justify-between">
-
-                  <h3 className="font-semibold text-[#e5b72e]">
-                    CURRENT STOCK ALERTS
-                  </h3>
-
-                  <AlertTriangle
-                    size={18}
-                    className="text-[#e5b72e]"
-                  />
-                </div>
-
-                <div className="mt-5 space-y-3">
-
-                  {[
-                    "18K Diamond Rings - 3 units left",
-                    "24K Gold Chains - 5 units left",
-                    "Gold Bangles - 2 units left",
-                    "Diamond Earrings - 4 units left",
-                  ].map((alert) => (
-
-                    <div
-                      key={alert}
-                      className="flex items-center gap-3 rounded-lg border border-[#3b321c] bg-[#17160f] p-3 text-xs"
-                    >
-
-                      <AlertTriangle
-                        size={15}
-                        className="text-[#e5b72e]"
-                      />
-
-                      {alert}
-
-                    </div>
-                  ))}
-
-                </div>
-              </div>
-            </div>
-
-            {/* BRANCH PERFORMANCE */}
-            <div className="mt-5 rounded-xl border border-[#40351a] bg-[#101210] p-5">
-
-              <div className="flex items-center justify-between">
-
-                <div>
-                  <h3 className="font-semibold text-[#e5b72e]">
-                    BRANCH PERFORMANCE
-                  </h3>
-
-                  <p className="mt-1 text-xs text-gray-500">
-                    Performance overview across all branches
-                  </p>
-                </div>
-
-                <MapPin
-                  size={20}
-                  className="text-[#e5b72e]"
-                />
-              </div>
-
-              <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-
-                {[
-                  ["Surat Branch", "₹ 5,85,250", "92%"],
-                  ["Mumbai Branch", "₹ 3,25,800", "78%"],
-                  ["Delhi Branch", "₹ 2,45,600", "69%"],
-                  ["Rajkot Branch", "₹ 1,28,600", "58%"],
-                ].map((branch) => (
-
-                  <div
-                    key={branch[0]}
-                    className="rounded-lg border border-[#302b1d] bg-[#151610] p-4"
-                  >
-
-                    <div className="flex items-center justify-between">
-
-                      <p className="text-sm font-medium">
-                        {branch[0]}
-                      </p>
-
-                      <ArrowUpRight
-                        size={16}
-                        className="text-green-400"
-                      />
-                    </div>
-
-                    <p className="mt-3 text-lg font-semibold text-[#e8bb34]">
-                      {branch[1]}
-                    </p>
-
-                    <div className="mt-3 h-2 rounded-full bg-[#29291f]">
-
-                      <div
-                        className="h-2 rounded-full bg-[#d9a928]"
-                        style={{ width: branch[2] }}
-                      />
-
-                    </div>
-
-                    <p className="mt-2 text-xs text-gray-500">
-                      Performance: {branch[2]}
-                    </p>
-
-                  </div>
-                ))}
-
-              </div>
-            </div>
-
-            {/* LOW STOCK + REMINDERS */}
-            <div className="mt-5 grid gap-5 xl:grid-cols-2">
-
-              {/* LOW STOCK ALERTS */}
-              <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
-
-                <div className="flex items-center justify-between">
-
-                  <div>
-                    <h3 className="font-semibold text-[#e5b72e]">
-                      LOW STOCK ALERTS
-                    </h3>
-
-                    <p className="mt-1 text-xs text-gray-500">
-                      Items that require immediate restocking
-                    </p>
-                  </div>
-
-                  <AlertTriangle
-                    size={20}
-                    className="text-[#e5b72e]"
-                  />
-
-                </div>
-
-                <div className="mt-5 space-y-3">
-
-                  {[
-                    ["Gold Chain 22K", "3 units left"],
-                    ["Gold Bangles 22K", "5 units left"],
-                    ["Diamond Earrings", "2 units left"],
-                  ].map((item) => (
-
-                    <div
-                      key={item[0]}
-                      className="flex items-center justify-between rounded-lg border border-[#302b1d] bg-[#151610] p-4"
-                    >
-
-                      <div>
-                        <p className="text-sm font-medium">
-                          {item[0]}
-                        </p>
-
-                        <p className="mt-1 text-xs text-red-400">
-                          {item[1]}
-                        </p>
-                      </div>
-
-                      <button className="rounded-md border border-[#8e6b1c] px-3 py-2 text-xs text-[#e5b72e] transition hover:bg-[#2a2413]">
-                        Reorder
-                      </button>
-
-                    </div>
-                  ))}
-
-                </div>
-              </div>
-
-              {/* REMINDERS */}
-              <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
-
-                <div className="flex items-center justify-between">
-
-                  <div>
-                    <h3 className="font-semibold text-[#e5b72e]">
-                      TODAY&apos;S REMINDERS
-                    </h3>
-
-                    <p className="mt-1 text-xs text-gray-500">
-                      Important activities for today
-                    </p>
-                  </div>
-
-                  <CalendarDays
-                    size={20}
-                    className="text-[#e5b72e]"
-                  />
-
-                </div>
-
-                <div className="mt-5 space-y-3">
-
-                  {[
-                    ["10:00 AM", "Customer Meeting"],
-                    ["01:00 PM", "Vendor Payment"],
-                    ["03:00 PM", "Physical Stock Counting"],
-                    ["05:30 PM", "Gold Rate Update"],
-                  ].map((reminder) => (
-
-                    <div
-                      key={reminder[0]}
-                      className="flex items-center gap-4 rounded-lg border border-[#302b1d] bg-[#151610] p-4"
-                    >
-
-                      <div className="flex items-center gap-2 text-xs text-[#e5b72e]">
-                        <Clock size={15} />
-                        {reminder[0]}
-                      </div>
-
-                      <div className="h-6 w-px bg-[#40351a]" />
-
-                      <span className="text-sm text-gray-300">
-                        {reminder[1]}
-                      </span>
-
-                    </div>
-                  ))}
-
-                </div>
-              </div>
-            </div>
-
-            {/* SHORTCUTS */}
-            <div className="mt-5 rounded-xl border border-[#40351a] bg-[#101210] p-5">
-
-              <div className="flex items-center justify-between">
-
-                <h3 className="font-semibold text-[#e5b72e]">
-                  BUSINESS & MANAGEMENT SHORTCUTS
-                </h3>
-
-                <button className="rounded-md border border-[#5d4818] px-3 py-2 text-xs text-[#e5b72e] hover:bg-[#2a2413]">
-                  Customize Dashboard
-                </button>
-
-              </div>
-
-              <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
-
-                {[
-                  "Daily Activity Report",
-                  "Label in Stock",
-                  "Label Summary",
-                  "Order Query",
-                  "Outstanding",
-                  "Customer Ledger",
-                  "Metal Balance Sheet",
-                  "Backup & Restore",
-                  "Toolbar Setup",
-                  "Shortcut Setup",
-                  "More Reports",
-                ].map((shortcut) => (
-
-                  <div
-                    key={shortcut}
-                    className="cursor-pointer rounded-lg border border-[#39311c] bg-[#151610] p-3 text-xs text-gray-300 transition hover:border-[#d6a927] hover:text-[#e8bb34]"
-                  >
-                    {shortcut}
-                  </div>
-                ))}
-
-              </div>
-            </div>
-
-            {/* LUXURY AI ASSISTANT */}
-            <div className="mt-5 rounded-xl border border-[#66521d] bg-[#17140c] p-5">
-
-              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-
-                <div className="flex items-center gap-4">
-
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#8e6b1c] bg-[#2a2413] text-[#e5b72e]">
-                    <Bot size={25} />
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold text-[#e5b72e]">
-                      Luxury AI Assistant
-                    </h3>
-
-                    <p className="mt-1 text-sm text-gray-400">
-                      Your intelligent business assistant is ready to help.
-                    </p>
-                  </div>
-
-                </div>
-
-                <button className="flex items-center justify-center gap-2 rounded-lg bg-[#d9a928] px-5 py-3 text-sm font-semibold text-black transition hover:bg-[#f0c43c]">
-                  <Bot size={17} />
-                  Ask AI Assistant
-                </button>
-
-              </div>
-
-              <div className="mt-5 grid gap-3 md:grid-cols-3">
-
-                <div className="rounded-lg border border-[#40351a] bg-[#101210] p-4">
-                  <p className="text-xs text-gray-500">
-                    AI INSIGHT
-                  </p>
-
-                  <p className="mt-2 text-sm text-gray-300">
-                    Sales are expected to increase by 18% next month.
-                  </p>
-                </div>
-
-                <div className="rounded-lg border border-[#40351a] bg-[#101210] p-4">
-                  <p className="text-xs text-gray-500">
-                    AI RECOMMENDATION
-                  </p>
-
-                  <p className="mt-2 text-sm text-gray-300">
-                    Consider restocking Gold Chain 22K products.
-                  </p>
-                </div>
-
-                <div className="rounded-lg border border-[#40351a] bg-[#101210] p-4">
-                  <p className="text-xs text-gray-500">
-                    AI STATUS
-                  </p>
-
-                  <p className="mt-2 flex items-center gap-2 text-sm text-green-400">
-                    <CheckCircle2 size={16} />
-                    System Analysis Active
-                  </p>
-                </div>
-
-              </div>
-            </div>
-
+          <div className="absolute inset-0 bg-gradient-to-r from-background-primary/90 via-background-primary/60 to-transparent" />
+        </div>
+
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 w-full">
+          <div className="max-w-2xl">
+            <span style={{color: "var(--brand-color)"}} className="font-medium tracking-widest uppercase text-sm mb-4 block">
+              {storeName} Collection
+            </span>
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-[1.1] text-white">
+              {tagline.split(' ').slice(0, Math.ceil(tagline.split(' ').length / 2)).join(' ')} <br />
+              {tagline.split(' ').slice(Math.ceil(tagline.split(' ').length / 2)).join(' ')}
+            </h1>
+            <p className="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed font-light">
+              Discover our handcrafted collection of pure 22K gold and certified diamond jewellery, designed for your most precious moments.
+            </p>
+            <Link 
+              href="/shop" 
+              style={{backgroundColor: "var(--brand-color)"}}
+              className="inline-flex items-center justify-center gap-3 text-black px-10 py-4 rounded-md font-bold hover:bg-white hover:text-black transition-all duration-300 transform hover:-translate-y-1 text-lg"
+            >
+              Shop Collection <ArrowRight size={20} />
+            </Link>
           </div>
+        </div>
+      </section>
+
+      {/* 2. FEATURES BANNER */}
+      <section className="bg-background-tertiary border-y border-border-theme py-8">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex flex-wrap justify-center md:justify-between gap-8 text-center md:text-left">
+          <div className="flex items-center gap-4">
+            <ShieldCheck className="text-accent-gold w-10 h-10" />
+            <div>
+              <h4 className="font-bold text-sm uppercase tracking-wide">100% Certified</h4>
+              <p className="text-xs text-text-secondary">BIS Hallmark & IGI Diamonds</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <Truck className="text-accent-gold w-10 h-10" />
+            <div>
+              <h4 className="font-bold text-sm uppercase tracking-wide">Secure Shipping</h4>
+              <p className="text-xs text-text-secondary">Fully insured delivery</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <Diamond className="text-accent-gold w-10 h-10" />
+            <div>
+              <h4 className="font-bold text-sm uppercase tracking-wide">Lifetime Exchange</h4>
+              <p className="text-xs text-text-secondary">100% value exchange</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. FEATURED PRODUCTS (Directly from ERP DB) */}
+      <section className="py-24 max-w-[1400px] mx-auto px-6 md:px-12">
+        <div className="flex justify-between items-end mb-12">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">Featured Arrivals</h2>
+            <p className="text-text-secondary">Handpicked designs fresh from our artisans.</p>
+          </div>
+          <Link href="/shop" className="text-accent-gold hover:underline font-medium hidden md:block">
+            View All Jewellery &rarr;
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {featuredProducts.length === 0 ? (
+            <div className="col-span-full py-20 text-center text-text-secondary border border-dashed border-border-theme rounded-xl">
+              <p>No products found in inventory.</p>
+              <p className="text-sm mt-2">Log into the ERP dashboard to add products.</p>
+            </div>
+          ) : (
+            featuredProducts.map((product) => (
+              <div key={product.id} className="group cursor-pointer">
+                <div className="relative aspect-square rounded-xl bg-background-tertiary border border-border-theme overflow-hidden mb-4">
+                  {/* Placeholder image since we don't have real images uploaded yet */}
+                  <Image 
+                    src={`https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80`} 
+                    alt={product.name}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  {product.quantity <= 0 && (
+                    <div className="absolute top-4 left-4 bg-red-500/90 text-white px-3 py-1 text-xs font-bold uppercase rounded">
+                      Out of Stock
+                    </div>
+                  )}
+                  {product.quantity > 0 && (
+                    <div className="absolute top-4 left-4 bg-accent-gold text-black px-3 py-1 text-xs font-bold uppercase rounded">
+                      {product.purity}
+                    </div>
+                  )}
+                </div>
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="font-semibold text-lg group-hover:text-accent-gold transition-colors line-clamp-1">
+                      {product.name}
+                    </h3>
+                    <p className="text-sm text-text-secondary mt-1">{product.category} • {product.weight}g</p>
+                  </div>
+                  <div className="flex gap-1 text-accent-gold">
+                    <Star className="w-4 h-4 fill-current" />
+                    <span className="text-xs font-medium">5.0</span>
+                  </div>
+                </div>
+                <p className="font-bold text-xl mt-3">₹{product.sellingPrice?.toLocaleString()}</p>
+                
+                <button 
+                  disabled={product.quantity <= 0}
+                  className={`w-full mt-4 py-3 rounded-md font-medium transition-colors ${
+                    product.quantity > 0 
+                    ? "bg-background-tertiary border border-border-theme hover:border-accent-gold hover:text-accent-gold" 
+                    : "bg-background-secondary border border-border-theme opacity-50 cursor-not-allowed"
+                  }`}
+                >
+                  {product.quantity > 0 ? "Add to Cart" : "Out of Stock"}
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+      </section>
+
+      {/* 4. CATEGORIES */}
+      <section className="py-12 bg-background-secondary border-t border-border-theme">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 text-center">
+          <h2 className="text-3xl font-bold mb-12">Shop by Category</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {['Rings', 'Necklaces', 'Earrings', 'Bangles'].map((cat, i) => (
+              <Link href={`/shop?category=${cat}`} key={cat} className="group relative h-48 md:h-64 rounded-xl overflow-hidden border border-border-theme">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
+                <Image 
+                  src={`https://images.unsplash.com/photo-${['1605100804735-247f1604a5a8', '1599643478514-4a820cbf311e', '1535632066927-ab7c9ab60908', '1611591437281-460bfbe1220a'][i]}?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80`}
+                  alt={cat}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-700 z-0"
+                />
+                <h3 className="absolute bottom-6 left-0 right-0 text-white font-bold text-xl z-20">{cat}</h3>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. FOOTER */}
+      <footer className="bg-background-primary py-12 border-t border-border-theme text-center md:text-left">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="col-span-1 md:col-span-2">
+            <div className="flex items-center gap-2 justify-center md:justify-start mb-4">
+              <div className="text-2xl text-accent-gold">◇</div>
+              <span className="text-xl font-bold text-white tracking-wide">Sharma Jewellers</span>
+            </div>
+            <p className="text-text-secondary text-sm max-w-sm">
+              Crafting legacy since 1990. We bring you the finest 22K gold and IGI certified diamonds, securely delivered to your doorstep.
+            </p>
+          </div>
+          <div>
+            <h4 className="font-bold text-white mb-4">Quick Links</h4>
+            <div className="flex flex-col gap-2">
+              <Link href="/shop" className="text-sm text-text-secondary hover:text-accent-gold">All Products</Link>
+              <Link href="/about" className="text-sm text-text-secondary hover:text-accent-gold">About Us</Link>
+              <Link href="/contact" className="text-sm text-text-secondary hover:text-accent-gold">Contact</Link>
+              <Link href="/login" className="text-sm text-text-secondary hover:text-accent-gold mt-4 font-bold">Staff Login</Link>
+            </div>
+          </div>
+          <div>
+            <h4 className="font-bold text-white mb-4">Legal</h4>
+            <div className="flex flex-col gap-2">
+              <Link href="#" className="text-sm text-text-secondary hover:text-accent-gold">Privacy Policy</Link>
+              <Link href="#" className="text-sm text-text-secondary hover:text-accent-gold">Terms of Service</Link>
+              <Link href="#" className="text-sm text-text-secondary hover:text-accent-gold">Return Policy</Link>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }

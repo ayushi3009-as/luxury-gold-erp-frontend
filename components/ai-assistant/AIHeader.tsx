@@ -14,18 +14,18 @@ export default function AIHeader() {
 
           {/* AI Logo */}
 
-          <div className="w-16 h-16 rounded-2xl bg-yellow-500 flex items-center justify-center shadow-lg">
+          <div className="w-16 h-16 rounded-2xl bg-accent-gold flex items-center justify-center shadow-lg">
             <Bot size={34} className="text-black" />
           </div>
 
           {/* Title */}
 
           <div>
-            <h1 className="text-4xl font-bold text-yellow-500">
+            <h1 className="text-4xl font-bold text-accent-gold">
               Luxury Gold AI Assistant
             </h1>
 
-            <p className="text-gray-400 mt-1">
+            <p className="text-text-secondary mt-1">
               Smart AI-powered assistant for your Jewellery ERP
             </p>
           </div>
@@ -52,7 +52,7 @@ export default function AIHeader() {
 
           <Link
             href="/ai-assistant/insights"
-            className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-5 py-3 rounded-xl transition"
+            className="flex items-center gap-2 bg-accent-gold hover:bg-accent-gold-hover text-black font-semibold px-5 py-3 rounded-xl transition"
           >
             <Sparkles size={18} />
             AI Insights

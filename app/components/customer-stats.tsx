@@ -32,14 +32,14 @@ export default function CustomerStats({ customers }: CustomerStatsProps) {
       value: activeCount.toLocaleString(),
       subtitle: `${activePercentage}% of total`,
       icon: BadgeCheck,
-      color: "text-gray-400",
+      color: "text-text-secondary",
     },
     {
       title: "Premium Members",
       value: premiumCount.toLocaleString(),
       subtitle: `${premiumPercentage}% of total`,
       icon: Gem,
-      color: "text-gray-400",
+      color: "text-text-secondary",
     },
     {
       title: "Total Account Balance",
@@ -66,8 +66,8 @@ export default function CustomerStats({ customers }: CustomerStatsProps) {
               </div>
 
               <div>
-                <p className="text-gray-400 text-sm">{item.title}</p>
-                <h2 className="text-3xl font-bold mt-1 text-white">{item.value}</h2>
+                <p className="text-text-secondary text-sm">{item.title}</p>
+                <h2 className="text-3xl font-bold mt-1 text-text-primary">{item.value}</h2>
                 <p className={`text-sm mt-2 ${item.color}`}>{item.subtitle}</p>
               </div>
             </div>

@@ -14,14 +14,14 @@ export default function ChatInput() {
   };
 
   return (
-    <div className="mt-6 bg-[#141414] border border-yellow-500/20 rounded-2xl p-4">
+    <div className="mt-6 bg-background-secondary border border-border-theme rounded-2xl p-4">
 
       <div className="flex items-center gap-3">
 
         {/* Attachment */}
 
-        <button className="p-3 rounded-xl bg-[#1B1B1B] hover:bg-[#252525] transition">
-          <Paperclip size={20} className="text-yellow-500" />
+        <button className="p-3 rounded-xl bg-background-tertiary hover:bg-[#252525] transition">
+          <Paperclip size={20} className="text-accent-gold" />
         </button>
 
         {/* Input */}
@@ -36,20 +36,20 @@ export default function ChatInput() {
               handleSend();
             }
           }}
-          className="flex-1 bg-[#1B1B1B] border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500"
+          className="flex-1 bg-background-tertiary border border-gray-700 rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-yellow-500"
         />
 
         {/* Voice */}
 
-        <button className="p-3 rounded-xl bg-[#1B1B1B] hover:bg-[#252525] transition">
-          <Mic size={20} className="text-yellow-500" />
+        <button className="p-3 rounded-xl bg-background-tertiary hover:bg-[#252525] transition">
+          <Mic size={20} className="text-accent-gold" />
         </button>
 
         {/* Send */}
 
         <button
           onClick={handleSend}
-          className="bg-yellow-500 hover:bg-yellow-400 text-black p-3 rounded-xl transition"
+          className="bg-accent-gold hover:bg-accent-gold-hover text-black p-3 rounded-xl transition"
         >
           <Send size={20} />
         </button>

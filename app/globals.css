@@ -1,8 +1,36 @@
 @import "tailwindcss";
 
+@theme {
+  --color-background-primary: var(--bg-primary);
+  --color-background-secondary: var(--bg-secondary);
+  --color-background-tertiary: var(--bg-tertiary);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent-gold: var(--accent-gold);
+  --color-accent-gold-hover: var(--accent-gold-hover);
+  --color-border-theme: var(--border-theme);
+}
+
 :root {
-  background: #090a09;
-  color: white;
+  --bg-primary: #fdfcf9; /* Premium pearl white */
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f5f2ea; /* Soft golden cream */
+  --text-primary: #231f18; /* Rich dark brown */
+  --text-secondary: #766a5a; /* Warm grey */
+  --accent-gold: #d4af37; /* Classic metallic gold */
+  --accent-gold-hover: #b5952f;
+  --border-theme: #ebe5d9;
+}
+
+.dark {
+  --bg-primary: #090a09;
+  --bg-secondary: #111111;
+  --bg-tertiary: #1c1a12;
+  --text-primary: #ffffff;
+  --text-secondary: #9ca3af;
+  --accent-gold: #f0c43c; /* Classic Gold */
+  --accent-gold-hover: #e4b52d;
+  --border-theme: #2b2617;
 }
 
 * {
@@ -11,7 +39,8 @@
 
 body {
   margin: 0;
-  background: #090a09;
-  color: white;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

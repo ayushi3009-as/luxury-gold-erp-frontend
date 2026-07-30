@@ -10,7 +10,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-import InventorySidebar from "../InventorySidebar";
+
 
 const gemstones = [
   {
@@ -61,17 +61,17 @@ const gemstones = [
 
 export default function GemstoneInventory() {
   return (
-    <div className="min-h-screen bg-[#090a09] text-white">
+    <div className="min-h-screen bg-background-primary text-text-primary">
 
-      <InventorySidebar />
+      
 
-      <main className="ml-64 min-h-screen p-5">
+      <main className=" min-h-screen p-5">
 
         {/* HEADER */}
         <div className="mb-6 flex items-start justify-between">
 
           <div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-text-secondary">
               Inventory / Gemstone Inventory
             </p>
 
@@ -79,19 +79,19 @@ export default function GemstoneInventory() {
               Gemstone Inventory
             </h1>
 
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-text-secondary">
               Manage coloured gemstones, origin, quality and stock valuation.
             </p>
           </div>
 
           <div className="flex gap-3">
 
-            <button className="flex items-center gap-2 rounded-lg border border-[#40351a] px-4 py-2 text-sm text-gray-300 hover:border-[#d9a928] hover:text-[#e4b52d]">
+            <button className="flex items-center gap-2 rounded-lg border border-border-theme px-4 py-2 text-sm text-text-secondary hover:border-accent-gold hover:text-accent-gold">
               <Download size={16} />
               Export
             </button>
 
-            <button className="flex items-center gap-2 rounded-lg bg-[#d9a928] px-4 py-2 text-sm font-semibold text-black hover:bg-[#f0c43c]">
+            <button className="flex items-center gap-2 rounded-lg bg-accent-gold px-4 py-2 text-sm font-semibold text-black hover:bg-accent-gold">
               <Plus size={17} />
               Add Gemstone
             </button>
@@ -103,10 +103,10 @@ export default function GemstoneInventory() {
         {/* KPI CARDS */}
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <div className="flex items-center justify-between">
-              <Gem size={27} className="text-[#e4b52d]" />
+              <Gem size={27} className="text-accent-gold" />
 
               <TrendingUp
                 size={18}
@@ -114,7 +114,7 @@ export default function GemstoneInventory() {
               />
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               TOTAL GEMSTONES
             </p>
 
@@ -124,16 +124,16 @@ export default function GemstoneInventory() {
 
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <div className="flex items-center justify-between">
               <Sparkles
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               TOTAL CARAT WEIGHT
             </p>
 
@@ -143,16 +143,16 @@ export default function GemstoneInventory() {
 
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <div className="flex items-center justify-between">
               <Gem
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               AVAILABLE STOCK
             </p>
 
@@ -162,20 +162,20 @@ export default function GemstoneInventory() {
 
           </div>
 
-          <div className="rounded-xl border border-[#7b5c17] bg-[#17140c] p-5">
+          <div className="rounded-xl border border-[#7b5c17] bg-background-tertiary p-5">
 
             <div className="flex items-center justify-between">
               <Sparkles
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               TOTAL STOCK VALUE
             </p>
 
-            <h2 className="mt-2 text-2xl font-bold text-[#e4b52d]">
+            <h2 className="mt-2 text-2xl font-bold text-accent-gold">
               ₹ 8.65 Cr
             </h2>
 
@@ -184,26 +184,26 @@ export default function GemstoneInventory() {
         </div>
 
         {/* FILTERS */}
-        <div className="mt-5 rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
 
-            <div className="flex items-center gap-3 rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3">
+            <div className="flex items-center gap-3 rounded-lg border border-border-theme bg-background-tertiary px-4 py-3">
 
               <Search
                 size={18}
-                className="text-gray-500"
+                className="text-text-secondary"
               />
 
               <input
                 type="text"
                 placeholder="Search gemstone..."
-                className="w-full bg-transparent text-sm text-gray-300 outline-none placeholder:text-gray-600"
+                className="w-full bg-transparent text-sm text-text-secondary outline-none placeholder:text-gray-600"
               />
 
             </div>
 
-            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none">
+            <select className="rounded-lg border border-border-theme bg-background-tertiary px-4 py-3 text-sm text-text-secondary outline-none">
 
               <option>All Gemstones</option>
               <option>Ruby</option>
@@ -213,7 +213,7 @@ export default function GemstoneInventory() {
 
             </select>
 
-            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none">
+            <select className="rounded-lg border border-border-theme bg-background-tertiary px-4 py-3 text-sm text-text-secondary outline-none">
 
               <option>All Origins</option>
               <option>Myanmar</option>
@@ -223,7 +223,7 @@ export default function GemstoneInventory() {
 
             </select>
 
-            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none">
+            <select className="rounded-lg border border-border-theme bg-background-tertiary px-4 py-3 text-sm text-text-secondary outline-none">
 
               <option>All Quality</option>
               <option>Premium</option>
@@ -232,7 +232,7 @@ export default function GemstoneInventory() {
 
             </select>
 
-            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none">
+            <select className="rounded-lg border border-border-theme bg-background-tertiary px-4 py-3 text-sm text-text-secondary outline-none">
 
               <option>All Stock</option>
               <option>Available</option>
@@ -246,25 +246,25 @@ export default function GemstoneInventory() {
         </div>
 
         {/* GEMSTONE TABLE */}
-        <div className="mt-5 rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
 
-          <div className="mb-5 border-b border-[#302b1d] pb-4">
+          <div className="mb-5 border-b border-border-theme pb-4">
 
-            <h2 className="font-semibold text-[#e4b52d]">
+            <h2 className="font-semibold text-accent-gold">
               GEMSTONE STOCK
             </h2>
 
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-text-secondary">
               View and manage all coloured gemstone inventory
             </p>
 
           </div>
 
-          <div className="overflow-x-auto rounded-lg border border-[#302b1d]">
+          <div className="overflow-x-auto rounded-lg border border-border-theme">
 
             <table className="w-full min-w-[1250px] text-left text-sm">
 
-              <thead className="bg-[#171711] text-xs text-gray-400">
+              <thead className="bg-background-tertiary text-xs text-text-secondary">
 
                 <tr>
                   <th className="px-4 py-4">STONE ID</th>
@@ -286,18 +286,18 @@ export default function GemstoneInventory() {
 
                   <tr
                     key={gemstone.id}
-                    className="border-t border-[#302b1d] text-gray-300"
+                    className="border-t border-border-theme text-text-secondary"
                   >
 
-                    <td className="px-4 py-4 text-[#e4b52d]">
+                    <td className="px-4 py-4 text-accent-gold">
                       {gemstone.stoneId}
                     </td>
 
-                    <td className="px-4 py-4 font-medium text-white">
+                    <td className="px-4 py-4 font-medium text-text-primary">
                       {gemstone.name}
                     </td>
 
-                    <td className="px-4 py-4 text-gray-400">
+                    <td className="px-4 py-4 text-text-secondary">
                       {gemstone.origin}
                     </td>
 
@@ -305,7 +305,7 @@ export default function GemstoneInventory() {
                       {gemstone.carat}
                     </td>
 
-                    <td className="px-4 py-4 text-[#e4b52d]">
+                    <td className="px-4 py-4 text-accent-gold">
                       {gemstone.color}
                     </td>
 
@@ -319,7 +319,7 @@ export default function GemstoneInventory() {
                         className={
                           gemstone.stock === "Available"
                             ? "rounded-md border border-green-900 bg-green-950/30 px-3 py-1 text-xs text-green-400"
-                            : "rounded-md border border-yellow-900 bg-yellow-950/30 px-3 py-1 text-xs text-yellow-400"
+                            : "rounded-md border border-yellow-900 bg-yellow-950/30 px-3 py-1 text-xs text-accent-gold"
                         }
                       >
                         {gemstone.stock}
@@ -327,13 +327,13 @@ export default function GemstoneInventory() {
 
                     </td>
 
-                    <td className="px-4 py-4 font-semibold text-[#e4b52d]">
+                    <td className="px-4 py-4 font-semibold text-accent-gold">
                       {gemstone.value}
                     </td>
 
                     <td className="px-4 py-4">
 
-                      <button className="text-gray-400 hover:text-[#e4b52d]">
+                      <button className="text-text-secondary hover:text-accent-gold">
                         <Eye size={17} />
                       </button>
 

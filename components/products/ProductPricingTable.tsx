@@ -35,41 +35,41 @@ export default function ProductPricingTable() {
   ];
 
   return (
-    <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl overflow-hidden">
+    <div className="bg-background-secondary border border-border-theme rounded-2xl overflow-hidden">
 
       <div className="overflow-x-auto">
 
         <table className="w-full">
 
-          <thead className="bg-[#1B1B1B]">
+          <thead className="bg-background-tertiary">
 
             <tr>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Image
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Product
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 SKU
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Cost Price
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Selling Price
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Profit
               </th>
 
-              <th className="px-6 py-4 text-center text-yellow-500">
+              <th className="px-6 py-4 text-center text-accent-gold">
                 Actions
               </th>
 
@@ -83,14 +83,14 @@ export default function ProductPricingTable() {
 
               <tr
                 key={item.id}
-                className="border-t border-gray-800 hover:bg-[#1A1A1A] transition"
+                className="border-t border-border-theme hover:bg-[#1A1A1A] transition"
               >
 
                 <td className="px-6 py-4">
                   <img
                     src={item.image}
                     alt={item.product}
-                    className="w-16 h-16 rounded-lg object-cover border border-yellow-500/20"
+                    className="w-16 h-16 rounded-lg object-cover border border-border-theme"
                   />
                 </td>
 
@@ -110,7 +110,7 @@ export default function ProductPricingTable() {
                   {item.sellingPrice}
                 </td>
 
-                <td className="px-6 py-4 text-yellow-500 font-semibold">
+                <td className="px-6 py-4 text-accent-gold font-semibold">
                   {item.profit}
                 </td>
 
@@ -127,7 +127,7 @@ export default function ProductPricingTable() {
 
                     <Link
                       href={`/products/pricing/edit/${item.id}`}
-                      className="text-yellow-500 hover:text-yellow-400"
+                      className="text-accent-gold hover:text-accent-gold"
                     >
                       <Pencil size={20} />
                     </Link>

@@ -5,7 +5,7 @@ import { ArrowLeft, Pencil } from "lucide-react";
 
 export default function SalesDetailsPage() {
   return (
-    <main className="min-h-screen bg-[#0B0B0B] text-white p-8">
+    <main className="min-h-screen bg-background-primary text-text-primary p-8">
 
       {/* Header */}
 
@@ -13,11 +13,11 @@ export default function SalesDetailsPage() {
 
         <div>
 
-          <h1 className="text-4xl font-bold text-yellow-500">
+          <h1 className="text-4xl font-bold text-accent-gold">
             Sales Report Details
           </h1>
 
-          <p className="text-gray-400 mt-2">
+          <p className="text-text-secondary mt-2">
             Complete Sales Information
           </p>
 
@@ -27,7 +27,7 @@ export default function SalesDetailsPage() {
 
           <Link
             href="/reports/sales"
-            className="flex items-center gap-2 border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black px-5 py-3 rounded-xl transition"
+            className="flex items-center gap-2 border border-yellow-500 text-accent-gold hover:bg-accent-gold hover:text-black px-5 py-3 rounded-xl transition"
           >
             <ArrowLeft size={18} />
             Back
@@ -35,7 +35,7 @@ export default function SalesDetailsPage() {
 
           <Link
             href="/reports/sales/edit/SAL001"
-            className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-black px-5 py-3 rounded-xl font-semibold transition"
+            className="flex items-center gap-2 bg-accent-gold hover:bg-accent-gold-hover text-black px-5 py-3 rounded-xl font-semibold transition"
           >
             <Pencil size={18} />
             Edit
@@ -47,7 +47,7 @@ export default function SalesDetailsPage() {
 
       {/* Details Card */}
 
-      <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-8">
+      <div className="bg-background-secondary border border-border-theme rounded-2xl p-8">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
 
@@ -68,50 +68,50 @@ export default function SalesDetailsPage() {
           <div className="space-y-5">
 
             <div className="flex justify-between border-b border-gray-700 pb-3">
-              <span className="text-gray-400">Sale ID</span>
+              <span className="text-text-secondary">Sale ID</span>
               <span>SAL001</span>
             </div>
 
             <div className="flex justify-between border-b border-gray-700 pb-3">
-              <span className="text-gray-400">Customer Name</span>
+              <span className="text-text-secondary">Customer Name</span>
               <span>Rahul Patel</span>
             </div>
 
             <div className="flex justify-between border-b border-gray-700 pb-3">
-              <span className="text-gray-400">Invoice No.</span>
+              <span className="text-text-secondary">Invoice No.</span>
               <span>INV001</span>
             </div>
 
             <div className="flex justify-between border-b border-gray-700 pb-3">
-              <span className="text-gray-400">Product</span>
+              <span className="text-text-secondary">Product</span>
               <span>Gold Ring</span>
             </div>
 
             <div className="flex justify-between border-b border-gray-700 pb-3">
-              <span className="text-gray-400">Quantity</span>
+              <span className="text-text-secondary">Quantity</span>
               <span>1</span>
             </div>
 
             <div className="flex justify-between border-b border-gray-700 pb-3">
-              <span className="text-gray-400">Amount</span>
-              <span className="text-yellow-500 font-bold">
+              <span className="text-text-secondary">Amount</span>
+              <span className="text-accent-gold font-bold">
                 ₹45,000
               </span>
             </div>
 
             <div className="flex justify-between border-b border-gray-700 pb-3">
-              <span className="text-gray-400">Sales Executive</span>
+              <span className="text-text-secondary">Sales Executive</span>
               <span>Ramesh</span>
             </div>
 
             <div className="flex justify-between border-b border-gray-700 pb-3">
-              <span className="text-gray-400">Sales Date</span>
+              <span className="text-text-secondary">Sales Date</span>
               <span>27 Jul 2026</span>
             </div>
 
             <div className="flex justify-between">
 
-              <span className="text-gray-400">
+              <span className="text-text-secondary">
                 Payment Status
               </span>
 
@@ -129,11 +129,11 @@ export default function SalesDetailsPage() {
 
         <div className="mt-10">
 
-          <h2 className="text-xl font-bold text-yellow-500 mb-4">
+          <h2 className="text-xl font-bold text-accent-gold mb-4">
             Remarks
           </h2>
 
-          <p className="text-gray-400 leading-8">
+          <p className="text-text-secondary leading-8">
             Customer purchased one Gold Ring.
             Full payment received successfully.
             Invoice generated and delivered to customer.

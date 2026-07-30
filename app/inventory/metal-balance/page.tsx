@@ -12,7 +12,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-import InventorySidebar from "../InventorySidebar";
+
 
 const metalBalances = [
   {
@@ -59,17 +59,17 @@ const metalBalances = [
 
 export default function MetalBalance() {
   return (
-    <div className="min-h-screen bg-[#090a09] text-white">
+    <div className="min-h-screen bg-background-primary text-text-primary">
 
-      <InventorySidebar />
+      
 
-      <main className="ml-64 min-h-screen p-5">
+      <main className=" min-h-screen p-5">
 
         {/* HEADER */}
         <div className="mb-6 flex items-start justify-between">
 
           <div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-text-secondary">
               Inventory / Metal Balance
             </p>
 
@@ -77,12 +77,12 @@ export default function MetalBalance() {
               Metal Balance
             </h1>
 
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-text-secondary">
               Monitor metal stock, purity, movement and current balance.
             </p>
           </div>
 
-          <button className="flex items-center gap-2 rounded-lg border border-[#40351a] px-4 py-2 text-sm text-gray-300 hover:border-[#d9a928] hover:text-[#e4b52d]">
+          <button className="flex items-center gap-2 rounded-lg border border-border-theme px-4 py-2 text-sm text-text-secondary hover:border-accent-gold hover:text-accent-gold">
             <Download size={16} />
             Export Report
           </button>
@@ -90,26 +90,26 @@ export default function MetalBalance() {
         </div>
 
         {/* FILTERS */}
-        <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
 
-            <div className="flex items-center gap-3 rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3">
+            <div className="flex items-center gap-3 rounded-lg border border-border-theme bg-background-tertiary px-4 py-3">
 
               <Search
                 size={18}
-                className="text-gray-500"
+                className="text-text-secondary"
               />
 
               <input
                 type="text"
                 placeholder="Search metal..."
-                className="w-full bg-transparent text-sm text-gray-300 outline-none placeholder:text-gray-600"
+                className="w-full bg-transparent text-sm text-text-secondary outline-none placeholder:text-gray-600"
               />
 
             </div>
 
-            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none focus:border-[#d9a928]">
+            <select className="rounded-lg border border-border-theme bg-background-tertiary px-4 py-3 text-sm text-text-secondary outline-none focus:border-accent-gold">
 
               <option>All Metals</option>
               <option>Gold</option>
@@ -118,7 +118,7 @@ export default function MetalBalance() {
 
             </select>
 
-            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none focus:border-[#d9a928]">
+            <select className="rounded-lg border border-border-theme bg-background-tertiary px-4 py-3 text-sm text-text-secondary outline-none focus:border-accent-gold">
 
               <option>All Purity</option>
               <option>24K</option>
@@ -137,7 +137,7 @@ export default function MetalBalance() {
 
               <input
                 type="date"
-                className="w-full rounded-lg border border-[#40351a] bg-[#171711] px-10 py-3 text-sm text-gray-300 outline-none focus:border-[#d9a928]"
+                className="w-full rounded-lg border border-border-theme bg-background-tertiary px-10 py-3 text-sm text-text-secondary outline-none focus:border-accent-gold"
               />
 
             </div>
@@ -149,13 +149,13 @@ export default function MetalBalance() {
         {/* KPI CARDS */}
         <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <div className="flex items-center justify-between">
 
               <Coins
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
 
               <span className="flex items-center text-xs text-green-400">
@@ -165,7 +165,7 @@ export default function MetalBalance() {
 
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               TOTAL GOLD BALANCE
             </p>
 
@@ -175,13 +175,13 @@ export default function MetalBalance() {
 
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <div className="flex items-center justify-between">
 
               <Scale
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
 
               <span className="flex items-center text-xs text-green-400">
@@ -191,7 +191,7 @@ export default function MetalBalance() {
 
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               TOTAL METAL STOCK
             </p>
 
@@ -201,13 +201,13 @@ export default function MetalBalance() {
 
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <div className="flex items-center justify-between">
 
               <TrendingUp
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
 
               <span className="flex items-center text-xs text-red-400">
@@ -217,7 +217,7 @@ export default function MetalBalance() {
 
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               TOTAL ISSUED
             </p>
 
@@ -227,22 +227,22 @@ export default function MetalBalance() {
 
           </div>
 
-          <div className="rounded-xl border border-[#7b5c17] bg-[#17140c] p-5">
+          <div className="rounded-xl border border-[#7b5c17] bg-background-tertiary p-5">
 
             <div className="flex items-center justify-between">
 
               <Gem
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
 
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               TOTAL METAL VALUE
             </p>
 
-            <h2 className="mt-2 text-2xl font-bold text-[#e4b52d]">
+            <h2 className="mt-2 text-2xl font-bold text-accent-gold">
               ₹ 22.86 Cr
             </h2>
 
@@ -251,25 +251,25 @@ export default function MetalBalance() {
         </div>
 
         {/* METAL BALANCE TABLE */}
-        <div className="mt-5 rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
 
-          <div className="mb-5 border-b border-[#302b1d] pb-4">
+          <div className="mb-5 border-b border-border-theme pb-4">
 
-            <h2 className="font-semibold text-[#e4b52d]">
+            <h2 className="font-semibold text-accent-gold">
               METAL BALANCE SUMMARY
             </h2>
 
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-text-secondary">
               Track opening, received, issued and current metal balance
             </p>
 
           </div>
 
-          <div className="overflow-x-auto rounded-lg border border-[#302b1d]">
+          <div className="overflow-x-auto rounded-lg border border-border-theme">
 
             <table className="w-full min-w-[1150px] text-left text-sm">
 
-              <thead className="bg-[#171711] text-xs text-gray-400">
+              <thead className="bg-background-tertiary text-xs text-text-secondary">
 
                 <tr>
                   <th className="px-4 py-4">METAL</th>
@@ -289,18 +289,18 @@ export default function MetalBalance() {
 
                   <tr
                     key={item.id}
-                    className="border-t border-[#302b1d] text-gray-300"
+                    className="border-t border-border-theme text-text-secondary"
                   >
 
                     <td className="px-4 py-4">
 
                       <div className="flex items-center gap-3">
 
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#2a2413] text-[#e4b52d]">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-background-tertiary text-accent-gold">
                           <Coins size={18} />
                         </div>
 
-                        <span className="font-medium text-white">
+                        <span className="font-medium text-text-primary">
                           {item.metal}
                         </span>
 
@@ -308,7 +308,7 @@ export default function MetalBalance() {
 
                     </td>
 
-                    <td className="px-4 py-4 text-[#e4b52d]">
+                    <td className="px-4 py-4 text-accent-gold">
                       {item.purity}
                     </td>
 
@@ -324,11 +324,11 @@ export default function MetalBalance() {
                       -{item.issued}
                     </td>
 
-                    <td className="px-4 py-4 font-semibold text-[#e4b52d]">
+                    <td className="px-4 py-4 font-semibold text-accent-gold">
                       {item.balance}
                     </td>
 
-                    <td className="px-4 py-4 font-semibold text-white">
+                    <td className="px-4 py-4 font-semibold text-text-primary">
                       {item.value}
                     </td>
 
@@ -347,15 +347,15 @@ export default function MetalBalance() {
         {/* BALANCE MOVEMENT */}
         <div className="mt-5 grid gap-5 xl:grid-cols-2">
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <div className="flex items-center justify-between">
 
-              <h2 className="font-semibold text-[#e4b52d]">
+              <h2 className="font-semibold text-accent-gold">
                 METAL MOVEMENT
               </h2>
 
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-text-secondary">
                 This Month
               </span>
 
@@ -379,9 +379,9 @@ export default function MetalBalance() {
 
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
-            <h2 className="font-semibold text-[#e4b52d]">
+            <h2 className="font-semibold text-accent-gold">
               PURITY DISTRIBUTION
             </h2>
 
@@ -398,11 +398,11 @@ export default function MetalBalance() {
 
                   <div className="mb-2 flex justify-between text-sm">
 
-                    <span className="text-gray-300">
+                    <span className="text-text-secondary">
                       {name}
                     </span>
 
-                    <span className="text-[#e4b52d]">
+                    <span className="text-accent-gold">
                       {weight}
                     </span>
 

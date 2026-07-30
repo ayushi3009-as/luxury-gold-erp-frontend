@@ -16,13 +16,13 @@ export default function CustomerLedgerPage() {
   const totalCredit = filteredLedger.reduce((sum, l) => sum + l.credit, 0);
 
   return (
-    <div className="text-white max-w-7xl mx-auto">
+    <div className="text-text-primary max-w-7xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
           Customer Financial Ledger
         </h1>
-        <p className="text-gray-400 mt-1 text-sm">
+        <p className="text-text-secondary mt-1 text-sm">
           Module 3 / Page 7: Debit & Credit Transaction Accounts Statement
         </p>
       </div>
@@ -36,18 +36,18 @@ export default function CustomerLedgerPage() {
           <div className="flex items-center gap-2 text-red-400 text-xs font-semibold mb-1">
             <ArrowUpRight size={16} /> Total Debit (Billed Purchases)
           </div>
-          <h3 className="text-3xl font-bold text-white">₹{totalDebit.toLocaleString()}</h3>
+          <h3 className="text-3xl font-bold text-text-primary">₹{totalDebit.toLocaleString()}</h3>
         </div>
 
         <div className="bg-[#171717] border border-[#2C2C2C] rounded-2xl p-6">
           <div className="flex items-center gap-2 text-emerald-400 text-xs font-semibold mb-1">
             <ArrowDownLeft size={16} /> Total Credit (Payments & Old Gold)
           </div>
-          <h3 className="text-3xl font-bold text-white">₹{totalCredit.toLocaleString()}</h3>
+          <h3 className="text-3xl font-bold text-text-primary">₹{totalCredit.toLocaleString()}</h3>
         </div>
 
         <div className="bg-[#171717] border border-[#2C2C2C] rounded-2xl p-6">
-          <div className="text-xs text-gray-400 font-semibold mb-1">Net Outstanding Balance</div>
+          <div className="text-xs text-text-secondary font-semibold mb-1">Net Outstanding Balance</div>
           <h3 className="text-3xl font-bold text-[#D4AF37]">₹{(totalDebit - totalCredit).toLocaleString()}</h3>
         </div>
       </div>
@@ -56,12 +56,12 @@ export default function CustomerLedgerPage() {
       <div className="bg-[#171717] border border-[#2C2C2C] rounded-2xl p-4 mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="flex items-center gap-3">
           <BookOpen size={20} className="text-[#D4AF37]" />
-          <span className="font-semibold text-white">Filter Transaction Type:</span>
+          <span className="font-semibold text-text-primary">Filter Transaction Type:</span>
         </div>
         <select
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
-          className="bg-[#101010] text-white border border-[#2C2C2C] rounded-xl px-4 py-2 text-sm outline-none focus:border-[#D4AF37]"
+          className="bg-[#101010] text-text-primary border border-[#2C2C2C] rounded-xl px-4 py-2 text-sm outline-none focus:border-[#D4AF37]"
         >
           <option value="All">All Types</option>
           <option value="Purchase">Purchase</option>
@@ -74,7 +74,7 @@ export default function CustomerLedgerPage() {
       <div className="bg-[#171717] border border-[#2C2C2C] rounded-2xl overflow-hidden shadow-xl">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="bg-[#1E1E1E] text-gray-400">
+            <thead className="bg-[#1E1E1E] text-text-secondary">
               <tr>
                 <th className="p-4">Date</th>
                 <th className="p-4">Reference No</th>
@@ -89,12 +89,12 @@ export default function CustomerLedgerPage() {
             <tbody className="divide-y divide-[#2C2C2C]">
               {filteredLedger.map((l) => (
                 <tr key={l.id} className="hover:bg-[#202020] transition">
-                  <td className="p-4 text-gray-400 text-xs font-mono">{l.date}</td>
+                  <td className="p-4 text-text-secondary text-xs font-mono">{l.date}</td>
                   <td className="p-4 font-mono font-semibold text-[#D4AF37]">{l.referenceNo}</td>
-                  <td className="p-4 font-medium text-white">{l.customerName}</td>
-                  <td className="p-4 text-gray-200">{l.description}</td>
+                  <td className="p-4 font-medium text-text-primary">{l.customerName}</td>
+                  <td className="p-4 text-text-primary">{l.description}</td>
                   <td className="p-4">
-                    <span className="bg-[#222] border border-[#333] px-3 py-1 rounded-full text-xs text-gray-300">
+                    <span className="bg-[#222] border border-[#333] px-3 py-1 rounded-full text-xs text-text-secondary">
                       {l.type}
                     </span>
                   </td>
@@ -104,7 +104,7 @@ export default function CustomerLedgerPage() {
                   <td className="p-4 text-right font-mono font-semibold text-emerald-400">
                     {l.credit > 0 ? `₹${l.credit.toLocaleString()}` : "-"}
                   </td>
-                  <td className="p-4 text-right font-mono font-bold text-white">
+                  <td className="p-4 text-right font-mono font-bold text-text-primary">
                     ₹{l.runningBalance.toLocaleString()}
                   </td>
                 </tr>

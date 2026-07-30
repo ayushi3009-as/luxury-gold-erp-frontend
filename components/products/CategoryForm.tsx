@@ -10,7 +10,7 @@ export default function CategoryForm({
   buttonText,
 }: CategoryFormProps) {
   return (
-    <form className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-8 max-w-4xl mx-auto">
+    <form className="bg-background-secondary border border-border-theme rounded-2xl p-8 max-w-4xl mx-auto">
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -18,14 +18,14 @@ export default function CategoryForm({
 
         <div>
 
-          <label className="block mb-2 text-yellow-500">
+          <label className="block mb-2 text-accent-gold">
             Category Name
           </label>
 
           <input
             type="text"
             placeholder="Enter category name"
-            className="w-full bg-[#1B1B1B] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-yellow-500"
+            className="w-full bg-background-tertiary border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-yellow-500"
           />
 
         </div>
@@ -34,14 +34,14 @@ export default function CategoryForm({
 
         <div>
 
-          <label className="block mb-2 text-yellow-500">
+          <label className="block mb-2 text-accent-gold">
             Category Code
           </label>
 
           <input
             type="text"
             placeholder="CAT001"
-            className="w-full bg-[#1B1B1B] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-yellow-500"
+            className="w-full bg-background-tertiary border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-yellow-500"
           />
 
         </div>
@@ -52,14 +52,14 @@ export default function CategoryForm({
 
       <div className="mt-6">
 
-        <label className="block mb-2 text-yellow-500">
+        <label className="block mb-2 text-accent-gold">
           Description
         </label>
 
         <textarea
           rows={5}
           placeholder="Category Description..."
-          className="w-full bg-[#1B1B1B] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-yellow-500"
+          className="w-full bg-background-tertiary border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-yellow-500"
         />
 
       </div>
@@ -68,12 +68,12 @@ export default function CategoryForm({
 
       <div className="mt-6">
 
-        <label className="block mb-2 text-yellow-500">
+        <label className="block mb-2 text-accent-gold">
           Status
         </label>
 
         <select
-          className="w-full bg-[#1B1B1B] border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-yellow-500"
+          className="w-full bg-background-tertiary border border-gray-700 rounded-xl px-4 py-3 outline-none focus:border-yellow-500"
         >
           <option>Active</option>
           <option>Inactive</option>
@@ -94,7 +94,7 @@ export default function CategoryForm({
 
         <button
           type="submit"
-          className="px-6 py-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-semibold transition"
+          className="px-6 py-3 rounded-xl bg-accent-gold hover:bg-accent-gold-hover text-black font-semibold transition"
         >
           {buttonText}
         </button>

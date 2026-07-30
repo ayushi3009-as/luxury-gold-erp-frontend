@@ -43,7 +43,7 @@ export default function RepairStatusPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#0B0B0B] text-white p-8">
+    <main className="min-h-screen bg-background-primary text-text-primary p-8">
 
       {/* Header */}
 
@@ -51,11 +51,11 @@ export default function RepairStatusPage() {
 
         <div>
 
-          <h1 className="text-4xl font-bold text-yellow-500">
+          <h1 className="text-4xl font-bold text-accent-gold">
             Repair Status
           </h1>
 
-          <p className="text-gray-400 mt-2">
+          <p className="text-text-secondary mt-2">
             Current repair progress
           </p>
 
@@ -63,7 +63,7 @@ export default function RepairStatusPage() {
 
         <Link
           href="/repair"
-          className="flex items-center gap-2 border border-yellow-500 text-yellow-500 px-5 py-3 rounded-xl hover:bg-yellow-500 hover:text-black transition"
+          className="flex items-center gap-2 border border-yellow-500 text-accent-gold px-5 py-3 rounded-xl hover:bg-accent-gold hover:text-black transition"
         >
           <ArrowLeft size={18} />
           Back
@@ -71,9 +71,9 @@ export default function RepairStatusPage() {
 
       </div>
 
-      <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-8">
+      <div className="bg-background-secondary border border-border-theme rounded-2xl p-8">
 
-        <h2 className="text-2xl font-bold text-yellow-500 mb-8">
+        <h2 className="text-2xl font-bold text-accent-gold mb-8">
           Repair Timeline
         </h2>
 
@@ -109,7 +109,7 @@ export default function RepairStatusPage() {
                   {step.title}
                 </h3>
 
-                <p className="text-gray-400 mt-2">
+                <p className="text-text-secondary mt-2">
                   {step.date}
                 </p>
 

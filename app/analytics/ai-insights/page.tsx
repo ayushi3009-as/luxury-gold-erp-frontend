@@ -9,7 +9,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 
-import AnalyticsSidebar from "../AnalyticsSidebar";
+
 
 const insights = [
   {
@@ -37,14 +37,14 @@ const insights = [
 
 export default function AIInsightsPage() {
   return (
-    <div className="min-h-screen bg-[#090a09] text-white">
-      <AnalyticsSidebar />
+    <div className="min-h-screen bg-background-primary text-text-primary">
+      
 
-      <main className="ml-64 min-h-screen p-8">
+      <main className=" min-h-screen p-8">
 
         {/* HEADER */}
         <div>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-text-secondary">
             Analytics / AI Insights
           </p>
 
@@ -52,16 +52,16 @@ export default function AIInsightsPage() {
             <div className="rounded-xl bg-[#211c0d] p-3">
               <Brain
                 size={26}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
-            <h1 className="text-3xl font-bold text-[#f0c43c]">
+            <h1 className="text-3xl font-bold text-accent-gold">
               AI Insights
             </h1>
           </div>
 
-          <p className="mt-3 text-sm text-gray-400">
+          <p className="mt-3 text-sm text-text-secondary">
             AI-powered analysis to help you understand your business better.
           </p>
         </div>
@@ -79,11 +79,11 @@ export default function AIInsightsPage() {
             </div>
 
             <div>
-              <h2 className="text-lg font-semibold text-[#f0c43c]">
+              <h2 className="text-lg font-semibold text-accent-gold">
                 AI Business Summary
               </h2>
 
-              <p className="mt-2 max-w-4xl text-sm leading-6 text-gray-300">
+              <p className="mt-2 max-w-4xl text-sm leading-6 text-text-secondary">
                 Your business is currently showing positive growth. Revenue
                 performance is improving, customer activity is increasing,
                 and gold jewellery remains the strongest performing category.
@@ -107,18 +107,18 @@ export default function AIInsightsPage() {
             return (
               <div
                 key={insight.title}
-                className="rounded-xl border border-[#40351b] bg-[#11130f] p-6 transition hover:border-[#b98c20]"
+                className="rounded-xl border border-border-theme bg-[#11130f] p-6 transition hover:border-[#b98c20]"
               >
                 <div className="flex items-center justify-between">
 
                   <div className="rounded-lg bg-[#211c0d] p-3">
                     <Icon
                       size={21}
-                      className="text-[#e4b52d]"
+                      className="text-accent-gold"
                     />
                   </div>
 
-                  <span className="rounded-full border border-[#51421c] px-3 py-1 text-[10px] text-[#e4b52d]">
+                  <span className="rounded-full border border-[#51421c] px-3 py-1 text-[10px] text-accent-gold">
                     {insight.type}
                   </span>
 
@@ -128,11 +128,11 @@ export default function AIInsightsPage() {
                   {insight.title}
                 </h2>
 
-                <p className="mt-3 text-sm leading-6 text-gray-500">
+                <p className="mt-3 text-sm leading-6 text-text-secondary">
                   {insight.description}
                 </p>
 
-                <button className="mt-5 text-xs text-[#e4b52d] hover:text-[#f0c43c]">
+                <button className="mt-5 text-xs text-accent-gold hover:text-accent-gold">
                   View detailed analysis →
                 </button>
               </div>
@@ -142,20 +142,20 @@ export default function AIInsightsPage() {
         </div>
 
         {/* RECOMMENDATIONS */}
-        <div className="mt-8 rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+        <div className="mt-8 rounded-xl border border-border-theme bg-[#11130f] p-6">
 
           <div className="flex items-center gap-3">
             <Lightbulb
               size={21}
-              className="text-[#e4b52d]"
+              className="text-accent-gold"
             />
 
             <div>
-              <h2 className="font-semibold text-[#f0c43c]">
+              <h2 className="font-semibold text-accent-gold">
                 AI Recommendations
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Suggested actions based on your business data
               </p>
             </div>
@@ -168,7 +168,7 @@ export default function AIInsightsPage() {
                 Promote high-performing products
               </p>
 
-              <p className="mt-2 text-xs leading-5 text-gray-500">
+              <p className="mt-2 text-xs leading-5 text-text-secondary">
                 Focus marketing efforts on products with strong sales
                 performance.
               </p>
@@ -179,7 +179,7 @@ export default function AIInsightsPage() {
                 Improve customer loyalty
               </p>
 
-              <p className="mt-2 text-xs leading-5 text-gray-500">
+              <p className="mt-2 text-xs leading-5 text-text-secondary">
                 Create targeted offers for repeat customers to increase
                 retention.
               </p>
@@ -190,7 +190,7 @@ export default function AIInsightsPage() {
                 Reduce slow-moving stock
               </p>
 
-              <p className="mt-2 text-xs leading-5 text-gray-500">
+              <p className="mt-2 text-xs leading-5 text-text-secondary">
                 Use discounts or campaigns to improve inventory movement.
               </p>
             </div>

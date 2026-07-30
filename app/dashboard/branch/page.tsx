@@ -45,11 +45,11 @@ const branches = [
 
 export default function BranchDashboard() {
   return (
-    <main className="min-h-screen bg-[#090a09] p-6 text-white">
+    <main className="min-h-screen bg-background-primary p-6 text-text-primary">
 
       {/* HEADER */}
       <div className="mb-8">
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-text-secondary">
           Dashboard / Branch
         </p>
 
@@ -57,7 +57,7 @@ export default function BranchDashboard() {
           Branch Dashboard
         </h1>
 
-        <p className="mt-2 text-gray-400">
+        <p className="mt-2 text-text-secondary">
           Monitor branch performance, sales, employees and inventory.
         </p>
       </div>
@@ -99,16 +99,16 @@ export default function BranchDashboard() {
       <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-3">
 
         {/* TABLE */}
-        <section className="rounded-xl border border-[#40351a] bg-[#101210] p-5 xl:col-span-2">
+        <section className="rounded-xl border border-border-theme bg-background-secondary p-5 xl:col-span-2">
 
           <div className="flex items-center justify-between">
 
             <div>
-              <h2 className="font-semibold text-[#e5b72e]">
+              <h2 className="font-semibold text-accent-gold">
                 BRANCH PERFORMANCE
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Sales performance by branch
               </p>
             </div>
@@ -125,7 +125,7 @@ export default function BranchDashboard() {
             <table className="w-full min-w-[650px]">
 
               <thead>
-                <tr className="border-b border-[#302b1d] text-left text-xs text-gray-500">
+                <tr className="border-b border-border-theme text-left text-xs text-text-secondary">
 
                   <th className="pb-4">
                     BRANCH
@@ -163,7 +163,7 @@ export default function BranchDashboard() {
                       {branch.name}
                     </td>
 
-                    <td className="py-4 text-[#e5b72e]">
+                    <td className="py-4 text-accent-gold">
                       {branch.sales}
                     </td>
 
@@ -174,7 +174,7 @@ export default function BranchDashboard() {
                       </span>
                     </td>
 
-                    <td className="py-4 text-gray-300">
+                    <td className="py-4 text-text-secondary">
                       {branch.orders}
                     </td>
 
@@ -199,19 +199,19 @@ export default function BranchDashboard() {
         </section>
 
         {/* TOP BRANCH */}
-        <section className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
+        <section className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
-          <h2 className="font-semibold text-[#e5b72e]">
+          <h2 className="font-semibold text-accent-gold">
             TOP PERFORMING BRANCH
           </h2>
 
           <div className="flex flex-col items-center py-8">
 
-            <div className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-[#d9a928] bg-[#211c0f]">
+            <div className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-accent-gold bg-background-tertiary">
 
               <Building2
                 size={42}
-                className="text-[#e5b72e]"
+                className="text-accent-gold"
               />
 
             </div>
@@ -220,11 +220,11 @@ export default function BranchDashboard() {
               Surat Branch
             </h3>
 
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-text-secondary">
               Best performing branch
             </p>
 
-            <p className="mt-5 text-2xl font-bold text-[#e5b72e]">
+            <p className="mt-5 text-2xl font-bold text-accent-gold">
               ₹ 4,25,850
             </p>
 
@@ -240,16 +240,16 @@ export default function BranchDashboard() {
       </div>
 
       {/* SALES OVERVIEW */}
-      <section className="mt-6 rounded-xl border border-[#40351a] bg-[#101210] p-5">
+      <section className="mt-6 rounded-xl border border-border-theme bg-background-secondary p-5">
 
         <div className="flex items-center justify-between">
 
           <div>
-            <h2 className="font-semibold text-[#e5b72e]">
+            <h2 className="font-semibold text-accent-gold">
               BRANCH SALES OVERVIEW
             </h2>
 
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-text-secondary">
               Sales comparison between branches
             </p>
           </div>
@@ -261,7 +261,7 @@ export default function BranchDashboard() {
 
         </div>
 
-        <div className="mt-8 flex h-64 items-end justify-around gap-6 border-b border-l border-[#302b1d] px-6">
+        <div className="mt-8 flex h-64 items-end justify-around gap-6 border-b border-l border-border-theme px-6">
 
            {[
             { name: "Surat", height: "92%" },
@@ -277,13 +277,13 @@ export default function BranchDashboard() {
             >
 
               <div
-                className="w-full max-w-[60px] rounded-t-md bg-[#d9a928]"
+                className="w-full max-w-[60px] rounded-t-md bg-accent-gold"
                 style={{
                   height: branch.height,
                 }}
               />
 
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-text-secondary">
                 {branch.name}
               </span>
 
@@ -337,13 +337,13 @@ function BranchCard({
   icon: React.ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
+    <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
-      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#66521d] bg-[#211c0f] text-[#e6b92e]">
+      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border-theme bg-background-tertiary text-accent-gold">
         {icon}
       </div>
 
-      <p className="mt-5 text-xs text-gray-500">
+      <p className="mt-5 text-xs text-text-secondary">
         {title}
       </p>
 
@@ -351,7 +351,7 @@ function BranchCard({
         {value}
       </h3>
 
-      <p className="mt-2 text-xs text-gray-500">
+      <p className="mt-2 text-xs text-text-secondary">
         {subtitle}
       </p>
 
@@ -372,17 +372,17 @@ function InfoCard({
   subtitle: string;
 }) {
   return (
-    <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
+    <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
-      <p className="text-xs text-gray-500">
+      <p className="text-xs text-text-secondary">
         {title}
       </p>
 
-      <h3 className="mt-3 text-lg font-semibold text-[#e5b72e]">
+      <h3 className="mt-3 text-lg font-semibold text-accent-gold">
         {value}
       </h3>
 
-      <p className="mt-2 text-xs text-gray-500">
+      <p className="mt-2 text-xs text-text-secondary">
         {subtitle}
       </p>
 

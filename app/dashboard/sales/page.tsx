@@ -31,12 +31,12 @@ const topProducts = [
 
 export default function SalesDashboard() {
   return (
-    <main className="min-h-screen bg-[#090a09] p-5 text-white lg:ml-[230px]">
+    <main className="min-h-screen bg-background-primary p-5 text-text-primary lg:ml-[230px]">
 
       {/* HEADER */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-text-secondary">
             Dashboard / Sales
           </p>
 
@@ -44,19 +44,19 @@ export default function SalesDashboard() {
             Sales Dashboard
           </h1>
 
-          <p className="mt-1 text-sm text-gray-400">
+          <p className="mt-1 text-sm text-text-secondary">
             Monitor your jewellery sales performance and revenue.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <button className="flex items-center gap-2 rounded-lg border border-[#40351a] bg-[#12130f] px-4 py-2 text-sm text-gray-300">
+          <button className="flex items-center gap-2 rounded-lg border border-border-theme bg-[#12130f] px-4 py-2 text-sm text-text-secondary">
             <CalendarDays size={16} />
             This Month
             <ChevronDown size={15} />
           </button>
 
-          <button className="rounded-lg bg-[#d9a928] px-4 py-2 text-sm font-semibold text-black">
+          <button className="rounded-lg bg-accent-gold px-4 py-2 text-sm font-semibold text-black">
             Export Report
           </button>
         </div>
@@ -99,15 +99,15 @@ export default function SalesDashboard() {
       <div className="mt-5 grid gap-5 xl:grid-cols-3">
 
         {/* SALES TREND */}
-        <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5 xl:col-span-2">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-5 xl:col-span-2">
 
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="font-semibold text-[#e5b72e]">
+              <h2 className="font-semibold text-accent-gold">
                 SALES TREND
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Weekly sales performance
               </p>
             </div>
@@ -118,7 +118,7 @@ export default function SalesDashboard() {
             </span>
           </div>
 
-          <div className="mt-8 flex h-64 items-end gap-4 border-b border-l border-[#302b1d] px-5">
+          <div className="mt-8 flex h-64 items-end gap-4 border-b border-l border-border-theme px-5">
 
             {salesData.map((item) => (
               <div
@@ -126,11 +126,11 @@ export default function SalesDashboard() {
                 className="flex h-full flex-1 flex-col items-center justify-end gap-2"
               >
                 <div
-                  className="w-full max-w-[45px] rounded-t-md bg-[#d9a928] transition hover:bg-[#f0c43c]"
+                  className="w-full max-w-[45px] rounded-t-md bg-accent-gold transition hover:bg-accent-gold"
                   style={{ height: `${item.value}%` }}
                 />
 
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-text-secondary">
                   {item.day}
                 </span>
               </div>
@@ -140,20 +140,20 @@ export default function SalesDashboard() {
         </div>
 
         {/* SALES TARGET */}
-        <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
-          <h2 className="font-semibold text-[#e5b72e]">
+          <h2 className="font-semibold text-accent-gold">
             SALES TARGET
           </h2>
 
           <div className="mt-8 flex justify-center">
-            <div className="flex h-44 w-44 items-center justify-center rounded-full border-[22px] border-[#d9a928]">
+            <div className="flex h-44 w-44 items-center justify-center rounded-full border-[22px] border-accent-gold">
               <div className="text-center">
                 <p className="text-3xl font-bold">
                   78%
                 </p>
 
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-text-secondary">
                   Achieved
                 </p>
               </div>
@@ -162,7 +162,7 @@ export default function SalesDashboard() {
 
           <div className="mt-6 flex justify-between text-sm">
             <div>
-              <p className="text-gray-500">
+              <p className="text-text-secondary">
                 Target
               </p>
 
@@ -172,11 +172,11 @@ export default function SalesDashboard() {
             </div>
 
             <div className="text-right">
-              <p className="text-gray-500">
+              <p className="text-text-secondary">
                 Achieved
               </p>
 
-              <p className="mt-1 font-semibold text-[#e5b72e]">
+              <p className="mt-1 font-semibold text-accent-gold">
                 ₹ 12,85,250
               </p>
             </div>
@@ -190,10 +190,10 @@ export default function SalesDashboard() {
       <div className="mt-5 grid gap-5 xl:grid-cols-3">
 
         {/* TOP PRODUCTS */}
-        <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5 xl:col-span-2">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-5 xl:col-span-2">
 
           <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-[#e5b72e]">
+            <h2 className="font-semibold text-accent-gold">
               TOP SELLING PRODUCTS
             </h2>
 
@@ -206,7 +206,7 @@ export default function SalesDashboard() {
 
             <table className="w-full text-left text-sm">
 
-              <thead className="border-b border-[#302b1d] text-xs text-gray-500">
+              <thead className="border-b border-border-theme text-xs text-text-secondary">
                 <tr>
                   <th className="pb-3">
                     PRODUCT
@@ -238,11 +238,11 @@ export default function SalesDashboard() {
                       </div>
                     </td>
 
-                    <td className="py-4 text-gray-400">
+                    <td className="py-4 text-text-secondary">
                       {product[1]}
                     </td>
 
-                    <td className="py-4 text-right text-[#e5b72e]">
+                    <td className="py-4 text-right text-accent-gold">
                       {product[2]}
                     </td>
                   </tr>
@@ -255,9 +255,9 @@ export default function SalesDashboard() {
         </div>
 
         {/* QUICK SALES SUMMARY */}
-        <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
-          <h2 className="font-semibold text-[#e5b72e]">
+          <h2 className="font-semibold text-accent-gold">
             SALES SUMMARY
           </h2>
 
@@ -294,10 +294,10 @@ export default function SalesDashboard() {
       </div>
 
       {/* RECENT SALES */}
-      <div className="mt-5 rounded-xl border border-[#40351a] bg-[#101210] p-5">
+      <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
 
         <div className="flex items-center justify-between">
-          <h2 className="font-semibold text-[#e5b72e]">
+          <h2 className="font-semibold text-accent-gold">
             RECENT SALES TRANSACTIONS
           </h2>
 
@@ -316,10 +316,10 @@ export default function SalesDashboard() {
           ].map((sale) => (
             <div
               key={sale[0]}
-              className="rounded-lg border border-[#302b1d] bg-[#151610] p-4"
+              className="rounded-lg border border-border-theme bg-background-secondary p-4"
             >
               <div className="flex items-center justify-between">
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-text-secondary">
                   {sale[0]}
                 </span>
 
@@ -333,11 +333,11 @@ export default function SalesDashboard() {
                 {sale[1]}
               </p>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 {sale[2]}
               </p>
 
-              <p className="mt-3 font-semibold text-[#e5b72e]">
+              <p className="mt-3 font-semibold text-accent-gold">
                 {sale[3]}
               </p>
             </div>
@@ -363,10 +363,10 @@ function StatCard({
   icon: React.ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
+    <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
       <div className="flex items-center justify-between">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#66521d] bg-[#211c0f] text-[#e6b92e]">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border-theme bg-background-tertiary text-accent-gold">
           {icon}
         </div>
 
@@ -376,7 +376,7 @@ function StatCard({
         </span>
       </div>
 
-      <p className="mt-5 text-xs text-gray-500">
+      <p className="mt-5 text-xs text-text-secondary">
         {title}
       </p>
 
@@ -384,7 +384,7 @@ function StatCard({
         {value}
       </h3>
 
-      <p className="mt-2 text-xs text-gray-500">
+      <p className="mt-2 text-xs text-text-secondary">
         Compared to last month
       </p>
 
@@ -404,23 +404,23 @@ function SummaryRow({
   return (
     <div>
       <div className="flex justify-between text-sm">
-        <span className="text-gray-300">
+        <span className="text-text-secondary">
           {label}
         </span>
 
-        <span className="text-[#e5b72e]">
+        <span className="text-accent-gold">
           {percent}
         </span>
       </div>
 
       <div className="mt-2 h-2 rounded-full bg-[#29271d]">
         <div
-          className="h-2 rounded-full bg-[#d9a928]"
+          className="h-2 rounded-full bg-accent-gold"
           style={{ width: percent }}
         />
       </div>
 
-      <p className="mt-1 text-xs text-gray-500">
+      <p className="mt-1 text-xs text-text-secondary">
         {value}
       </p>
     </div>

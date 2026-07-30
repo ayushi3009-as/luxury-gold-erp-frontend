@@ -30,7 +30,7 @@ export default function RepairCard({
       className="
       bg-[#151515]
       border
-      border-gray-800
+      border-border-theme
       rounded-2xl
       p-6
       hover:border-yellow-500
@@ -45,12 +45,12 @@ export default function RepairCard({
 
         <div>
 
-          <h2 className="text-xl font-bold text-yellow-500">
+          <h2 className="text-xl font-bold text-accent-gold">
             Repair #{id}
           </h2>
 
 
-          <p className="text-gray-400 mt-1">
+          <p className="text-text-secondary mt-1">
             {customerName}
           </p>
 
@@ -72,7 +72,7 @@ export default function RepairCard({
             ? "bg-green-500/10 text-green-400"
             : status === "Pending"
             ? "bg-red-500/10 text-red-400"
-            : "bg-yellow-500/10 text-yellow-500"
+            : "bg-accent-gold/10 text-accent-gold"
           }
 
           `}
@@ -90,12 +90,12 @@ export default function RepairCard({
 
 
 
-      <div className="mt-5 space-y-2 text-gray-300">
+      <div className="mt-5 space-y-2 text-text-secondary">
 
 
         <p>
 
-          <span className="text-gray-500">
+          <span className="text-text-secondary">
             Phone:
           </span>{" "}
 
@@ -108,7 +108,7 @@ export default function RepairCard({
 
         <p>
 
-          <span className="text-gray-500">
+          <span className="text-text-secondary">
             Product:
           </span>{" "}
 
@@ -122,7 +122,7 @@ export default function RepairCard({
 
         <p>
 
-          <span className="text-gray-500">
+          <span className="text-text-secondary">
             Repair Type:
           </span>{" "}
 
@@ -136,7 +136,7 @@ export default function RepairCard({
 
         <p>
 
-          <span className="text-gray-500">
+          <span className="text-text-secondary">
             Charges:
           </span>{" "}
 
@@ -160,10 +160,10 @@ export default function RepairCard({
         text-center
         border
         border-yellow-500
-        text-yellow-500
+        text-accent-gold
         py-2
         rounded-xl
-        hover:bg-yellow-500
+        hover:bg-accent-gold
         hover:text-black
         transition
         "

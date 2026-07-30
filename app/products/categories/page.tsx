@@ -11,7 +11,7 @@ export default function CategoriesPage() {
   const [search, setSearch] = useState("");
 
   return (
-    <main className="min-h-screen bg-[#0B0B0B] text-white p-8">
+    <main className="min-h-screen bg-background-primary text-text-primary p-8">
 
       {/* Header */}
 
@@ -19,11 +19,11 @@ export default function CategoriesPage() {
 
         <div>
 
-          <h1 className="text-4xl font-bold text-yellow-500">
+          <h1 className="text-4xl font-bold text-accent-gold">
             Categories
           </h1>
 
-          <p className="text-gray-400 mt-2">
+          <p className="text-text-secondary mt-2">
             Manage all jewellery categories
           </p>
 
@@ -31,7 +31,7 @@ export default function CategoriesPage() {
 
         <Link
           href="/products/categories/add"
-          className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-6 py-3 rounded-xl transition"
+          className="flex items-center gap-2 bg-accent-gold hover:bg-accent-gold-hover text-black font-semibold px-6 py-3 rounded-xl transition"
         >
           <Plus size={20} />
           Add Category
@@ -43,9 +43,9 @@ export default function CategoriesPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
 
-        <div className="bg-[#141414] rounded-2xl p-6 border border-yellow-500/20">
+        <div className="bg-background-secondary rounded-2xl p-6 border border-border-theme">
 
-          <h3 className="text-gray-400">
+          <h3 className="text-text-secondary">
             Total Categories
           </h3>
 
@@ -55,9 +55,9 @@ export default function CategoriesPage() {
 
         </div>
 
-        <div className="bg-[#141414] rounded-2xl p-6 border border-yellow-500/20">
+        <div className="bg-background-secondary rounded-2xl p-6 border border-border-theme">
 
-          <h3 className="text-gray-400">
+          <h3 className="text-text-secondary">
             Active Categories
           </h3>
 
@@ -67,9 +67,9 @@ export default function CategoriesPage() {
 
         </div>
 
-        <div className="bg-[#141414] rounded-2xl p-6 border border-yellow-500/20">
+        <div className="bg-background-secondary rounded-2xl p-6 border border-border-theme">
 
-          <h3 className="text-gray-400">
+          <h3 className="text-text-secondary">
             Inactive Categories
           </h3>
 

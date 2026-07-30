@@ -1,163 +1,126 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import CRMSubNav from "@/app/components/crm-sub-nav";
-import CustomerFilters from "@/app/components/customer-filters";
-import CustomerStats from "@/app/components/customer-stats";
-import CustomerTable from "@/app/components/customer-table";
-import AddCustomerDialog from "@/app/components/add-customer-dialog";
-import { customers as initialCustomers, Customer } from "@/app/components/customer-data";
-import { Plus } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Users, Search, Plus, Filter, Loader2 } from "lucide-react";
+import Link from "next/link";
 
 export default function CustomersPage() {
-  const [customerList, setCustomerList] = useState<Customer[]>(initialCustomers);
-  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [customers, setCustomers] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // Filter States
-  const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState("All");
-  const [membershipFilter, setMembershipFilter] = useState("All");
-  const [cityFilter, setCityFilter] = useState("All");
-
-  // Sort State
-  const [sortOrder, setSortOrder] = useState("newest");
-
-  // Unique list of cities for filter dropdown
-  const cities = useMemo(() => {
-    const citySet = new Set(customerList.map((c) => c.city));
-    return Array.from(citySet).sort();
-  }, [customerList]);
-
-  // Handle Add Customer
-  const handleAddCustomer = (newCustomerData: Omit<Customer, "id">) => {
-    const nextId = Math.max(0, ...customerList.map((c) => c.id)) + 1;
-    const newCustomer: Customer = {
-      ...newCustomerData,
-      id: nextId,
-      kycVerified: false,
-      totalPurchases: 0,
-      joinedDate: new Date().toISOString().split("T")[0],
-    };
-    setCustomerList((prev) => [newCustomer, ...prev]);
-  };
-
-  // Handle Delete Customer
-  const handleDeleteCustomer = (id: number) => {
-    if (confirm("Are you sure you want to delete this customer?")) {
-      setCustomerList((prev) => prev.filter((c) => c.id !== id));
-    }
-  };
-
-  // Handle Export Data to CSV
-  const handleExport = () => {
-    if (customerList.length === 0) return;
-    const headers = ["ID", "Name", "Phone", "Email", "City", "Membership", "Balance", "Progress", "Status"];
-    const rows = filteredCustomers.map((c) => [
-      c.id,
-      `"${c.name}"`,
-      `"${c.phone}"`,
-      `"${c.email}"`,
-      `"${c.city}"`,
-      `"${c.membership}"`,
-      c.balance,
-      `${c.progress}%`,
-      c.status,
-    ]);
-
-    const csvContent =
-      "data:text/csv;charset=utf-8," +
-      [headers.join(","), ...rows.map((e) => e.join(","))].join("\n");
-
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `luxray_customers_${Date.now()}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  // Filtered and sorted customers list
-  const filteredCustomers = useMemo(() => {
-    return customerList
-      .filter((c) => {
-        const matchSearch =
-          c.name.toLowerCase().includes(search.toLowerCase()) ||
-          c.phone.includes(search) ||
-          c.email.toLowerCase().includes(search.toLowerCase());
-
-        const matchStatus = statusFilter === "All" || c.status === statusFilter;
-        const matchMembership = membershipFilter === "All" || c.membership === membershipFilter;
-        const matchCity = cityFilter === "All" || c.city === cityFilter;
-
-        return matchSearch && matchStatus && matchMembership && matchCity;
+  useEffect(() => {
+    fetch('/API/customers')
+      .then(res => res.json())
+      .then(data => {
+        setCustomers(data);
+        setLoading(false);
       })
-      .sort((a, b) => {
-        if (sortOrder === "newest") return b.id - a.id;
-        if (sortOrder === "oldest") return a.id - b.id;
-        if (sortOrder === "balance-high") return b.balance - a.balance;
-        if (sortOrder === "balance-low") return a.balance - b.balance;
-        if (sortOrder === "name") return a.name.localeCompare(b.name);
-        return 0;
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
       });
-  }, [customerList, search, statusFilter, membershipFilter, cityFilter, sortOrder]);
+  }, []);
 
   return (
-    <div className="text-white max-w-7xl mx-auto">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div className="p-8 min-h-screen bg-background-primary text-text-primary">
+      <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-5 mb-8">
         <div>
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-            Customer CRM
+          <h1 className="text-3xl font-bold text-accent-gold flex items-center gap-3">
+            <Users size={32} />
+            Customer Management
           </h1>
-          <p className="text-gray-400 mt-1 text-sm">
-            Module 3 / Page 1: Customer List
-          </p>
+          <p className="text-text-secondary mt-1">Manage customer profiles and purchase history</p>
         </div>
-
-        <button
-          onClick={() => setIsAddDialogOpen(true)}
-          className="bg-[#D4AF37] text-black rounded-xl px-6 py-3.5 font-semibold flex items-center gap-2 hover:bg-yellow-400 transition shadow-lg shadow-amber-500/10 cursor-pointer"
-        >
-          <Plus size={20} />
-          Add Quick Customer
+        <button className="flex items-center gap-2 bg-accent-gold text-black px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow">
+          <Plus size={18} />
+          New Customer
         </button>
       </div>
 
-      {/* CRM 10-Tab Navigation Bar */}
-      <CRMSubNav />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="bg-background-secondary rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:-translate-y-1 transition-all">
+          <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          <h3 className="text-text-secondary">Total Customers</h3>
+          <p className="text-3xl font-bold mt-2 text-accent-gold">
+            {loading ? <Loader2 className="animate-spin" /> : customers.length}
+          </p>
+        </div>
+        <div className="bg-background-secondary rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:-translate-y-1 transition-all">
+          <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          <h3 className="text-text-secondary">Active This Month</h3>
+          <p className="text-3xl font-bold mt-2">
+            {loading ? <Loader2 className="animate-spin" /> : customers.length}
+          </p>
+        </div>
+        <div className="bg-background-secondary rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:-translate-y-1 transition-all">
+          <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          <h3 className="text-text-secondary">Loyalty Members</h3>
+          <p className="text-3xl font-bold mt-2">0</p>
+        </div>
+      </div>
 
-      {/* Customer Filters */}
-      <CustomerFilters
-        search={search}
-        onSearchChange={setSearch}
-        status={statusFilter}
-        onStatusChange={setStatusFilter}
-        membership={membershipFilter}
-        onMembershipChange={setMembershipFilter}
-        city={cityFilter}
-        onCityChange={setCityFilter}
-        cities={cities}
-        onExport={handleExport}
-      />
+      <div className="bg-background-secondary border border-border-theme rounded-2xl p-6 shadow-sm">
+        <div className="flex justify-between items-center mb-6">
+          <div className="relative w-72">
+            <Search className="absolute left-3 top-2.5 text-text-secondary" size={18} />
+            <input 
+              type="text" 
+              placeholder="Search customers..." 
+              className="w-full bg-background-tertiary border border-border-theme rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-accent-gold"
+            />
+          </div>
+          <button className="flex items-center gap-2 border border-border-theme px-3 py-2 rounded-lg text-sm text-text-secondary hover:text-accent-gold hover:border-accent-gold transition-colors">
+            <Filter size={16} /> Filter
+          </button>
+        </div>
 
-      {/* Stats */}
-      <CustomerStats customers={filteredCustomers} />
-
-      {/* Table */}
-      <CustomerTable
-        customers={filteredCustomers}
-        sortOrder={sortOrder}
-        onSortChange={setSortOrder}
-        onDeleteCustomer={handleDeleteCustomer}
-      />
-
-      {/* Add Customer Quick Modal */}
-      <AddCustomerDialog
-        isOpen={isAddDialogOpen}
-        onClose={() => setIsAddDialogOpen(false)}
-        onAddCustomer={handleAddCustomer}
-      />
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="border-b border-border-theme text-sm text-text-secondary">
+                <th className="pb-3 font-medium">Customer Name</th>
+                <th className="pb-3 font-medium">Phone</th>
+                <th className="pb-3 font-medium">Email</th>
+                <th className="pb-3 font-medium">Join Date</th>
+                <th className="pb-3 font-medium">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {loading ? (
+                <tr>
+                  <td colSpan={5} className="py-12 text-center">
+                    <Loader2 className="animate-spin mx-auto text-accent-gold" size={32} />
+                  </td>
+                </tr>
+              ) : customers.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="py-12 text-center text-text-secondary">
+                    No customers found. Create a bill to add customers.
+                  </td>
+                </tr>
+              ) : (
+                customers.map(customer => (
+                  <tr key={customer.id} className="border-b border-border-theme hover:bg-background-tertiary transition-colors">
+                    <td className="py-4 font-medium text-text-primary">
+                      {customer.firstName} {customer.lastName}
+                    </td>
+                    <td className="py-4 text-text-secondary">{customer.phone || 'N/A'}</td>
+                    <td className="py-4 text-text-secondary">{customer.email || 'N/A'}</td>
+                    <td className="py-4 text-text-secondary text-sm">
+                      {new Date(customer.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="py-4">
+                      <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-500 border border-green-500/20">
+                        Active
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }

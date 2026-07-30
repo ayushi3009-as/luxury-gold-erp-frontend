@@ -11,11 +11,11 @@ import {
 
 export default function InventoryDashboard() {
   return (
-    <div className="min-h-screen bg-[#090a09] p-5 text-white">
+    <div className="min-h-screen bg-background-primary p-5 text-text-primary">
 
       {/* Header */}
       <div className="mb-6">
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-text-secondary">
           Dashboard / Inventory
         </p>
 
@@ -23,7 +23,7 @@ export default function InventoryDashboard() {
           Inventory Dashboard
         </h1>
 
-        <p className="mt-1 text-gray-400">
+        <p className="mt-1 text-text-secondary">
           Monitor jewellery stock, warehouse and inventory performance.
         </p>
       </div>
@@ -31,16 +31,16 @@ export default function InventoryDashboard() {
       {/* KPI CARDS */}
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
 
-        <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
           <div className="flex items-center justify-between">
-            <Package className="text-[#e4b52d]" size={28} />
+            <Package className="text-accent-gold" size={28} />
             <span className="flex items-center text-sm text-green-400">
               <ArrowUpRight size={16} />
               12.5%
             </span>
           </div>
 
-          <p className="mt-5 text-sm text-gray-400">
+          <p className="mt-5 text-sm text-text-secondary">
             TOTAL STOCK VALUE
           </p>
 
@@ -49,16 +49,16 @@ export default function InventoryDashboard() {
           </h2>
         </div>
 
-        <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
           <div className="flex items-center justify-between">
-            <Warehouse className="text-[#e4b52d]" size={28} />
+            <Warehouse className="text-accent-gold" size={28} />
             <span className="flex items-center text-sm text-green-400">
               <ArrowUpRight size={16} />
               8.6%
             </span>
           </div>
 
-          <p className="mt-5 text-sm text-gray-400">
+          <p className="mt-5 text-sm text-text-secondary">
             TOTAL PRODUCTS
           </p>
 
@@ -67,16 +67,16 @@ export default function InventoryDashboard() {
           </h2>
         </div>
 
-        <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
           <div className="flex items-center justify-between">
-            <TrendingUp className="text-[#e4b52d]" size={28} />
+            <TrendingUp className="text-accent-gold" size={28} />
             <span className="flex items-center text-sm text-red-400">
               <ArrowDownRight size={16} />
               4.2%
             </span>
           </div>
 
-          <p className="mt-5 text-sm text-gray-400">
+          <p className="mt-5 text-sm text-text-secondary">
             STOCK MOVEMENT
           </p>
 
@@ -85,15 +85,15 @@ export default function InventoryDashboard() {
           </h2>
         </div>
 
-        <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
           <div className="flex items-center justify-between">
-            <AlertTriangle className="text-[#e4b52d]" size={28} />
+            <AlertTriangle className="text-accent-gold" size={28} />
             <span className="text-sm text-red-400">
               Attention
             </span>
           </div>
 
-          <p className="mt-5 text-sm text-gray-400">
+          <p className="mt-5 text-sm text-text-secondary">
             LOW STOCK ITEMS
           </p>
 
@@ -107,13 +107,13 @@ export default function InventoryDashboard() {
       {/* INVENTORY OVERVIEW */}
       <div className="mt-6 grid gap-5 xl:grid-cols-2">
 
-        <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-[#e4b52d]">
+            <h2 className="text-lg font-semibold text-accent-gold">
               INVENTORY OVERVIEW
             </h2>
 
-            <button className="rounded-lg border border-[#4a3a18] px-3 py-1 text-xs text-gray-300">
+            <button className="rounded-lg border border-[#4a3a18] px-3 py-1 text-xs text-text-secondary">
               This Month
             </button>
           </div>
@@ -134,15 +134,15 @@ export default function InventoryDashboard() {
         </div>
 
         {/* STOCK ALERTS */}
-        <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-[#e4b52d]">
+            <h2 className="text-lg font-semibold text-accent-gold">
               CURRENT STOCK ALERTS
             </h2>
 
             <AlertTriangle
               size={20}
-              className="text-yellow-400"
+              className="text-accent-gold"
             />
           </div>
 
@@ -168,7 +168,7 @@ export default function InventoryDashboard() {
                   </p>
                 </div>
 
-                <button className="rounded-md border border-[#7b5c17] px-3 py-1 text-xs text-[#e4b52d]">
+                <button className="rounded-md border border-[#7b5c17] px-3 py-1 text-xs text-accent-gold">
                   Reorder
                 </button>
               </div>

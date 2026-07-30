@@ -1,21 +1,31 @@
 import "./globals.css";
-import MainSidebar from "@/components/layout/MainSidebar";
-import TopBar from "@/components/layout/TopBar";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import AppLayout from "@/components/layout/AppLayout";
+import { Metadata } from "next";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export const metadata: Metadata = {
+  title: "Luxury Gold ERP",
+  description: "Premium Jewellery Management System",
+};
+
+import { getSession } from "@/lib/session";
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const session = await getSession();
+  
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <div className="flex min-h-screen bg-[#090a09] text-white">
-          <MainSidebar />
-          <div className="flex-1 lg:ml-[230px] flex flex-col">
-            <TopBar title="Dashboard" />
-            <main className="flex-1 overflow-y-auto">
-              {children}
-            </main>
-          </div>
-        </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <AppLayout userRole={session?.role}>{children}</AppLayout>
+        </ThemeProvider>
       </body>
     </html>
   );
 }
+// trigger rebuild

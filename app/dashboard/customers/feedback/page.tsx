@@ -20,13 +20,13 @@ export default function CustomerFeedbackPage() {
   };
 
   return (
-    <div className="text-white max-w-7xl mx-auto">
+    <div className="text-text-primary max-w-7xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
           Customer Feedback & Reviews
         </h1>
-        <p className="text-gray-400 mt-1 text-sm">
+        <p className="text-text-secondary mt-1 text-sm">
           Module 3 / Page 10: Ratings, Service Feedback & CSAT Support Tickets
         </p>
       </div>
@@ -44,12 +44,12 @@ export default function CustomerFeedbackPage() {
                 <Star key={star} size={16} fill="#D4AF37" />
               ))}
             </div>
-            <p className="text-xs text-gray-400">Out of 5 Stars CSAT</p>
+            <p className="text-xs text-text-secondary">Out of 5 Stars CSAT</p>
           </div>
 
           <div>
-            <h3 className="text-xl font-bold text-white mb-1">Customer Satisfaction Index</h3>
-            <p className="text-sm text-gray-300 max-w-xl">
+            <h3 className="text-xl font-bold text-text-primary mb-1">Customer Satisfaction Index</h3>
+            <p className="text-sm text-text-secondary max-w-xl">
               Based on verified feedback from buyers across Gold, Diamond, and Silver jewellery purchases and 11+1 savings scheme enrollments.
             </p>
           </div>
@@ -59,7 +59,7 @@ export default function CustomerFeedbackPage() {
         <select
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
-          className="bg-[#101010] text-white border border-[#2C2C2C] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#D4AF37] w-full md:w-64"
+          className="bg-[#101010] text-text-primary border border-[#2C2C2C] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#D4AF37] w-full md:w-64"
         >
           <option value="All">All Categories</option>
           <option value="Product Quality">Product Quality</option>
@@ -79,8 +79,8 @@ export default function CustomerFeedbackPage() {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-3">
               <div>
                 <span className="text-xs font-mono text-[#D4AF37] font-semibold mr-2">{fb.id}</span>
-                <span className="font-bold text-white text-base">{fb.customerName}</span>
-                <span className="text-xs text-gray-400 ml-3">({fb.category})</span>
+                <span className="font-bold text-text-primary text-base">{fb.customerName}</span>
+                <span className="text-xs text-text-secondary ml-3">({fb.category})</span>
               </div>
 
               <div className="flex items-center gap-3">
@@ -104,17 +104,17 @@ export default function CustomerFeedbackPage() {
               </div>
             </div>
 
-            <p className="text-gray-300 text-sm italic mb-4 bg-[#101010] p-4 rounded-xl border border-[#2C2C2C]">
+            <p className="text-text-secondary text-sm italic mb-4 bg-[#101010] p-4 rounded-xl border border-[#2C2C2C]">
               &quot;{fb.comment}&quot;
             </p>
 
-            <div className="flex justify-between items-center text-xs text-gray-400">
+            <div className="flex justify-between items-center text-xs text-text-secondary">
               <span>Submitted: {fb.date}</span>
 
               {fb.status !== "Resolved" && (
                 <button
                   onClick={() => handleResolve(fb.id)}
-                  className="bg-[#D4AF37] hover:bg-yellow-400 text-black px-4 py-1.5 rounded-lg font-semibold transition"
+                  className="bg-[#D4AF37] hover:bg-accent-gold-hover text-black px-4 py-1.5 rounded-lg font-semibold transition"
                 >
                   Mark as Resolved
                 </button>

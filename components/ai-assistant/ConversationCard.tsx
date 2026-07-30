@@ -10,12 +10,12 @@ export default function ConversationCard({
   date,
 }: ConversationCardProps) {
   return (
-    <div className="bg-[#141414] border border-yellow-500/20 rounded-xl p-4 hover:border-yellow-500 transition cursor-pointer">
-      <h3 className="text-white font-semibold text-base">
+    <div className="bg-background-secondary border border-border-theme rounded-xl p-4 hover:border-yellow-500 transition cursor-pointer">
+      <h3 className="text-text-primary font-semibold text-base">
         {title}
       </h3>
 
-      <p className="text-gray-400 text-sm mt-2">
+      <p className="text-text-secondary text-sm mt-2">
         {date}
       </p>
     </div>

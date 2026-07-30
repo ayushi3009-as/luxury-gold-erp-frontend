@@ -7,7 +7,7 @@ import ProductForm from "@/components/products/ProductForm";
 
 export default function AddProductPage() {
   return (
-    <main className="min-h-screen bg-[#0B0B0B] text-white p-8">
+    <main className="min-h-screen bg-background-primary text-text-primary p-8">
 
       {/* Header */}
 
@@ -15,11 +15,11 @@ export default function AddProductPage() {
 
         <div>
 
-          <h1 className="text-4xl font-bold text-yellow-500">
+          <h1 className="text-4xl font-bold text-accent-gold">
             Add Product
           </h1>
 
-          <p className="text-gray-400 mt-2">
+          <p className="text-text-secondary mt-2">
             Create a new jewellery product
           </p>
 
@@ -27,7 +27,7 @@ export default function AddProductPage() {
 
         <Link
           href="/products"
-          className="flex items-center gap-2 border border-yellow-500 text-yellow-500 px-5 py-3 rounded-xl hover:bg-yellow-500 hover:text-black transition"
+          className="flex items-center gap-2 border border-yellow-500 text-accent-gold px-5 py-3 rounded-xl hover:bg-accent-gold hover:text-black transition"
         >
           <ArrowLeft size={18} />
           Back

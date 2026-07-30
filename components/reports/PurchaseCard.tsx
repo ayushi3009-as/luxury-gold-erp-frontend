@@ -53,48 +53,48 @@ export default function PurchaseCard() {
   };
 
   return (
-    <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl overflow-hidden">
+    <div className="bg-background-secondary border border-border-theme rounded-2xl overflow-hidden">
 
       <div className="overflow-x-auto">
 
         <table className="w-full">
 
-          <thead className="bg-[#1B1B1B]">
+          <thead className="bg-background-tertiary">
 
             <tr>
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Purchase ID
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Supplier
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Invoice
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Product
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Qty
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Amount
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Date
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Status
               </th>
 
-              <th className="px-6 py-4 text-center text-yellow-500">
+              <th className="px-6 py-4 text-center text-accent-gold">
                 Actions
               </th>
             </tr>
@@ -107,7 +107,7 @@ export default function PurchaseCard() {
 
               <tr
                 key={purchase.id}
-                className="border-t border-gray-800 hover:bg-[#1A1A1A]"
+                className="border-t border-border-theme hover:bg-[#1A1A1A]"
               >
 
                 <td className="px-6 py-4">{purchase.id}</td>
@@ -120,7 +120,7 @@ export default function PurchaseCard() {
 
                 <td className="px-6 py-4">{purchase.quantity}</td>
 
-                <td className="px-6 py-4 text-yellow-500 font-semibold">
+                <td className="px-6 py-4 text-accent-gold font-semibold">
                   {purchase.amount}
                 </td>
 
@@ -155,7 +155,7 @@ export default function PurchaseCard() {
 
                     <Link
                       href={`/reports/purchase/edit/${purchase.id}`}
-                      className="text-yellow-400 hover:text-yellow-300"
+                      className="text-accent-gold hover:text-yellow-300"
                     >
                       <Pencil size={18} />
                     </Link>

@@ -47,7 +47,7 @@ export default function CRMSubNav() {
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition ${
                 isActive
                   ? "bg-[#D4AF37] text-black font-semibold shadow-sm"
-                  : "text-gray-400 hover:text-white hover:bg-[#222]"
+                  : "text-text-secondary hover:text-text-primary hover:bg-[#222]"
               }`}
             >
               <Icon size={16} />

@@ -15,7 +15,7 @@ export default function RepairSearch({
     <div className="relative w-full">
 
       <Search
-        className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+        className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary"
         size={20}
       />
 
@@ -26,14 +26,14 @@ export default function RepairSearch({
         onChange={(e) => onChange(e.target.value)}
         className="
           w-full
-          bg-[#141414]
+          bg-background-secondary
           border
-          border-yellow-500/20
+          border-border-theme
           rounded-2xl
           pl-12
           pr-4
           py-4
-          text-white
+          text-text-primary
           placeholder-gray-500
           outline-none
           focus:border-yellow-500

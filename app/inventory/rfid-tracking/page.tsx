@@ -13,7 +13,7 @@ import {
   XCircle,
 } from "lucide-react";
 
-import InventorySidebar from "../InventorySidebar";
+
 
 const rfidItems = [
   {
@@ -50,15 +50,15 @@ const rfidItems = [
 
 export default function RFIDTracking() {
   return (
-    <div className="min-h-screen bg-[#090a09] text-white">
-      <InventorySidebar />
+    <div className="min-h-screen bg-background-primary text-text-primary">
+      
 
-      <main className="ml-64 min-h-screen p-5">
+      <main className=" min-h-screen p-5">
 
         {/* HEADER */}
         <div className="mb-6 flex items-start justify-between">
           <div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-text-secondary">
               Inventory / RFID Tracking
             </p>
 
@@ -66,18 +66,18 @@ export default function RFIDTracking() {
               RFID Tracking
             </h1>
 
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-text-secondary">
               Track jewellery items in real-time using RFID technology.
             </p>
           </div>
 
           <div className="flex gap-3">
-            <button className="flex items-center gap-2 rounded-lg border border-[#40351a] px-4 py-2 text-sm text-gray-300 hover:border-[#d9a928] hover:text-[#e4b52d]">
+            <button className="flex items-center gap-2 rounded-lg border border-border-theme px-4 py-2 text-sm text-text-secondary hover:border-accent-gold hover:text-accent-gold">
               <XCircle size={16} />
               Stop Scanning
             </button>
 
-            <button className="flex items-center gap-2 rounded-lg bg-[#d9a928] px-4 py-2 text-sm font-semibold text-black hover:bg-[#f0c43c]">
+            <button className="flex items-center gap-2 rounded-lg bg-accent-gold px-4 py-2 text-sm font-semibold text-black hover:bg-accent-gold">
               <Radio size={16} />
               Start Scanning
             </button>
@@ -87,9 +87,9 @@ export default function RFIDTracking() {
         {/* RFID STATUS */}
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
             <div className="flex items-center justify-between">
-              <Radio className="text-[#e4b52d]" size={26} />
+              <Radio className="text-accent-gold" size={26} />
 
               <span className="flex items-center gap-1 text-xs text-green-400">
                 <Activity size={14} />
@@ -97,7 +97,7 @@ export default function RFIDTracking() {
               </span>
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               RFID SYSTEM STATUS
             </p>
 
@@ -106,12 +106,12 @@ export default function RFIDTracking() {
             </h2>
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
             <div className="flex items-center justify-between">
-              <Tag className="text-[#e4b52d]" size={26} />
+              <Tag className="text-accent-gold" size={26} />
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               TOTAL RFID TAGS
             </p>
 
@@ -120,12 +120,12 @@ export default function RFIDTracking() {
             </h2>
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
             <div className="flex items-center justify-between">
-              <Signal className="text-[#e4b52d]" size={26} />
+              <Signal className="text-accent-gold" size={26} />
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               ACTIVE TAGS
             </p>
 
@@ -134,16 +134,16 @@ export default function RFIDTracking() {
             </h2>
           </div>
 
-          <div className="rounded-xl border border-[#7b5c17] bg-[#17140c] p-5">
+          <div className="rounded-xl border border-[#7b5c17] bg-background-tertiary p-5">
             <div className="flex items-center justify-between">
-              <MapPin className="text-[#e4b52d]" size={26} />
+              <MapPin className="text-accent-gold" size={26} />
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               ITEMS TRACKED TODAY
             </p>
 
-            <h2 className="mt-2 text-2xl font-bold text-[#e4b52d]">
+            <h2 className="mt-2 text-2xl font-bold text-accent-gold">
               1,248
             </h2>
           </div>
@@ -151,28 +151,28 @@ export default function RFIDTracking() {
         </div>
 
         {/* FILTER SECTION */}
-        <div className="mt-5 rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
 
-            <div className="flex items-center gap-3 rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3">
-              <Search size={18} className="text-gray-500" />
+            <div className="flex items-center gap-3 rounded-lg border border-border-theme bg-background-tertiary px-4 py-3">
+              <Search size={18} className="text-text-secondary" />
 
               <input
                 type="text"
                 placeholder="Search RFID tag or product..."
-                className="w-full bg-transparent text-sm text-gray-300 outline-none placeholder:text-gray-600"
+                className="w-full bg-transparent text-sm text-text-secondary outline-none placeholder:text-gray-600"
               />
             </div>
 
-            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none focus:border-[#d9a928]">
+            <select className="rounded-lg border border-border-theme bg-background-tertiary px-4 py-3 text-sm text-text-secondary outline-none focus:border-accent-gold">
               <option>All Locations</option>
               <option>Main Warehouse</option>
               <option>Surat Branch</option>
               <option>Mumbai Branch</option>
             </select>
 
-            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none focus:border-[#d9a928]">
+            <select className="rounded-lg border border-border-theme bg-background-tertiary px-4 py-3 text-sm text-text-secondary outline-none focus:border-accent-gold">
               <option>All Status</option>
               <option>Active</option>
               <option>Inactive</option>
@@ -186,7 +186,7 @@ export default function RFIDTracking() {
 
               <input
                 type="date"
-                className="w-full rounded-lg border border-[#40351a] bg-[#171711] px-10 py-3 text-sm text-gray-300 outline-none focus:border-[#d9a928]"
+                className="w-full rounded-lg border border-border-theme bg-background-tertiary px-10 py-3 text-sm text-text-secondary outline-none focus:border-accent-gold"
               />
             </div>
 
@@ -195,16 +195,16 @@ export default function RFIDTracking() {
         </div>
 
         {/* RFID TABLE */}
-        <div className="mt-5 rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
 
-          <div className="mb-5 flex items-center justify-between border-b border-[#302b1d] pb-4">
+          <div className="mb-5 flex items-center justify-between border-b border-border-theme pb-4">
 
             <div>
-              <h2 className="font-semibold text-[#e4b52d]">
+              <h2 className="font-semibold text-accent-gold">
                 RFID TRACKING RECORDS
               </h2>
 
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Monitor tagged jewellery items and their locations
               </p>
             </div>
@@ -216,11 +216,11 @@ export default function RFIDTracking() {
 
           </div>
 
-          <div className="overflow-x-auto rounded-lg border border-[#302b1d]">
+          <div className="overflow-x-auto rounded-lg border border-border-theme">
 
             <table className="w-full min-w-[1100px] text-left text-sm">
 
-              <thead className="bg-[#171711] text-xs text-gray-400">
+              <thead className="bg-background-tertiary text-xs text-text-secondary">
                 <tr>
                   <th className="px-4 py-4">RFID TAG</th>
                   <th className="px-4 py-4">PRODUCT</th>
@@ -238,21 +238,21 @@ export default function RFIDTracking() {
 
                   <tr
                     key={item.id}
-                    className="border-t border-[#302b1d] text-gray-300"
+                    className="border-t border-border-theme text-text-secondary"
                   >
 
                     <td className="px-4 py-4">
-                      <span className="flex items-center gap-2 text-[#e4b52d]">
+                      <span className="flex items-center gap-2 text-accent-gold">
                         <Radio size={16} />
                         {item.tag}
                       </span>
                     </td>
 
-                    <td className="px-4 py-4 font-medium text-white">
+                    <td className="px-4 py-4 font-medium text-text-primary">
                       {item.product}
                     </td>
 
-                    <td className="px-4 py-4 text-gray-400">
+                    <td className="px-4 py-4 text-text-secondary">
                       {item.sku}
                     </td>
 
@@ -270,7 +270,7 @@ export default function RFIDTracking() {
                           item.signal === "Strong"
                             ? "text-green-400"
                             : item.signal === "Medium"
-                              ? "text-yellow-400"
+                              ? "text-accent-gold"
                               : "text-red-400"
                         }
                       >
@@ -298,7 +298,7 @@ export default function RFIDTracking() {
 
                     </td>
 
-                    <td className="px-4 py-4 text-gray-400">
+                    <td className="px-4 py-4 text-text-secondary">
                       {item.lastScan}
                     </td>
 
@@ -317,11 +317,11 @@ export default function RFIDTracking() {
         {/* FOOTER */}
         <div className="mt-5 flex justify-end gap-3">
 
-          <button className="rounded-lg border border-[#40351a] px-5 py-3 text-sm text-gray-300 hover:border-[#d9a928] hover:text-[#e4b52d]">
+          <button className="rounded-lg border border-border-theme px-5 py-3 text-sm text-text-secondary hover:border-accent-gold hover:text-accent-gold">
             Export Report
           </button>
 
-          <button className="flex items-center gap-2 rounded-lg bg-[#d9a928] px-6 py-3 text-sm font-semibold text-black hover:bg-[#f0c43c]">
+          <button className="flex items-center gap-2 rounded-lg bg-accent-gold px-6 py-3 text-sm font-semibold text-black hover:bg-accent-gold">
             <Save size={17} />
             Save Tracking Report
           </button>

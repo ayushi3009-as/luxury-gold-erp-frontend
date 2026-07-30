@@ -90,13 +90,13 @@ export default function AddCustomerDialog({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-      <div className="bg-[#171717] border border-[#2C2C2C] text-white rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-background-primary/70 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+      <div className="bg-[#171717] border border-[#2C2C2C] text-text-primary rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl">
         <div className="flex justify-between items-center px-6 py-5 border-b border-[#2C2C2C]">
           <h2 className="text-xl font-semibold text-[#D4AF37]">Add New Customer</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white p-1 rounded-lg hover:bg-[#222] transition"
+            className="text-text-secondary hover:text-text-primary p-1 rounded-lg hover:bg-[#222] transition"
           >
             <X size={20} />
           </button>
@@ -104,41 +104,41 @@ export default function AddCustomerDialog({
 
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Customer Name</label>
+            <label className="block text-sm text-text-secondary mb-1">Customer Name</label>
             <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
               placeholder="e.g. Rajesh Kumar"
-              className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]"
+              className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-text-primary placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]"
             />
             {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Phone Number</label>
+              <label className="block text-sm text-text-secondary mb-1">Phone Number</label>
               <input
                 type="text"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="+91 9876543210"
-                className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]"
+                className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-text-primary placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]"
               />
               {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Email</label>
+              <label className="block text-sm text-text-secondary mb-1">Email</label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="rajesh@email.com"
-                className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]"
+                className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-text-primary placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]"
               />
               {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
             </div>
@@ -146,25 +146,25 @@ export default function AddCustomerDialog({
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm text-gray-400 mb-1">City</label>
+              <label className="block text-sm text-text-secondary mb-1">City</label>
               <input
                 type="text"
                 name="city"
                 value={formData.city}
                 onChange={handleChange}
                 placeholder="e.g. Mumbai"
-                className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]"
+                className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-text-primary placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]"
               />
               {errors.city && <p className="text-red-400 text-xs mt-1">{errors.city}</p>}
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Membership</label>
+              <label className="block text-sm text-text-secondary mb-1">Membership</label>
               <select
                 name="membership"
                 value={formData.membership}
                 onChange={handleChange}
-                className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37]"
+                className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-[#D4AF37]"
               >
                 <option value="Gold Member">Gold Member</option>
                 <option value="Silver Member">Silver Member</option>
@@ -175,20 +175,20 @@ export default function AddCustomerDialog({
 
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Balance (₹)</label>
+              <label className="block text-sm text-text-secondary mb-1">Balance (₹)</label>
               <input
                 type="number"
                 name="balance"
                 value={formData.balance}
                 onChange={handleChange}
                 placeholder="50000"
-                className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]"
+                className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-text-primary placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]"
               />
               {errors.balance && <p className="text-red-400 text-xs mt-1">{errors.balance}</p>}
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Gold Scheme %</label>
+              <label className="block text-sm text-text-secondary mb-1">Gold Scheme %</label>
               <input
                 type="number"
                 name="progress"
@@ -197,17 +197,17 @@ export default function AddCustomerDialog({
                 min="0"
                 max="100"
                 placeholder="50"
-                className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]"
+                className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-text-primary placeholder-gray-500 focus:outline-none focus:border-[#D4AF37]"
               />
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-1">Status</label>
+              <label className="block text-sm text-text-secondary mb-1">Status</label>
               <select
                 name="status"
                 value={formData.status}
                 onChange={handleChange}
-                className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37]"
+                className="w-full bg-[#101010] border border-[#2C2C2C] rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-[#D4AF37]"
               >
                 <option value="Active">Active</option>
                 <option value="Inactive">Inactive</option>
@@ -219,13 +219,13 @@ export default function AddCustomerDialog({
             <button
               type="button"
               onClick={onClose}
-              className="w-1/2 bg-transparent border border-[#2C2C2C] text-gray-300 hover:bg-[#222] py-3 rounded-xl font-medium transition"
+              className="w-1/2 bg-transparent border border-[#2C2C2C] text-text-secondary hover:bg-[#222] py-3 rounded-xl font-medium transition"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="w-1/2 bg-[#D4AF37] hover:bg-yellow-400 text-black py-3 rounded-xl font-semibold transition"
+              className="w-1/2 bg-[#D4AF37] hover:bg-accent-gold-hover text-black py-3 rounded-xl font-semibold transition"
             >
               Save Customer
             </button>

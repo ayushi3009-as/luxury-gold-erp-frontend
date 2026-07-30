@@ -6,17 +6,17 @@ import { ArrowLeft } from "lucide-react";
 
 export default function ProductHistoryDetailsPage() {
   return (
-    <main className="min-h-screen bg-[#0B0B0B] text-white p-8">
+    <main className="min-h-screen bg-background-primary text-text-primary p-8">
 
       <div className="flex justify-between items-center mb-10">
 
         <div>
 
-          <h1 className="text-4xl font-bold text-yellow-500">
+          <h1 className="text-4xl font-bold text-accent-gold">
             Product History Details
           </h1>
 
-          <p className="text-gray-400 mt-2">
+          <p className="text-text-secondary mt-2">
             View complete product history
           </p>
 
@@ -24,7 +24,7 @@ export default function ProductHistoryDetailsPage() {
 
         <Link
           href="/products/history"
-          className="flex items-center gap-2 border border-yellow-500 text-yellow-500 px-5 py-3 rounded-xl hover:bg-yellow-500 hover:text-black transition"
+          className="flex items-center gap-2 border border-yellow-500 text-accent-gold px-5 py-3 rounded-xl hover:bg-accent-gold hover:text-black transition"
         >
           <ArrowLeft size={18} />
           Back
@@ -32,7 +32,7 @@ export default function ProductHistoryDetailsPage() {
 
       </div>
 
-      <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-8 grid lg:grid-cols-2 gap-10">
+      <div className="bg-background-secondary border border-border-theme rounded-2xl p-8 grid lg:grid-cols-2 gap-10">
 
         <div className="flex justify-center">
 
@@ -48,33 +48,33 @@ export default function ProductHistoryDetailsPage() {
 
         <div className="space-y-5">
 
-          <h2 className="text-3xl font-bold text-yellow-500">
+          <h2 className="text-3xl font-bold text-accent-gold">
             Gold Ring
           </h2>
 
           <p>
-            <span className="text-gray-400">
+            <span className="text-text-secondary">
               SKU :
             </span>{" "}
             GLD001
           </p>
 
           <p>
-            <span className="text-gray-400">
+            <span className="text-text-secondary">
               Action :
             </span>{" "}
             Created
           </p>
 
           <p>
-            <span className="text-gray-400">
+            <span className="text-text-secondary">
               User :
             </span>{" "}
             Admin
           </p>
 
           <p>
-            <span className="text-gray-400">
+            <span className="text-text-secondary">
               Date :
             </span>{" "}
             24 July 2026
@@ -82,11 +82,11 @@ export default function ProductHistoryDetailsPage() {
 
           <div>
 
-            <h3 className="text-xl font-semibold text-yellow-500 mb-3">
+            <h3 className="text-xl font-semibold text-accent-gold mb-3">
               Description
             </h3>
 
-            <p className="text-gray-400 leading-8">
+            <p className="text-text-secondary leading-8">
               This product was created in the Luxury Gold ERP system.
               All modifications, pricing updates, inventory changes,
               and user activities are recorded here for tracking.

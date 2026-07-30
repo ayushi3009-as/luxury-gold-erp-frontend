@@ -10,7 +10,7 @@ import {
   TrendingDown,
 } from "lucide-react";
 
-import InventorySidebar from "../InventorySidebar";
+
 
 const deadStockItems = [
   {
@@ -67,17 +67,17 @@ const deadStockItems = [
 
 export default function DeadStock() {
   return (
-    <div className="min-h-screen bg-[#090a09] text-white">
+    <div className="min-h-screen bg-background-primary text-text-primary">
 
-      <InventorySidebar />
+      
 
-      <main className="ml-64 min-h-screen p-5">
+      <main className=" min-h-screen p-5">
 
         {/* HEADER */}
         <div className="mb-6 flex items-start justify-between">
 
           <div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-text-secondary">
               Inventory / Dead Stock
             </p>
 
@@ -85,12 +85,12 @@ export default function DeadStock() {
               Dead Stock
             </h1>
 
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-text-secondary">
               Identify slow-moving and non-moving inventory to improve stock turnover.
             </p>
           </div>
 
-          <button className="flex items-center gap-2 rounded-lg border border-[#40351a] px-4 py-2 text-sm text-gray-300 hover:border-[#d9a928] hover:text-[#e4b52d]">
+          <button className="flex items-center gap-2 rounded-lg border border-border-theme px-4 py-2 text-sm text-text-secondary hover:border-accent-gold hover:text-accent-gold">
             <Download size={16} />
             Export Report
           </button>
@@ -116,7 +116,7 @@ export default function DeadStock() {
 
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               TOTAL DEAD STOCK
             </p>
 
@@ -126,39 +126,39 @@ export default function DeadStock() {
 
           </div>
 
-          <div className="rounded-xl border border-[#7b5c17] bg-[#17140c] p-5">
+          <div className="rounded-xl border border-[#7b5c17] bg-background-tertiary p-5">
 
             <div className="flex items-center justify-between">
 
               <Package
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
 
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               TOTAL QUANTITY
             </p>
 
-            <h2 className="mt-2 text-2xl font-bold text-[#e4b52d]">
+            <h2 className="mt-2 text-2xl font-bold text-accent-gold">
               146 Units
             </h2>
 
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <div className="flex items-center justify-between">
 
               <ShoppingCart
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
 
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               DEAD STOCK VALUE
             </p>
 
@@ -168,18 +168,18 @@ export default function DeadStock() {
 
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <div className="flex items-center justify-between">
 
               <TrendingDown
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
 
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               STOCK TURNOVER LOSS
             </p>
 
@@ -192,26 +192,26 @@ export default function DeadStock() {
         </div>
 
         {/* FILTERS */}
-        <div className="mt-5 rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
 
-            <div className="flex items-center gap-3 rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3">
+            <div className="flex items-center gap-3 rounded-lg border border-border-theme bg-background-tertiary px-4 py-3">
 
               <Search
                 size={18}
-                className="text-gray-500"
+                className="text-text-secondary"
               />
 
               <input
                 type="text"
                 placeholder="Search product or SKU..."
-                className="w-full bg-transparent text-sm text-gray-300 outline-none placeholder:text-gray-600"
+                className="w-full bg-transparent text-sm text-text-secondary outline-none placeholder:text-gray-600"
               />
 
             </div>
 
-            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none">
+            <select className="rounded-lg border border-border-theme bg-background-tertiary px-4 py-3 text-sm text-text-secondary outline-none">
 
               <option>All Categories</option>
               <option>Gold Jewellery</option>
@@ -221,7 +221,7 @@ export default function DeadStock() {
 
             </select>
 
-            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none">
+            <select className="rounded-lg border border-border-theme bg-background-tertiary px-4 py-3 text-sm text-text-secondary outline-none">
 
               <option>Stock Age</option>
               <option>6+ Months</option>
@@ -230,7 +230,7 @@ export default function DeadStock() {
 
             </select>
 
-            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none">
+            <select className="rounded-lg border border-border-theme bg-background-tertiary px-4 py-3 text-sm text-text-secondary outline-none">
 
               <option>All Status</option>
               <option>Dead Stock</option>
@@ -243,17 +243,17 @@ export default function DeadStock() {
         </div>
 
         {/* TABLE */}
-        <div className="mt-5 rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
 
-          <div className="mb-5 flex items-center justify-between border-b border-[#302b1d] pb-4">
+          <div className="mb-5 flex items-center justify-between border-b border-border-theme pb-4">
 
             <div>
 
-              <h2 className="font-semibold text-[#e4b52d]">
+              <h2 className="font-semibold text-accent-gold">
                 DEAD STOCK ITEMS
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Inventory with no or very low sales activity
               </p>
 
@@ -265,11 +265,11 @@ export default function DeadStock() {
 
           </div>
 
-          <div className="overflow-x-auto rounded-lg border border-[#302b1d]">
+          <div className="overflow-x-auto rounded-lg border border-border-theme">
 
             <table className="w-full min-w-[1150px] text-left text-sm">
 
-              <thead className="bg-[#171711] text-xs text-gray-400">
+              <thead className="bg-background-tertiary text-xs text-text-secondary">
 
                 <tr>
                   <th className="px-4 py-4">PRODUCT</th>
@@ -290,18 +290,18 @@ export default function DeadStock() {
 
                   <tr
                     key={item.id}
-                    className="border-t border-[#302b1d] text-gray-300"
+                    className="border-t border-border-theme text-text-secondary"
                   >
 
                     <td className="px-4 py-4">
 
                       <div className="flex items-center gap-3">
 
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#2a2413] text-[#e4b52d]">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-background-tertiary text-accent-gold">
                           <Archive size={18} />
                         </div>
 
-                        <span className="font-medium text-white">
+                        <span className="font-medium text-text-primary">
                           {item.product}
                         </span>
 
@@ -309,11 +309,11 @@ export default function DeadStock() {
 
                     </td>
 
-                    <td className="px-4 py-4 text-[#e4b52d]">
+                    <td className="px-4 py-4 text-accent-gold">
                       {item.sku}
                     </td>
 
-                    <td className="px-4 py-4 text-gray-400">
+                    <td className="px-4 py-4 text-text-secondary">
                       {item.category}
                     </td>
 
@@ -321,11 +321,11 @@ export default function DeadStock() {
                       {item.stock} Units
                     </td>
 
-                    <td className="px-4 py-4 text-gray-400">
+                    <td className="px-4 py-4 text-text-secondary">
                       {item.lastSold}
                     </td>
 
-                    <td className="px-4 py-4 font-semibold text-[#e4b52d]">
+                    <td className="px-4 py-4 font-semibold text-accent-gold">
                       {item.value}
                     </td>
 
@@ -335,7 +335,7 @@ export default function DeadStock() {
                         className={
                           item.status === "Dead Stock"
                             ? "rounded-md border border-red-900 bg-red-950/30 px-3 py-1 text-xs text-red-400"
-                            : "rounded-md border border-yellow-900 bg-yellow-950/30 px-3 py-1 text-xs text-yellow-400"
+                            : "rounded-md border border-yellow-900 bg-yellow-950/30 px-3 py-1 text-xs text-accent-gold"
                         }
                       >
                         {item.status}
@@ -345,7 +345,7 @@ export default function DeadStock() {
 
                     <td className="px-4 py-4">
 
-                      <button className="text-gray-400 hover:text-[#e4b52d]">
+                      <button className="text-text-secondary hover:text-accent-gold">
                         <Eye size={17} />
                       </button>
 
@@ -366,49 +366,49 @@ export default function DeadStock() {
         {/* ACTION SUMMARY */}
         <div className="mt-5 grid gap-5 xl:grid-cols-3">
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
-            <h2 className="font-semibold text-[#e4b52d]">
+            <h2 className="font-semibold text-accent-gold">
               DISCOUNT / CLEARANCE
             </h2>
 
-            <p className="mt-2 text-sm text-gray-400">
+            <p className="mt-2 text-sm text-text-secondary">
               Move old inventory through special offers and clearance sales.
             </p>
 
-            <button className="mt-5 rounded-lg border border-[#7b5c17] px-4 py-2 text-sm text-[#e4b52d]">
+            <button className="mt-5 rounded-lg border border-[#7b5c17] px-4 py-2 text-sm text-accent-gold">
               Create Clearance Sale
             </button>
 
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
-            <h2 className="font-semibold text-[#e4b52d]">
+            <h2 className="font-semibold text-accent-gold">
               REWORK / REMODEL
             </h2>
 
-            <p className="mt-2 text-sm text-gray-400">
+            <p className="mt-2 text-sm text-text-secondary">
               Convert old jewellery into new designs and improve stock movement.
             </p>
 
-            <button className="mt-5 rounded-lg border border-[#7b5c17] px-4 py-2 text-sm text-[#e4b52d]">
+            <button className="mt-5 rounded-lg border border-[#7b5c17] px-4 py-2 text-sm text-accent-gold">
               Start Rework
             </button>
 
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
-            <h2 className="font-semibold text-[#e4b52d]">
+            <h2 className="font-semibold text-accent-gold">
               STOCK TRANSFER
             </h2>
 
-            <p className="mt-2 text-sm text-gray-400">
+            <p className="mt-2 text-sm text-text-secondary">
               Transfer slow-moving stock to another branch or warehouse.
             </p>
 
-            <button className="mt-5 rounded-lg border border-[#7b5c17] px-4 py-2 text-sm text-[#e4b52d]">
+            <button className="mt-5 rounded-lg border border-[#7b5c17] px-4 py-2 text-sm text-accent-gold">
               Transfer Stock
             </button>
 

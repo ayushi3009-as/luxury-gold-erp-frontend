@@ -12,7 +12,7 @@ import {
   TrendingDown,
 } from "lucide-react";
 
-import InventorySidebar from "../InventorySidebar";
+
 
 const lowStockItems = [
   {
@@ -74,17 +74,17 @@ const lowStockItems = [
 
 export default function LowStock() {
   return (
-    <div className="min-h-screen bg-[#090a09] text-white">
+    <div className="min-h-screen bg-background-primary text-text-primary">
 
-      <InventorySidebar />
+      
 
-      <main className="ml-64 min-h-screen p-5">
+      <main className=" min-h-screen p-5">
 
         {/* HEADER */}
         <div className="mb-6 flex items-start justify-between">
 
           <div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-text-secondary">
               Inventory / Low Stock
             </p>
 
@@ -92,19 +92,19 @@ export default function LowStock() {
               Low Stock
             </h1>
 
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-text-secondary">
               Monitor low inventory items and create purchase orders before stock runs out.
             </p>
           </div>
 
           <div className="flex gap-3">
 
-            <button className="flex items-center gap-2 rounded-lg border border-[#40351a] px-4 py-2 text-sm text-gray-300 hover:border-[#d9a928] hover:text-[#e4b52d]">
+            <button className="flex items-center gap-2 rounded-lg border border-border-theme px-4 py-2 text-sm text-text-secondary hover:border-accent-gold hover:text-accent-gold">
               <Download size={16} />
               Export Report
             </button>
 
-            <button className="flex items-center gap-2 rounded-lg bg-[#d9a928] px-4 py-2 text-sm font-semibold text-black hover:bg-[#f0c43c]">
+            <button className="flex items-center gap-2 rounded-lg bg-accent-gold px-4 py-2 text-sm font-semibold text-black hover:bg-accent-gold">
               <Plus size={17} />
               Create Purchase Order
             </button>
@@ -129,7 +129,7 @@ export default function LowStock() {
               </span>
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               TOTAL LOW STOCK ITEMS
             </p>
 
@@ -139,35 +139,35 @@ export default function LowStock() {
 
           </div>
 
-          <div className="rounded-xl border border-[#7b5c17] bg-[#17140c] p-5">
+          <div className="rounded-xl border border-[#7b5c17] bg-background-tertiary p-5">
 
             <div className="flex items-center justify-between">
               <TrendingDown
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               CRITICAL ITEMS
             </p>
 
-            <h2 className="mt-2 text-2xl font-bold text-[#e4b52d]">
+            <h2 className="mt-2 text-2xl font-bold text-accent-gold">
               7
             </h2>
 
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <div className="flex items-center justify-between">
               <ShoppingCart
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               PENDING REORDERS
             </p>
 
@@ -177,7 +177,7 @@ export default function LowStock() {
 
           </div>
 
-          <div className="rounded-xl border border-green-900 bg-[#101210] p-5">
+          <div className="rounded-xl border border-green-900 bg-background-secondary p-5">
 
             <div className="flex items-center justify-between">
               <CheckCircle2
@@ -186,7 +186,7 @@ export default function LowStock() {
               />
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               REORDERED ITEMS
             </p>
 
@@ -199,26 +199,26 @@ export default function LowStock() {
         </div>
 
         {/* SEARCH AND FILTERS */}
-        <div className="mt-5 rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
 
-            <div className="flex items-center gap-3 rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3">
+            <div className="flex items-center gap-3 rounded-lg border border-border-theme bg-background-tertiary px-4 py-3">
 
               <Search
                 size={18}
-                className="text-gray-500"
+                className="text-text-secondary"
               />
 
               <input
                 type="text"
                 placeholder="Search product or SKU..."
-                className="w-full bg-transparent text-sm text-gray-300 outline-none placeholder:text-gray-600"
+                className="w-full bg-transparent text-sm text-text-secondary outline-none placeholder:text-gray-600"
               />
 
             </div>
 
-            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none">
+            <select className="rounded-lg border border-border-theme bg-background-tertiary px-4 py-3 text-sm text-text-secondary outline-none">
 
               <option>All Categories</option>
               <option>Gold Jewellery</option>
@@ -227,7 +227,7 @@ export default function LowStock() {
 
             </select>
 
-            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none">
+            <select className="rounded-lg border border-border-theme bg-background-tertiary px-4 py-3 text-sm text-text-secondary outline-none">
 
               <option>All Priority</option>
               <option>Critical</option>
@@ -236,7 +236,7 @@ export default function LowStock() {
 
             </select>
 
-            <select className="rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3 text-sm text-gray-300 outline-none">
+            <select className="rounded-lg border border-border-theme bg-background-tertiary px-4 py-3 text-sm text-text-secondary outline-none">
 
               <option>All Suppliers</option>
               <option>Diamond Traders</option>
@@ -250,16 +250,16 @@ export default function LowStock() {
         </div>
 
         {/* LOW STOCK TABLE */}
-        <div className="mt-5 rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
 
-          <div className="mb-5 flex items-center justify-between border-b border-[#302b1d] pb-4">
+          <div className="mb-5 flex items-center justify-between border-b border-border-theme pb-4">
 
             <div>
-              <h2 className="font-semibold text-[#e4b52d]">
+              <h2 className="font-semibold text-accent-gold">
                 LOW STOCK ITEMS
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Items that require immediate inventory replenishment
               </p>
             </div>
@@ -271,11 +271,11 @@ export default function LowStock() {
 
           </div>
 
-          <div className="overflow-x-auto rounded-lg border border-[#302b1d]">
+          <div className="overflow-x-auto rounded-lg border border-border-theme">
 
             <table className="w-full min-w-[1250px] text-left text-sm">
 
-              <thead className="bg-[#171711] text-xs text-gray-400">
+              <thead className="bg-background-tertiary text-xs text-text-secondary">
 
                 <tr>
                   <th className="px-4 py-4">PRODUCT</th>
@@ -297,18 +297,18 @@ export default function LowStock() {
 
                   <tr
                     key={item.id}
-                    className="border-t border-[#302b1d] text-gray-300"
+                    className="border-t border-border-theme text-text-secondary"
                   >
 
                     <td className="px-4 py-4">
 
                       <div className="flex items-center gap-3">
 
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#2a2413] text-[#e4b52d]">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-background-tertiary text-accent-gold">
                           <Package size={18} />
                         </div>
 
-                        <span className="font-medium text-white">
+                        <span className="font-medium text-text-primary">
                           {item.product}
                         </span>
 
@@ -316,11 +316,11 @@ export default function LowStock() {
 
                     </td>
 
-                    <td className="px-4 py-4 text-[#e4b52d]">
+                    <td className="px-4 py-4 text-accent-gold">
                       {item.sku}
                     </td>
 
-                    <td className="px-4 py-4 text-gray-400">
+                    <td className="px-4 py-4 text-text-secondary">
                       {item.category}
                     </td>
 
@@ -336,7 +336,7 @@ export default function LowStock() {
                       {item.minimumStock} Units
                     </td>
 
-                    <td className="px-4 py-4 text-yellow-400">
+                    <td className="px-4 py-4 text-accent-gold">
                       {item.reorderLevel} Units
                     </td>
 
@@ -350,7 +350,7 @@ export default function LowStock() {
                         className={
                           item.priority === "Critical"
                             ? "rounded-md border border-red-900 bg-red-950/30 px-3 py-1 text-xs text-red-400"
-                            : "rounded-md border border-yellow-900 bg-yellow-950/30 px-3 py-1 text-xs text-yellow-400"
+                            : "rounded-md border border-yellow-900 bg-yellow-950/30 px-3 py-1 text-xs text-accent-gold"
                         }
                       >
                         {item.priority}
@@ -360,7 +360,7 @@ export default function LowStock() {
 
                     <td className="px-4 py-4">
 
-                      <button className="rounded-md border border-[#7b5c17] px-3 py-1 text-xs text-[#e4b52d] hover:bg-[#2a2413]">
+                      <button className="rounded-md border border-[#7b5c17] px-3 py-1 text-xs text-accent-gold hover:bg-background-tertiary">
                         Reorder
                       </button>
 
@@ -381,16 +381,16 @@ export default function LowStock() {
         {/* REORDER SUMMARY */}
         <div className="mt-5 grid gap-5 xl:grid-cols-2">
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <div className="flex items-center gap-3">
 
               <ShoppingCart
                 size={22}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
 
-              <h2 className="font-semibold text-[#e4b52d]">
+              <h2 className="font-semibold text-accent-gold">
                 REORDER SUMMARY
               </h2>
 
@@ -406,7 +406,7 @@ export default function LowStock() {
 
                 <div
                   key={category}
-                  className="flex items-center justify-between rounded-lg border border-[#302b1d] bg-[#171711] p-4"
+                  className="flex items-center justify-between rounded-lg border border-border-theme bg-background-tertiary p-4"
                 >
 
                   <div>
@@ -415,13 +415,13 @@ export default function LowStock() {
                       {category}
                     </p>
 
-                    <p className="mt-1 text-xs text-gray-500">
+                    <p className="mt-1 text-xs text-text-secondary">
                       {items}
                     </p>
 
                   </div>
 
-                  <p className="font-semibold text-[#e4b52d]">
+                  <p className="font-semibold text-accent-gold">
                     {value}
                   </p>
 
@@ -433,16 +433,16 @@ export default function LowStock() {
 
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <div className="flex items-center gap-3">
 
               <Package
                 size={22}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
 
-              <h2 className="font-semibold text-[#e4b52d]">
+              <h2 className="font-semibold text-accent-gold">
                 STOCK LEVEL STATUS
               </h2>
 
@@ -460,11 +460,11 @@ export default function LowStock() {
 
                   <div className="mb-2 flex justify-between text-sm">
 
-                    <span className="text-gray-300">
+                    <span className="text-text-secondary">
                       {name}
                     </span>
 
-                    <span className="text-gray-400">
+                    <span className="text-text-secondary">
                       {items}
                     </span>
 

@@ -13,13 +13,13 @@ export default function PurchaseSearch() {
 
         <Search
           size={18}
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary"
         />
 
         <input
           type="text"
           placeholder="Search Purchase..."
-          className="w-full bg-[#141414] border border-gray-700 rounded-xl pl-12 pr-4 py-3 text-white focus:outline-none focus:border-yellow-500"
+          className="w-full bg-background-secondary border border-gray-700 rounded-xl pl-12 pr-4 py-3 text-text-primary focus:outline-none focus:border-yellow-500"
         />
 
       </div>
@@ -29,7 +29,7 @@ export default function PurchaseSearch() {
       <div className="flex gap-3">
 
         <button
-          className="flex items-center gap-2 border border-yellow-500 text-yellow-500 px-5 py-3 rounded-xl hover:bg-yellow-500 hover:text-black transition"
+          className="flex items-center gap-2 border border-yellow-500 text-accent-gold px-5 py-3 rounded-xl hover:bg-accent-gold hover:text-black transition"
         >
           <Filter size={18} />
           Filter
@@ -37,7 +37,7 @@ export default function PurchaseSearch() {
 
         <Link
           href="/reports/purchase/add"
-          className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-5 py-3 rounded-xl transition"
+          className="flex items-center gap-2 bg-accent-gold hover:bg-accent-gold-hover text-black font-semibold px-5 py-3 rounded-xl transition"
         >
           <Plus size={18} />
           Add Purchase

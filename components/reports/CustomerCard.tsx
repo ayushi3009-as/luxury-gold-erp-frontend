@@ -29,7 +29,7 @@ export default function CustomerCard({
       className="
       bg-[#151515]
       border
-      border-gray-800
+      border-border-theme
       rounded-2xl
       p-6
       hover:border-yellow-500
@@ -43,12 +43,12 @@ export default function CustomerCard({
 
         <div>
 
-          <h2 className="text-xl font-bold text-yellow-500">
+          <h2 className="text-xl font-bold text-accent-gold">
             {name}
           </h2>
 
 
-          <p className="text-gray-400 mt-1">
+          <p className="text-text-secondary mt-1">
             {phone}
           </p>
 
@@ -65,8 +65,8 @@ export default function CustomerCard({
           text-sm
           ${
             goldSavingScheme
-            ? "bg-yellow-500/10 text-yellow-500"
-            : "bg-gray-800 text-gray-400"
+            ? "bg-accent-gold/10 text-accent-gold"
+            : "bg-gray-800 text-text-secondary"
           }
           `}
         >
@@ -86,11 +86,11 @@ export default function CustomerCard({
 
 
 
-      <div className="mt-5 space-y-2 text-gray-300">
+      <div className="mt-5 space-y-2 text-text-secondary">
 
 
         <p>
-          <span className="text-gray-500">
+          <span className="text-text-secondary">
             Email:
           </span>{" "}
           {email}
@@ -99,7 +99,7 @@ export default function CustomerCard({
 
 
         <p>
-          <span className="text-gray-500">
+          <span className="text-text-secondary">
             Total Orders:
           </span>{" "}
           {totalOrders}
@@ -108,7 +108,7 @@ export default function CustomerCard({
 
 
         <p>
-          <span className="text-gray-500">
+          <span className="text-text-secondary">
             Total Purchase:
           </span>{" "}
           {totalPurchase}
@@ -129,10 +129,10 @@ export default function CustomerCard({
         text-center
         border
         border-yellow-500
-        text-yellow-500
+        text-accent-gold
         py-2
         rounded-xl
-        hover:bg-yellow-500
+        hover:bg-accent-gold
         hover:text-black
         transition
         "

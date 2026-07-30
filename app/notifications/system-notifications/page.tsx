@@ -1,5 +1,5 @@
 "use client";
-import NotificationsSidebar from "../NotificationsSidebar";
+
 
 import {
   Bell,
@@ -49,18 +49,18 @@ const notifications = [
 
 export default function SystemNotificationsPage() {
   return (
-  <div className="min-h-screen bg-[#090a09] text-white">
+  <div className="min-h-screen bg-background-primary text-text-primary">
 
-    <NotificationsSidebar />
+    
 
-    <main className="ml-64 min-h-screen p-8">
+    <main className=" min-h-screen p-8">
 
         {/* HEADER */}
         <div className="flex items-end justify-between">
 
           <div>
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               Notifications / System Notifications
             </p>
 
@@ -69,23 +69,23 @@ export default function SystemNotificationsPage() {
               <div className="rounded-xl bg-[#211c0d] p-3">
                 <Bell
                   size={25}
-                  className="text-[#e4b52d]"
+                  className="text-accent-gold"
                 />
               </div>
 
-              <h1 className="text-3xl font-bold text-[#f0c43c]">
+              <h1 className="text-3xl font-bold text-accent-gold">
                 System Notifications
               </h1>
 
             </div>
 
-            <p className="mt-3 text-sm text-gray-400">
+            <p className="mt-3 text-sm text-text-secondary">
               View important system updates, security events and system activity.
             </p>
 
           </div>
 
-          <button className="rounded-lg border border-[#40351b] px-4 py-2 text-xs text-gray-300 transition hover:border-[#e4b52d] hover:text-[#e4b52d]">
+          <button className="rounded-lg border border-border-theme px-4 py-2 text-xs text-text-secondary transition hover:border-[#e4b52d] hover:text-accent-gold">
             Mark All as Read
           </button>
 
@@ -94,9 +94,9 @@ export default function SystemNotificationsPage() {
         {/* SUMMARY CARDS */}
         <div className="mt-8 grid grid-cols-4 gap-5">
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               Total Notifications
             </p>
 
@@ -104,7 +104,7 @@ export default function SystemNotificationsPage() {
               36
             </h2>
 
-            <p className="mt-2 text-xs text-gray-400">
+            <p className="mt-2 text-xs text-text-secondary">
               System activity records
             </p>
 
@@ -112,7 +112,7 @@ export default function SystemNotificationsPage() {
 
           <div className="rounded-xl border border-green-900/40 bg-[#11130f] p-5">
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               Successful
             </p>
 
@@ -126,25 +126,25 @@ export default function SystemNotificationsPage() {
 
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               Unread
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold text-[#e4b52d]">
+            <h2 className="mt-3 text-3xl font-bold text-accent-gold">
               8
             </h2>
 
-            <p className="mt-2 text-xs text-gray-400">
+            <p className="mt-2 text-xs text-text-secondary">
               New system updates
             </p>
 
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               System Status
             </p>
 
@@ -161,24 +161,24 @@ export default function SystemNotificationsPage() {
         </div>
 
         {/* SYSTEM NOTIFICATION LIST */}
-        <div className="mt-6 rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+        <div className="mt-6 rounded-xl border border-border-theme bg-[#11130f] p-6">
 
           <div className="flex items-center gap-3">
 
             <div className="rounded-lg bg-[#211c0d] p-3">
               <Settings
                 size={20}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
             <div>
 
-              <h2 className="text-lg font-semibold text-[#f0c43c]">
+              <h2 className="text-lg font-semibold text-accent-gold">
                 System Activity
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Recent system events and automated activities
               </p>
 
@@ -203,7 +203,7 @@ export default function SystemNotificationsPage() {
                     <div className="rounded-lg bg-[#211c0d] p-3">
                       <Icon
                         size={20}
-                        className="text-[#e4b52d]"
+                        className="text-accent-gold"
                       />
                     </div>
 
@@ -213,7 +213,7 @@ export default function SystemNotificationsPage() {
                         {notification.title}
                       </h3>
 
-                      <p className="mt-1 text-xs text-gray-400">
+                      <p className="mt-1 text-xs text-text-secondary">
                         {notification.description}
                       </p>
 
@@ -271,12 +271,12 @@ export default function SystemNotificationsPage() {
                 All Systems Operational
               </h2>
 
-              <p className="mt-2 text-sm leading-6 text-gray-300">
+              <p className="mt-2 text-sm leading-6 text-text-secondary">
                 All major ERP services are currently running normally.
                 System activity, database and security services are operational.
               </p>
 
-              <div className="mt-4 flex items-center gap-2 text-sm text-gray-400">
+              <div className="mt-4 flex items-center gap-2 text-sm text-text-secondary">
                 <Info size={16} />
                 Last system health check: Just now
               </div>

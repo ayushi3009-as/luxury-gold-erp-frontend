@@ -11,7 +11,7 @@ import {
   Warehouse as WarehouseIcon,
 } from "lucide-react";
 
-import InventorySidebar from "../InventorySidebar";
+
 
 const warehouses = [
   {
@@ -48,17 +48,17 @@ const warehouses = [
 
 export default function Warehouse() {
   return (
-    <div className="min-h-screen bg-[#090a09] text-white">
+    <div className="min-h-screen bg-background-primary text-text-primary">
 
-      <InventorySidebar />
+      
 
-      <main className="ml-64 min-h-screen p-5">
+      <main className=" min-h-screen p-5">
 
         {/* HEADER */}
         <div className="mb-6 flex items-start justify-between">
 
           <div>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-text-secondary">
               Inventory / Warehouse
             </p>
 
@@ -66,12 +66,12 @@ export default function Warehouse() {
               Warehouse
             </h1>
 
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-text-secondary">
               Manage warehouses, branches and inventory locations.
             </p>
           </div>
 
-          <button className="flex items-center gap-2 rounded-lg bg-[#d9a928] px-4 py-2 text-sm font-semibold text-black hover:bg-[#f0c43c]">
+          <button className="flex items-center gap-2 rounded-lg bg-accent-gold px-4 py-2 text-sm font-semibold text-black hover:bg-accent-gold">
             <Plus size={17} />
             Add Warehouse
           </button>
@@ -81,16 +81,16 @@ export default function Warehouse() {
         {/* KPI CARDS */}
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <div className="flex items-center justify-between">
               <WarehouseIcon
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               TOTAL WAREHOUSES
             </p>
 
@@ -100,16 +100,16 @@ export default function Warehouse() {
 
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <div className="flex items-center justify-between">
               <Package
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               TOTAL PRODUCTS
             </p>
 
@@ -119,16 +119,16 @@ export default function Warehouse() {
 
           </div>
 
-          <div className="rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
             <div className="flex items-center justify-between">
               <Building2
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               ACTIVE LOCATIONS
             </p>
 
@@ -138,20 +138,20 @@ export default function Warehouse() {
 
           </div>
 
-          <div className="rounded-xl border border-[#7b5c17] bg-[#17140c] p-5">
+          <div className="rounded-xl border border-[#7b5c17] bg-background-tertiary p-5">
 
             <div className="flex items-center justify-between">
               <MapPin
                 size={27}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
-            <p className="mt-5 text-xs text-gray-500">
+            <p className="mt-5 text-xs text-text-secondary">
               TOTAL STOCK VALUE
             </p>
 
-            <h2 className="mt-2 text-2xl font-bold text-[#e4b52d]">
+            <h2 className="mt-2 text-2xl font-bold text-accent-gold">
               ₹ 8.45 Cr
             </h2>
 
@@ -160,19 +160,19 @@ export default function Warehouse() {
         </div>
 
         {/* SEARCH */}
-        <div className="mt-5 rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
 
-          <div className="flex items-center gap-3 rounded-lg border border-[#40351a] bg-[#171711] px-4 py-3">
+          <div className="flex items-center gap-3 rounded-lg border border-border-theme bg-background-tertiary px-4 py-3">
 
             <Search
               size={18}
-              className="text-gray-500"
+              className="text-text-secondary"
             />
 
             <input
               type="text"
               placeholder="Search warehouse by name, code or location..."
-              className="w-full bg-transparent text-sm text-gray-300 outline-none placeholder:text-gray-600"
+              className="w-full bg-transparent text-sm text-text-secondary outline-none placeholder:text-gray-600"
             />
 
           </div>
@@ -180,25 +180,25 @@ export default function Warehouse() {
         </div>
 
         {/* WAREHOUSE TABLE */}
-        <div className="mt-5 rounded-xl border border-[#3d3218] bg-[#101210] p-5">
+        <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
 
-          <div className="mb-5 border-b border-[#302b1d] pb-4">
+          <div className="mb-5 border-b border-border-theme pb-4">
 
-            <h2 className="font-semibold text-[#e4b52d]">
+            <h2 className="font-semibold text-accent-gold">
               WAREHOUSE LOCATIONS
             </h2>
 
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-text-secondary">
               Manage all inventory storage locations
             </p>
 
           </div>
 
-          <div className="overflow-x-auto rounded-lg border border-[#302b1d]">
+          <div className="overflow-x-auto rounded-lg border border-border-theme">
 
             <table className="w-full min-w-[1100px] text-left text-sm">
 
-              <thead className="bg-[#171711] text-xs text-gray-400">
+              <thead className="bg-background-tertiary text-xs text-text-secondary">
 
                 <tr>
                   <th className="px-4 py-4">WAREHOUSE</th>
@@ -219,18 +219,18 @@ export default function Warehouse() {
 
                   <tr
                     key={warehouse.id}
-                    className="border-t border-[#302b1d] text-gray-300"
+                    className="border-t border-border-theme text-text-secondary"
                   >
 
                     <td className="px-4 py-4">
 
                       <div className="flex items-center gap-3">
 
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#2a2413] text-[#e4b52d]">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-background-tertiary text-accent-gold">
                           <WarehouseIcon size={18} />
                         </div>
 
-                        <span className="font-medium text-white">
+                        <span className="font-medium text-text-primary">
                           {warehouse.name}
                         </span>
 
@@ -238,7 +238,7 @@ export default function Warehouse() {
 
                     </td>
 
-                    <td className="px-4 py-4 text-[#e4b52d]">
+                    <td className="px-4 py-4 text-accent-gold">
                       {warehouse.code}
                     </td>
 
@@ -254,7 +254,7 @@ export default function Warehouse() {
 
                     </td>
 
-                    <td className="px-4 py-4 text-gray-400">
+                    <td className="px-4 py-4 text-text-secondary">
                       {warehouse.manager}
                     </td>
 
@@ -262,7 +262,7 @@ export default function Warehouse() {
                       {warehouse.products}
                     </td>
 
-                    <td className="px-4 py-4 text-[#e4b52d]">
+                    <td className="px-4 py-4 text-accent-gold">
                       {warehouse.value}
                     </td>
 
@@ -278,11 +278,11 @@ export default function Warehouse() {
 
                       <div className="flex items-center gap-3">
 
-                        <button className="text-gray-400 hover:text-[#e4b52d]">
+                        <button className="text-text-secondary hover:text-accent-gold">
                           <Eye size={17} />
                         </button>
 
-                        <button className="text-gray-400 hover:text-[#e4b52d]">
+                        <button className="text-text-secondary hover:text-accent-gold">
                           <Edit size={17} />
                         </button>
 

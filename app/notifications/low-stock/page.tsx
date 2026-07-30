@@ -1,5 +1,5 @@
 "use client";
-import NotificationsSidebar from "../NotificationsSidebar";
+
 
 import {
   Package,
@@ -46,15 +46,15 @@ const lowStockProducts = [
 
 export default function LowStockPage() {
   return (
-  <div className="min-h-screen bg-[#090a09] text-white">
+  <div className="min-h-screen bg-background-primary text-text-primary">
 
-    <NotificationsSidebar />
+    
 
-    <main className="ml-64 min-h-screen p-8">
+    <main className=" min-h-screen p-8">
         {/* HEADER */}
         <div>
 
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-text-secondary">
             Notifications / Low Stock
           </p>
 
@@ -63,17 +63,17 @@ export default function LowStockPage() {
             <div className="rounded-xl bg-[#211c0d] p-3">
               <Package
                 size={25}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
-            <h1 className="text-3xl font-bold text-[#f0c43c]">
+            <h1 className="text-3xl font-bold text-accent-gold">
               Low Stock
             </h1>
 
           </div>
 
-          <p className="mt-3 text-sm text-gray-400">
+          <p className="mt-3 text-sm text-text-secondary">
             Monitor products that are running below their minimum stock level.
           </p>
 
@@ -82,17 +82,17 @@ export default function LowStockPage() {
         {/* SUMMARY CARDS */}
         <div className="mt-8 grid grid-cols-4 gap-5">
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
 
             <div className="flex items-center justify-between">
 
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Low Stock Items
               </p>
 
               <Package
                 size={19}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
 
             </div>
@@ -101,7 +101,7 @@ export default function LowStockPage() {
               24
             </h2>
 
-            <p className="mt-2 text-xs text-yellow-400">
+            <p className="mt-2 text-xs text-accent-gold">
               Requires attention
             </p>
 
@@ -111,7 +111,7 @@ export default function LowStockPage() {
 
             <div className="flex items-center justify-between">
 
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Critical Stock
               </p>
 
@@ -132,17 +132,17 @@ export default function LowStockPage() {
 
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
 
             <div className="flex items-center justify-between">
 
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Stock Value at Risk
               </p>
 
               <TrendingDown
                 size={19}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
 
             </div>
@@ -151,23 +151,23 @@ export default function LowStockPage() {
               $84.6K
             </h2>
 
-            <p className="mt-2 text-xs text-gray-400">
+            <p className="mt-2 text-xs text-text-secondary">
               Estimated inventory value
             </p>
 
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
 
             <div className="flex items-center justify-between">
 
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Warehouses Affected
               </p>
 
               <Warehouse
                 size={19}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
 
             </div>
@@ -176,7 +176,7 @@ export default function LowStockPage() {
               6
             </h2>
 
-            <p className="mt-2 text-xs text-gray-400">
+            <p className="mt-2 text-xs text-text-secondary">
               Across all locations
             </p>
 
@@ -185,23 +185,23 @@ export default function LowStockPage() {
         </div>
 
         {/* LOW STOCK TABLE */}
-        <div className="mt-6 rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+        <div className="mt-6 rounded-xl border border-border-theme bg-[#11130f] p-6">
 
           <div className="flex items-center justify-between">
 
             <div>
 
-              <h2 className="text-lg font-semibold text-[#f0c43c]">
+              <h2 className="text-lg font-semibold text-accent-gold">
                 Products Requiring Restock
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Products currently below the defined minimum stock level
               </p>
 
             </div>
 
-            <button className="rounded-lg border border-[#40351b] px-4 py-2 text-xs text-gray-300 transition hover:border-[#e4b52d] hover:text-[#e4b52d]">
+            <button className="rounded-lg border border-border-theme px-4 py-2 text-xs text-text-secondary transition hover:border-[#e4b52d] hover:text-accent-gold">
               Create Purchase Order
             </button>
 
@@ -210,7 +210,7 @@ export default function LowStockPage() {
           <div className="mt-6 overflow-hidden rounded-lg border border-[#2f2a1b]">
 
             {/* TABLE HEADER */}
-            <div className="grid grid-cols-6 border-b border-[#2f2a1b] bg-[#151711] px-5 py-4 text-xs text-gray-500">
+            <div className="grid grid-cols-6 border-b border-[#2f2a1b] bg-[#151711] px-5 py-4 text-xs text-text-secondary">
 
               <span>Product</span>
               <span>SKU</span>
@@ -233,11 +233,11 @@ export default function LowStockPage() {
                   {product.name}
                 </span>
 
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-text-secondary">
                   {product.sku}
                 </span>
 
-                <span className="text-xs text-gray-400">
+                <span className="text-xs text-text-secondary">
                   {product.category}
                 </span>
 
@@ -245,13 +245,13 @@ export default function LowStockPage() {
                   className={`text-sm font-semibold ${
                     product.status === "Critical"
                       ? "text-red-400"
-                      : "text-yellow-400"
+                      : "text-accent-gold"
                   }`}
                 >
                   {product.currentStock} units
                 </span>
 
-                <span className="text-sm text-gray-400">
+                <span className="text-sm text-text-secondary">
                   {product.minimumStock} units
                 </span>
 
@@ -259,7 +259,7 @@ export default function LowStockPage() {
                   className={`flex w-fit items-center gap-1 rounded-full px-3 py-1 text-[10px] ${
                     product.status === "Critical"
                       ? "bg-red-500/10 text-red-400"
-                      : "bg-yellow-500/10 text-yellow-400"
+                      : "bg-accent-gold/10 text-accent-gold"
                   }`}
                 >
                   <ArrowDownRight size={12} />
@@ -288,11 +288,11 @@ export default function LowStockPage() {
 
             <div>
 
-              <h2 className="font-semibold text-[#f0c43c]">
+              <h2 className="font-semibold text-accent-gold">
                 Automatic Low Stock Monitoring
               </h2>
 
-              <p className="mt-2 text-sm leading-6 text-gray-300">
+              <p className="mt-2 text-sm leading-6 text-text-secondary">
                 The system automatically monitors inventory levels and creates
                 alerts whenever a product falls below its minimum stock level.
               </p>

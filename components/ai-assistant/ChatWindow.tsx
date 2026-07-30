@@ -27,7 +27,7 @@ const messages = [
 
 export default function ChatWindow() {
   return (
-    <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-6 h-[550px] overflow-y-auto space-y-4">
+    <div className="bg-background-secondary border border-border-theme rounded-2xl p-6 h-[550px] overflow-y-auto space-y-4">
       {messages.map((item) => (
         <ChatMessage
           key={item.id}

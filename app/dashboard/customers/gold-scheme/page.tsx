@@ -35,21 +35,21 @@ export default function GoldSavingSchemePage() {
   };
 
   return (
-    <div className="text-white max-w-7xl mx-auto">
+    <div className="text-text-primary max-w-7xl mx-auto">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
             Gold Saving Scheme (11+1)
           </h1>
-          <p className="text-gray-400 mt-1 text-sm">
+          <p className="text-text-secondary mt-1 text-sm">
             Module 3 / Page 6: Monthly Gold Installment Scheme Management
           </p>
         </div>
 
         <button
           onClick={() => setShowModal(true)}
-          className="bg-[#D4AF37] text-black rounded-xl px-6 py-3.5 font-semibold flex items-center gap-2 hover:bg-yellow-400 transition cursor-pointer shadow-lg shadow-amber-500/10"
+          className="bg-[#D4AF37] text-black rounded-xl px-6 py-3.5 font-semibold flex items-center gap-2 hover:bg-accent-gold-hover transition cursor-pointer shadow-lg shadow-amber-500/10"
         >
           <Plus size={20} />
           Enroll New Scheme
@@ -72,8 +72,8 @@ export default function GoldSavingSchemePage() {
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <span className="text-xs font-mono text-[#D4AF37] font-semibold">{s.id}</span>
-                  <h3 className="text-xl font-bold text-white mt-0.5">{s.customerName}</h3>
-                  <p className="text-xs text-gray-400">{s.schemeName}</p>
+                  <h3 className="text-xl font-bold text-text-primary mt-0.5">{s.customerName}</h3>
+                  <p className="text-xs text-text-secondary">{s.schemeName}</p>
                 </div>
                 <span
                   className={`text-xs px-3 py-1 rounded-full font-semibold ${
@@ -90,7 +90,7 @@ export default function GoldSavingSchemePage() {
 
               {/* Progress Bar */}
               <div className="space-y-2 mb-6">
-                <div className="flex justify-between text-xs text-gray-300 font-medium">
+                <div className="flex justify-between text-xs text-text-secondary font-medium">
                   <span>Installments Paid</span>
                   <span>
                     {s.paidInstallments} of {s.totalInstallments} Months ({progressPercent}%)
@@ -107,20 +107,20 @@ export default function GoldSavingSchemePage() {
               {/* Stat Row */}
               <div className="grid grid-cols-3 gap-2 bg-[#101010] p-4 rounded-xl border border-[#2C2C2C] text-xs">
                 <div>
-                  <span className="text-gray-400 block">Monthly Pay</span>
-                  <span className="text-white font-bold font-mono text-sm">
+                  <span className="text-text-secondary block">Monthly Pay</span>
+                  <span className="text-text-primary font-bold font-mono text-sm">
                     ₹{s.monthlyInstallment.toLocaleString()}
                   </span>
                 </div>
                 <div>
-                  <span className="text-gray-400 block">Accumulated</span>
+                  <span className="text-text-secondary block">Accumulated</span>
                   <span className="text-[#D4AF37] font-bold font-mono text-sm">
                     {s.accumulatedWeight} g
                   </span>
                 </div>
                 <div>
-                  <span className="text-gray-400 block">Maturity Date</span>
-                  <span className="text-gray-300 font-medium">{s.maturityDate}</span>
+                  <span className="text-text-secondary block">Maturity Date</span>
+                  <span className="text-text-secondary font-medium">{s.maturityDate}</span>
                 </div>
               </div>
             </div>
@@ -130,28 +130,28 @@ export default function GoldSavingSchemePage() {
 
       {/* Enrolment Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-          <div className="bg-[#171717] border border-[#2C2C2C] text-white rounded-2xl w-full max-w-md p-6 relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background-primary/70 backdrop-blur-sm p-4">
+          <div className="bg-[#171717] border border-[#2C2C2C] text-text-primary rounded-2xl w-full max-w-md p-6 relative">
             <h3 className="text-xl font-bold text-[#D4AF37] mb-4">Enroll Customer in Gold Scheme</h3>
             <form onSubmit={handleCreateScheme} className="space-y-4">
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Customer Name</label>
+                <label className="block text-sm text-text-secondary mb-1">Customer Name</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Sunita Devi"
                   value={newScheme.customerName}
                   onChange={(e) => setNewScheme({ ...newScheme, customerName: e.target.value })}
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Scheme Package</label>
+                <label className="block text-sm text-text-secondary mb-1">Scheme Package</label>
                 <select
                   value={newScheme.schemeName}
                   onChange={(e) => setNewScheme({ ...newScheme, schemeName: e.target.value })}
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 >
                   <option value="Luxray Swarna Bachat 11+1">Luxray Swarna Bachat 11+1 (1 Bonus Month)</option>
                   <option value="Dhanraksha Diamond Plan">Dhanraksha Diamond Savings (11 Months)</option>
@@ -160,13 +160,13 @@ export default function GoldSavingSchemePage() {
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Monthly Installment Amount (₹)</label>
+                <label className="block text-sm text-text-secondary mb-1">Monthly Installment Amount (₹)</label>
                 <input
                   type="number"
                   required
                   value={newScheme.monthlyInstallment}
                   onChange={(e) => setNewScheme({ ...newScheme, monthlyInstallment: e.target.value })}
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 />
               </div>
 
@@ -174,13 +174,13 @@ export default function GoldSavingSchemePage() {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="w-1/2 bg-[#222] hover:bg-[#333] text-gray-300 py-3 rounded-xl font-medium transition"
+                  className="w-1/2 bg-[#222] hover:bg-[#333] text-text-secondary py-3 rounded-xl font-medium transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="w-1/2 bg-[#D4AF37] hover:bg-yellow-400 text-black py-3 rounded-xl font-semibold transition"
+                  className="w-1/2 bg-[#D4AF37] hover:bg-accent-gold-hover text-black py-3 rounded-xl font-semibold transition"
                 >
                   Create Plan
                 </button>

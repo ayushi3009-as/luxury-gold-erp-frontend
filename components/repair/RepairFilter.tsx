@@ -21,7 +21,7 @@ export default function RepairFilter({
       <select
         value={status}
         onChange={(e) => onStatusChange(e.target.value)}
-        className="bg-[#141414] border border-yellow-500/20 rounded-xl px-4 py-3 text-white outline-none focus:border-yellow-500"
+        className="bg-background-secondary border border-border-theme rounded-xl px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
       >
         <option value="">All Status</option>
         <option value="Pending">Pending</option>
@@ -36,7 +36,7 @@ export default function RepairFilter({
       <select
         value={worker}
         onChange={(e) => onWorkerChange(e.target.value)}
-        className="bg-[#141414] border border-yellow-500/20 rounded-xl px-4 py-3 text-white outline-none focus:border-yellow-500"
+        className="bg-background-secondary border border-border-theme rounded-xl px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
       >
         <option value="">All Workers</option>
         <option value="Ramesh">Ramesh</option>

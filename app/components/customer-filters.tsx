@@ -33,14 +33,14 @@ export default function CustomerFilters({
         {/* Search */}
         <div className="md:col-span-5 relative">
           <Search
-            className="absolute left-4 top-3.5 text-gray-500"
+            className="absolute left-4 top-3.5 text-text-secondary"
             size={20}
           />
           <input
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search customers by name, mobile or email..."
-            className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl py-3 pl-12 pr-4 outline-none focus:border-[#D4AF37] placeholder-gray-500"
+            className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl py-3 pl-12 pr-4 outline-none focus:border-[#D4AF37] placeholder-gray-500"
           />
         </div>
 
@@ -48,7 +48,7 @@ export default function CustomerFilters({
         <select
           value={status}
           onChange={(e) => onStatusChange(e.target.value)}
-          className="md:col-span-2 bg-[#101010] text-white rounded-xl border border-[#2C2C2C] px-4 py-3 outline-none focus:border-[#D4AF37]"
+          className="md:col-span-2 bg-[#101010] text-text-primary rounded-xl border border-[#2C2C2C] px-4 py-3 outline-none focus:border-[#D4AF37]"
         >
           <option value="All">Status : All</option>
           <option value="Active">Status : Active</option>
@@ -59,7 +59,7 @@ export default function CustomerFilters({
         <select
           value={membership}
           onChange={(e) => onMembershipChange(e.target.value)}
-          className="md:col-span-2 bg-[#101010] text-white rounded-xl border border-[#2C2C2C] px-4 py-3 outline-none focus:border-[#D4AF37]"
+          className="md:col-span-2 bg-[#101010] text-text-primary rounded-xl border border-[#2C2C2C] px-4 py-3 outline-none focus:border-[#D4AF37]"
         >
           <option value="All">Membership : All</option>
           <option value="Gold Member">Gold Member</option>
@@ -71,7 +71,7 @@ export default function CustomerFilters({
         <select
           value={city}
           onChange={(e) => onCityChange(e.target.value)}
-          className="md:col-span-2 bg-[#101010] text-white rounded-xl border border-[#2C2C2C] px-4 py-3 outline-none focus:border-[#D4AF37]"
+          className="md:col-span-2 bg-[#101010] text-text-primary rounded-xl border border-[#2C2C2C] px-4 py-3 outline-none focus:border-[#D4AF37]"
         >
           <option value="All">City : All</option>
           {cities.map((c) => (

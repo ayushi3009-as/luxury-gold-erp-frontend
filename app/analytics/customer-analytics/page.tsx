@@ -10,7 +10,7 @@ import {
   Heart,
 } from "lucide-react";
 
-import AnalyticsSidebar from "../AnalyticsSidebar";
+
 
 const customerSegments = [
   {
@@ -46,14 +46,14 @@ export default function CustomerAnalyticsPage() {
   const maxValue = 500;
 
   return (
-    <div className="min-h-screen bg-[#090a09] text-white">
-      <AnalyticsSidebar />
+    <div className="min-h-screen bg-background-primary text-text-primary">
+      
 
-      <main className="ml-64 min-h-screen p-8">
+      <main className=" min-h-screen p-8">
 
         {/* HEADER */}
         <div>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-text-secondary">
             Analytics / Customer Analytics
           </p>
 
@@ -61,16 +61,16 @@ export default function CustomerAnalyticsPage() {
             <div className="rounded-xl bg-[#211c0d] p-3">
               <Users
                 size={25}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
-            <h1 className="text-3xl font-bold text-[#f0c43c]">
+            <h1 className="text-3xl font-bold text-accent-gold">
               Customer Analytics
             </h1>
           </div>
 
-          <p className="mt-3 text-sm text-gray-400">
+          <p className="mt-3 text-sm text-text-secondary">
             Understand customer behavior, growth and purchase patterns.
           </p>
         </div>
@@ -78,15 +78,15 @@ export default function CustomerAnalyticsPage() {
         {/* KPI CARDS */}
         <div className="mt-8 grid grid-cols-4 gap-5">
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
             <div className="flex items-center justify-between">
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Total Customers
               </p>
 
               <Users
                 size={19}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
@@ -100,15 +100,15 @@ export default function CustomerAnalyticsPage() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
             <div className="flex items-center justify-between">
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 New Customers
               </p>
 
               <UserPlus
                 size={19}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
@@ -121,15 +121,15 @@ export default function CustomerAnalyticsPage() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
             <div className="flex items-center justify-between">
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Returning Customers
               </p>
 
               <Repeat2
                 size={19}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
@@ -142,15 +142,15 @@ export default function CustomerAnalyticsPage() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
             <div className="flex items-center justify-between">
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Customer Lifetime Value
               </p>
 
               <Crown
                 size={19}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
@@ -166,16 +166,16 @@ export default function CustomerAnalyticsPage() {
         </div>
 
         {/* CUSTOMER GROWTH */}
-        <div className="mt-6 rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+        <div className="mt-6 rounded-xl border border-border-theme bg-[#11130f] p-6">
 
           <div className="flex items-start justify-between">
 
             <div>
-              <h2 className="text-lg font-semibold text-[#f0c43c]">
+              <h2 className="text-lg font-semibold text-accent-gold">
                 Customer Growth
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 New and returning customer activity
               </p>
             </div>
@@ -213,7 +213,7 @@ export default function CustomerAnalyticsPage() {
                     />
 
                     <div
-                      className="flex-1 rounded-t-lg bg-[#e4b52d]"
+                      className="flex-1 rounded-t-lg bg-accent-gold"
                       style={{
                         height: `${returningHeight}%`,
                       }}
@@ -221,7 +221,7 @@ export default function CustomerAnalyticsPage() {
 
                   </div>
 
-                  <span className="mt-3 text-xs text-gray-500">
+                  <span className="mt-3 text-xs text-text-secondary">
                     {item.month}
                   </span>
 
@@ -231,7 +231,7 @@ export default function CustomerAnalyticsPage() {
 
           </div>
 
-          <div className="mt-6 flex gap-6 text-xs text-gray-400">
+          <div className="mt-6 flex gap-6 text-xs text-text-secondary">
 
             <span className="flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-[#80651c]" />
@@ -239,7 +239,7 @@ export default function CustomerAnalyticsPage() {
             </span>
 
             <span className="flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-[#e4b52d]" />
+              <span className="h-2 w-2 rounded-full bg-accent-gold" />
               Returning Customers
             </span>
 
@@ -250,11 +250,11 @@ export default function CustomerAnalyticsPage() {
         {/* CUSTOMER SEGMENTS */}
         <div className="mt-6">
 
-          <h2 className="text-lg font-semibold text-[#f0c43c]">
+          <h2 className="text-lg font-semibold text-accent-gold">
             Customer Segments
           </h2>
 
-          <p className="mt-1 text-xs text-gray-500">
+          <p className="mt-1 text-xs text-text-secondary">
             Customer classification based on purchase behavior
           </p>
 
@@ -264,7 +264,7 @@ export default function CustomerAnalyticsPage() {
 
               <div
                 key={segment.title}
-                className="rounded-xl border border-[#40351b] bg-[#11130f] p-6"
+                className="rounded-xl border border-border-theme bg-[#11130f] p-6"
               >
 
                 <div className="flex items-center justify-between">
@@ -272,11 +272,11 @@ export default function CustomerAnalyticsPage() {
                   <div className="rounded-lg bg-[#211c0d] p-3">
                     <Crown
                       size={20}
-                      className="text-[#e4b52d]"
+                      className="text-accent-gold"
                     />
                   </div>
 
-                  <span className="text-xl font-bold text-[#e4b52d]">
+                  <span className="text-xl font-bold text-accent-gold">
                     {segment.percentage}%
                   </span>
 
@@ -290,7 +290,7 @@ export default function CustomerAnalyticsPage() {
                   {segment.count}
                 </p>
 
-                <p className="mt-2 text-xs leading-5 text-gray-500">
+                <p className="mt-2 text-xs leading-5 text-text-secondary">
                   {segment.description}
                 </p>
 
@@ -327,11 +327,11 @@ export default function CustomerAnalyticsPage() {
 
             <div>
 
-              <h2 className="font-semibold text-[#f0c43c]">
+              <h2 className="font-semibold text-accent-gold">
                 Customer Insight
               </h2>
 
-              <p className="mt-2 text-sm leading-6 text-gray-300">
+              <p className="mt-2 text-sm leading-6 text-text-secondary">
                 Returning customers are contributing strongly to overall
                 business revenue. Improving loyalty programs and personalized
                 offers can further increase customer retention.

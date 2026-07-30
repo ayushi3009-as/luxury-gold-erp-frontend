@@ -25,7 +25,7 @@ export default function ProductCard({
   status,
 }: ProductCardProps) {
   return (
-    <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-5 hover:border-yellow-500 transition">
+    <div className="bg-background-secondary border border-border-theme rounded-2xl p-5 hover:border-yellow-500 transition">
 
       {/* Image */}
 
@@ -39,23 +39,23 @@ export default function ProductCard({
 
       <div className="mt-5 space-y-2">
 
-        <h2 className="text-xl font-semibold text-white">
+        <h2 className="text-xl font-semibold text-text-primary">
           {name}
         </h2>
 
-        <p className="text-gray-400">
+        <p className="text-text-secondary">
           SKU : {sku}
         </p>
 
-        <p className="text-gray-400">
+        <p className="text-text-secondary">
           Category : {category}
         </p>
 
-        <p className="text-yellow-400 font-bold text-lg">
+        <p className="text-accent-gold font-bold text-lg">
           {price}
         </p>
 
-        <p className="text-gray-400">
+        <p className="text-text-secondary">
           Stock : {stock}
         </p>
 
@@ -84,7 +84,7 @@ export default function ProductCard({
 
         <Link
           href={`/products/edit/${id}`}
-          className="text-yellow-500 hover:text-yellow-400"
+          className="text-accent-gold hover:text-accent-gold"
         >
           <Pencil size={22} />
         </Link>

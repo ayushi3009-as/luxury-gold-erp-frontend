@@ -50,14 +50,14 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-72 bg-[#111111] border-r border-[#2C2C2C] flex flex-col h-full text-white shrink-0">
+    <aside className="w-72 bg-background-secondary border-r border-[#2C2C2C] flex flex-col h-full text-text-primary shrink-0">
       <div className="px-8 py-7 border-b border-[#2C2C2C] flex items-center gap-3">
         <div className="p-2 bg-[#171717] border border-[#2C2C2C] rounded-xl text-[#D4AF37]">
           <Gem size={28} />
         </div>
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-[#D4AF37]">Luxray</h1>
-          <p className="text-gray-400 text-xs mt-0.5">Jewellery ERP System</p>
+          <p className="text-text-secondary text-xs mt-0.5">Jewellery ERP System</p>
         </div>
       </div>
 
@@ -75,7 +75,7 @@ export default function Sidebar() {
               className={`flex items-center gap-4 rounded-xl px-5 py-3.5 font-medium transition ${
                 isActive
                   ? "bg-[#D4AF37] text-black shadow-md shadow-amber-500/10 font-semibold"
-                  : "text-gray-400 hover:text-white hover:bg-[#1D1D1D]"
+                  : "text-text-secondary hover:text-text-primary hover:bg-[#1D1D1D]"
               }`}
             >
               <Icon size={20} />
@@ -88,10 +88,10 @@ export default function Sidebar() {
       <div className="m-5 rounded-2xl border border-[#2C2C2C] bg-[#171717] p-5">
         <div className="flex items-center gap-3 text-[#D4AF37]">
           <Headphones size={22} />
-          <h3 className="font-semibold text-white text-sm">Customer Support</h3>
+          <h3 className="font-semibold text-text-primary text-sm">Customer Support</h3>
         </div>
-        <p className="text-gray-400 mt-2 text-xs font-mono">+91 98765 43210</p>
-        <p className="text-gray-400 text-xs font-mono">support@luxray.com</p>
+        <p className="text-text-secondary mt-2 text-xs font-mono">+91 98765 43210</p>
+        <p className="text-text-secondary text-xs font-mono">support@luxray.com</p>
       </div>
     </aside>
   );

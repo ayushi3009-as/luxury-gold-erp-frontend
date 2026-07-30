@@ -48,8 +48,8 @@ export default function RepairReportPage() {
     <main
       className="
       min-h-screen
-      bg-[#0B0B0B]
-      text-white
+      bg-background-primary
+      text-text-primary
       p-8
       "
     >
@@ -66,14 +66,14 @@ export default function RepairReportPage() {
           className="
           text-4xl
           font-bold
-          text-yellow-500
+          text-accent-gold
           "
         >
           Repair Reports
         </h1>
 
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           Manage repair orders, customer details and repair status
         </p>
 

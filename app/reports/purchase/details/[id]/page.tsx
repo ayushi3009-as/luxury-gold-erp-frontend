@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 
 export default function PurchaseReportDetailsPage() {
   return (
-    <main className="min-h-screen bg-[#0B0B0B] text-white p-8">
+    <main className="min-h-screen bg-background-primary text-text-primary p-8">
 
       {/* Header */}
 
@@ -13,11 +13,11 @@ export default function PurchaseReportDetailsPage() {
 
         <div>
 
-          <h1 className="text-4xl font-bold text-yellow-500">
+          <h1 className="text-4xl font-bold text-accent-gold">
             Purchase Report Details
           </h1>
 
-          <p className="text-gray-400 mt-2">
+          <p className="text-text-secondary mt-2">
             View complete purchase report information
           </p>
 
@@ -25,7 +25,7 @@ export default function PurchaseReportDetailsPage() {
 
         <Link
           href="/reports/purchase"
-          className="flex items-center gap-2 border border-yellow-500 text-yellow-500 px-5 py-3 rounded-xl hover:bg-yellow-500 hover:text-black transition"
+          className="flex items-center gap-2 border border-yellow-500 text-accent-gold px-5 py-3 rounded-xl hover:bg-accent-gold hover:text-black transition"
         >
           <ArrowLeft size={18} />
           Back
@@ -35,12 +35,12 @@ export default function PurchaseReportDetailsPage() {
 
       {/* Details Card */}
 
-      <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-8">
+      <div className="bg-background-secondary border border-border-theme rounded-2xl p-8">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           <div>
-            <h3 className="text-yellow-500 text-sm mb-2">
+            <h3 className="text-accent-gold text-sm mb-2">
               Purchase ID
             </h3>
 
@@ -50,7 +50,7 @@ export default function PurchaseReportDetailsPage() {
           </div>
 
           <div>
-            <h3 className="text-yellow-500 text-sm mb-2">
+            <h3 className="text-accent-gold text-sm mb-2">
               Supplier Name
             </h3>
 
@@ -60,7 +60,7 @@ export default function PurchaseReportDetailsPage() {
           </div>
 
           <div>
-            <h3 className="text-yellow-500 text-sm mb-2">
+            <h3 className="text-accent-gold text-sm mb-2">
               Invoice Number
             </h3>
 
@@ -70,7 +70,7 @@ export default function PurchaseReportDetailsPage() {
           </div>
 
           <div>
-            <h3 className="text-yellow-500 text-sm mb-2">
+            <h3 className="text-accent-gold text-sm mb-2">
               Product Name
             </h3>
 
@@ -80,7 +80,7 @@ export default function PurchaseReportDetailsPage() {
           </div>
 
           <div>
-            <h3 className="text-yellow-500 text-sm mb-2">
+            <h3 className="text-accent-gold text-sm mb-2">
               Category
             </h3>
 
@@ -90,7 +90,7 @@ export default function PurchaseReportDetailsPage() {
           </div>
 
           <div>
-            <h3 className="text-yellow-500 text-sm mb-2">
+            <h3 className="text-accent-gold text-sm mb-2">
               Quantity
             </h3>
 
@@ -100,17 +100,17 @@ export default function PurchaseReportDetailsPage() {
           </div>
 
           <div>
-            <h3 className="text-yellow-500 text-sm mb-2">
+            <h3 className="text-accent-gold text-sm mb-2">
               Purchase Amount
             </h3>
 
-            <p className="text-lg font-semibold text-yellow-500">
+            <p className="text-lg font-semibold text-accent-gold">
               ₹2,50,000
             </p>
           </div>
 
           <div>
-            <h3 className="text-yellow-500 text-sm mb-2">
+            <h3 className="text-accent-gold text-sm mb-2">
               GST
             </h3>
 
@@ -120,7 +120,7 @@ export default function PurchaseReportDetailsPage() {
           </div>
 
           <div>
-            <h3 className="text-yellow-500 text-sm mb-2">
+            <h3 className="text-accent-gold text-sm mb-2">
               Purchase Date
             </h3>
 
@@ -130,7 +130,7 @@ export default function PurchaseReportDetailsPage() {
           </div>
 
           <div>
-            <h3 className="text-yellow-500 text-sm mb-2">
+            <h3 className="text-accent-gold text-sm mb-2">
               Payment Status
             </h3>
 
@@ -145,13 +145,13 @@ export default function PurchaseReportDetailsPage() {
 
         <div className="mt-8">
 
-          <h3 className="text-yellow-500 mb-2">
+          <h3 className="text-accent-gold mb-2">
             Remarks
           </h3>
 
-          <div className="bg-[#1B1B1B] rounded-xl p-5 border border-gray-700">
+          <div className="bg-background-tertiary rounded-xl p-5 border border-gray-700">
 
-            <p className="text-gray-300 leading-7">
+            <p className="text-text-secondary leading-7">
               Gold Chain purchased from Shree Gold Traders.
               Payment completed successfully and inventory updated.
             </p>

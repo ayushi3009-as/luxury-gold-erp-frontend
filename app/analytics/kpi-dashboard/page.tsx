@@ -13,7 +13,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-import AnalyticsSidebar from "../AnalyticsSidebar";
+
 
 const kpis = [
   {
@@ -60,16 +60,16 @@ const performanceData = [
 
 export default function KPIDashboardPage() {
   return (
-    <div className="min-h-screen bg-[#090a09] text-white">
-      <AnalyticsSidebar />
+    <div className="min-h-screen bg-background-primary text-text-primary">
+      
 
-      <main className="ml-64 min-h-screen p-8">
+      <main className=" min-h-screen p-8">
 
         {/* HEADER */}
         <div className="flex items-end justify-between">
 
           <div>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               Analytics / KPI Dashboard
             </p>
 
@@ -78,22 +78,22 @@ export default function KPIDashboardPage() {
               <div className="rounded-xl bg-[#211c0d] p-3">
                 <Gauge
                   size={25}
-                  className="text-[#e4b52d]"
+                  className="text-accent-gold"
                 />
               </div>
 
-              <h1 className="text-3xl font-bold text-[#f0c43c]">
+              <h1 className="text-3xl font-bold text-accent-gold">
                 KPI Dashboard
               </h1>
 
             </div>
 
-            <p className="mt-3 text-sm text-gray-400">
+            <p className="mt-3 text-sm text-text-secondary">
               Track your most important business performance indicators.
             </p>
           </div>
 
-          <select className="rounded-lg border border-[#40351b] bg-[#11130f] px-4 py-2 text-xs text-gray-300 outline-none">
+          <select className="rounded-lg border border-border-theme bg-[#11130f] px-4 py-2 text-xs text-text-secondary outline-none">
             <option>Current Month</option>
             <option>Last 3 Months</option>
             <option>This Year</option>
@@ -110,7 +110,7 @@ export default function KPIDashboardPage() {
             return (
               <div
                 key={kpi.title}
-                className="rounded-xl border border-[#40351b] bg-[#11130f] p-5"
+                className="rounded-xl border border-border-theme bg-[#11130f] p-5"
               >
 
                 <div className="flex items-start justify-between">
@@ -118,7 +118,7 @@ export default function KPIDashboardPage() {
                   <div className="rounded-lg bg-[#211c0d] p-3">
                     <Icon
                       size={20}
-                      className="text-[#e4b52d]"
+                      className="text-accent-gold"
                     />
                   </div>
 
@@ -129,7 +129,7 @@ export default function KPIDashboardPage() {
 
                 </div>
 
-                <p className="mt-5 text-xs text-gray-500">
+                <p className="mt-5 text-xs text-text-secondary">
                   {kpi.title}
                 </p>
 
@@ -137,12 +137,12 @@ export default function KPIDashboardPage() {
                   {kpi.value}
                 </h2>
 
-                <div className="mt-4 flex justify-between text-[10px] text-gray-500">
+                <div className="mt-4 flex justify-between text-[10px] text-text-secondary">
                   <span>
                     Target: {kpi.target}
                   </span>
 
-                  <span className="text-[#e4b52d]">
+                  <span className="text-accent-gold">
                     {kpi.progress}%
                   </span>
                 </div>
@@ -168,23 +168,23 @@ export default function KPIDashboardPage() {
         <div className="mt-6 grid grid-cols-3 gap-6">
 
           {/* OVERALL SCORE */}
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-6">
 
             <div className="flex items-center gap-3">
 
               <div className="rounded-lg bg-[#211c0d] p-3">
                 <Activity
                   size={20}
-                  className="text-[#e4b52d]"
+                  className="text-accent-gold"
                 />
               </div>
 
               <div>
-                <h2 className="font-semibold text-[#f0c43c]">
+                <h2 className="font-semibold text-accent-gold">
                   Overall KPI Score
                 </h2>
 
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-text-secondary">
                   Current business health
                 </p>
               </div>
@@ -222,23 +222,23 @@ export default function KPIDashboardPage() {
           </div>
 
           {/* PERFORMANCE METRICS */}
-          <div className="col-span-2 rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+          <div className="col-span-2 rounded-xl border border-border-theme bg-[#11130f] p-6">
 
             <div className="flex items-center gap-3">
 
               <div className="rounded-lg bg-[#211c0d] p-3">
                 <Target
                   size={20}
-                  className="text-[#e4b52d]"
+                  className="text-accent-gold"
                 />
               </div>
 
               <div>
-                <h2 className="font-semibold text-[#f0c43c]">
+                <h2 className="font-semibold text-accent-gold">
                   Performance Metrics
                 </h2>
 
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-text-secondary">
                   Progress toward business goals
                 </p>
               </div>
@@ -253,11 +253,11 @@ export default function KPIDashboardPage() {
 
                   <div className="flex justify-between text-sm">
 
-                    <span className="text-gray-300">
+                    <span className="text-text-secondary">
                       {item.label}
                     </span>
 
-                    <span className="text-[#e4b52d]">
+                    <span className="text-accent-gold">
                       {item.value}%
                     </span>
 
@@ -285,7 +285,7 @@ export default function KPIDashboardPage() {
         </div>
 
         {/* KPI STATUS */}
-        <div className="mt-6 rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+        <div className="mt-6 rounded-xl border border-border-theme bg-[#11130f] p-6">
 
           <div className="flex items-center gap-3">
 
@@ -296,11 +296,11 @@ export default function KPIDashboardPage() {
 
             <div>
 
-              <h2 className="font-semibold text-[#f0c43c]">
+              <h2 className="font-semibold text-accent-gold">
                 KPI Status Overview
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Current status of key business indicators
               </p>
 
@@ -312,7 +312,7 @@ export default function KPIDashboardPage() {
 
             <div className="rounded-lg bg-[#151711] p-5">
 
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Revenue
               </p>
 
@@ -320,7 +320,7 @@ export default function KPIDashboardPage() {
                 On Track
               </p>
 
-              <p className="mt-2 text-xs text-gray-500">
+              <p className="mt-2 text-xs text-text-secondary">
                 89% of target achieved
               </p>
 
@@ -328,7 +328,7 @@ export default function KPIDashboardPage() {
 
             <div className="rounded-lg bg-[#151711] p-5">
 
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Sales
               </p>
 
@@ -336,7 +336,7 @@ export default function KPIDashboardPage() {
                 On Track
               </p>
 
-              <p className="mt-2 text-xs text-gray-500">
+              <p className="mt-2 text-xs text-text-secondary">
                 Strong sales momentum
               </p>
 
@@ -344,15 +344,15 @@ export default function KPIDashboardPage() {
 
             <div className="rounded-lg bg-[#151711] p-5">
 
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Customer Growth
               </p>
 
-              <p className="mt-2 text-sm text-[#e4b52d]">
+              <p className="mt-2 text-sm text-accent-gold">
                 Improving
               </p>
 
-              <p className="mt-2 text-xs text-gray-500">
+              <p className="mt-2 text-xs text-text-secondary">
                 Retention rate is healthy
               </p>
 
@@ -360,7 +360,7 @@ export default function KPIDashboardPage() {
 
             <div className="rounded-lg bg-[#151711] p-5">
 
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Inventory
               </p>
 
@@ -368,7 +368,7 @@ export default function KPIDashboardPage() {
                 Healthy
               </p>
 
-              <p className="mt-2 text-xs text-gray-500">
+              <p className="mt-2 text-xs text-text-secondary">
                 Efficient stock movement
               </p>
 

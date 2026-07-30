@@ -19,7 +19,7 @@ export default function ProductImageCard({
   primary,
 }: ProductImageCardProps) {
   return (
-    <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl overflow-hidden hover:border-yellow-500 transition">
+    <div className="bg-background-secondary border border-border-theme rounded-2xl overflow-hidden hover:border-yellow-500 transition">
 
       {/* Product Image */}
       <div className="relative">
@@ -31,7 +31,7 @@ export default function ProductImageCard({
         />
 
         {primary && (
-          <div className="absolute top-3 right-3 bg-yellow-500 text-black rounded-full p-2">
+          <div className="absolute top-3 right-3 bg-accent-gold text-black rounded-full p-2">
             <Star size={16} fill="black" />
           </div>
         )}
@@ -41,13 +41,13 @@ export default function ProductImageCard({
       {/* Details */}
       <div className="p-5">
 
-        <h2 className="text-xl font-bold text-white">
+        <h2 className="text-xl font-bold text-text-primary">
           {productName}
         </h2>
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           Total Images :
-          <span className="text-yellow-500 font-semibold ml-2">
+          <span className="text-accent-gold font-semibold ml-2">
             {totalImages}
           </span>
         </p>
@@ -56,7 +56,7 @@ export default function ProductImageCard({
           Status :
           <span
             className={`ml-2 font-semibold ${
-              primary ? "text-green-400" : "text-gray-400"
+              primary ? "text-green-400" : "text-text-secondary"
             }`}
           >
             {primary ? "Primary Image" : "Gallery Image"}
@@ -76,7 +76,7 @@ export default function ProductImageCard({
 
           <Link
             href={`/products/images/upload?id=${id}`}
-            className="text-yellow-500 hover:text-yellow-400"
+            className="text-accent-gold hover:text-accent-gold"
           >
             <Pencil size={22} />
           </Link>

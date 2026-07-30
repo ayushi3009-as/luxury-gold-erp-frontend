@@ -46,13 +46,13 @@ export default function AddCustomerPage() {
   };
 
   return (
-    <div className="text-white max-w-7xl mx-auto">
+    <div className="text-text-primary max-w-7xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
           Add Customer (Full Registration)
         </h1>
-        <p className="text-gray-400 mt-1 text-sm">
+        <p className="text-text-secondary mt-1 text-sm">
           Module 3 / Page 2: Add Customer Onboarding Wizard
         </p>
       </div>
@@ -65,11 +65,11 @@ export default function AddCustomerPage() {
           <div className="w-16 h-16 bg-green-900/40 text-green-400 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-600">
             <CheckCircle2 size={36} />
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">Customer Registered Successfully!</h2>
-          <p className="text-gray-400 mb-6">
+          <h2 className="text-2xl font-bold text-text-primary mb-2">Customer Registered Successfully!</h2>
+          <p className="text-text-secondary mb-6">
             Customer record for <span className="text-[#D4AF37] font-semibold">{form.firstName} {form.lastName}</span> has been added to Luxray ERP CRM.
           </p>
-          <div className="text-sm text-gray-500 flex items-center justify-center gap-2">
+          <div className="text-sm text-text-secondary flex items-center justify-center gap-2">
             Redirecting to Customer List <ArrowRight size={16} />
           </div>
         </div>
@@ -83,7 +83,7 @@ export default function AddCustomerPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <label className="block text-sm text-gray-400 mb-2">First Name *</label>
+                <label className="block text-sm text-text-secondary mb-2">First Name *</label>
                 <input
                   type="text"
                   name="firstName"
@@ -91,12 +91,12 @@ export default function AddCustomerPage() {
                   value={form.firstName}
                   onChange={handleChange}
                   placeholder="e.g. Ramesh"
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Last Name *</label>
+                <label className="block text-sm text-text-secondary mb-2">Last Name *</label>
                 <input
                   type="text"
                   name="lastName"
@@ -104,12 +104,12 @@ export default function AddCustomerPage() {
                   value={form.lastName}
                   onChange={handleChange}
                   placeholder="e.g. Shah"
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Phone Number *</label>
+                <label className="block text-sm text-text-secondary mb-2">Phone Number *</label>
                 <input
                   type="text"
                   name="phone"
@@ -117,12 +117,12 @@ export default function AddCustomerPage() {
                   value={form.phone}
                   onChange={handleChange}
                   placeholder="+91 98765 43210"
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Email Address *</label>
+                <label className="block text-sm text-text-secondary mb-2">Email Address *</label>
                 <input
                   type="email"
                   name="email"
@@ -130,17 +130,17 @@ export default function AddCustomerPage() {
                   value={form.email}
                   onChange={handleChange}
                   placeholder="ramesh.shah@email.com"
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Gender</label>
+                <label className="block text-sm text-text-secondary mb-2">Gender</label>
                 <select
                   name="gender"
                   value={form.gender}
                   onChange={handleChange}
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 >
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -149,13 +149,13 @@ export default function AddCustomerPage() {
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Date of Birth</label>
+                <label className="block text-sm text-text-secondary mb-2">Date of Birth</label>
                 <input
                   type="date"
                   name="dob"
                   value={form.dob}
                   onChange={handleChange}
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 />
               </div>
             </div>
@@ -169,19 +169,19 @@ export default function AddCustomerPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="md:col-span-3">
-                <label className="block text-sm text-gray-400 mb-2">Street Address</label>
+                <label className="block text-sm text-text-secondary mb-2">Street Address</label>
                 <textarea
                   name="address"
                   rows={2}
                   value={form.address}
                   onChange={handleChange}
                   placeholder="House/Shop No, Street Name, Area..."
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-2">City *</label>
+                <label className="block text-sm text-text-secondary mb-2">City *</label>
                 <input
                   type="text"
                   name="city"
@@ -189,31 +189,31 @@ export default function AddCustomerPage() {
                   value={form.city}
                   onChange={handleChange}
                   placeholder="e.g. Mumbai"
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-2">State</label>
+                <label className="block text-sm text-text-secondary mb-2">State</label>
                 <input
                   type="text"
                   name="state"
                   value={form.state}
                   onChange={handleChange}
                   placeholder="e.g. Maharashtra"
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-2">PIN Code</label>
+                <label className="block text-sm text-text-secondary mb-2">PIN Code</label>
                 <input
                   type="text"
                   name="pincode"
                   value={form.pincode}
                   onChange={handleChange}
                   placeholder="400001"
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 />
               </div>
             </div>
@@ -227,12 +227,12 @@ export default function AddCustomerPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Membership Tier</label>
+                <label className="block text-sm text-text-secondary mb-2">Membership Tier</label>
                 <select
                   name="membership"
                   value={form.membership}
                   onChange={handleChange}
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 >
                   <option value="Silver Member">Silver Member</option>
                   <option value="Gold Member">Gold Member</option>
@@ -241,24 +241,24 @@ export default function AddCustomerPage() {
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-2">Opening Account Balance (₹)</label>
+                <label className="block text-sm text-text-secondary mb-2">Opening Account Balance (₹)</label>
                 <input
                   type="number"
                   name="initialBalance"
                   value={form.initialBalance}
                   onChange={handleChange}
                   placeholder="0.00"
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-2">KYC Identification Type</label>
+                <label className="block text-sm text-text-secondary mb-2">KYC Identification Type</label>
                 <select
                   name="kycType"
                   value={form.kycType}
                   onChange={handleChange}
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 >
                   <option value="Aadhaar Card">Aadhaar Card</option>
                   <option value="PAN Card">PAN Card</option>
@@ -268,14 +268,14 @@ export default function AddCustomerPage() {
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-2">KYC Document Number</label>
+                <label className="block text-sm text-text-secondary mb-2">KYC Document Number</label>
                 <input
                   type="text"
                   name="kycNumber"
                   value={form.kycNumber}
                   onChange={handleChange}
                   placeholder="e.g. 1234-5678-9012"
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 />
               </div>
 
@@ -288,7 +288,7 @@ export default function AddCustomerPage() {
                   onChange={handleChange}
                   className="w-5 h-5 accent-[#D4AF37] rounded cursor-pointer"
                 />
-                <label htmlFor="goldSchemeOptIn" className="text-sm text-gray-300 cursor-pointer">
+                <label htmlFor="goldSchemeOptIn" className="text-sm text-text-secondary cursor-pointer">
                   Enroll customer automatically in Gold Savings 11+1 Scheme preview
                 </label>
               </div>
@@ -300,13 +300,13 @@ export default function AddCustomerPage() {
             <button
               type="button"
               onClick={() => router.push("/dashboard/customers")}
-              className="px-6 py-3.5 rounded-xl border border-[#2C2C2C] text-gray-300 hover:bg-[#222] transition"
+              className="px-6 py-3.5 rounded-xl border border-[#2C2C2C] text-text-secondary hover:bg-[#222] transition"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-8 py-3.5 rounded-xl bg-[#D4AF37] hover:bg-yellow-400 text-black font-semibold transition shadow-lg shadow-amber-500/10 cursor-pointer"
+              className="px-8 py-3.5 rounded-xl bg-[#D4AF37] hover:bg-accent-gold-hover text-black font-semibold transition shadow-lg shadow-amber-500/10 cursor-pointer"
             >
               Save & Register Customer
             </button>

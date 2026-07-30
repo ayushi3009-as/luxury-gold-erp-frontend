@@ -9,8 +9,8 @@ export default function AddRepairPage() {
     <main
       className="
       min-h-screen
-      bg-[#0B0B0B]
-      text-white
+      bg-background-primary
+      text-text-primary
       p-8
       "
     >
@@ -25,11 +25,11 @@ export default function AddRepairPage() {
         mb-6
         border
         border-yellow-500
-        text-yellow-500
+        text-accent-gold
         px-5
         py-2
         rounded-xl
-        hover:bg-yellow-500
+        hover:bg-accent-gold
         hover:text-black
         transition
         "
@@ -52,14 +52,14 @@ export default function AddRepairPage() {
           className="
           text-4xl
           font-bold
-          text-yellow-500
+          text-accent-gold
           "
         >
           Add Repair
         </h1>
 
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           Add new jewellery repair request
         </p>
 
@@ -77,9 +77,9 @@ export default function AddRepairPage() {
 
       <div
         className="
-        bg-[#141414]
+        bg-background-secondary
         border
-        border-yellow-500/20
+        border-border-theme
         rounded-2xl
         p-8
         "
@@ -100,7 +100,7 @@ export default function AddRepairPage() {
 
           <div>
 
-            <label className="text-yellow-500">
+            <label className="text-accent-gold">
               Customer Name
             </label>
 
@@ -110,7 +110,7 @@ export default function AddRepairPage() {
               className="
               w-full
               mt-2
-              bg-[#1B1B1B]
+              bg-background-tertiary
               border
               border-gray-700
               rounded-xl
@@ -127,7 +127,7 @@ export default function AddRepairPage() {
 
           <div>
 
-            <label className="text-yellow-500">
+            <label className="text-accent-gold">
               Phone Number
             </label>
 
@@ -137,7 +137,7 @@ export default function AddRepairPage() {
               className="
               w-full
               mt-2
-              bg-[#1B1B1B]
+              bg-background-tertiary
               border
               border-gray-700
               rounded-xl
@@ -154,7 +154,7 @@ export default function AddRepairPage() {
 
           <div>
 
-            <label className="text-yellow-500">
+            <label className="text-accent-gold">
               Product Name
             </label>
 
@@ -164,7 +164,7 @@ export default function AddRepairPage() {
               className="
               w-full
               mt-2
-              bg-[#1B1B1B]
+              bg-background-tertiary
               border
               border-gray-700
               rounded-xl
@@ -181,7 +181,7 @@ export default function AddRepairPage() {
 
           <div>
 
-            <label className="text-yellow-500">
+            <label className="text-accent-gold">
               Repair Type
             </label>
 
@@ -190,7 +190,7 @@ export default function AddRepairPage() {
               className="
               w-full
               mt-2
-              bg-[#1B1B1B]
+              bg-background-tertiary
               border
               border-gray-700
               rounded-xl
@@ -231,7 +231,7 @@ export default function AddRepairPage() {
 
           <div>
 
-            <label className="text-yellow-500">
+            <label className="text-accent-gold">
               Repair Charges
             </label>
 
@@ -242,7 +242,7 @@ export default function AddRepairPage() {
               className="
               w-full
               mt-2
-              bg-[#1B1B1B]
+              bg-background-tertiary
               border
               border-gray-700
               rounded-xl
@@ -260,7 +260,7 @@ export default function AddRepairPage() {
 
           <div>
 
-            <label className="text-yellow-500">
+            <label className="text-accent-gold">
               Status
             </label>
 
@@ -269,7 +269,7 @@ export default function AddRepairPage() {
               className="
               w-full
               mt-2
-              bg-[#1B1B1B]
+              bg-background-tertiary
               border
               border-gray-700
               rounded-xl
@@ -311,7 +311,7 @@ export default function AddRepairPage() {
         <div className="mt-6">
 
 
-          <label className="text-yellow-500">
+          <label className="text-accent-gold">
             Repair Description
           </label>
 
@@ -322,7 +322,7 @@ export default function AddRepairPage() {
             className="
             w-full
             mt-2
-            bg-[#1B1B1B]
+            bg-background-tertiary
             border
             border-gray-700
             rounded-xl
@@ -343,13 +343,13 @@ export default function AddRepairPage() {
         <button
           className="
           mt-8
-          bg-yellow-500
+          bg-accent-gold
           text-black
           px-8
           py-3
           rounded-xl
           font-semibold
-          hover:bg-yellow-400
+          hover:bg-accent-gold-hover
           transition
           "
         >

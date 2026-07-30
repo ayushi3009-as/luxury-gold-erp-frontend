@@ -21,7 +21,7 @@ export default function Logo() {
           Luxury
         </h1>
 
-        <p className="text-gray-300 text-sm mt-1">
+        <p className="text-text-secondary text-sm mt-1">
           Gold Jewellery CRM System
         </p>
 

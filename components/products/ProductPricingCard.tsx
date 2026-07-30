@@ -23,7 +23,7 @@ export default function ProductPricingCard({
   profit,
 }: ProductPricingCardProps) {
   return (
-    <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl overflow-hidden hover:border-yellow-500 transition">
+    <div className="bg-background-secondary border border-border-theme rounded-2xl overflow-hidden hover:border-yellow-500 transition">
 
       {/* Product Image */}
 
@@ -41,39 +41,39 @@ export default function ProductPricingCard({
 
           <IndianRupee
             size={22}
-            className="text-yellow-500"
+            className="text-accent-gold"
           />
 
-          <h2 className="text-xl font-bold text-white">
+          <h2 className="text-xl font-bold text-text-primary">
             {product}
           </h2>
 
         </div>
 
-        <p className="text-gray-400">
+        <p className="text-text-secondary">
           SKU :
-          <span className="text-white ml-2">
+          <span className="text-text-primary ml-2">
             {sku}
           </span>
         </p>
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           Cost Price :
-          <span className="text-white ml-2">
+          <span className="text-text-primary ml-2">
             {costPrice}
           </span>
         </p>
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           Selling Price :
           <span className="text-green-400 ml-2 font-semibold">
             {sellingPrice}
           </span>
         </p>
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           Profit :
-          <span className="text-yellow-500 ml-2 font-semibold">
+          <span className="text-accent-gold ml-2 font-semibold">
             {profit}
           </span>
         </p>
@@ -91,7 +91,7 @@ export default function ProductPricingCard({
 
           <Link
             href={`/products/pricing/edit/${id}`}
-            className="text-yellow-500 hover:text-yellow-400"
+            className="text-accent-gold hover:text-accent-gold"
           >
             <Pencil size={22} />
           </Link>

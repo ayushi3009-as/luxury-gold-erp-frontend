@@ -4,9 +4,9 @@ import Logo from "@/components/auth/Logo";
 
 export default function RegisterPage() {
   return (
-    <main className="min-h-screen bg-black flex items-center justify-center p-8">
+    <main className="min-h-screen bg-background-primary flex items-center justify-center p-8">
 
-      <div className="w-full max-w-7xl rounded-[30px] overflow-hidden border border-[#C9A227] bg-[#111111] shadow-2xl">
+      <div className="w-full max-w-7xl rounded-[30px] overflow-hidden border border-[#C9A227] bg-background-secondary shadow-2xl">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[900px]">
 
@@ -24,7 +24,7 @@ export default function RegisterPage() {
 
             {/* Dark Overlay */}
 
-            <div className="absolute inset-0 bg-black/35" />
+            <div className="absolute inset-0 bg-background-primary/35" />
 
             {/* Logo */}
 
@@ -36,7 +36,7 @@ export default function RegisterPage() {
 
           {/* Right Side */}
 
-          <div className="bg-[#141414] flex items-center justify-center px-16 py-14">
+          <div className="bg-background-secondary flex items-center justify-center px-16 py-14">
 
             <RegisterForm />
 

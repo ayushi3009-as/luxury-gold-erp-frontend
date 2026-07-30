@@ -30,7 +30,7 @@ export default function RepairSearch() {
             left-4
             top-1/2
             -translate-y-1/2
-            text-gray-400
+            text-text-secondary
             "
           />
 
@@ -40,14 +40,14 @@ export default function RepairSearch() {
             placeholder="Search Repair ID / Customer Name..."
             className="
             w-full
-            bg-[#141414]
+            bg-background-secondary
             border
             border-gray-700
             rounded-xl
             pl-12
             pr-4
             py-3
-            text-white
+            text-text-primary
             focus:outline-none
             focus:border-yellow-500
             "
@@ -75,11 +75,11 @@ export default function RepairSearch() {
             gap-2
             border
             border-yellow-500
-            text-yellow-500
+            text-accent-gold
             px-5
             py-3
             rounded-xl
-            hover:bg-yellow-500
+            hover:bg-accent-gold
             hover:text-black
             transition
             "
@@ -103,13 +103,13 @@ export default function RepairSearch() {
             flex
             items-center
             gap-2
-            bg-yellow-500
+            bg-accent-gold
             text-black
             font-semibold
             px-5
             py-3
             rounded-xl
-            hover:bg-yellow-400
+            hover:bg-accent-gold-hover
             transition
             "
           >
@@ -140,9 +140,9 @@ export default function RepairSearch() {
           <div
             className="
             mt-5
-            bg-[#141414]
+            bg-background-secondary
             border
-            border-yellow-500/20
+            border-border-theme
             rounded-xl
             p-5
             "
@@ -151,7 +151,7 @@ export default function RepairSearch() {
 
             <h3
               className="
-              text-yellow-500
+              text-accent-gold
               font-semibold
               mb-4
               "
@@ -165,13 +165,13 @@ export default function RepairSearch() {
 
             <select
               className="
-              bg-[#1B1B1B]
+              bg-background-tertiary
               border
               border-gray-700
               rounded-lg
               px-4
               py-2
-              text-white
+              text-text-primary
               "
             >
 

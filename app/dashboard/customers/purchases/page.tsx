@@ -16,13 +16,13 @@ export default function PurchaseHistoryPage() {
   const totalWeight = filteredRecords.reduce((sum, p) => sum + p.weightGrams, 0);
 
   return (
-    <div className="text-white max-w-7xl mx-auto">
+    <div className="text-text-primary max-w-7xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
           Purchase History
         </h1>
-        <p className="text-gray-400 mt-1 text-sm">
+        <p className="text-text-secondary mt-1 text-sm">
           Module 3 / Page 4: Jewellery Transactions & Invoices Log
         </p>
       </div>
@@ -33,15 +33,15 @@ export default function PurchaseHistoryPage() {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
         <div className="bg-[#171717] border border-[#2C2C2C] rounded-2xl p-6">
-          <p className="text-xs text-gray-400">Total Purchase Volume</p>
+          <p className="text-xs text-text-secondary">Total Purchase Volume</p>
           <h3 className="text-3xl font-bold text-[#D4AF37] mt-1">₹{totalAmount.toLocaleString()}</h3>
         </div>
         <div className="bg-[#171717] border border-[#2C2C2C] rounded-2xl p-6">
-          <p className="text-xs text-gray-400">Total Jewellery Weight</p>
-          <h3 className="text-3xl font-bold text-white mt-1">{totalWeight.toFixed(1)} g</h3>
+          <p className="text-xs text-text-secondary">Total Jewellery Weight</p>
+          <h3 className="text-3xl font-bold text-text-primary mt-1">{totalWeight.toFixed(1)} g</h3>
         </div>
         <div className="bg-[#171717] border border-[#2C2C2C] rounded-2xl p-6">
-          <p className="text-xs text-gray-400">Completed Invoices</p>
+          <p className="text-xs text-text-secondary">Completed Invoices</p>
           <h3 className="text-3xl font-bold text-emerald-400 mt-1">{filteredRecords.length} Bills</h3>
         </div>
       </div>
@@ -50,7 +50,7 @@ export default function PurchaseHistoryPage() {
       <div className="bg-[#171717] border border-[#2C2C2C] rounded-2xl p-4 mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="flex items-center gap-3">
           <ShoppingBag size={20} className="text-[#D4AF37]" />
-          <span className="font-semibold text-white">Filter by Category:</span>
+          <span className="font-semibold text-text-primary">Filter by Category:</span>
         </div>
         <div className="flex gap-2">
           {["All", "Gold", "Diamond", "Silver"].map((cat) => (
@@ -60,7 +60,7 @@ export default function PurchaseHistoryPage() {
               className={`px-4 py-2 rounded-xl text-xs font-semibold transition ${
                 categoryFilter === cat
                   ? "bg-[#D4AF37] text-black"
-                  : "bg-[#101010] text-gray-300 border border-[#2C2C2C] hover:bg-[#222]"
+                  : "bg-[#101010] text-text-secondary border border-[#2C2C2C] hover:bg-[#222]"
               }`}
             >
               {cat}
@@ -73,7 +73,7 @@ export default function PurchaseHistoryPage() {
       <div className="bg-[#171717] border border-[#2C2C2C] rounded-2xl overflow-hidden shadow-xl">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="bg-[#1E1E1E] text-gray-400">
+            <thead className="bg-[#1E1E1E] text-text-secondary">
               <tr>
                 <th className="p-4">Invoice No</th>
                 <th className="p-4">Customer</th>
@@ -91,22 +91,22 @@ export default function PurchaseHistoryPage() {
               {filteredRecords.map((p) => (
                 <tr key={p.id} className="hover:bg-[#202020] transition">
                   <td className="p-4 font-mono font-semibold text-[#D4AF37]">{p.invoiceNo}</td>
-                  <td className="p-4 font-medium text-white">{p.customerName}</td>
-                  <td className="p-4 text-gray-200">{p.item}</td>
+                  <td className="p-4 font-medium text-text-primary">{p.customerName}</td>
+                  <td className="p-4 text-text-primary">{p.item}</td>
                   <td className="p-4">
-                    <span className="bg-[#222] border border-[#333] px-3 py-1 rounded-full text-xs text-gray-300">
+                    <span className="bg-[#222] border border-[#333] px-3 py-1 rounded-full text-xs text-text-secondary">
                       {p.category}
                     </span>
                   </td>
-                  <td className="p-4 font-mono text-gray-300">{p.weightGrams} g</td>
-                  <td className="p-4 text-gray-400 text-xs">{p.purity}</td>
-                  <td className="p-4 font-semibold text-white">₹{p.amount.toLocaleString()}</td>
-                  <td className="p-4 text-gray-300">{p.paymentMethod}</td>
-                  <td className="p-4 text-gray-400 text-xs">{p.date}</td>
+                  <td className="p-4 font-mono text-text-secondary">{p.weightGrams} g</td>
+                  <td className="p-4 text-text-secondary text-xs">{p.purity}</td>
+                  <td className="p-4 font-semibold text-text-primary">₹{p.amount.toLocaleString()}</td>
+                  <td className="p-4 text-text-secondary">{p.paymentMethod}</td>
+                  <td className="p-4 text-text-secondary text-xs">{p.date}</td>
                   <td className="p-4 text-center">
                     <button
                       onClick={() => alert(`Downloading GST Invoice ${p.invoiceNo}`)}
-                      className="p-2 rounded-lg border border-[#2C2C2C] hover:bg-[#2C2C2C] text-gray-300 hover:text-white transition"
+                      className="p-2 rounded-lg border border-[#2C2C2C] hover:bg-[#2C2C2C] text-text-secondary hover:text-text-primary transition"
                       title="Download Invoice"
                     >
                       <Download size={16} />

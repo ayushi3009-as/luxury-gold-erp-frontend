@@ -12,7 +12,7 @@ import {
   Crown,
 } from "lucide-react";
 
-import AnalyticsSidebar from "../AnalyticsSidebar";
+
 
 const kpiData = [
   {
@@ -56,28 +56,28 @@ const revenueData = [
 
 export default function BusinessAnalyticsPage() {
   return (
-    <div className="min-h-screen bg-[#090a09] text-white">
-      <AnalyticsSidebar />
+    <div className="min-h-screen bg-background-primary text-text-primary">
+      
 
-      <main className="ml-64 min-h-screen p-8">
+      <main className=" min-h-screen p-8">
 
         {/* HEADER */}
         <div className="flex items-end justify-between">
           <div>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               Analytics / Business Analytics
             </p>
 
-            <h1 className="mt-2 text-3xl font-bold tracking-tight text-[#f0c43c]">
+            <h1 className="mt-2 text-3xl font-bold tracking-tight text-accent-gold">
               Business Analytics
             </h1>
 
-            <p className="mt-2 text-sm text-gray-400">
+            <p className="mt-2 text-sm text-text-secondary">
               Monitor your business performance, revenue, customers and growth.
             </p>
           </div>
 
-          <select className="rounded-lg border border-[#40351b] bg-[#11130f] px-4 py-2 text-xs text-gray-300 outline-none">
+          <select className="rounded-lg border border-border-theme bg-[#11130f] px-4 py-2 text-xs text-text-secondary outline-none">
             <option>Last 30 Days</option>
             <option>Last 90 Days</option>
             <option>This Year</option>
@@ -92,11 +92,11 @@ export default function BusinessAnalyticsPage() {
             return (
               <div
                 key={item.title}
-                className="group relative overflow-hidden rounded-xl border border-[#40351b] bg-[#11130f] p-5 transition hover:border-[#b98c20]"
+                className="group relative overflow-hidden rounded-xl border border-border-theme bg-[#11130f] p-5 transition hover:border-[#b98c20]"
               >
                 <div className="flex items-start justify-between">
                   <div className="rounded-lg bg-[#211c0d] p-3">
-                    <Icon size={20} className="text-[#e4b52d]" />
+                    <Icon size={20} className="text-accent-gold" />
                   </div>
 
                   <span
@@ -116,7 +116,7 @@ export default function BusinessAnalyticsPage() {
                   </span>
                 </div>
 
-                <p className="mt-5 text-xs text-gray-500">
+                <p className="mt-5 text-xs text-text-secondary">
                   {item.title}
                 </p>
 
@@ -141,15 +141,15 @@ export default function BusinessAnalyticsPage() {
         <div className="mt-6 grid grid-cols-3 gap-6">
 
           {/* REVENUE CHART */}
-          <div className="col-span-2 rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+          <div className="col-span-2 rounded-xl border border-border-theme bg-[#11130f] p-6">
 
             <div className="flex items-start justify-between">
               <div>
-                <h2 className="text-lg font-semibold text-[#f0c43c]">
+                <h2 className="text-lg font-semibold text-accent-gold">
                   Revenue Performance
                 </h2>
 
-                <p className="mt-1 text-xs text-gray-500">
+                <p className="mt-1 text-xs text-text-secondary">
                   Revenue and sales performance over the last 6 months
                 </p>
               </div>
@@ -170,7 +170,7 @@ export default function BusinessAnalyticsPage() {
                   <div className="flex h-full w-full items-end gap-1">
 
                     <div
-                      className="flex-1 rounded-t-md bg-[#b98c20] transition hover:bg-[#e4b52d]"
+                      className="flex-1 rounded-t-md bg-[#b98c20] transition hover:bg-accent-gold"
                       style={{
                         height: `${item.revenue}%`,
                       }}
@@ -185,7 +185,7 @@ export default function BusinessAnalyticsPage() {
 
                   </div>
 
-                  <span className="mt-3 text-xs text-gray-500">
+                  <span className="mt-3 text-xs text-text-secondary">
                     {item.month}
                   </span>
                 </div>
@@ -193,7 +193,7 @@ export default function BusinessAnalyticsPage() {
 
             </div>
 
-            <div className="mt-5 flex gap-6 text-xs text-gray-400">
+            <div className="mt-5 flex gap-6 text-xs text-text-secondary">
               <span className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-[#b98c20]" />
                 Revenue
@@ -207,22 +207,22 @@ export default function BusinessAnalyticsPage() {
           </div>
 
           {/* BUSINESS HEALTH */}
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-6">
 
             <div className="flex items-center gap-3">
               <div className="rounded-lg bg-[#211c0d] p-3">
                 <Crown
                   size={20}
-                  className="text-[#e4b52d]"
+                  className="text-accent-gold"
                 />
               </div>
 
               <div>
-                <h2 className="font-semibold text-[#f0c43c]">
+                <h2 className="font-semibold text-accent-gold">
                   Business Health
                 </h2>
 
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-text-secondary">
                   Overall performance score
                 </p>
               </div>
@@ -235,7 +235,7 @@ export default function BusinessAnalyticsPage() {
                     86
                   </p>
 
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-text-secondary">
                     Excellent
                   </p>
                 </div>
@@ -246,7 +246,7 @@ export default function BusinessAnalyticsPage() {
 
               <div>
                 <div className="flex justify-between text-xs">
-                  <span className="text-gray-400">
+                  <span className="text-text-secondary">
                     Sales Growth
                   </span>
 
@@ -262,11 +262,11 @@ export default function BusinessAnalyticsPage() {
 
               <div>
                 <div className="flex justify-between text-xs">
-                  <span className="text-gray-400">
+                  <span className="text-text-secondary">
                     Customer Growth
                   </span>
 
-                  <span className="text-[#e4b52d]">
+                  <span className="text-accent-gold">
                     74%
                   </span>
                 </div>
@@ -284,20 +284,20 @@ export default function BusinessAnalyticsPage() {
         <div className="mt-6 grid grid-cols-3 gap-6">
 
           {/* INSIGHTS */}
-          <div className="col-span-2 rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+          <div className="col-span-2 rounded-xl border border-border-theme bg-[#11130f] p-6">
 
             <div className="flex items-center gap-3">
               <Sparkles
                 size={20}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
 
               <div>
-                <h2 className="font-semibold text-[#f0c43c]">
+                <h2 className="font-semibold text-accent-gold">
                   Business Insights
                 </h2>
 
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-text-secondary">
                   Important performance observations
                 </p>
               </div>
@@ -314,13 +314,13 @@ export default function BusinessAnalyticsPage() {
                   </span>
                 </div>
 
-                <p className="mt-2 text-xs leading-5 text-gray-500">
+                <p className="mt-2 text-xs leading-5 text-text-secondary">
                   Revenue increased by 18.6% compared to the previous period.
                 </p>
               </div>
 
               <div className="rounded-lg border border-[#2f2a1b] bg-[#151711] p-4">
-                <div className="flex items-center gap-2 text-[#e4b52d]">
+                <div className="flex items-center gap-2 text-accent-gold">
                   <Users size={16} />
 
                   <span className="text-sm font-medium">
@@ -328,13 +328,13 @@ export default function BusinessAnalyticsPage() {
                   </span>
                 </div>
 
-                <p className="mt-2 text-xs leading-5 text-gray-500">
+                <p className="mt-2 text-xs leading-5 text-text-secondary">
                   Active customers increased by 8.2% this period.
                 </p>
               </div>
 
               <div className="rounded-lg border border-[#2f2a1b] bg-[#151711] p-4">
-                <div className="flex items-center gap-2 text-[#e4b52d]">
+                <div className="flex items-center gap-2 text-accent-gold">
                   <ShoppingCart size={16} />
 
                   <span className="text-sm font-medium">
@@ -342,7 +342,7 @@ export default function BusinessAnalyticsPage() {
                   </span>
                 </div>
 
-                <p className="mt-2 text-xs leading-5 text-gray-500">
+                <p className="mt-2 text-xs leading-5 text-text-secondary">
                   Total sales volume is showing a strong upward trend.
                 </p>
               </div>
@@ -356,7 +356,7 @@ export default function BusinessAnalyticsPage() {
                   </span>
                 </div>
 
-                <p className="mt-2 text-xs leading-5 text-gray-500">
+                <p className="mt-2 text-xs leading-5 text-text-secondary">
                   Inventory value is stable with efficient stock movement.
                 </p>
               </div>
@@ -365,13 +365,13 @@ export default function BusinessAnalyticsPage() {
           </div>
 
           {/* TOP PERFORMING */}
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-6">
 
-            <h2 className="font-semibold text-[#f0c43c]">
+            <h2 className="font-semibold text-accent-gold">
               Top Performing
             </h2>
 
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-text-secondary">
               Best performing business segments
             </p>
 
@@ -380,7 +380,7 @@ export default function BusinessAnalyticsPage() {
               <div>
                 <div className="flex justify-between text-sm">
                   <span>Gold Jewellery</span>
-                  <span className="text-[#e4b52d]">92%</span>
+                  <span className="text-accent-gold">92%</span>
                 </div>
 
                 <div className="mt-2 h-2 rounded-full bg-[#292519]">
@@ -391,7 +391,7 @@ export default function BusinessAnalyticsPage() {
               <div>
                 <div className="flex justify-between text-sm">
                   <span>Diamond Jewellery</span>
-                  <span className="text-[#e4b52d]">78%</span>
+                  <span className="text-accent-gold">78%</span>
                 </div>
 
                 <div className="mt-2 h-2 rounded-full bg-[#292519]">
@@ -402,7 +402,7 @@ export default function BusinessAnalyticsPage() {
               <div>
                 <div className="flex justify-between text-sm">
                   <span>Silver Jewellery</span>
-                  <span className="text-[#e4b52d]">64%</span>
+                  <span className="text-accent-gold">64%</span>
                 </div>
 
                 <div className="mt-2 h-2 rounded-full bg-[#292519]">

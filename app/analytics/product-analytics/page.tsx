@@ -9,7 +9,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 
-import AnalyticsSidebar from "../AnalyticsSidebar";
+
 
 const productCategories = [
   {
@@ -67,16 +67,16 @@ const topProducts = [
 
 export default function ProductAnalyticsPage() {
   return (
-    <div className="min-h-screen bg-[#090a09] text-white">
-      <AnalyticsSidebar />
+    <div className="min-h-screen bg-background-primary text-text-primary">
+      
 
-      <main className="ml-64 min-h-screen p-8">
+      <main className=" min-h-screen p-8">
 
         {/* HEADER */}
         <div className="flex items-end justify-between">
 
           <div>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               Analytics / Product Analytics
             </p>
 
@@ -84,21 +84,21 @@ export default function ProductAnalyticsPage() {
               <div className="rounded-xl bg-[#211c0d] p-3">
                 <Package
                   size={25}
-                  className="text-[#e4b52d]"
+                  className="text-accent-gold"
                 />
               </div>
 
-              <h1 className="text-3xl font-bold text-[#f0c43c]">
+              <h1 className="text-3xl font-bold text-accent-gold">
                 Product Analytics
               </h1>
             </div>
 
-            <p className="mt-3 text-sm text-gray-400">
+            <p className="mt-3 text-sm text-text-secondary">
               Analyze product performance, sales trends and category growth.
             </p>
           </div>
 
-          <select className="rounded-lg border border-[#40351b] bg-[#11130f] px-4 py-2 text-xs text-gray-300 outline-none">
+          <select className="rounded-lg border border-border-theme bg-[#11130f] px-4 py-2 text-xs text-text-secondary outline-none">
             <option>Last 30 Days</option>
             <option>Last 90 Days</option>
             <option>This Year</option>
@@ -109,15 +109,15 @@ export default function ProductAnalyticsPage() {
         {/* KPI CARDS */}
         <div className="mt-8 grid grid-cols-4 gap-5">
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
             <div className="flex items-center justify-between">
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Total Products
               </p>
 
               <Package
                 size={19}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
@@ -130,15 +130,15 @@ export default function ProductAnalyticsPage() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
             <div className="flex items-center justify-between">
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Total Product Sales
               </p>
 
               <ShoppingCart
                 size={19}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
@@ -152,15 +152,15 @@ export default function ProductAnalyticsPage() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
             <div className="flex items-center justify-between">
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Best Category
               </p>
 
               <TrendingUp
                 size={19}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
@@ -173,15 +173,15 @@ export default function ProductAnalyticsPage() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
             <div className="flex items-center justify-between">
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Average Rating
               </p>
 
               <Star
                 size={19}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
@@ -197,14 +197,14 @@ export default function ProductAnalyticsPage() {
         </div>
 
         {/* CATEGORY PERFORMANCE */}
-        <div className="mt-6 rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+        <div className="mt-6 rounded-xl border border-border-theme bg-[#11130f] p-6">
 
           <div>
-            <h2 className="text-lg font-semibold text-[#f0c43c]">
+            <h2 className="text-lg font-semibold text-accent-gold">
               Category Performance
             </h2>
 
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-text-secondary">
               Product sales performance by jewellery category
             </p>
           </div>
@@ -217,7 +217,7 @@ export default function ProductAnalyticsPage() {
 
                 <div className="flex items-center justify-between">
 
-                  <span className="text-sm text-gray-300">
+                  <span className="text-sm text-text-secondary">
                     {category.name}
                   </span>
 
@@ -229,11 +229,11 @@ export default function ProductAnalyticsPage() {
 
                 <div className="mt-2 flex items-center justify-between text-xs">
 
-                  <span className="text-gray-500">
+                  <span className="text-text-secondary">
                     Revenue: {category.revenue}
                   </span>
 
-                  <span className="text-[#e4b52d]">
+                  <span className="text-accent-gold">
                     {category.sales}%
                   </span>
 
@@ -259,16 +259,16 @@ export default function ProductAnalyticsPage() {
         </div>
 
         {/* TOP PRODUCTS TABLE */}
-        <div className="mt-6 rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+        <div className="mt-6 rounded-xl border border-border-theme bg-[#11130f] p-6">
 
           <div className="flex items-center justify-between">
 
             <div>
-              <h2 className="text-lg font-semibold text-[#f0c43c]">
+              <h2 className="text-lg font-semibold text-accent-gold">
                 Top Performing Products
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Products generating the highest sales and revenue
               </p>
             </div>
@@ -282,7 +282,7 @@ export default function ProductAnalyticsPage() {
 
           <div className="mt-6 overflow-hidden rounded-lg border border-[#2f2a1b]">
 
-            <div className="grid grid-cols-4 border-b border-[#2f2a1b] bg-[#151711] px-5 py-4 text-xs text-gray-500">
+            <div className="grid grid-cols-4 border-b border-[#2f2a1b] bg-[#151711] px-5 py-4 text-xs text-text-secondary">
 
               <span>Product</span>
               <span>Category</span>
@@ -302,11 +302,11 @@ export default function ProductAnalyticsPage() {
                   {product.name}
                 </span>
 
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-text-secondary">
                   {product.category}
                 </span>
 
-                <span className="text-sm text-[#e4b52d]">
+                <span className="text-sm text-accent-gold">
                   {product.sales}
                 </span>
 
@@ -336,11 +336,11 @@ export default function ProductAnalyticsPage() {
 
             <div>
 
-              <h2 className="font-semibold text-[#f0c43c]">
+              <h2 className="font-semibold text-accent-gold">
                 Product Performance Insight
               </h2>
 
-              <p className="mt-2 text-sm leading-6 text-gray-300">
+              <p className="mt-2 text-sm leading-6 text-text-secondary">
                 Gold jewellery is currently the strongest performing category.
                 Premium gold collections and diamond products are generating
                 the highest revenue contribution.

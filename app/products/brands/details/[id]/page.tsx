@@ -6,17 +6,17 @@ import { ArrowLeft } from "lucide-react";
 
 export default function BrandDetailsPage() {
   return (
-    <main className="min-h-screen bg-[#0B0B0B] text-white p-8">
+    <main className="min-h-screen bg-background-primary text-text-primary p-8">
 
       <div className="flex justify-between items-center mb-10">
 
         <div>
 
-          <h1 className="text-4xl font-bold text-yellow-500">
+          <h1 className="text-4xl font-bold text-accent-gold">
             Brand Details
           </h1>
 
-          <p className="text-gray-400 mt-2">
+          <p className="text-text-secondary mt-2">
             View complete brand information
           </p>
 
@@ -24,7 +24,7 @@ export default function BrandDetailsPage() {
 
         <Link
           href="/products/brands"
-          className="flex items-center gap-2 border border-yellow-500 text-yellow-500 px-5 py-3 rounded-xl hover:bg-yellow-500 hover:text-black transition"
+          className="flex items-center gap-2 border border-yellow-500 text-accent-gold px-5 py-3 rounded-xl hover:bg-accent-gold hover:text-black transition"
         >
           <ArrowLeft size={18} />
           Back
@@ -32,7 +32,7 @@ export default function BrandDetailsPage() {
 
       </div>
 
-      <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-8 grid lg:grid-cols-2 gap-10">
+      <div className="bg-background-secondary border border-border-theme rounded-2xl p-8 grid lg:grid-cols-2 gap-10">
 
         <div>
 
@@ -48,26 +48,26 @@ export default function BrandDetailsPage() {
 
         <div className="space-y-5">
 
-          <h2 className="text-3xl font-bold text-yellow-500">
+          <h2 className="text-3xl font-bold text-accent-gold">
             Tanishq
           </h2>
 
           <p>
-            <span className="text-gray-400">Country :</span> India
+            <span className="text-text-secondary">Country :</span> India
           </p>
 
           <p>
-            <span className="text-gray-400">Website :</span>
+            <span className="text-text-secondary">Website :</span>
             https://www.tanishq.co.in
           </p>
 
           <p>
-            <span className="text-gray-400">Email :</span>
+            <span className="text-text-secondary">Email :</span>
             support@tanishq.co.in
           </p>
 
           <p>
-            <span className="text-gray-400">Products :</span>
+            <span className="text-text-secondary">Products :</span>
             120
           </p>
 
@@ -77,11 +77,11 @@ export default function BrandDetailsPage() {
 
           <div>
 
-            <h3 className="text-xl font-semibold text-yellow-500 mb-3">
+            <h3 className="text-xl font-semibold text-accent-gold mb-3">
               Description
             </h3>
 
-            <p className="text-gray-400 leading-8">
+            <p className="text-text-secondary leading-8">
               Premium jewellery brand offering high-quality gold,
               diamond and bridal collections.
             </p>

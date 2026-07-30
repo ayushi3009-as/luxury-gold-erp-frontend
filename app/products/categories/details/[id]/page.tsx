@@ -5,25 +5,25 @@ import { ArrowLeft, FolderOpen } from "lucide-react";
 
 export default function CategoryDetailsPage() {
   return (
-    <main className="min-h-screen bg-[#0B0B0B] text-white p-8">
+    <main className="min-h-screen bg-background-primary text-text-primary p-8">
 
       {/* Header */}
 
       <div className="flex justify-between items-center mb-8">
 
         <div>
-          <h1 className="text-4xl font-bold text-yellow-500">
+          <h1 className="text-4xl font-bold text-accent-gold">
             Category Details
           </h1>
 
-          <p className="text-gray-400 mt-2">
+          <p className="text-text-secondary mt-2">
             View category information
           </p>
         </div>
 
         <Link
           href="/products/categories"
-          className="flex items-center gap-2 border border-yellow-500 text-yellow-500 px-5 py-3 rounded-xl hover:bg-yellow-500 hover:text-black transition"
+          className="flex items-center gap-2 border border-yellow-500 text-accent-gold px-5 py-3 rounded-xl hover:bg-accent-gold hover:text-black transition"
         >
           <ArrowLeft size={18} />
           Back
@@ -33,12 +33,12 @@ export default function CategoryDetailsPage() {
 
       {/* Card */}
 
-      <div className="max-w-4xl mx-auto bg-[#141414] border border-yellow-500/20 rounded-2xl p-10">
+      <div className="max-w-4xl mx-auto bg-background-secondary border border-border-theme rounded-2xl p-10">
 
         <div className="flex items-center gap-4 mb-8">
 
-          <div className="w-20 h-20 rounded-full bg-yellow-500/10 flex items-center justify-center">
-            <FolderOpen size={40} className="text-yellow-500" />
+          <div className="w-20 h-20 rounded-full bg-accent-gold/10 flex items-center justify-center">
+            <FolderOpen size={40} className="text-accent-gold" />
           </div>
 
           <div>
@@ -46,7 +46,7 @@ export default function CategoryDetailsPage() {
               Gold Jewellery
             </h2>
 
-            <p className="text-gray-400">
+            <p className="text-text-secondary">
               Category Information
             </p>
           </div>
@@ -57,7 +57,7 @@ export default function CategoryDetailsPage() {
 
           <div>
 
-            <h3 className="text-yellow-500 mb-2">
+            <h3 className="text-accent-gold mb-2">
               Category Name
             </h3>
 
@@ -69,7 +69,7 @@ export default function CategoryDetailsPage() {
 
           <div>
 
-            <h3 className="text-yellow-500 mb-2">
+            <h3 className="text-accent-gold mb-2">
               Category Code
             </h3>
 
@@ -81,7 +81,7 @@ export default function CategoryDetailsPage() {
 
           <div>
 
-            <h3 className="text-yellow-500 mb-2">
+            <h3 className="text-accent-gold mb-2">
               Total Products
             </h3>
 
@@ -93,7 +93,7 @@ export default function CategoryDetailsPage() {
 
           <div>
 
-            <h3 className="text-yellow-500 mb-2">
+            <h3 className="text-accent-gold mb-2">
               Status
             </h3>
 
@@ -107,11 +107,11 @@ export default function CategoryDetailsPage() {
 
         <div className="mt-10">
 
-          <h3 className="text-yellow-500 mb-3">
+          <h3 className="text-accent-gold mb-3">
             Description
           </h3>
 
-          <p className="text-gray-400 leading-8">
+          <p className="text-text-secondary leading-8">
             This category contains all premium gold jewellery products,
             including rings, necklaces, bangles, bracelets, earrings,
             pendants, and other ornaments available in the Luxury Gold ERP

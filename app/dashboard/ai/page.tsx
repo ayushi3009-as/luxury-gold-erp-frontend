@@ -52,16 +52,16 @@ const predictions = [
 
 export default function AIDashboard() {
   return (
-    <main className="min-h-screen bg-[#090a09] p-6 text-white">
+    <main className="min-h-screen bg-background-primary p-6 text-text-primary">
 
       {/* HEADER */}
       <div className="mb-8">
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-text-secondary">
           Dashboard / AI Dashboard
         </p>
 
         <div className="mt-3 flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#66521d] bg-[#211c0f] text-[#e5b72e]">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border-theme bg-background-tertiary text-accent-gold">
             <BrainCircuit size={28} />
           </div>
 
@@ -70,7 +70,7 @@ export default function AIDashboard() {
               AI Dashboard
             </h1>
 
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-text-secondary">
               Intelligent insights, predictions and business recommendations.
             </p>
           </div>
@@ -78,7 +78,7 @@ export default function AIDashboard() {
       </div>
 
       {/* AI STATUS */}
-      <div className="rounded-xl border border-[#66521d] bg-[#15130d] p-5">
+      <div className="rounded-xl border border-border-theme bg-[#15130d] p-5">
         <div className="flex items-center justify-between">
 
           <div className="flex items-center gap-3">
@@ -91,7 +91,7 @@ export default function AIDashboard() {
                 AI Engine is Active
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Last analysis completed a few minutes ago
               </p>
             </div>
@@ -137,22 +137,22 @@ export default function AIDashboard() {
       </div>
 
       {/* PREDICTIONS */}
-      <section className="mt-6 rounded-xl border border-[#40351a] bg-[#101210] p-5">
+      <section className="mt-6 rounded-xl border border-border-theme bg-background-secondary p-5">
 
         <div className="flex items-center justify-between">
 
           <div>
-            <h2 className="flex items-center gap-2 font-semibold text-[#e5b72e]">
+            <h2 className="flex items-center gap-2 font-semibold text-accent-gold">
               <Sparkles size={20} />
               AI BUSINESS PREDICTIONS
             </h2>
 
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-text-secondary">
               Predictions generated from current business data.
             </p>
           </div>
 
-          <span className="rounded-full bg-[#211c0f] px-3 py-1 text-xs text-[#e5b72e]">
+          <span className="rounded-full bg-background-tertiary px-3 py-1 text-xs text-accent-gold">
             AI Powered
           </span>
 
@@ -163,9 +163,9 @@ export default function AIDashboard() {
           {predictions.map((prediction) => (
             <div
               key={prediction.label}
-              className="rounded-xl border border-[#302b1d] bg-[#151610] p-5"
+              className="rounded-xl border border-border-theme bg-background-secondary p-5"
             >
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 {prediction.label}
               </p>
 
@@ -186,15 +186,15 @@ export default function AIDashboard() {
       <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-2">
 
         {/* SALES FORECAST */}
-        <section className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
+        <section className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="font-semibold text-[#e5b72e]">
+              <h2 className="font-semibold text-accent-gold">
                 SALES FORECAST
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 AI predicted sales trend
               </p>
             </div>
@@ -205,7 +205,7 @@ export default function AIDashboard() {
             />
           </div>
 
-          <div className="mt-8 flex h-64 items-end gap-4 border-b border-l border-[#302b1d] px-5">
+          <div className="mt-8 flex h-64 items-end gap-4 border-b border-l border-border-theme px-5">
 
             {[
               { month: "Aug", height: "42%" },
@@ -220,13 +220,13 @@ export default function AIDashboard() {
                 className="flex h-full flex-1 flex-col items-center justify-end gap-2"
               >
                 <div
-                  className="w-full max-w-[48px] rounded-t-md bg-[#d9a928]"
+                  className="w-full max-w-[48px] rounded-t-md bg-accent-gold"
                   style={{
                     height: item.height,
                   }}
                 />
 
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-text-secondary">
                   {item.month}
                 </span>
               </div>
@@ -236,16 +236,16 @@ export default function AIDashboard() {
         </section>
 
         {/* RECOMMENDATIONS */}
-        <section className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
+        <section className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
           <div className="flex items-center justify-between">
 
             <div>
-              <h2 className="font-semibold text-[#e5b72e]">
+              <h2 className="font-semibold text-accent-gold">
                 AI RECOMMENDATIONS
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Suggested actions for your business
               </p>
             </div>
@@ -281,16 +281,16 @@ export default function AIDashboard() {
       </div>
 
       {/* INSIGHTS */}
-      <section className="mt-6 rounded-xl border border-[#40351a] bg-[#101210] p-5">
+      <section className="mt-6 rounded-xl border border-border-theme bg-background-secondary p-5">
 
         <div className="flex items-center justify-between">
 
           <div>
-            <h2 className="font-semibold text-[#e5b72e]">
+            <h2 className="font-semibold text-accent-gold">
               AI BUSINESS INSIGHTS
             </h2>
 
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-text-secondary">
               Important insights detected by the AI engine.
             </p>
           </div>
@@ -306,7 +306,7 @@ export default function AIDashboard() {
           {insights.map((insight) => (
             <div
               key={insight.title}
-              className="rounded-xl border border-[#302b1d] bg-[#151610] p-5"
+              className="rounded-xl border border-border-theme bg-background-secondary p-5"
             >
 
               <div className="flex items-start justify-between">
@@ -318,7 +318,7 @@ export default function AIDashboard() {
                 {insight.type === "Warning" ? (
                   <AlertTriangle
                     size={18}
-                    className="text-yellow-400"
+                    className="text-accent-gold"
                   />
                 ) : (
                   <TrendingUp
@@ -329,14 +329,14 @@ export default function AIDashboard() {
 
               </div>
 
-              <p className="mt-3 text-sm leading-6 text-gray-400">
+              <p className="mt-3 text-sm leading-6 text-text-secondary">
                 {insight.description}
               </p>
 
               <span
                 className={`mt-4 inline-block rounded-full px-3 py-1 text-xs ${
                   insight.type === "Warning"
-                    ? "bg-yellow-500/10 text-yellow-400"
+                    ? "bg-accent-gold/10 text-accent-gold"
                     : "bg-green-500/10 text-green-400"
                 }`}
               >
@@ -365,13 +365,13 @@ function AICard({
   icon: React.ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
+    <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
 
-      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#66521d] bg-[#211c0f] text-[#e6b92e]">
+      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border-theme bg-background-tertiary text-accent-gold">
         {icon}
       </div>
 
-      <p className="mt-5 text-xs text-gray-500">
+      <p className="mt-5 text-xs text-text-secondary">
         {title}
       </p>
 
@@ -379,7 +379,7 @@ function AICard({
         {value}
       </h3>
 
-      <p className="mt-2 text-xs text-gray-500">
+      <p className="mt-2 text-xs text-text-secondary">
         {subtitle}
       </p>
 
@@ -397,9 +397,9 @@ function Recommendation({
   description: string;
 }) {
   return (
-    <div className="flex gap-4 rounded-xl border border-[#302b1d] bg-[#151610] p-4">
+    <div className="flex gap-4 rounded-xl border border-border-theme bg-background-secondary p-4">
 
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#211c0f] text-[#e5b72e]">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-background-tertiary text-accent-gold">
         {icon}
       </div>
 
@@ -408,7 +408,7 @@ function Recommendation({
           {title}
         </h3>
 
-        <p className="mt-1 text-sm text-gray-400">
+        <p className="mt-1 text-sm text-text-secondary">
           {description}
         </p>
       </div>

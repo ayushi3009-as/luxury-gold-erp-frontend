@@ -10,9 +10,9 @@ export default function CollectionForm({
   buttonText,
 }: CollectionFormProps) {
   return (
-    <form className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-8 max-w-5xl mx-auto">
+    <form className="bg-background-secondary border border-border-theme rounded-2xl p-8 max-w-5xl mx-auto">
 
-      <h2 className="text-3xl font-bold text-yellow-500 mb-8">
+      <h2 className="text-3xl font-bold text-accent-gold mb-8">
         Collection Information
       </h2>
 
@@ -22,14 +22,14 @@ export default function CollectionForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             Collection Name
           </label>
 
           <input
             type="text"
             placeholder="Enter Collection Name"
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
           />
 
         </div>
@@ -38,12 +38,12 @@ export default function CollectionForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             Category
           </label>
 
           <select
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
           >
             <option>Gold Jewellery</option>
             <option>Diamond Jewellery</option>
@@ -57,13 +57,13 @@ export default function CollectionForm({
 
         <div className="md:col-span-2">
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             Collection Banner
           </label>
 
           <input
             type="file"
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white file:bg-yellow-500 file:text-black file:border-0 file:px-4 file:py-2 file:rounded-lg"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary file:bg-accent-gold file:text-black file:border-0 file:px-4 file:py-2 file:rounded-lg"
           />
 
         </div>
@@ -72,14 +72,14 @@ export default function CollectionForm({
 
         <div className="md:col-span-2">
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             Description
           </label>
 
           <textarea
             rows={5}
             placeholder="Enter Collection Description..."
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white resize-none outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary resize-none outline-none focus:border-yellow-500"
           />
 
         </div>
@@ -88,12 +88,12 @@ export default function CollectionForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             Status
           </label>
 
           <select
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
           >
             <option>Active</option>
             <option>Inactive</option>
@@ -109,7 +109,7 @@ export default function CollectionForm({
 
         <button
           type="submit"
-          className="bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-8 py-3 rounded-xl transition"
+          className="bg-accent-gold hover:bg-accent-gold-hover text-black font-semibold px-8 py-3 rounded-xl transition"
         >
           {buttonText}
         </button>

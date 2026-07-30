@@ -21,7 +21,7 @@ export default function QRCodeCard({
   created,
 }: QRCodeCardProps) {
   return (
-    <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl overflow-hidden hover:border-yellow-500 transition">
+    <div className="bg-background-secondary border border-border-theme rounded-2xl overflow-hidden hover:border-yellow-500 transition">
 
       {/* Product Image */}
 
@@ -49,24 +49,24 @@ export default function QRCodeCard({
 
         <div className="flex items-center gap-2 mb-4">
 
-          <QrCode className="text-yellow-500" size={22} />
+          <QrCode className="text-accent-gold" size={22} />
 
-          <h2 className="text-xl font-bold text-white">
+          <h2 className="text-xl font-bold text-text-primary">
             {product}
           </h2>
 
         </div>
 
-        <p className="text-gray-400">
+        <p className="text-text-secondary">
           SKU :
-          <span className="text-white ml-2">
+          <span className="text-text-primary ml-2">
             {sku}
           </span>
         </p>
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           Created :
-          <span className="text-white ml-2">
+          <span className="text-text-primary ml-2">
             {created}
           </span>
         </p>
@@ -84,7 +84,7 @@ export default function QRCodeCard({
 
           <Link
             href={`/products/qrcode/generate?id=${id}`}
-            className="text-yellow-500 hover:text-yellow-400"
+            className="text-accent-gold hover:text-accent-gold"
           >
             <Pencil size={22} />
           </Link>

@@ -1,5 +1,5 @@
 "use client";
-import NotificationsSidebar from "../NotificationsSidebar";
+
 
 import {
   CheckSquare,
@@ -49,18 +49,18 @@ const tasks = [
 
 export default function TaskCenterPage() {
   return (
-  <div className="min-h-screen bg-[#090a09] text-white">
+  <div className="min-h-screen bg-background-primary text-text-primary">
 
-    <NotificationsSidebar />
+    
 
-    <main className="ml-64 min-h-screen p-8">
+    <main className=" min-h-screen p-8">
 
         {/* HEADER */}
         <div className="flex items-end justify-between">
 
           <div>
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               Notifications / Task Center
             </p>
 
@@ -69,17 +69,17 @@ export default function TaskCenterPage() {
               <div className="rounded-xl bg-[#211c0d] p-3">
                 <CheckSquare
                   size={25}
-                  className="text-[#e4b52d]"
+                  className="text-accent-gold"
                 />
               </div>
 
-              <h1 className="text-3xl font-bold text-[#f0c43c]">
+              <h1 className="text-3xl font-bold text-accent-gold">
                 Task Center
               </h1>
 
             </div>
 
-            <p className="mt-3 text-sm text-gray-400">
+            <p className="mt-3 text-sm text-text-secondary">
               Manage, track and complete your business tasks.
             </p>
 
@@ -95,9 +95,9 @@ export default function TaskCenterPage() {
         {/* SUMMARY CARDS */}
         <div className="mt-8 grid grid-cols-4 gap-5">
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               Total Tasks
             </p>
 
@@ -105,7 +105,7 @@ export default function TaskCenterPage() {
               48
             </h2>
 
-            <p className="mt-2 text-xs text-gray-400">
+            <p className="mt-2 text-xs text-text-secondary">
               All assigned tasks
             </p>
 
@@ -113,15 +113,15 @@ export default function TaskCenterPage() {
 
           <div className="rounded-xl border border-yellow-900/40 bg-[#11130f] p-5">
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               In Progress
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold text-yellow-400">
+            <h2 className="mt-3 text-3xl font-bold text-accent-gold">
               16
             </h2>
 
-            <p className="mt-2 text-xs text-yellow-400">
+            <p className="mt-2 text-xs text-accent-gold">
               Currently being worked on
             </p>
 
@@ -129,7 +129,7 @@ export default function TaskCenterPage() {
 
           <div className="rounded-xl border border-red-900/40 bg-[#11130f] p-5">
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               Pending
             </p>
 
@@ -145,7 +145,7 @@ export default function TaskCenterPage() {
 
           <div className="rounded-xl border border-green-900/40 bg-[#11130f] p-5">
 
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               Completed
             </p>
 
@@ -162,17 +162,17 @@ export default function TaskCenterPage() {
         </div>
 
         {/* TASK LIST */}
-        <div className="mt-6 rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+        <div className="mt-6 rounded-xl border border-border-theme bg-[#11130f] p-6">
 
           <div className="flex items-center justify-between">
 
             <div>
 
-              <h2 className="text-lg font-semibold text-[#f0c43c]">
+              <h2 className="text-lg font-semibold text-accent-gold">
                 My Tasks
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Tasks assigned to you and your team
               </p>
 
@@ -180,15 +180,15 @@ export default function TaskCenterPage() {
 
             <div className="flex gap-2">
 
-              <button className="rounded-lg border border-[#40351b] px-3 py-2 text-xs text-gray-400 hover:border-[#e4b52d] hover:text-[#e4b52d]">
+              <button className="rounded-lg border border-border-theme px-3 py-2 text-xs text-text-secondary hover:border-[#e4b52d] hover:text-accent-gold">
                 All
               </button>
 
-              <button className="rounded-lg border border-[#40351b] px-3 py-2 text-xs text-gray-400 hover:border-[#e4b52d] hover:text-[#e4b52d]">
+              <button className="rounded-lg border border-border-theme px-3 py-2 text-xs text-text-secondary hover:border-[#e4b52d] hover:text-accent-gold">
                 Pending
               </button>
 
-              <button className="rounded-lg border border-[#40351b] px-3 py-2 text-xs text-gray-400 hover:border-[#e4b52d] hover:text-[#e4b52d]">
+              <button className="rounded-lg border border-border-theme px-3 py-2 text-xs text-text-secondary hover:border-[#e4b52d] hover:text-accent-gold">
                 Completed
               </button>
 
@@ -217,12 +217,12 @@ export default function TaskCenterPage() {
                     ) : task.status === "In Progress" ? (
                       <Clock3
                         size={22}
-                        className="text-yellow-400"
+                        className="text-accent-gold"
                       />
                     ) : (
                       <Circle
                         size={22}
-                        className="text-gray-500"
+                        className="text-text-secondary"
                       />
                     )}
 
@@ -234,11 +234,11 @@ export default function TaskCenterPage() {
                       {task.title}
                     </h3>
 
-                    <p className="mt-1 text-xs text-gray-400">
+                    <p className="mt-1 text-xs text-text-secondary">
                       {task.description}
                     </p>
 
-                    <div className="mt-2 flex items-center gap-3 text-[10px] text-gray-500">
+                    <div className="mt-2 flex items-center gap-3 text-[10px] text-text-secondary">
 
                       <span className="flex items-center gap-1">
                         <UserRound size={12} />
@@ -263,7 +263,7 @@ export default function TaskCenterPage() {
                       task.priority === "High"
                         ? "bg-red-500/10 text-red-400"
                         : task.priority === "Medium"
-                          ? "bg-yellow-500/10 text-yellow-400"
+                          ? "bg-accent-gold/10 text-accent-gold"
                           : "bg-green-500/10 text-green-400"
                     }`}
                   >
@@ -275,8 +275,8 @@ export default function TaskCenterPage() {
                       task.status === "Completed"
                         ? "bg-green-500/10 text-green-400"
                         : task.status === "In Progress"
-                          ? "bg-yellow-500/10 text-yellow-400"
-                          : "bg-gray-500/10 text-gray-400"
+                          ? "bg-accent-gold/10 text-accent-gold"
+                          : "bg-gray-500/10 text-text-secondary"
                     }`}
                   >
                     {task.status}
@@ -306,11 +306,11 @@ export default function TaskCenterPage() {
 
             <div>
 
-              <h2 className="font-semibold text-[#f0c43c]">
+              <h2 className="font-semibold text-accent-gold">
                 Task Management
               </h2>
 
-              <p className="mt-2 text-sm leading-6 text-gray-300">
+              <p className="mt-2 text-sm leading-6 text-text-secondary">
                 Assign tasks, track progress and make sure important business
                 activities are completed on time.
               </p>

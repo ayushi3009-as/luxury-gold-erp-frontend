@@ -13,15 +13,15 @@ import {
 
 export default function PersonalDashboard() {
   return (
-    <main className="min-h-screen bg-[#090a09] p-6 text-white">
+    <main className="min-h-screen bg-background-primary p-6 text-text-primary">
       {/* HEADER */}
       <div className="mb-8">
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-text-secondary">
           Dashboard / Personal Dashboard
         </p>
 
         <div className="mt-3 flex items-center gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#66521d] bg-[#211c0f] text-[#e5b72e]">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border-theme bg-background-tertiary text-accent-gold">
             <User size={26} />
           </div>
 
@@ -30,7 +30,7 @@ export default function PersonalDashboard() {
               Personal Dashboard
             </h1>
 
-            <p className="mt-1 text-gray-400">
+            <p className="mt-1 text-text-secondary">
               Manage your personal performance, tasks and daily activities.
             </p>
           </div>
@@ -38,10 +38,10 @@ export default function PersonalDashboard() {
       </div>
 
       {/* PROFILE CARD */}
-      <div className="rounded-xl border border-[#66521d] bg-[#15130d] p-6">
+      <div className="rounded-xl border border-border-theme bg-[#15130d] p-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#211c0f] text-xl font-bold text-[#e5b72e]">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-background-tertiary text-xl font-bold text-accent-gold">
               HP
             </div>
 
@@ -50,14 +50,14 @@ export default function PersonalDashboard() {
                 Hasti Patel
               </h2>
 
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-text-secondary">
                 ERP Intern · Luxury Gold
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
-            <Award className="text-[#e5b72e]" />
+            <Award className="text-accent-gold" />
             <span className="text-green-400">
               Excellent
             </span>
@@ -99,8 +99,8 @@ export default function PersonalDashboard() {
       {/* PERFORMANCE + GOALS */}
       <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-2">
         {/* PERFORMANCE */}
-        <section className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
-          <h2 className="font-semibold text-[#e5b72e]">
+        <section className="rounded-xl border border-border-theme bg-background-secondary p-5">
+          <h2 className="font-semibold text-accent-gold">
             MY PERFORMANCE
           </h2>
 
@@ -126,8 +126,8 @@ export default function PersonalDashboard() {
         </section>
 
         {/* GOALS */}
-        <section className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
-          <h2 className="font-semibold text-[#e5b72e]">
+        <section className="rounded-xl border border-border-theme bg-background-secondary p-5">
+          <h2 className="font-semibold text-accent-gold">
             MY GOALS
           </h2>
 
@@ -154,8 +154,8 @@ export default function PersonalDashboard() {
       </div>
 
       {/* TASKS */}
-      <section className="mt-6 rounded-xl border border-[#40351a] bg-[#101210] p-5">
-        <h2 className="font-semibold text-[#e5b72e]">
+      <section className="mt-6 rounded-xl border border-border-theme bg-background-secondary p-5">
+        <h2 className="font-semibold text-accent-gold">
           MY TASKS
         </h2>
 
@@ -181,8 +181,8 @@ export default function PersonalDashboard() {
       </section>
 
       {/* TODAY SCHEDULE */}
-      <section className="mt-6 rounded-xl border border-[#40351a] bg-[#101210] p-5">
-        <h2 className="font-semibold text-[#e5b72e]">
+      <section className="mt-6 rounded-xl border border-border-theme bg-background-secondary p-5">
+        <h2 className="font-semibold text-accent-gold">
           TODAY&apos;S SCHEDULE
         </h2>
 
@@ -205,11 +205,11 @@ export default function PersonalDashboard() {
       </section>
 
       {/* NOTIFICATIONS */}
-      <section className="mt-6 rounded-xl border border-[#40351a] bg-[#101210] p-5">
+      <section className="mt-6 rounded-xl border border-border-theme bg-background-secondary p-5">
         <div className="flex items-center gap-3">
-          <Bell className="text-[#e5b72e]" />
+          <Bell className="text-accent-gold" />
 
-          <h2 className="font-semibold text-[#e5b72e]">
+          <h2 className="font-semibold text-accent-gold">
             NOTIFICATIONS
           </h2>
         </div>
@@ -239,12 +239,12 @@ function PersonalCard({
   icon: ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-[#40351a] bg-[#101210] p-5">
-      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#66521d] bg-[#211c0f] text-[#e6b92e]">
+    <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
+      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border-theme bg-background-tertiary text-accent-gold">
         {icon}
       </div>
 
-      <p className="mt-5 text-xs text-gray-500">
+      <p className="mt-5 text-xs text-text-secondary">
         {title}
       </p>
 
@@ -252,7 +252,7 @@ function PersonalCard({
         {value}
       </h3>
 
-      <p className="mt-2 text-xs text-gray-500">
+      <p className="mt-2 text-xs text-text-secondary">
         {subtitle}
       </p>
     </div>
@@ -272,18 +272,18 @@ function ProgressBar({
   return (
     <div>
       <div className="mb-2 flex justify-between text-sm">
-        <span className="text-gray-300">
+        <span className="text-text-secondary">
           {label}
         </span>
 
-        <span className="text-[#e5b72e]">
+        <span className="text-accent-gold">
           {value}
         </span>
       </div>
 
       <div className="h-2 rounded-full bg-[#24251f]">
         <div
-          className="h-2 rounded-full bg-[#d9a928]"
+          className="h-2 rounded-full bg-accent-gold"
           style={{ width: progress }}
         />
       </div>
@@ -302,13 +302,13 @@ function TaskItem({
   status: "Completed" | "Pending";
 }) {
   return (
-    <div className="flex items-center justify-between rounded-xl border border-[#302b1d] bg-[#151610] p-4">
+    <div className="flex items-center justify-between rounded-xl border border-border-theme bg-background-secondary p-4">
       <div>
         <p className="font-medium">
           {title}
         </p>
 
-        <p className="text-xs text-gray-500">
+        <p className="text-xs text-text-secondary">
           {time}
         </p>
       </div>
@@ -317,7 +317,7 @@ function TaskItem({
         className={
           status === "Completed"
             ? "rounded-full bg-green-500/10 px-3 py-1 text-xs text-green-400"
-            : "rounded-full bg-yellow-500/10 px-3 py-1 text-xs text-yellow-400"
+            : "rounded-full bg-accent-gold/10 px-3 py-1 text-xs text-accent-gold"
         }
       >
         {status}
@@ -335,14 +335,14 @@ function ScheduleItem({
   title: string;
 }) {
   return (
-    <div className="flex items-center gap-4 rounded-xl border border-[#302b1d] bg-[#151610] p-4">
-      <span className="min-w-[80px] text-sm text-[#e5b72e]">
+    <div className="flex items-center gap-4 rounded-xl border border-border-theme bg-background-secondary p-4">
+      <span className="min-w-[80px] text-sm text-accent-gold">
         {time}
       </span>
 
-      <div className="h-8 w-px bg-[#40351a]" />
+      <div className="h-8 w-px bg-border-theme" />
 
-      <span className="text-sm text-gray-300">
+      <span className="text-sm text-text-secondary">
         {title}
       </span>
     </div>
@@ -356,7 +356,7 @@ function Notification({
   text: string;
 }) {
   return (
-    <p className="rounded-xl border border-[#302b1d] bg-[#151610] p-4 text-sm text-gray-300">
+    <p className="rounded-xl border border-border-theme bg-background-secondary p-4 text-sm text-text-secondary">
       {text}
     </p>
   );

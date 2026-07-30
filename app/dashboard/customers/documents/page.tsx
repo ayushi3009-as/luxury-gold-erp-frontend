@@ -37,21 +37,21 @@ export default function CustomerDocumentsPage() {
   };
 
   return (
-    <div className="text-white max-w-7xl mx-auto">
+    <div className="text-text-primary max-w-7xl mx-auto">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
             Customer KYC Documents
           </h1>
-          <p className="text-gray-400 mt-1 text-sm">
+          <p className="text-text-secondary mt-1 text-sm">
             Module 3 / Page 8: Government ID & Verification Repository
           </p>
         </div>
 
         <button
           onClick={() => setShowUploadModal(true)}
-          className="bg-[#D4AF37] text-black rounded-xl px-6 py-3.5 font-semibold flex items-center gap-2 hover:bg-yellow-400 transition cursor-pointer shadow-lg shadow-amber-500/10"
+          className="bg-[#D4AF37] text-black rounded-xl px-6 py-3.5 font-semibold flex items-center gap-2 hover:bg-accent-gold-hover transition cursor-pointer shadow-lg shadow-amber-500/10"
         >
           <Upload size={20} />
           Upload New Document
@@ -65,7 +65,7 @@ export default function CustomerDocumentsPage() {
       <div className="bg-[#171717] border border-[#2C2C2C] rounded-2xl p-4 mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="flex items-center gap-3">
           <ShieldCheck size={20} className="text-[#D4AF37]" />
-          <span className="font-semibold text-white">Verification Status:</span>
+          <span className="font-semibold text-text-primary">Verification Status:</span>
         </div>
         <div className="flex gap-2">
           {["All", "Verified", "Pending"].map((st) => (
@@ -75,7 +75,7 @@ export default function CustomerDocumentsPage() {
               className={`px-4 py-2 rounded-xl text-xs font-semibold transition ${
                 statusFilter === st
                   ? "bg-[#D4AF37] text-black"
-                  : "bg-[#101010] text-gray-300 border border-[#2C2C2C] hover:bg-[#222]"
+                  : "bg-[#101010] text-text-secondary border border-[#2C2C2C] hover:bg-[#222]"
               }`}
             >
               {st}
@@ -110,11 +110,11 @@ export default function CustomerDocumentsPage() {
               </span>
             </div>
 
-            <h3 className="text-lg font-bold text-white mb-1">{doc.customerName}</h3>
+            <h3 className="text-lg font-bold text-text-primary mb-1">{doc.customerName}</h3>
             <p className="text-sm font-semibold text-[#D4AF37]">{doc.documentType}</p>
-            <p className="text-xs font-mono text-gray-400 mt-1">ID: {doc.documentNumber}</p>
+            <p className="text-xs font-mono text-text-secondary mt-1">ID: {doc.documentNumber}</p>
 
-            <div className="mt-6 pt-4 border-t border-[#2C2C2C] flex justify-between items-center text-xs text-gray-400">
+            <div className="mt-6 pt-4 border-t border-[#2C2C2C] flex justify-between items-center text-xs text-text-secondary">
               <span>Uploaded: {doc.uploadDate}</span>
               <button
                 onClick={() => alert(`Viewing ${doc.documentType} for ${doc.customerName}`)}
@@ -129,30 +129,30 @@ export default function CustomerDocumentsPage() {
 
       {/* Upload Modal */}
       {showUploadModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-          <div className="bg-[#171717] border border-[#2C2C2C] text-white rounded-2xl w-full max-w-md p-6 relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background-primary/70 backdrop-blur-sm p-4">
+          <div className="bg-[#171717] border border-[#2C2C2C] text-text-primary rounded-2xl w-full max-w-md p-6 relative">
             <h3 className="text-xl font-bold text-[#D4AF37] mb-4">Upload Customer KYC Document</h3>
             <form onSubmit={handleUpload} className="space-y-4">
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Customer Name</label>
+                <label className="block text-sm text-text-secondary mb-1">Customer Name</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Ramesh Shah"
                   value={newDoc.customerName}
                   onChange={(e) => setNewDoc({ ...newDoc, customerName: e.target.value })}
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Document Type</label>
+                <label className="block text-sm text-text-secondary mb-1">Document Type</label>
                 <select
                   value={newDoc.documentType}
                   onChange={(e) =>
                     setNewDoc({ ...newDoc, documentType: e.target.value as KYCDocument["documentType"] })
                   }
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 >
                   <option value="Aadhaar Card">Aadhaar Card</option>
                   <option value="PAN Card">PAN Card</option>
@@ -162,14 +162,14 @@ export default function CustomerDocumentsPage() {
               </div>
 
               <div>
-                <label className="block text-sm text-gray-400 mb-1">Document Number</label>
+                <label className="block text-sm text-text-secondary mb-1">Document Number</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. 1234-5678-9012"
                   value={newDoc.documentNumber}
                   onChange={(e) => setNewDoc({ ...newDoc, documentNumber: e.target.value })}
-                  className="w-full bg-[#101010] border border-[#2C2C2C] text-white rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
+                  className="w-full bg-[#101010] border border-[#2C2C2C] text-text-primary rounded-xl px-4 py-3 outline-none focus:border-[#D4AF37]"
                 />
               </div>
 
@@ -177,13 +177,13 @@ export default function CustomerDocumentsPage() {
                 <button
                   type="button"
                   onClick={() => setShowUploadModal(false)}
-                  className="w-1/2 bg-[#222] text-gray-300 py-3 rounded-xl font-medium"
+                  className="w-1/2 bg-[#222] text-text-secondary py-3 rounded-xl font-medium"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="w-1/2 bg-[#D4AF37] hover:bg-yellow-400 text-black py-3 rounded-xl font-semibold"
+                  className="w-1/2 bg-[#D4AF37] hover:bg-accent-gold-hover text-black py-3 rounded-xl font-semibold"
                 >
                   Upload & Verify
                 </button>

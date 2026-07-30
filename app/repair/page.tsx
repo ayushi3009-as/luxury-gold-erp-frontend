@@ -14,7 +14,7 @@ export default function RepairPage() {
   const [worker, setWorker] = useState("");
 
   return (
-    <main className="min-h-screen bg-[#0B0B0B] text-white p-8">
+    <main className="min-h-screen bg-background-primary text-text-primary p-8">
 
       {/* Header */}
 
@@ -22,11 +22,11 @@ export default function RepairPage() {
 
         <div>
 
-          <h1 className="text-4xl font-bold text-yellow-500">
+          <h1 className="text-4xl font-bold text-accent-gold">
             Repair Management
           </h1>
 
-          <p className="text-gray-400 mt-2">
+          <p className="text-text-secondary mt-2">
             Manage all jewellery repair orders
           </p>
 
@@ -34,7 +34,7 @@ export default function RepairPage() {
 
         <Link
           href="/repair/entry"
-          className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-6 py-3 rounded-xl transition"
+          className="flex items-center gap-2 bg-accent-gold hover:bg-accent-gold-hover text-black font-semibold px-6 py-3 rounded-xl transition"
         >
           <Plus size={20} />
           New Repair
@@ -46,23 +46,23 @@ export default function RepairPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
 
-        <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-6">
-          <p className="text-gray-400">Total Repairs</p>
+        <div className="bg-background-secondary border border-border-theme rounded-2xl p-6">
+          <p className="text-text-secondary">Total Repairs</p>
           <h2 className="text-3xl font-bold mt-3">248</h2>
         </div>
 
-        <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-6">
-          <p className="text-gray-400">Pending</p>
-          <h2 className="text-3xl font-bold mt-3 text-yellow-500">32</h2>
+        <div className="bg-background-secondary border border-border-theme rounded-2xl p-6">
+          <p className="text-text-secondary">Pending</p>
+          <h2 className="text-3xl font-bold mt-3 text-accent-gold">32</h2>
         </div>
 
-        <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-6">
-          <p className="text-gray-400">In Progress</p>
+        <div className="bg-background-secondary border border-border-theme rounded-2xl p-6">
+          <p className="text-text-secondary">In Progress</p>
           <h2 className="text-3xl font-bold mt-3 text-blue-400">18</h2>
         </div>
 
-        <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-6">
-          <p className="text-gray-400">Completed</p>
+        <div className="bg-background-secondary border border-border-theme rounded-2xl p-6">
+          <p className="text-text-secondary">Completed</p>
           <h2 className="text-3xl font-bold mt-3 text-green-400">198</h2>
         </div>
 

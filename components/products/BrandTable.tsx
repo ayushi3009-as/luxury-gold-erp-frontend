@@ -32,37 +32,37 @@ export default function BrandTable() {
   ];
 
   return (
-    <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl overflow-hidden">
+    <div className="bg-background-secondary border border-border-theme rounded-2xl overflow-hidden">
 
       <div className="overflow-x-auto">
 
         <table className="w-full">
 
-          <thead className="bg-[#1B1B1B]">
+          <thead className="bg-background-tertiary">
 
             <tr>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Logo
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Brand Name
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Country
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Products
               </th>
 
-              <th className="px-6 py-4 text-left text-yellow-500">
+              <th className="px-6 py-4 text-left text-accent-gold">
                 Status
               </th>
 
-              <th className="px-6 py-4 text-center text-yellow-500">
+              <th className="px-6 py-4 text-center text-accent-gold">
                 Actions
               </th>
 
@@ -76,7 +76,7 @@ export default function BrandTable() {
 
               <tr
                 key={brand.id}
-                className="border-t border-gray-800 hover:bg-[#1A1A1A] transition"
+                className="border-t border-border-theme hover:bg-[#1A1A1A] transition"
               >
 
                 <td className="px-6 py-4">
@@ -93,7 +93,7 @@ export default function BrandTable() {
                   {brand.name}
                 </td>
 
-                <td className="px-6 py-4 text-gray-400">
+                <td className="px-6 py-4 text-text-secondary">
                   {brand.country}
                 </td>
 
@@ -128,7 +128,7 @@ export default function BrandTable() {
 
                     <Link
                       href={`/products/brands/edit/${brand.id}`}
-                      className="text-yellow-500 hover:text-yellow-400"
+                      className="text-accent-gold hover:text-accent-gold"
                     >
                       <Pencil size={20} />
                     </Link>

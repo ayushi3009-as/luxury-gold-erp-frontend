@@ -23,7 +23,7 @@ export default function ProductHistoryCard({
   date,
 }: ProductHistoryCardProps) {
   return (
-    <div className="bg-[#141414] border border-yellow-500/20 rounded-2xl overflow-hidden hover:border-yellow-500 transition">
+    <div className="bg-background-secondary border border-border-theme rounded-2xl overflow-hidden hover:border-yellow-500 transition">
 
       <img
         src={image}
@@ -37,39 +37,39 @@ export default function ProductHistoryCard({
 
           <History
             size={22}
-            className="text-yellow-500"
+            className="text-accent-gold"
           />
 
-          <h2 className="text-xl font-bold text-white">
+          <h2 className="text-xl font-bold text-text-primary">
             {product}
           </h2>
 
         </div>
 
-        <p className="text-gray-400">
+        <p className="text-text-secondary">
           SKU :
-          <span className="text-white ml-2">
+          <span className="text-text-primary ml-2">
             {sku}
           </span>
         </p>
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           Action :
-          <span className="text-yellow-500 ml-2">
+          <span className="text-accent-gold ml-2">
             {action}
           </span>
         </p>
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           User :
-          <span className="text-white ml-2">
+          <span className="text-text-primary ml-2">
             {user}
           </span>
         </p>
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           Date :
-          <span className="text-white ml-2">
+          <span className="text-text-primary ml-2">
             {date}
           </span>
         </p>

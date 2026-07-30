@@ -21,11 +21,11 @@ export default function RegisterForm() {
 
       {/* Heading */}
 
-      <h1 className="text-4xl font-bold text-white">
+      <h1 className="text-4xl font-bold text-text-primary">
         Create Account
       </h1>
 
-      <p className="text-gray-400 mt-3 mb-10">
+      <p className="text-text-secondary mt-3 mb-10">
         Fill in the details to create your account
       </p>
 
@@ -35,7 +35,7 @@ export default function RegisterForm() {
 
         <div>
 
-          <label className="block text-gray-300 mb-2">
+          <label className="block text-text-secondary mb-2">
             Full Name
           </label>
 
@@ -43,13 +43,13 @@ export default function RegisterForm() {
 
             <User
               size={20}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-yellow-500"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-accent-gold"
             />
 
             <input
               type="text"
               placeholder="Enter your full name"
-              className="w-full h-14 rounded-xl bg-[#1A1A1A] border border-gray-700 pl-12 pr-4 text-white placeholder:text-gray-500 focus:border-yellow-500 outline-none transition"
+              className="w-full h-14 rounded-xl bg-[#1A1A1A] border border-gray-700 pl-12 pr-4 text-text-primary placeholder:text-text-secondary focus:border-yellow-500 outline-none transition"
             />
 
           </div>
@@ -60,7 +60,7 @@ export default function RegisterForm() {
 
         <div>
 
-          <label className="block text-gray-300 mb-2">
+          <label className="block text-text-secondary mb-2">
             Email Address
           </label>
 
@@ -68,13 +68,13 @@ export default function RegisterForm() {
 
             <Mail
               size={20}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-yellow-500"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-accent-gold"
             />
 
             <input
               type="email"
               placeholder="Enter your email"
-              className="w-full h-14 rounded-xl bg-[#1A1A1A] border border-gray-700 pl-12 pr-4 text-white placeholder:text-gray-500 focus:border-yellow-500 outline-none transition"
+              className="w-full h-14 rounded-xl bg-[#1A1A1A] border border-gray-700 pl-12 pr-4 text-text-primary placeholder:text-text-secondary focus:border-yellow-500 outline-none transition"
             />
 
           </div>
@@ -85,7 +85,7 @@ export default function RegisterForm() {
 
         <div>
 
-          <label className="block text-gray-300 mb-2">
+          <label className="block text-text-secondary mb-2">
             Phone Number
           </label>
 
@@ -93,13 +93,13 @@ export default function RegisterForm() {
 
             <Phone
               size={20}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-yellow-500"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-accent-gold"
             />
 
             <input
               type="tel"
               placeholder="Enter your phone number"
-              className="w-full h-14 rounded-xl bg-[#1A1A1A] border border-gray-700 pl-12 pr-4 text-white placeholder:text-gray-500 focus:border-yellow-500 outline-none transition"
+              className="w-full h-14 rounded-xl bg-[#1A1A1A] border border-gray-700 pl-12 pr-4 text-text-primary placeholder:text-text-secondary focus:border-yellow-500 outline-none transition"
             />
 
           </div>
@@ -110,7 +110,7 @@ export default function RegisterForm() {
 
         <div>
 
-          <label className="block text-gray-300 mb-2">
+          <label className="block text-text-secondary mb-2">
             Password
           </label>
 
@@ -118,13 +118,13 @@ export default function RegisterForm() {
 
             <Lock
               size={20}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-yellow-500"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-accent-gold"
             />
 
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Create password"
-              className="w-full h-14 rounded-xl bg-[#1A1A1A] border border-gray-700 pl-12 pr-12 text-white placeholder:text-gray-500 focus:border-yellow-500 outline-none transition"
+              className="w-full h-14 rounded-xl bg-[#1A1A1A] border border-gray-700 pl-12 pr-12 text-text-primary placeholder:text-text-secondary focus:border-yellow-500 outline-none transition"
             />
 
             <button
@@ -132,7 +132,7 @@ export default function RegisterForm() {
               onClick={() =>
                 setShowPassword(!showPassword)
               }
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-yellow-500"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-accent-gold"
             >
               {showPassword ? (
                 <EyeOff size={20} />
@@ -149,7 +149,7 @@ export default function RegisterForm() {
 
         <div>
 
-          <label className="block text-gray-300 mb-2">
+          <label className="block text-text-secondary mb-2">
             Confirm Password
           </label>
 
@@ -157,7 +157,7 @@ export default function RegisterForm() {
 
             <Lock
               size={20}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-yellow-500"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-accent-gold"
             />
 
             <input
@@ -167,7 +167,7 @@ export default function RegisterForm() {
                   : "password"
               }
               placeholder="Confirm password"
-              className="w-full h-14 rounded-xl bg-[#1A1A1A] border border-gray-700 pl-12 pr-12 text-white placeholder:text-gray-500 focus:border-yellow-500 outline-none transition"
+              className="w-full h-14 rounded-xl bg-[#1A1A1A] border border-gray-700 pl-12 pr-12 text-text-primary placeholder:text-text-secondary focus:border-yellow-500 outline-none transition"
             />
 
             <button
@@ -177,7 +177,7 @@ export default function RegisterForm() {
                   !showConfirmPassword
                 )
               }
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-yellow-500"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-accent-gold"
             >
               {showConfirmPassword ? (
                 <EyeOff size={20} />
@@ -198,13 +198,13 @@ export default function RegisterForm() {
             className="mt-1 h-5 w-5 accent-yellow-500"
           />
 
-          <p className="text-gray-400 text-sm leading-6">
+          <p className="text-text-secondary text-sm leading-6">
 
             I agree to the{" "}
 
             <Link
               href="#"
-              className="text-yellow-500 hover:underline"
+              className="text-accent-gold hover:underline"
             >
               Terms & Conditions
             </Link>
@@ -213,7 +213,7 @@ export default function RegisterForm() {
 
             <Link
               href="#"
-              className="text-yellow-500 hover:underline"
+              className="text-accent-gold hover:underline"
             >
               Privacy Policy
             </Link>
@@ -237,7 +237,7 @@ export default function RegisterForm() {
 
           <div className="flex-1 h-px bg-gray-700"></div>
 
-          <span className="text-gray-500 text-sm">
+          <span className="text-text-secondary text-sm">
             OR
           </span>
 
@@ -249,7 +249,7 @@ export default function RegisterForm() {
 
        <button
         type="button"
-        className="w-full h-14 rounded-xl border border-gray-700 hover:border-yellow-500 hover:bg-[#1B1B1B] transition flex items-center justify-center gap-3 text-white"
+        className="w-full h-14 rounded-xl border border-gray-700 hover:border-yellow-500 hover:bg-background-tertiary transition flex items-center justify-center gap-3 text-text-primary"
         >
         <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -284,13 +284,13 @@ export default function RegisterForm() {
 
       <div className="mt-8 text-center">
 
-        <span className="text-gray-400">
+        <span className="text-text-secondary">
           Already have an account?
         </span>
 
         <Link
           href="/login"
-          className="ml-2 text-yellow-500 hover:text-yellow-400 font-semibold"
+          className="ml-2 text-accent-gold hover:text-accent-gold font-semibold"
         >
           Login Now
         </Link>

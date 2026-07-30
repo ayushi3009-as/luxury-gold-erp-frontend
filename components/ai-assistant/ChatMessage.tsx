@@ -22,8 +22,8 @@ export default function ChatMessage({
       <div
         className={`max-w-[75%] rounded-2xl px-5 py-4 ${
           isUser
-            ? "bg-yellow-500 text-black"
-            : "bg-[#141414] border border-yellow-500/20 text-white"
+            ? "bg-accent-gold text-black"
+            : "bg-background-secondary border border-border-theme text-text-primary"
         }`}
       >
         <p className="leading-7 whitespace-pre-wrap">
@@ -34,7 +34,7 @@ export default function ChatMessage({
           className={`mt-2 text-xs ${
             isUser
               ? "text-black/70"
-              : "text-gray-500"
+              : "text-text-secondary"
           }`}
         >
           {time}

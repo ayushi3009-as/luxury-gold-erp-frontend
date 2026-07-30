@@ -8,7 +8,7 @@ import {
   BarChart3,
 } from "lucide-react";
 
-import AnalyticsSidebar from "../AnalyticsSidebar";
+
 
 const revenueData = [
   { month: "Jan", revenue: 42000 },
@@ -34,16 +34,16 @@ export default function RevenueTrendsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#090a09] text-white">
-      <AnalyticsSidebar />
+    <div className="min-h-screen bg-background-primary text-text-primary">
+      
 
-      <main className="ml-64 min-h-screen p-8">
+      <main className=" min-h-screen p-8">
 
         {/* HEADER */}
         <div className="flex items-end justify-between">
 
           <div>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-text-secondary">
               Analytics / Revenue Trends
             </p>
 
@@ -51,21 +51,21 @@ export default function RevenueTrendsPage() {
               <div className="rounded-xl bg-[#211c0d] p-3">
                 <TrendingUp
                   size={25}
-                  className="text-[#e4b52d]"
+                  className="text-accent-gold"
                 />
               </div>
 
-              <h1 className="text-3xl font-bold text-[#f0c43c]">
+              <h1 className="text-3xl font-bold text-accent-gold">
                 Revenue Trends
               </h1>
             </div>
 
-            <p className="mt-3 text-sm text-gray-400">
+            <p className="mt-3 text-sm text-text-secondary">
               Track revenue growth and understand your business performance.
             </p>
           </div>
 
-          <select className="rounded-lg border border-[#40351b] bg-[#11130f] px-4 py-2 text-xs text-gray-300 outline-none">
+          <select className="rounded-lg border border-border-theme bg-[#11130f] px-4 py-2 text-xs text-text-secondary outline-none">
             <option>Last 8 Months</option>
             <option>Last 12 Months</option>
             <option>This Year</option>
@@ -76,16 +76,16 @@ export default function RevenueTrendsPage() {
         {/* SUMMARY CARDS */}
         <div className="mt-8 grid grid-cols-3 gap-5">
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
 
             <div className="flex items-center justify-between">
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Total Revenue
               </p>
 
               <DollarSign
                 size={19}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
@@ -100,16 +100,16 @@ export default function RevenueTrendsPage() {
 
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
 
             <div className="flex items-center justify-between">
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Average Monthly Revenue
               </p>
 
               <BarChart3
                 size={19}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
@@ -117,22 +117,22 @@ export default function RevenueTrendsPage() {
               $71.7K
             </h2>
 
-            <p className="mt-2 text-xs text-gray-500">
+            <p className="mt-2 text-xs text-text-secondary">
               Based on the selected period
             </p>
 
           </div>
 
-          <div className="rounded-xl border border-[#40351b] bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
 
             <div className="flex items-center justify-between">
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-text-secondary">
                 Best Performing Month
               </p>
 
               <CalendarDays
                 size={19}
-                className="text-[#e4b52d]"
+                className="text-accent-gold"
               />
             </div>
 
@@ -149,16 +149,16 @@ export default function RevenueTrendsPage() {
         </div>
 
         {/* REVENUE TREND CHART */}
-        <div className="mt-6 rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+        <div className="mt-6 rounded-xl border border-border-theme bg-[#11130f] p-6">
 
           <div className="flex items-start justify-between">
 
             <div>
-              <h2 className="text-lg font-semibold text-[#f0c43c]">
+              <h2 className="text-lg font-semibold text-accent-gold">
                 Revenue Growth
               </h2>
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-text-secondary">
                 Monthly revenue performance
               </p>
             </div>
@@ -182,18 +182,18 @@ export default function RevenueTrendsPage() {
                   className="flex h-full flex-1 flex-col items-center justify-end"
                 >
 
-                  <div className="mb-3 text-[10px] text-gray-500">
+                  <div className="mb-3 text-[10px] text-text-secondary">
                     ${(item.revenue / 1000).toFixed(0)}K
                   </div>
 
                   <div
-                    className="w-full rounded-t-lg bg-[#b98c20] transition-all duration-300 hover:bg-[#e4b52d]"
+                    className="w-full rounded-t-lg bg-[#b98c20] transition-all duration-300 hover:bg-accent-gold"
                     style={{
                       height: `${height}%`,
                     }}
                   />
 
-                  <span className="mt-3 text-xs text-gray-500">
+                  <span className="mt-3 text-xs text-text-secondary">
                     {item.month}
                   </span>
 
@@ -206,14 +206,14 @@ export default function RevenueTrendsPage() {
         </div>
 
         {/* CATEGORY PERFORMANCE */}
-        <div className="mt-6 rounded-xl border border-[#40351b] bg-[#11130f] p-6">
+        <div className="mt-6 rounded-xl border border-border-theme bg-[#11130f] p-6">
 
           <div>
-            <h2 className="text-lg font-semibold text-[#f0c43c]">
+            <h2 className="text-lg font-semibold text-accent-gold">
               Revenue by Category
             </h2>
 
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-text-secondary">
               Performance of major jewellery categories
             </p>
           </div>
@@ -226,11 +226,11 @@ export default function RevenueTrendsPage() {
 
                 <div className="flex justify-between text-sm">
 
-                  <span className="text-gray-300">
+                  <span className="text-text-secondary">
                     {category.name}
                   </span>
 
-                  <span className="text-[#e4b52d]">
+                  <span className="text-accent-gold">
                     {category.value}%
                   </span>
 

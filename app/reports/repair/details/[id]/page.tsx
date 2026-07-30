@@ -38,8 +38,8 @@ export default function RepairDetailsPage({
     <main
       className="
       min-h-screen
-      bg-[#0B0B0B]
-      text-white
+      bg-background-primary
+      text-text-primary
       p-8
       "
     >
@@ -54,11 +54,11 @@ export default function RepairDetailsPage({
         mb-6
         border
         border-yellow-500
-        text-yellow-500
+        text-accent-gold
         px-5
         py-2
         rounded-xl
-        hover:bg-yellow-500
+        hover:bg-accent-gold
         hover:text-black
         transition
         "
@@ -81,14 +81,14 @@ export default function RepairDetailsPage({
           className="
           text-4xl
           font-bold
-          text-yellow-500
+          text-accent-gold
           "
         >
           Repair Details
         </h1>
 
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-text-secondary mt-2">
           Repair ID: {params.id}
         </p>
 
@@ -105,9 +105,9 @@ export default function RepairDetailsPage({
 
       <div
         className="
-        bg-[#141414]
+        bg-background-secondary
         border
-        border-yellow-500/20
+        border-border-theme
         rounded-2xl
         p-8
         "
@@ -122,7 +122,7 @@ export default function RepairDetailsPage({
             className="
             text-2xl
             font-bold
-            text-yellow-500
+            text-accent-gold
             "
           >
             {repair.product}
@@ -132,8 +132,8 @@ export default function RepairDetailsPage({
 
           <span
             className="
-            bg-yellow-500/10
-            text-yellow-500
+            bg-accent-gold/10
+            text-accent-gold
             px-4
             py-2
             rounded-full
@@ -166,7 +166,7 @@ export default function RepairDetailsPage({
 
           <div>
 
-            <p className="text-gray-500">
+            <p className="text-text-secondary">
               Customer Name
             </p>
 
@@ -181,7 +181,7 @@ export default function RepairDetailsPage({
 
           <div>
 
-            <p className="text-gray-500">
+            <p className="text-text-secondary">
               Phone
             </p>
 
@@ -196,7 +196,7 @@ export default function RepairDetailsPage({
 
           <div>
 
-            <p className="text-gray-500">
+            <p className="text-text-secondary">
               Email
             </p>
 
@@ -211,7 +211,7 @@ export default function RepairDetailsPage({
 
           <div>
 
-            <p className="text-gray-500">
+            <p className="text-text-secondary">
               Category
             </p>
 
@@ -226,7 +226,7 @@ export default function RepairDetailsPage({
 
           <div>
 
-            <p className="text-gray-500">
+            <p className="text-text-secondary">
               Repair Type
             </p>
 
@@ -241,11 +241,11 @@ export default function RepairDetailsPage({
 
           <div>
 
-            <p className="text-gray-500">
+            <p className="text-text-secondary">
               Repair Charges
             </p>
 
-            <p className="text-yellow-500 font-semibold">
+            <p className="text-accent-gold font-semibold">
               {repair.charges}
             </p>
 
@@ -256,7 +256,7 @@ export default function RepairDetailsPage({
 
           <div>
 
-            <p className="text-gray-500">
+            <p className="text-text-secondary">
               Received Date
             </p>
 
@@ -271,7 +271,7 @@ export default function RepairDetailsPage({
 
           <div>
 
-            <p className="text-gray-500">
+            <p className="text-text-secondary">
               Delivery Date
             </p>
 
@@ -294,12 +294,12 @@ export default function RepairDetailsPage({
         <div className="mt-8">
 
 
-          <p className="text-gray-500 mb-2">
+          <p className="text-text-secondary mb-2">
             Issue Description
           </p>
 
 
-          <p className="text-gray-300">
+          <p className="text-text-secondary">
             {repair.issue}
           </p>
 
@@ -315,13 +315,13 @@ export default function RepairDetailsPage({
         <button
           className="
           mt-8
-          bg-yellow-500
+          bg-accent-gold
           text-black
           px-8
           py-3
           rounded-xl
           font-semibold
-          hover:bg-yellow-400
+          hover:bg-accent-gold-hover
           transition
           "
         >

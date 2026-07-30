@@ -68,27 +68,25 @@ export default function RepairSidebar() {
   ];
 
   return (
-    <aside className="w-72 min-h-screen bg-[#111111] border-r border-yellow-500/20">
+    <aside className="w-72 min-h-[calc(100vh-78px)] bg-background-secondary border-r border-border-theme">
 
       {/* Logo Section */}
 
-      <div className="h-28 border-b border-yellow-500/20 flex items-center justify-center">
+      <div className="h-28 border-b border-border-theme flex items-center justify-center">
 
         <div className="flex items-center gap-4">
 
-          <div className="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center">
+          <div className="w-14 h-14 rounded-2xl bg-accent-gold/10 border border-border-theme flex items-center justify-center">
 
-            <Gem className="w-8 h-8 text-yellow-500" />
+            <Gem className="w-8 h-8 text-accent-gold" />
 
           </div>
 
           <div>
 
-            <h1 className="text-3xl font-bold text-yellow-500">
-              Luxury Gold ERP
-            </h1>
+            
 
-            <p className="text-gray-400 text-sm mt-1">
+            <p className="text-text-secondary text-sm mt-1">
               Jewellery Management
             </p>
 
@@ -115,8 +113,8 @@ export default function RepairSidebar() {
               href={item.href}
               className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
                 active
-                  ? "bg-yellow-500 text-black font-semibold shadow-lg"
-                  : "text-gray-300 hover:bg-[#1B1B1B] hover:text-yellow-500"
+                  ? "bg-accent-gold text-black font-semibold shadow-lg"
+                  : "text-text-secondary hover:bg-background-tertiary hover:text-accent-gold"
               }`}
             >
               <Icon size={20} />

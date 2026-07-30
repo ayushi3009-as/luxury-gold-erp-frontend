@@ -10,9 +10,9 @@ export default function GoldForm({
   buttonText,
 }: GoldFormProps) {
   return (
-    <form className="bg-[#141414] border border-yellow-500/20 rounded-2xl p-8 max-w-6xl mx-auto">
+    <form className="bg-background-secondary border border-border-theme rounded-2xl p-8 max-w-6xl mx-auto">
 
-      <h2 className="text-3xl font-bold text-yellow-500 mb-8">
+      <h2 className="text-3xl font-bold text-accent-gold mb-8">
         Gold Product Information
       </h2>
 
@@ -22,14 +22,14 @@ export default function GoldForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             Product Name
           </label>
 
           <input
             type="text"
             placeholder="Enter Product Name"
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
           />
 
         </div>
@@ -38,14 +38,14 @@ export default function GoldForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             SKU
           </label>
 
           <input
             type="text"
             placeholder="GLD001"
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
           />
 
         </div>
@@ -54,12 +54,12 @@ export default function GoldForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             Gold Purity
           </label>
 
           <select
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
           >
             <option>18K</option>
             <option>22K</option>
@@ -72,14 +72,14 @@ export default function GoldForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             Weight (gm)
           </label>
 
           <input
             type="number"
             placeholder="10"
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
           />
 
         </div>
@@ -88,14 +88,14 @@ export default function GoldForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             Making Charges
           </label>
 
           <input
             type="number"
             placeholder="5000"
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
           />
 
         </div>
@@ -104,14 +104,14 @@ export default function GoldForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             Selling Price
           </label>
 
           <input
             type="number"
             placeholder="65000"
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
           />
 
         </div>
@@ -120,14 +120,14 @@ export default function GoldForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             Stock Quantity
           </label>
 
           <input
             type="number"
             placeholder="20"
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
           />
 
         </div>
@@ -136,13 +136,13 @@ export default function GoldForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             Product Image
           </label>
 
           <input
             type="file"
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white file:bg-yellow-500 file:text-black file:border-0 file:px-4 file:py-2 file:rounded-lg"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary file:bg-accent-gold file:text-black file:border-0 file:px-4 file:py-2 file:rounded-lg"
           />
 
         </div>
@@ -151,14 +151,14 @@ export default function GoldForm({
 
         <div className="md:col-span-2">
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             Description
           </label>
 
           <textarea
             rows={5}
             placeholder="Enter Product Description..."
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white resize-none outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary resize-none outline-none focus:border-yellow-500"
           />
 
         </div>
@@ -167,12 +167,12 @@ export default function GoldForm({
 
         <div>
 
-          <label className="block mb-2 text-gray-300">
+          <label className="block mb-2 text-text-secondary">
             Status
           </label>
 
           <select
-            className="w-full rounded-xl bg-[#0B0B0B] border border-gray-700 px-4 py-3 text-white outline-none focus:border-yellow-500"
+            className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary outline-none focus:border-yellow-500"
           >
             <option>Active</option>
             <option>Inactive</option>
@@ -188,7 +188,7 @@ export default function GoldForm({
 
         <button
           type="submit"
-          className="bg-yellow-500 hover:bg-yellow-400 text-black font-semibold px-8 py-3 rounded-xl transition"
+          className="bg-accent-gold hover:bg-accent-gold-hover text-black font-semibold px-8 py-3 rounded-xl transition"
         >
           {buttonText}
         </button>

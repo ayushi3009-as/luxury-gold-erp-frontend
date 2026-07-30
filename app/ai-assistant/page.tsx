@@ -2,11 +2,11 @@ import AIHeader from "@/components/ai-assistant/AIHeader";
 import SuggestedPrompts from "@/components/ai-assistant/SuggestedPrompts";
 import ChatWindow from "@/components/ai-assistant/ChatWindow";
 import ChatInput from "@/components/ai-assistant/ChatInput";
-import ChatSidebar from "@/components/ai-assistant/ChatSidebar";
+
 
 export default function AIAssistantPage() {
   return (
-    <main className="min-h-screen bg-[#0B0B0B] text-white p-8">
+    <main className="min-h-screen bg-background-primary text-text-primary p-8">
 
       {/* Header */}
 
@@ -33,7 +33,7 @@ export default function AIAssistantPage() {
         {/* Right Sidebar */}
 
         <aside className="xl:col-span-1">
-          <ChatSidebar />
+          
         </aside>
 
       </div>
