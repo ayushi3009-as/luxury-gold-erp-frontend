@@ -31,7 +31,7 @@ const topProducts = [
 
 export default function SalesDashboard() {
   return (
-    <main className="min-h-screen bg-background-primary p-5 text-text-primary lg:ml-[230px]">
+    <main className="min-h-screen bg-background-primary p-5 text-text-primary">
 
       {/* HEADER */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
