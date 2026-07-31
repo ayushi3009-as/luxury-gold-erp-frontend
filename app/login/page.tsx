@@ -17,7 +17,7 @@ export default function LoginPage() {
     setError("");
 
     try {
-      const res = await fetch("/API/auth/login", {
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -29,7 +29,7 @@ export default function LoginPage() {
         // Force a hard reload so the layout gets the new session cookie role
         if (data.user.role === "Sales Staff") {
           window.location.href = "/pos";
-        } else if (data.user.role === "Super Admin") {
+        } else if (data.user.role === "Super Admin" || data.user.role === "SUPER_ADMIN") {
           window.location.href = "/saas-admin";
         } else {
           window.location.href = "/dashboard";
@@ -45,18 +45,18 @@ export default function LoginPage() {
   };
 
   const loginAsAdmin = () => {
-    setEmail("admin@luxurygold.com");
-    setPassword("password123");
+    setEmail("admin@gold-erp.com");
+    setPassword("Admin@123");
   };
 
   const loginAsStore = () => {
     setEmail("store@gold-erp.com");
-    setPassword("password123");
+    setPassword("Store@123");
   };
 
   const loginAsSales = () => {
     setEmail("sales@gold-erp.com");
-    setPassword("password123");
+    setPassword("Sales@123");
   };
 
   return (
