@@ -62,23 +62,26 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
   const goldProducts = products.filter(p => p.category?.toLowerCase().includes('gold')) || [];
   const diamondProducts = products.filter(p => p.category?.toLowerCase().includes('diamond')) || [];
 
-  // Demo data with catalogNumber field
+  // Demo data with catalogNumber field (used when DB is empty)
   const demoGoldProducts = [
-    { id: '1', name: 'Royal Kundan Necklace', price: 245000, purity: '22K', weight: '45g', catalogNumber: 1, category: 'necklace', imageUrl: 'https://images.unsplash.com/photo-1599643478514-4a7f052843cb?w=600&auto=format&fit=crop&q=80' },
-    { id: '2', name: 'Antique Temple Bangle', price: 185000, purity: '22K', weight: '28g', catalogNumber: 2, category: 'bangle', imageUrl: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&auto=format&fit=crop&q=80' },
-    { id: '3', name: 'Filigree Gold Jhumkas', price: 85000, purity: '22K', weight: '12g', catalogNumber: 3, category: 'earring', imageUrl: 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&auto=format&fit=crop&q=80' },
-    { id: '7', name: 'Bridal Choker Set', price: 420000, purity: '22K', weight: '68g', catalogNumber: 4, category: 'necklace', imageUrl: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=600&auto=format&fit=crop&q=80' },
+    { id: '1', name: 'Royal Kundan Necklace', sellingPrice: 245000, purity: '22K', weight: 45, catalogNumber: 1, category: 'necklace', imageUrl: 'https://images.unsplash.com/photo-1599643478514-4a7f052843cb?w=600&auto=format&fit=crop&q=80' },
+    { id: '2', name: 'Antique Temple Bangle', sellingPrice: 185000, purity: '22K', weight: 28, catalogNumber: 2, category: 'bangle', imageUrl: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&auto=format&fit=crop&q=80' },
+    { id: '3', name: 'Filigree Gold Jhumkas', sellingPrice: 85000, purity: '22K', weight: 12, catalogNumber: 3, category: 'earring', imageUrl: 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&auto=format&fit=crop&q=80' },
+    { id: '7', name: 'Bridal Choker Set', sellingPrice: 420000, purity: '22K', weight: 68, catalogNumber: 4, category: 'necklace', imageUrl: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=600&auto=format&fit=crop&q=80' },
   ];
 
   const demoDiamondProducts = [
-    { id: '4', name: 'Solitaire Platinum Ring', price: 350000, purity: 'VVS1', weight: '1.5ct', catalogNumber: 5, category: 'ring', imageUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b2548e?w=600&auto=format&fit=crop&q=80' },
-    { id: '5', name: 'Diamond Tennis Bracelet', price: 520000, purity: 'VVS2', weight: '3.2ct', catalogNumber: 6, category: 'bracelet', imageUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&auto=format&fit=crop&q=80' },
-    { id: '6', name: 'Emerald Cut Pendant', price: 890000, purity: 'IF', weight: '5.0ct', catalogNumber: 7, category: 'necklace', imageUrl: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=600&auto=format&fit=crop&q=80' },
-    { id: '8', name: 'Pear Drop Earrings', price: 310000, purity: 'VVS1', weight: '2.1ct', catalogNumber: 8, category: 'earring', imageUrl: 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&auto=format&fit=crop&q=80' },
+    { id: '4', name: 'Solitaire Platinum Ring', sellingPrice: 350000, purity: 'VVS1', weight: 1.5, catalogNumber: 5, category: 'ring', imageUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b2548e?w=600&auto=format&fit=crop&q=80' },
+    { id: '5', name: 'Diamond Tennis Bracelet', sellingPrice: 520000, purity: 'VVS2', weight: 3.2, catalogNumber: 6, category: 'bracelet', imageUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&auto=format&fit=crop&q=80' },
+    { id: '6', name: 'Emerald Cut Pendant', sellingPrice: 890000, purity: 'IF', weight: 5.0, catalogNumber: 7, category: 'necklace', imageUrl: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=600&auto=format&fit=crop&q=80' },
+    { id: '8', name: 'Pear Drop Earrings', sellingPrice: 310000, purity: 'VVS1', weight: 2.1, catalogNumber: 8, category: 'earring', imageUrl: 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&auto=format&fit=crop&q=80' },
   ];
 
-  const displayGold = goldProducts.length > 0 ? goldProducts : demoGoldProducts;
-  const displayDiamonds = diamondProducts.length > 0 ? diamondProducts : demoDiamondProducts;
+  // Map DB products to use sellingPrice as price for display
+  const mapProduct = (p: any, i: number) => ({ ...p, price: p.sellingPrice ?? p.price, weight: p.weight ? `${p.weight}g` : 'N/A', catalogNumber: p.catalogNumber ?? (i + 1) });
+
+  const displayGold = (goldProducts.length > 0 ? goldProducts : demoGoldProducts).map(mapProduct);
+  const displayDiamonds = (diamondProducts.length > 0 ? diamondProducts : demoDiamondProducts).map(mapProduct);
 
   const heroImage = (tenant?.heroImageUrl && tenant.heroImageUrl.trim() !== '')
     ? tenant.heroImageUrl

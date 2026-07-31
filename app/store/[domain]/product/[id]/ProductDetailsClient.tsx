@@ -25,7 +25,7 @@ export default function ProductDetailsClient({ product }: { product: any }) {
     'https://images.unsplash.com/photo-1605100804763-247f67b2548e?w=400&auto=format&fit=crop&q=80',
   ];
 
-  const price = product?.price || 245000;
+  const price = product?.sellingPrice || product?.price || 245000;
   const makingCharge = product?.makingCharge || 25000;
   const gst = Math.round(price * 0.03);
   const goldValue = price - makingCharge - gst;
