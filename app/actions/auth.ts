@@ -36,7 +36,7 @@ export async function loginAction(prevState: any, formData: FormData) {
     }
 
     // Create session
-    await createSession(user.id, user.role.name);
+    await createSession(user.id, user.role.name, user.tenantId);
 
   } catch (error) {
     console.error("Login error:", error);
