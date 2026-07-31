@@ -19,26 +19,42 @@ export default async function StoreLayout({
   });
 
   return (
-    <div className={`min-h-screen bg-[#0a0a0a] text-white selection:bg-accent-gold selection:text-black font-sans flex flex-col ${playfair.variable} ${inter.variable}`}>
-      {/* 🌟 PREMIUM NAVBAR */}
-      <nav className="fixed top-0 w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-2xl border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
-          <div className="flex items-center gap-12">
-            <Link href={`/`} className="text-3xl font-serif tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#FFF3B0] to-[#D4AF37] uppercase hover:opacity-80 transition-opacity">
-              {tenant?.name || "Luxury Gold"}
-            </Link>
-            <div className="hidden lg:flex items-center gap-8 text-sm uppercase tracking-[0.2em] text-white/60">
-              <Link href={`/collections/gold`} className="hover:text-accent-gold transition-colors">Gold Collection</Link>
-              <Link href={`/collections/diamonds`} className="hover:text-accent-gold transition-colors">Diamonds</Link>
-              <Link href={`/about`} className="hover:text-accent-gold transition-colors">Heritage</Link>
-            </div>
+    <div className={`min-h-screen bg-[#0a0a0a] text-white font-sans flex flex-col ${playfair.variable} ${inter.variable}`}>
+      {/* ── EDITORIAL NAVBAR ── hairline border, no blur bg fill */}
+      <nav className="fixed top-0 w-full z-50 border-b border-[#2A2724] bg-[#0a0a0a]">
+        <div className="grid grid-cols-[40px_1fr_auto] md:grid-cols-[40px_auto_1fr_auto] items-stretch h-[64px]">
+
+          {/* Vertical rail marker */}
+          <div className="border-r border-[#2A2724] flex items-center justify-center">
+            <span className="text-[8px] text-[#8a7a5a]">◆</span>
           </div>
-          <div className="flex items-center gap-6 text-white/80">
-            <button className="hover:text-accent-gold transition-colors"><Search size={22} strokeWidth={1.5} /></button>
-            <button className="hover:text-accent-gold transition-colors"><User size={22} strokeWidth={1.5} /></button>
-            <Link href={`/cart`} className="hover:text-accent-gold transition-colors relative">
-              <ShoppingBag size={22} strokeWidth={1.5} />
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-accent-gold text-black text-[10px] font-bold rounded-full flex items-center justify-center">0</span>
+
+          {/* Brand wordmark */}
+          <Link href="/" className="px-6 flex items-center border-r border-[#2A2724] shrink-0">
+            <span className="text-sm font-serif tracking-[0.3em] text-white/95 uppercase">
+              {tenant?.name || 'Luxury Gold'}
+            </span>
+          </Link>
+
+          {/* Center nav links — desktop only */}
+          <div className="hidden md:flex items-center px-6 gap-8 text-[10px] uppercase tracking-[0.2em] text-[#8a7a5a]">
+            <Link href="/collections/gold" className="hover:text-[#D4AF37] transition-colors duration-500">Gold Collection</Link>
+            <Link href="/collections/diamonds" className="hover:text-[#D4AF37] transition-colors duration-500">Diamonds</Link>
+            <Link href="/gifting" className="hover:text-[#D4AF37] transition-colors duration-500">Gifting</Link>
+            <Link href="/about" className="hover:text-[#D4AF37] transition-colors duration-500">Heritage</Link>
+          </div>
+
+          {/* Right icons */}
+          <div className="flex items-center border-l border-[#2A2724]">
+            <Link href="/search" className="h-full px-4 flex items-center border-r border-[#2A2724] hover:bg-[#2A2724]/30 transition-colors">
+              <Search size={16} strokeWidth={1.5} className="text-[#8a7a5a]" />
+            </Link>
+            <Link href="/account" className="h-full px-4 flex items-center border-r border-[#2A2724] hover:bg-[#2A2724]/30 transition-colors">
+              <User size={16} strokeWidth={1.5} className="text-[#8a7a5a]" />
+            </Link>
+            <Link href="/cart" className="h-full px-4 flex items-center hover:bg-[#2A2724]/30 transition-colors relative">
+              <ShoppingBag size={16} strokeWidth={1.5} className="text-[#8a7a5a]" />
+              <span className="absolute top-3 right-2 w-3.5 h-3.5 bg-[#D4AF37] text-black text-[8px] font-bold flex items-center justify-center">0</span>
             </Link>
           </div>
         </div>
@@ -49,55 +65,79 @@ export default async function StoreLayout({
         {children}
       </main>
 
-      {/* 📜 FOOTER */}
-      <footer className="bg-black pt-24 pb-12 px-6 border-t border-white/10 mt-auto">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-12 mb-16">
-          <div className="md:col-span-2">
-            <h2 className="text-3xl font-serif tracking-widest text-accent-gold uppercase mb-6">
-              {tenant?.name || "Luxury Gold"}
+      {/* ── EDITORIAL FOOTER ── hairline divided, no shadows */}
+      <footer className="border-t border-[#2A2724] bg-[#0a0a0a] mt-auto">
+        {/* Main footer grid */}
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] divide-y md:divide-y-0 md:divide-x divide-[#2A2724]">
+          {/* Brand column */}
+          <div className="p-10">
+            <h2 className="font-serif tracking-[0.3em] text-white/95 uppercase text-sm mb-6">
+              {tenant?.name || 'Luxury Gold'}
             </h2>
-            <p className="text-white/50 max-w-md leading-relaxed font-light mb-8">
-              {tenant?.aboutUsText || "Crafting timeless masterpieces since 1995. We bring you the finest purity of 22K gold and internationally certified diamonds."}
+            <p className="text-[#8a7a5a] text-xs leading-relaxed font-sans font-light max-w-xs mb-8">
+              {tenant?.aboutUsText || 'Crafting timeless masterpieces since 1995. Purest 22K gold and internationally certified diamonds.'}
             </p>
-            <div className="flex gap-4">
-              <Link href="/book-appointment" className="text-xs uppercase tracking-widest text-gold border-b border-gold pb-1 hover:text-white hover:border-white transition-colors">Book an Appointment</Link>
-            </div>
+            <Link href="/book-appointment" className="text-[10px] tracking-[0.2em] text-[#D4AF37] uppercase border-b border-[#D4AF37]/40 pb-1 hover:border-[#D4AF37] transition-colors">
+              Book an appointment →
+            </Link>
           </div>
-          <div>
-            <h4 className="text-white uppercase tracking-widest text-sm mb-6">Explore</h4>
-            <ul className="space-y-4 text-white/50 font-light text-sm">
-              <li><Link href={`/collections/gold`} className="hover:text-accent-gold transition-colors">Gold Collection</Link></li>
-              <li><Link href={`/collections/diamonds`} className="hover:text-accent-gold transition-colors">Diamond Collection</Link></li>
-              <li><Link href={`/gifting`} className="hover:text-accent-gold transition-colors">The Gifting Edit</Link></li>
-              <li><Link href={`/custom-orders`} className="hover:text-accent-gold transition-colors">Bespoke Services</Link></li>
-              <li><Link href={`/journal`} className="hover:text-accent-gold transition-colors">The Journal</Link></li>
+
+          {/* Explore column */}
+          <div className="p-10">
+            <p className="text-[9px] tracking-[0.3em] text-[#8a7a5a] uppercase mb-6">Explore</p>
+            <ul className="space-y-4 text-xs text-[#8a7a5a] font-sans">
+              {[
+                { label: 'Gold Collection', href: '/collections/gold' },
+                { label: 'Diamond Collection', href: '/collections/diamonds' },
+                { label: 'The Gifting Edit', href: '/gifting' },
+                { label: 'Bespoke Services', href: '/custom-orders' },
+                { label: 'The Journal', href: '/journal' },
+              ].map(l => (
+                <li key={l.href}><Link href={l.href} className="hover:text-[#D4AF37] transition-colors duration-500">{l.label}</Link></li>
+              ))}
             </ul>
           </div>
-          <div>
-            <h4 className="text-white uppercase tracking-widest text-sm mb-6">Client Care</h4>
-            <ul className="space-y-4 text-white/50 font-light text-sm">
-              <li><Link href={`/account`} className="hover:text-accent-gold transition-colors">My Account</Link></li>
-              <li><Link href={`/size-guide`} className="hover:text-accent-gold transition-colors">Size Guide</Link></li>
-              <li><Link href={`/care`} className="hover:text-accent-gold transition-colors">Jewelry Care</Link></li>
-              <li><Link href={`/faq`} className="hover:text-accent-gold transition-colors">FAQ</Link></li>
-              <li><Link href={`/contact`} className="hover:text-accent-gold transition-colors">Contact Us</Link></li>
+
+          {/* Client Care column */}
+          <div className="p-10">
+            <p className="text-[9px] tracking-[0.3em] text-[#8a7a5a] uppercase mb-6">Client Care</p>
+            <ul className="space-y-4 text-xs text-[#8a7a5a] font-sans">
+              {[
+                { label: 'My Account', href: '/account' },
+                { label: 'Size Guide', href: '/size-guide' },
+                { label: 'Jewelry Care', href: '/care' },
+                { label: 'FAQ', href: '/faq' },
+                { label: 'Contact Us', href: '/contact' },
+              ].map(l => (
+                <li key={l.href}><Link href={l.href} className="hover:text-[#D4AF37] transition-colors duration-500">{l.label}</Link></li>
+              ))}
             </ul>
           </div>
-          <div>
-            <h4 className="text-white uppercase tracking-widest text-sm mb-6">Legal</h4>
-            <ul className="space-y-4 text-white/50 font-light text-sm">
-              <li><Link href={`/policies/shipping`} className="hover:text-accent-gold transition-colors">Shipping Policy</Link></li>
-              <li><Link href={`/policies/returns`} className="hover:text-accent-gold transition-colors">Returns & Exchanges</Link></li>
-              <li><Link href={`/policies/warranty`} className="hover:text-accent-gold transition-colors">Lifetime Warranty</Link></li>
-              <li><Link href={`/policies/privacy`} className="hover:text-accent-gold transition-colors">Privacy Policy</Link></li>
-              <li><Link href={`/policies/terms`} className="hover:text-accent-gold transition-colors">Terms of Service</Link></li>
+
+          {/* Legal column */}
+          <div className="p-10">
+            <p className="text-[9px] tracking-[0.3em] text-[#8a7a5a] uppercase mb-6">Legal</p>
+            <ul className="space-y-4 text-xs text-[#8a7a5a] font-sans">
+              {[
+                { label: 'Shipping Policy', href: '/policies/shipping' },
+                { label: 'Returns & Exchanges', href: '/policies/returns' },
+                { label: 'Lifetime Warranty', href: '/policies/warranty' },
+                { label: 'Privacy Policy', href: '/policies/privacy' },
+                { label: 'Terms of Service', href: '/policies/terms' },
+              ].map(l => (
+                <li key={l.href}><Link href={l.href} className="hover:text-[#D4AF37] transition-colors duration-500">{l.label}</Link></li>
+              ))}
             </ul>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center border-t border-white/10 pt-8 text-white/30 text-[10px] tracking-widest uppercase">
-          <p>&copy; {new Date().getFullYear()} {tenant?.name || "Luxury Gold ERP"}. All rights reserved.</p>
-          <p className="mt-4 md:mt-0 flex items-center gap-2">
-            Powered by <span className="text-gold font-semibold">Tivra</span>
+
+        {/* Bottom bar */}
+        <div className="border-t border-[#2A2724] px-10 py-4 flex flex-col md:flex-row justify-between items-center gap-3">
+          <p className="text-[9px] tracking-[0.2em] text-[#8a7a5a] uppercase">
+            © {new Date().getFullYear()} {tenant?.name || 'Luxury Gold'}. All rights reserved.
+          </p>
+          <p className="text-[9px] tracking-[0.2em] text-[#8a7a5a] uppercase">
+            Powered by <span className="text-[#D4AF37]">Tivra</span>
           </p>
         </div>
       </footer>

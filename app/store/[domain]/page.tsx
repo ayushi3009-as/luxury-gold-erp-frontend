@@ -1,8 +1,50 @@
 import prisma from '@/lib/prisma';
-import { ArrowRight, Diamond, Sparkles, ChevronRight, ShieldCheck } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import { GrainOverlay } from '@/components/storefront/GrainOverlay';
-import { ProductCard } from '@/components/storefront/ProductCard';
+
+// ─── Catalog Item (editorial, hairline-framed, NO shadows) ───────────────────
+function CatalogItem({ product, index }: { product: any; index: number }) {
+  const catalogNum = String((product.catalogNumber ?? (index + 1))).padStart(3, '0');
+  const category = (product.category || '').toLowerCase();
+  const name = (product.name || '').toLowerCase();
+
+  function getFallback() {
+    if (category.includes('ring') || name.includes('ring'))
+      return 'https://images.unsplash.com/photo-1605100804763-247f67b2548e?w=600&auto=format&fit=crop&q=80';
+    if (category.includes('necklace') || name.includes('necklace'))
+      return 'https://images.unsplash.com/photo-1599643478514-4a7f052843cb?w=600&auto=format&fit=crop&q=80';
+    if (category.includes('bangle') || category.includes('bracelet') || name.includes('bangle'))
+      return 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&auto=format&fit=crop&q=80';
+    if (category.includes('earring') || name.includes('earring') || name.includes('jhumka'))
+      return 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&auto=format&fit=crop&q=80';
+    return 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&auto=format&fit=crop&q=80';
+  }
+
+  return (
+    <Link href={`/product/${product.id}`} className="group cursor-pointer px-6 first:pl-0 last:pr-0 block">
+      {/* Hairline framed image — no rounded corners, no shadow */}
+      <div className="border border-[#2A2724] p-1 mb-4 overflow-hidden">
+        <img
+          src={product.imageUrl || getFallback()}
+          alt={product.name}
+          onError={(e) => { e.currentTarget.src = getFallback(); }}
+          className="w-full h-[200px] md:h-[240px] object-cover transition-[object-position] duration-[900ms] ease-luxury group-hover:object-[70%_30%]"
+        />
+      </div>
+      {/* Catalog number placard */}
+      <p className="text-[9px] tracking-widest text-[#8a7a5a] uppercase mb-1.5">
+        N°{catalogNum}
+      </p>
+      <p className="text-sm text-white/90 font-serif leading-snug mb-1 group-hover:text-[#D4AF37] transition-colors duration-500">
+        {product.name}
+      </p>
+      <p className="text-sm text-[#D4AF37] font-light">
+        ₹{product.price?.toLocaleString('en-IN')}
+      </p>
+    </Link>
+  );
+}
 
 export default async function StorefrontHomePage({ params }: { params: { domain: string } }) {
   const tenant = await prisma.tenant.findUnique({
@@ -10,9 +52,9 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
   });
 
   const products = await prisma.product.findMany({
-    where: { 
+    where: {
       tenantId: tenant?.id,
-      isPublished: true 
+      isPublished: true
     },
     take: 12
   });
@@ -20,182 +62,223 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
   const goldProducts = products.filter(p => p.category?.toLowerCase().includes('gold')) || [];
   const diamondProducts = products.filter(p => p.category?.toLowerCase().includes('diamond')) || [];
 
-  // Dummy fallback data
+  // Demo data with catalogNumber field
   const demoGoldProducts = [
-    { id: '1', name: "22K Royal Kundan Necklace", price: 245000, purity: "22K", weight: "45g", imageUrl: "https://images.unsplash.com/photo-1599643478514-4a7f052843cb?w=800&auto=format&fit=crop&q=80" },
-    { id: '2', name: "Antique Temple Bangle", price: 185000, purity: "22K", weight: "28g", imageUrl: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&auto=format&fit=crop&q=80" },
-    { id: '3', name: "Filigree Gold Jhumkas", price: 85000, purity: "22K", weight: "12g", imageUrl: "https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=800&auto=format&fit=crop&q=80" },
+    { id: '1', name: 'Royal Kundan Necklace', price: 245000, purity: '22K', weight: '45g', catalogNumber: 1, category: 'necklace', imageUrl: 'https://images.unsplash.com/photo-1599643478514-4a7f052843cb?w=600&auto=format&fit=crop&q=80' },
+    { id: '2', name: 'Antique Temple Bangle', price: 185000, purity: '22K', weight: '28g', catalogNumber: 2, category: 'bangle', imageUrl: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&auto=format&fit=crop&q=80' },
+    { id: '3', name: 'Filigree Gold Jhumkas', price: 85000, purity: '22K', weight: '12g', catalogNumber: 3, category: 'earring', imageUrl: 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&auto=format&fit=crop&q=80' },
+    { id: '7', name: 'Bridal Choker Set', price: 420000, purity: '22K', weight: '68g', catalogNumber: 4, category: 'necklace', imageUrl: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=600&auto=format&fit=crop&q=80' },
   ];
 
   const demoDiamondProducts = [
-    { id: '4', name: "Solitaire Platinum Ring", price: 350000, purity: "VVS1", weight: "1.5ct", imageUrl: "https://images.unsplash.com/photo-1605100804763-247f67b2548e?w=800&auto=format&fit=crop&q=80" },
-    { id: '5', name: "Diamond Tennis Bracelet", price: 520000, purity: "VVS2", weight: "3.2ct", imageUrl: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&auto=format&fit=crop&q=80" },
-    { id: '6', name: "Emerald Cut Diamond Necklace", price: 890000, purity: "IF", weight: "5.0ct", imageUrl: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=800&auto=format&fit=crop&q=80" },
+    { id: '4', name: 'Solitaire Platinum Ring', price: 350000, purity: 'VVS1', weight: '1.5ct', catalogNumber: 5, category: 'ring', imageUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b2548e?w=600&auto=format&fit=crop&q=80' },
+    { id: '5', name: 'Diamond Tennis Bracelet', price: 520000, purity: 'VVS2', weight: '3.2ct', catalogNumber: 6, category: 'bracelet', imageUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&auto=format&fit=crop&q=80' },
+    { id: '6', name: 'Emerald Cut Pendant', price: 890000, purity: 'IF', weight: '5.0ct', catalogNumber: 7, category: 'necklace', imageUrl: 'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=600&auto=format&fit=crop&q=80' },
+    { id: '8', name: 'Pear Drop Earrings', price: 310000, purity: 'VVS1', weight: '2.1ct', catalogNumber: 8, category: 'earring', imageUrl: 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&auto=format&fit=crop&q=80' },
   ];
 
   const displayGold = goldProducts.length > 0 ? goldProducts : demoGoldProducts;
   const displayDiamonds = diamondProducts.length > 0 ? diamondProducts : demoDiamondProducts;
 
+  const heroImage = (tenant?.heroImageUrl && tenant.heroImageUrl.trim() !== '')
+    ? tenant.heroImageUrl
+    : 'https://images.unsplash.com/photo-1599643478514-4a7f052843cb?w=1200&auto=format&fit=crop&q=80';
+
   return (
     <>
-      {/* 📈 LIVE GOLD RATE TICKER */}
-      <div className="w-full bg-white/[0.02] border-b border-white/5 pt-24 pb-2 overflow-hidden z-40 relative">
-        <div className="animate-[marquee_20s_linear_infinite] whitespace-nowrap text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-soft)] font-sans px-4">
-          <span className="text-gold">Live Rates:</span> 24K Gold ₹7,450/g • 22K Gold ₹6,825/g • 18K Gold ₹5,587/g &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-          <span className="text-gold">Live Rates:</span> 24K Gold ₹7,450/g • 22K Gold ₹6,825/g • 18K Gold ₹5,587/g
+      <GrainOverlay />
+
+      {/* ═══════════════════════════════════════════════════════
+          1. ASYMMETRIC EDITORIAL HERO
+          ═══════════════════════════════════════════════════════ */}
+      <section className="grid grid-cols-1 md:grid-cols-[40px_1fr_1fr] min-h-[78vh] border-b border-[#2A2724] pt-[96px]">
+
+        {/* Vertical rail — hidden on mobile */}
+        <div className="hidden md:flex border-r border-[#2A2724] items-end justify-center pb-8">
+          <span className="[writing-mode:vertical-rl] text-[9px] tracking-[0.25em] text-[#8a7a5a] uppercase select-none">
+            N°01 — The eternity edit
+          </span>
         </div>
+
+        {/* Text content — left aligned */}
+        <div className="px-8 md:px-12 flex flex-col justify-center py-16 md:py-0 border-b md:border-b-0 border-[#2A2724]">
+          <p className="text-[10px] tracking-[0.35em] text-[#D4AF37] uppercase mb-6 font-medium">
+            Handcrafted · 22K · IF-grade
+          </p>
+          <h1 className="font-serif font-light text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-white/95 mb-6 tracking-tight">
+            {tenant?.heroTitle
+              ? tenant.heroTitle
+              : <>Elegance curated<br />for eternity</>}
+          </h1>
+          <p className="text-sm text-white/50 max-w-xs leading-relaxed mb-10 font-sans font-light">
+            {tenant?.heroSubtitle || 'A private edit of hand-set kundan and solitaire pieces, catalogued by our Jaipur atelier.'}
+          </p>
+          <Link
+            href="/collections"
+            className="text-[11px] tracking-[0.25em] text-[#D4AF37] uppercase border-b border-[#D4AF37]/50 pb-1 w-fit hover:border-[#D4AF37] transition-colors duration-500"
+          >
+            View the index →
+          </Link>
+
+          {/* Mini trust strip below CTA */}
+          <div className="flex items-center gap-6 mt-12 pt-8 border-t border-[#2A2724]">
+            {['BIS Hallmarked', 'IGI Certified', 'Free Shipping'].map(t => (
+              <span key={t} className="text-[9px] tracking-[0.2em] text-[#8a7a5a] uppercase">{t}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* Framed hero image — museum placard style */}
+        <div className="p-6 flex flex-col border-l border-[#2A2724]">
+          <div className="flex-1 border border-[#8a7a5a]/40 p-1.5 overflow-hidden">
+            <img
+              src={heroImage}
+              alt="Hero Jewelry"
+              className="w-full h-full object-cover min-h-[300px] md:min-h-[400px] animate-[kenburns_20s_ease-out_infinite_alternate]"
+            />
+          </div>
+          <p className="text-[9px] tracking-widest text-[#8a7a5a] uppercase mt-3">
+            Ref. 22K-014 · Hand-set kundan, Jaipur atelier
+          </p>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════
+          2. THIN TRUST TICKER BAR
+          ═══════════════════════════════════════════════════════ */}
+      <div className="border-b border-[#2A2724] px-6 md:px-10 py-3 flex gap-8 overflow-x-auto hide-scrollbar">
+        <span className="text-[10px] tracking-[0.15em] text-[#8a7a5a] uppercase whitespace-nowrap">
+          Today's gold rate <span className="text-[#D4AF37]">₹7,412/g</span>
+        </span>
+        <span className="text-[10px] tracking-[0.15em] text-[#8a7a5a] uppercase whitespace-nowrap">22K → ₹6,795/g</span>
+        <span className="text-[10px] tracking-[0.15em] text-[#8a7a5a] uppercase whitespace-nowrap">BIS Hallmarked</span>
+        <span className="text-[10px] tracking-[0.15em] text-[#8a7a5a] uppercase whitespace-nowrap">IGI Certified</span>
+        <span className="text-[10px] tracking-[0.15em] text-[#8a7a5a] uppercase whitespace-nowrap">Conflict-Free Sourcing</span>
+        <span className="text-[10px] tracking-[0.15em] text-[#8a7a5a] uppercase whitespace-nowrap">Insured Shipping</span>
       </div>
 
-      {/* 🎥 HERO SECTION (Editorial Framed Look) */}
-      <section className="relative min-h-[80vh] w-full flex flex-col items-center justify-center overflow-hidden pb-20 pt-10">
-        <GrainOverlay />
-        <div className="absolute inset-0 z-0 bg-black">
-          {/* Editorial Frame */}
-          <div className="absolute inset-4 md:inset-8 overflow-hidden rounded-sm border border-white/5">
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-black/90 z-10 pointer-events-none"></div>
-            <img 
-              src={(tenant?.heroImageUrl && tenant.heroImageUrl.trim() !== '') ? tenant.heroImageUrl : "https://images.unsplash.com/photo-1599643478514-4a7f052843cb?w=1600&auto=format&fit=crop&q=80"} 
-              alt="Hero Jewelry" 
-              className="w-full h-full object-cover animate-[kenburns_20s_ease-out_infinite_alternate] opacity-80"
-            />
+      {/* ═══════════════════════════════════════════════════════
+          3. GOLD INDEX — numbered catalog grid
+          ═══════════════════════════════════════════════════════ */}
+      <section id="gold" className="px-6 md:px-10 py-16 md:py-20 border-b border-[#2A2724]">
+        {/* Section header */}
+        <div className="flex items-end justify-between mb-8 pb-6 border-b border-[#2A2724]">
+          <div className="flex items-center gap-6">
+            <span className="[writing-mode:vertical-rl] text-[9px] tracking-[0.2em] text-[#8a7a5a] uppercase hidden md:block">Gold</span>
+            <div>
+              <p className="text-[9px] tracking-[0.3em] text-[#8a7a5a] uppercase mb-2">Purest 22K & 24K</p>
+              <h2 className="font-serif font-light text-3xl md:text-4xl text-white/95">The Gold Index</h2>
+            </div>
           </div>
-        </div>
-
-        <div className="relative z-20 text-center px-6 max-w-4xl mx-auto flex flex-col items-center mt-12 md:mt-24">
-          <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-[var(--color-gold)] mb-8 opacity-90 font-medium">Fine Jewelry House</p>
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif font-light mb-8 leading-tight text-white/95 drop-shadow-2xl tracking-tight">
-            {tenant?.heroTitle || "Elegance Curated for Eternity"}
-          </h2>
-          <p className="text-sm md:text-base text-white/60 mb-14 max-w-xl font-sans tracking-widest font-light leading-relaxed">
-            {tenant?.heroSubtitle || "Discover our exclusive collection of handcrafted 22K gold and IF-grade diamond masterpieces."}
-          </p>
-          <Link href={`/collections`} className="border border-gold/50 text-gold text-xs uppercase tracking-[0.2em] px-10 py-4 transition-all duration-700 ease-luxury hover:bg-gold hover:text-black hover:border-gold">
-            Explore Collection
-          </Link>
-        </div>
-      </section>
-
-      {/* 📖 EDITORIAL LOOKBOOK */}
-      <section className="relative h-[65vh] w-full flex items-center justify-center py-10">
-        <GrainOverlay />
-        <div className="absolute inset-0 z-0 bg-black">
-          <div className="absolute inset-4 md:inset-8 overflow-hidden rounded-sm border border-white/5">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/40 z-10 pointer-events-none"></div>
-            <img 
-              src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=1600&auto=format&fit=crop&q=80" 
-              alt="Lookbook" 
-              className="w-full h-full object-cover object-[50%_40%] opacity-80"
-            />
-          </div>
-        </div>
-        <div className="relative z-20 text-center">
-          <h3 className="text-4xl md:text-5xl font-serif text-white/90 font-light mb-4 drop-shadow-xl">The Royal Legacy</h3>
-          <p className="text-white/70 font-sans tracking-wider text-sm uppercase">Timeless Traditions Restored</p>
-        </div>
-      </section>
-
-      {/* 🪙 GOLD COLLECTION SECTION */}
-      <section id="gold" className="py-24 md:py-32 px-6 max-w-[1400px] mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-white/5 pb-8">
-          <div>
-            <p className="text-gold uppercase tracking-[0.3em] text-xs font-semibold mb-4">Purest 22K & 24K</p>
-            <h3 className="text-4xl md:text-5xl font-serif font-light text-white/90">The Gold Collection</h3>
-          </div>
-          <Link href={`/collections/gold`} className="relative text-[11px] uppercase tracking-[0.15em] text-white/80 cursor-pointer after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-gold after:transition-[width] after:duration-500 after:ease-luxury hover:after:w-full hidden md:block">
-            View All Gold
+          <Link href="/collections/gold" className="text-[10px] tracking-[0.2em] text-[#8a7a5a] uppercase hover:text-[#D4AF37] transition-colors duration-500 border-b border-[#2A2724] hover:border-[#D4AF37] pb-1 hidden md:block">
+            View all →
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+        {/* Catalog grid — divide-x lines, NO rounded corners, NO shadows */}
+        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[#2A2724]">
           {displayGold.map((item: any, i: number) => (
-            <ProductCard key={item.id} product={item} />
+            <CatalogItem key={item.id} product={item} index={i} />
           ))}
         </div>
       </section>
 
-      {/* 🛠️ THE CRAFT STRIP */}
-      <section className="border-y border-white/5 bg-[#111]/30 py-16 overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-6">
-          <p className="text-center text-xs uppercase tracking-[0.3em] text-gold/80 mb-12">The Process</p>
-          <div className="flex gap-8 overflow-x-auto snap-x md:grid md:grid-cols-4 pb-4 md:pb-0 hide-scrollbar">
-            {[
-              { step: '01', title: 'Sourcing', desc: 'Ethically mined and conflict-free raw materials.' },
-              { step: '02', title: 'Design', desc: 'Sketched by visionary artists to capture modern elegance.' },
-              { step: '03', title: 'Hand-setting', desc: 'Each stone placed with millimeter precision by master artisans.' },
-              { step: '04', title: 'Certification', desc: 'Rigorous hallmarking and independent quality checks.' }
-            ].map((p, i) => (
-              <div key={i} className="min-w-[250px] snap-center">
-                <span className="text-gold/40 font-serif text-3xl mb-4 block">{p.step}</span>
-                <h4 className="text-white/90 text-lg font-serif mb-2">{p.title}</h4>
-                <p className="text-white/50 text-sm leading-relaxed">{p.desc}</p>
-              </div>
-            ))}
-          </div>
+      {/* ═══════════════════════════════════════════════════════
+          4. THE CRAFT — numbered process strip
+          ═══════════════════════════════════════════════════════ */}
+      <section className="border-b border-[#2A2724] py-16 px-6 md:px-10">
+        <p className="text-[9px] tracking-[0.3em] text-[#8a7a5a] uppercase mb-10">The process</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[#2A2724]">
+          {[
+            { step: '01', title: 'Sourcing', desc: 'Ethically mined, conflict-free raw materials.' },
+            { step: '02', title: 'Design', desc: 'Sketched by artists capturing modern elegance.' },
+            { step: '03', title: 'Hand-setting', desc: 'Each stone placed with millimeter precision.' },
+            { step: '04', title: 'Certification', desc: 'Rigorous BIS hallmarking and quality checks.' },
+          ].map((p, i) => (
+            <div key={i} className="px-6 first:pl-0 last:pr-0">
+              <span className="text-[#8a7a5a]/50 font-serif text-2xl mb-4 block">{p.step}</span>
+              <h4 className="text-white/90 text-sm font-serif mb-2">{p.title}</h4>
+              <p className="text-white/40 text-xs leading-relaxed font-sans">{p.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* 💎 DIAMOND COLLECTION SECTION */}
-      <section id="diamonds" className="py-24 md:py-32 px-6 max-w-[1400px] mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-white/5 pb-8">
-          <div>
-            <p className="text-gold uppercase tracking-[0.3em] text-xs font-semibold mb-4">Flawless Brilliance</p>
-            <h3 className="text-4xl md:text-5xl font-serif font-light text-white/90">The Diamond Collection</h3>
+      {/* ═══════════════════════════════════════════════════════
+          5. DIAMOND INDEX — numbered catalog grid
+          ═══════════════════════════════════════════════════════ */}
+      <section id="diamonds" className="px-6 md:px-10 py-16 md:py-20 border-b border-[#2A2724]">
+        <div className="flex items-end justify-between mb-8 pb-6 border-b border-[#2A2724]">
+          <div className="flex items-center gap-6">
+            <span className="[writing-mode:vertical-rl] text-[9px] tracking-[0.2em] text-[#8a7a5a] uppercase hidden md:block">Diamonds</span>
+            <div>
+              <p className="text-[9px] tracking-[0.3em] text-[#8a7a5a] uppercase mb-2">Flawless brilliance · IF & VVS</p>
+              <h2 className="font-serif font-light text-3xl md:text-4xl text-white/95">The Diamond Index</h2>
+            </div>
           </div>
-          <Link href={`/collections/diamonds`} className="relative text-[11px] uppercase tracking-[0.15em] text-white/80 cursor-pointer after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-gold after:transition-[width] after:duration-500 after:ease-luxury hover:after:w-full hidden md:block">
-            View All Diamonds
+          <Link href="/collections/diamonds" className="text-[10px] tracking-[0.2em] text-[#8a7a5a] uppercase hover:text-[#D4AF37] transition-colors duration-500 border-b border-[#2A2724] hover:border-[#D4AF37] pb-1 hidden md:block">
+            View all →
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[#2A2724]">
           {displayDiamonds.map((item: any, i: number) => (
-            <ProductCard key={item.id} product={item} />
+            <CatalogItem key={item.id} product={item} index={i + displayGold.length} />
           ))}
         </div>
       </section>
 
-      {/* 🎁 SHOP BY OCCASION */}
-      <section className="py-24 px-6 bg-[#0a0a0a]">
-        <div className="max-w-[1400px] mx-auto">
-          <p className="text-center text-xs uppercase tracking-[0.3em] text-gold/80 mb-12">Curated Edits</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {['The Bridal Trousseau', 'Everyday Elegance', 'The Gifting Edit'].map((title, i) => (
-              <div key={i} className="relative h-[300px] group cursor-pointer overflow-hidden rounded-sm bg-[#111]">
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-700 ease-luxury z-10"></div>
-                <img 
-                  src={`https://images.unsplash.com/photo-${i === 0 ? '1605100804763-247f67b2548e' : i === 1 ? '1606760227091-3dd870d97f1d' : '1515562141207-7a88fb7ce338'}?w=800&auto=format&fit=crop&q=80`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-luxury"
+      {/* ═══════════════════════════════════════════════════════
+          6. CURATED EDITS — editorial 3-panel
+          ═══════════════════════════════════════════════════════ */}
+      <section className="border-b border-[#2A2724] py-16 px-6 md:px-10">
+        <p className="text-[9px] tracking-[0.3em] text-[#8a7a5a] uppercase mb-8">Curated edits</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#2A2724]">
+          {[
+            { title: 'The Bridal Trousseau', ref: 'Edit 01', img: 'https://images.unsplash.com/photo-1605100804763-247f67b2548e?w=800&auto=format&fit=crop&q=80' },
+            { title: 'Everyday Elegance', ref: 'Edit 02', img: 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=800&auto=format&fit=crop&q=80' },
+            { title: 'The Gifting Edit', ref: 'Edit 03', img: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&auto=format&fit=crop&q=80' },
+          ].map((edit, i) => (
+            <Link key={i} href="/gifting" className="group px-0 md:px-8 first:pl-0 last:pr-0 py-8 md:py-0 block cursor-pointer">
+              <div className="border border-[#2A2724] p-1 mb-4 overflow-hidden">
+                <img
+                  src={edit.img}
+                  className="w-full h-[220px] object-cover group-hover:scale-[1.03] transition-transform duration-[900ms] ease-luxury"
                 />
-                <div className="absolute inset-0 z-20 flex items-center justify-center">
-                  <h4 className="text-2xl font-serif font-light text-white text-center px-4">{title}</h4>
-                </div>
               </div>
-            ))}
-          </div>
+              <p className="text-[9px] tracking-widest text-[#8a7a5a] uppercase mb-2">{edit.ref}</p>
+              <h3 className="font-serif font-light text-xl text-white/90 group-hover:text-[#D4AF37] transition-colors duration-500">{edit.title}</h3>
+            </Link>
+          ))}
         </div>
       </section>
 
-      {/* ✉️ PRIVATE CLIENT ACCESS */}
-      <section className="py-32 border-t border-white/5 text-center relative overflow-hidden">
-        <GrainOverlay />
-        <div className="max-w-xl mx-auto px-6 relative z-20">
-          <ShieldCheck className="mx-auto text-gold mb-6 opacity-80" size={32} strokeWidth={1} />
-          <h3 className="text-3xl font-serif font-light text-white/90 mb-4">Private Client Access</h3>
-          <p className="text-white/60 mb-8 font-light leading-relaxed">
-            Join an exclusive circle of collectors. Receive private invitations to unveilings, bespoke services, and curated acquisitions.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <input 
-              type="email" 
-              placeholder="Your email address" 
-              className="bg-transparent border-b border-white/20 px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors w-full sm:w-64"
+      {/* ═══════════════════════════════════════════════════════
+          7. PRIVATE CLIENT NEWSLETTER
+          ═══════════════════════════════════════════════════════ */}
+      <section className="py-24 px-6 md:px-10 border-b border-[#2A2724]">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-center max-w-5xl">
+          <div>
+            <p className="text-[9px] tracking-[0.3em] text-[#8a7a5a] uppercase mb-4">Private circle</p>
+            <h3 className="font-serif font-light text-3xl md:text-4xl text-white/95 mb-3">
+              Private Client Access
+            </h3>
+            <p className="text-sm text-white/40 font-sans font-light leading-relaxed max-w-md">
+              Join an exclusive circle of collectors. Receive private invitations to unveilings, bespoke consultations, and curated acquisitions.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-0 border border-[#2A2724]">
+            <input
+              type="email"
+              placeholder="Your email address"
+              className="bg-transparent px-5 py-4 text-sm text-white placeholder:text-white/30 focus:outline-none w-full sm:w-72 border-b sm:border-b-0 sm:border-r border-[#2A2724]"
             />
-            <button className="border border-gold text-gold text-xs uppercase tracking-[0.2em] px-8 py-3 hover:bg-gold hover:text-black transition-colors duration-500 ease-luxury shrink-0">
+            <button className="text-[11px] tracking-[0.25em] text-[#D4AF37] uppercase px-6 py-4 hover:bg-[#D4AF37] hover:text-black transition-colors duration-500 ease-luxury shrink-0 whitespace-nowrap">
               Request Access
             </button>
           </div>
         </div>
       </section>
-
     </>
   );
 }
