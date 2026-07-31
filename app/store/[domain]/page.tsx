@@ -47,7 +47,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
       </div>
 
       {/* 🎥 HERO SECTION */}
-      <section className="relative h-[85vh] w-full flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[85vh] w-full flex flex-col items-center justify-center overflow-hidden pb-20">
         <GrainOverlay />
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#0a0a0a] z-10 pointer-events-none"></div>
@@ -58,7 +58,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
           />
         </div>
 
-        <div className="relative z-20 text-center px-6 max-w-4xl mx-auto flex flex-col items-center mt-12">
+        <div className="relative z-20 text-center px-6 max-w-4xl mx-auto flex flex-col items-center mt-24">
           <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-gold)] mb-6 opacity-90">Fine Jewelry House</p>
           <h2 className="text-5xl md:text-7xl font-serif font-light mb-8 leading-tight text-white/90 drop-shadow-2xl">
             {tenant?.heroTitle || "Elegance Curated for Eternity"}
