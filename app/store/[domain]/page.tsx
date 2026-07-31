@@ -52,7 +52,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#0a0a0a] z-10 pointer-events-none"></div>
           <img 
-            src={tenant?.heroImageUrl || "https://images.unsplash.com/photo-1599643478514-4a7f052843cb?w=1600&auto=format&fit=crop&q=80"} 
+            src={(tenant?.heroImageUrl && tenant.heroImageUrl.trim() !== '') ? tenant.heroImageUrl : "https://images.unsplash.com/photo-1599643478514-4a7f052843cb?w=1600&auto=format&fit=crop&q=80"} 
             alt="Hero Jewelry" 
             className="w-full h-full object-cover animate-[kenburns_20s_ease-out_infinite_alternate]"
           />
