@@ -5,13 +5,24 @@ import { getSession } from '@/lib/session';
 export async function GET() {
   try {
     const session = await getSession();
-    if (!session || !session.tenantId) {
-      return NextResponse.json({ error: 'Unauthorized. No Tenant ID found.' }, { status: 401 });
+    if (!session || !session.userId) {
+      return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
+    }
+
+    let tenantId = session.tenantId;
+    if (!tenantId) {
+      // Fallback for older sessions without tenantId
+      const user = await prisma.user.findUnique({ where: { id: session.userId } });
+      if (user?.tenantId) {
+        tenantId = user.tenantId;
+      } else {
+        return NextResponse.json({ error: 'Unauthorized. No Tenant ID found.' }, { status: 401 });
+      }
     }
 
     // Get the most recent gold rate FOR THIS TENANT
     const latestRate = await prisma.goldRate.findFirst({
-      where: { tenantId: session.tenantId },
+      where: { tenantId },
       orderBy: { createdAt: 'desc' }
     });
 
@@ -36,8 +47,19 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const session = await getSession();
-    if (!session || !session.tenantId) {
-      return NextResponse.json({ error: 'Unauthorized. No Tenant ID found.' }, { status: 401 });
+    if (!session || !session.userId) {
+      return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
+    }
+
+    let tenantId = session.tenantId;
+    if (!tenantId) {
+      // Fallback for older sessions without tenantId
+      const user = await prisma.user.findUnique({ where: { id: session.userId } });
+      if (user?.tenantId) {
+        tenantId = user.tenantId;
+      } else {
+        return NextResponse.json({ error: 'Unauthorized. No Tenant ID found.' }, { status: 401 });
+      }
     }
 
     const data = await req.json();
@@ -45,7 +67,7 @@ export async function POST(req: Request) {
     // Create new rate linked to THIS TENANT
     const newRate = await prisma.goldRate.create({
       data: {
-        tenantId: session.tenantId,
+        tenantId,
         gold24k: Number(data.gold24k),
         gold22k: Number(data.gold22k),
         gold18k: Number(data.gold18k),
