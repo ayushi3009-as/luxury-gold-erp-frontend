@@ -2,6 +2,11 @@ import prisma from '@/lib/prisma';
 import { Search, ShoppingBag, User } from 'lucide-react';
 import Link from 'next/link';
 
+import { Playfair_Display, Inter } from 'next/font/google';
+
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-serif', weight: ['400', '500', '600'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
+
 export default async function StoreLayout({
   children,
   params,
@@ -14,7 +19,7 @@ export default async function StoreLayout({
   });
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white selection:bg-accent-gold selection:text-black font-sans flex flex-col">
+    <div className={`min-h-screen bg-[#0a0a0a] text-white selection:bg-accent-gold selection:text-black font-sans flex flex-col ${playfair.variable} ${inter.variable}`}>
       {/* 🌟 PREMIUM NAVBAR */}
       <nav className="fixed top-0 w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-2xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">

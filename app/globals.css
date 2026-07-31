@@ -10,6 +10,14 @@
   --color-accent-gold-hover: var(--accent-gold-hover);
   --color-border-theme: var(--border-theme);
   --animate-kenburns: kenburns 20s ease-out infinite alternate;
+  --font-serif: var(--font-serif), serif;
+  --font-sans: var(--font-sans), sans-serif;
+  --color-gold: #D4AF37;
+  --color-gold-soft: rgb(212 175 55 / 0.15);
+}
+
+.ease-luxury {
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes kenburns {
