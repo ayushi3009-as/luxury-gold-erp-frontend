@@ -41,21 +41,23 @@ export default function middleware(req: NextRequest) {
     }
   }
 
-  // If it's a subdomain, and it's NOT the 'app' subdomain (which is for ERP),
-  // we route them to the B2C storefront folder: /store/[domain]
+  // ERP/Admin paths that should never be rewritten to the storefront
+  const erpPaths = ['/login', '/register', '/dashboard', '/inventory', '/products',
+    '/pos', '/reports', '/settings', '/hr', '/purchase', '/saas-admin',
+    '/api', '/analytics', '/audit-logs', '/backup', '/gold-rate', '/notifications'];
+  const isErpPath = erpPaths.some(p => url.pathname.startsWith(p));
+
+  // If it's a subdomain (e.g. ram.tivra.marketing), route to that tenant's store
   if (isSubdomain && subdomain !== 'app' && subdomain !== 'www') {
-    // Rewrite the URL to /store/[subdomain]/path
-    // E.g. ram.tivra.marketing/products -> /store/ram/products
     return NextResponse.rewrite(new URL(`/store/${subdomain}${url.pathname}`, req.url));
   }
 
-  // If it's the main domain (gold.tivra.marketing) without a subdomain,
-  // we route them to the SaaS landing page
-  if (!isSubdomain && hostname !== 'localhost:3000') {
-    // If you want to show a generic SaaS marketing page on the root domain
-    // return NextResponse.rewrite(new URL(`/marketing${url.pathname}`, req.url));
+  // If it's the ROOT domain (gold.tivra.marketing) and NOT an ERP path,
+  // show the demo storefront — acts as the flagship/demo tenant
+  if (isExactRoot && !isErpPath) {
+    return NextResponse.rewrite(new URL(`/store/gold${url.pathname}`, req.url));
   }
 
-  // Otherwise, let them pass through to the ERP Admin dashboard (current root routes)
+  // Otherwise pass through to ERP admin routes
   return NextResponse.next();
 }
