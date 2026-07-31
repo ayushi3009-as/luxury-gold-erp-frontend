@@ -46,42 +46,47 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
         </div>
       </div>
 
-      {/* 🎥 HERO SECTION */}
-      <section className="relative min-h-[85vh] w-full flex flex-col items-center justify-center overflow-hidden pb-20">
+      {/* 🎥 HERO SECTION (Editorial Framed Look) */}
+      <section className="relative min-h-[80vh] w-full flex flex-col items-center justify-center overflow-hidden pb-20 pt-10">
         <GrainOverlay />
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#0a0a0a] z-10 pointer-events-none"></div>
-          <img 
-            src={(tenant?.heroImageUrl && tenant.heroImageUrl.trim() !== '') ? tenant.heroImageUrl : "https://images.unsplash.com/photo-1599643478514-4a7f052843cb?w=1600&auto=format&fit=crop&q=80"} 
-            alt="Hero Jewelry" 
-            className="w-full h-full object-cover animate-[kenburns_20s_ease-out_infinite_alternate]"
-          />
+        <div className="absolute inset-0 z-0 bg-black">
+          {/* Editorial Frame */}
+          <div className="absolute inset-4 md:inset-8 overflow-hidden rounded-sm border border-white/5">
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-black/90 z-10 pointer-events-none"></div>
+            <img 
+              src={(tenant?.heroImageUrl && tenant.heroImageUrl.trim() !== '') ? tenant.heroImageUrl : "https://images.unsplash.com/photo-1599643478514-4a7f052843cb?w=1600&auto=format&fit=crop&q=80"} 
+              alt="Hero Jewelry" 
+              className="w-full h-full object-cover animate-[kenburns_20s_ease-out_infinite_alternate] opacity-80"
+            />
+          </div>
         </div>
 
-        <div className="relative z-20 text-center px-6 max-w-4xl mx-auto flex flex-col items-center mt-24">
-          <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-gold)] mb-6 opacity-90">Fine Jewelry House</p>
-          <h2 className="text-5xl md:text-7xl font-serif font-light mb-8 leading-tight text-white/90 drop-shadow-2xl">
+        <div className="relative z-20 text-center px-6 max-w-4xl mx-auto flex flex-col items-center mt-12 md:mt-24">
+          <p className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-[var(--color-gold)] mb-8 opacity-90 font-medium">Fine Jewelry House</p>
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif font-light mb-8 leading-tight text-white/95 drop-shadow-2xl tracking-tight">
             {tenant?.heroTitle || "Elegance Curated for Eternity"}
           </h2>
-          <p className="text-lg text-white/70 mb-12 max-w-2xl font-sans tracking-wide">
+          <p className="text-sm md:text-base text-white/60 mb-14 max-w-xl font-sans tracking-widest font-light leading-relaxed">
             {tenant?.heroSubtitle || "Discover our exclusive collection of handcrafted 22K gold and IF-grade diamond masterpieces."}
           </p>
-          <Link href={`/collections`} className="border border-gold text-gold text-xs uppercase tracking-[0.2em] px-9 py-4 transition-[background-color,color] duration-500 ease-luxury hover:bg-gold hover:text-black">
+          <Link href={`/collections`} className="border border-gold/50 text-gold text-xs uppercase tracking-[0.2em] px-10 py-4 transition-all duration-700 ease-luxury hover:bg-gold hover:text-black hover:border-gold">
             Explore Collection
           </Link>
         </div>
       </section>
 
       {/* 📖 EDITORIAL LOOKBOOK */}
-      <section className="relative h-[70vh] overflow-hidden w-full flex items-center justify-center">
+      <section className="relative h-[65vh] w-full flex items-center justify-center py-10">
         <GrainOverlay />
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/40 to-transparent z-10 pointer-events-none"></div>
-          <img 
-            src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=1600&auto=format&fit=crop&q=80" 
-            alt="Lookbook" 
-            className="w-full h-full object-cover object-[50%_40%] scale-105"
-          />
+        <div className="absolute inset-0 z-0 bg-black">
+          <div className="absolute inset-4 md:inset-8 overflow-hidden rounded-sm border border-white/5">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/40 z-10 pointer-events-none"></div>
+            <img 
+              src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=1600&auto=format&fit=crop&q=80" 
+              alt="Lookbook" 
+              className="w-full h-full object-cover object-[50%_40%] opacity-80"
+            />
+          </div>
         </div>
         <div className="relative z-20 text-center">
           <h3 className="text-4xl md:text-5xl font-serif text-white/90 font-light mb-4 drop-shadow-xl">The Royal Legacy</h3>
@@ -101,7 +106,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
           {displayGold.map((item: any, i: number) => (
             <ProductCard key={item.id} product={item} />
           ))}

@@ -19,7 +19,7 @@ export function ProductCard({ product }: { product: any }) {
   
   return (
     <Link href={`/product/${product.id}`} className="group cursor-pointer block">
-      <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#111] mb-4 rounded-sm">
+      <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#111] mb-5 rounded-sm border border-white/5">
         <img
           src={product.imageUrl || fallback}
           alt={product.name}
