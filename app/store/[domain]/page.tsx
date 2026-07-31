@@ -28,7 +28,6 @@ function CatalogItem({ product, index }: { product: any; index: number }) {
         <img
           src={product.imageUrl || getFallback()}
           alt={product.name}
-          onError={(e) => { e.currentTarget.src = getFallback(); }}
           className="w-full h-[200px] md:h-[240px] object-cover transition-[object-position] duration-[900ms] ease-luxury group-hover:object-[70%_30%]"
         />
       </div>
