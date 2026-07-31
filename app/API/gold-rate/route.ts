@@ -3,19 +3,20 @@ import prisma from '@/lib/prisma';
 
 export async function GET() {
   try {
+    // Get the most recent gold rate
     const latestRate = await prisma.goldRate.findFirst({
-      orderBy: { effectiveAt: 'desc' },
+      orderBy: { createdAt: 'desc' }
     });
-    
+
     if (!latestRate) {
-      // Return a default mock rate if DB is empty for demo purposes
+      // Return default dummy rates if DB is empty
       return NextResponse.json({
-        gold24k: 7620,
-        gold22k: 7150,
-        gold18k: 5850,
-        silver: 85,
-        platinum: 3450,
-        effectiveAt: new Date(),
+        gold24k: 74250,
+        gold22k: 68100,
+        gold18k: 55680,
+        silver: 92500,
+        platinum: 45000,
+        effectiveAt: new Date()
       });
     }
 
@@ -26,24 +27,24 @@ export async function GET() {
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(req: Request) {
   try {
-    const body = await request.json();
-    const { gold24k, gold22k, gold18k, silver, platinum } = body;
-
+    const data = await req.json();
+    
     const newRate = await prisma.goldRate.create({
       data: {
-        gold24k,
-        gold22k,
-        gold18k,
-        silver,
-        platinum,
-      },
+        gold24k: Number(data.gold24k),
+        gold22k: Number(data.gold22k),
+        gold18k: Number(data.gold18k),
+        silver: Number(data.silver),
+        platinum: Number(data.platinum || 0),
+        effectiveAt: new Date()
+      }
     });
 
     return NextResponse.json(newRate, { status: 201 });
   } catch (error) {
-    console.error('Error adding gold rate:', error);
-    return NextResponse.json({ error: 'Failed to add gold rate' }, { status: 500 });
+    console.error('Error updating gold rate:', error);
+    return NextResponse.json({ error: 'Failed to update gold rate' }, { status: 500 });
   }
 }

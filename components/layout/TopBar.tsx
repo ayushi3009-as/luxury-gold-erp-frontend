@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Search, Bell, User, LogOut } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { logoutAction } from "@/app/actions/auth";
+import { LiveTopBarRate } from "./LiveTopBarRate";
 
 interface TopBarProps {
   title: string;
@@ -22,7 +23,7 @@ export default function TopBar({ title }: TopBarProps) {
         <div className="flex items-center bg-background-tertiary border border-border-theme rounded-full px-4 py-1.5 shadow-inner">
           <span className="text-lg mr-2">🪙</span>
           <span className="text-sm text-text-secondary">
-            Gold 22K: <span className="text-accent-gold font-semibold">₹ 7,620/g</span>
+            <LiveTopBarRate />
           </span>
         </div>
 

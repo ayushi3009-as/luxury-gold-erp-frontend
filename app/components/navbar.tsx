@@ -1,14 +1,14 @@
 "use client";
 
 import { Search, Bell, Settings } from "lucide-react";
+import { LiveTopBarRate } from "@/components/layout/LiveTopBarRate";
 
 export default function Navbar() {
   return (
     <header className="h-20 border-b border-[#b4a0a0] bg-background-secondary flex items-center justify-between px-8 text-text-primary">
       <div className="flex items-center gap-4">
-        <div className="rounded-xl border border-[#2C2C2C] bg-[#171717] px-5 py-2.5 flex items-center gap-2">
-          <span className="text-[#D4AF37] font-semibold">Gold 22K:</span>
-          <span className="font-mono text-text-primary">₹6,850/g</span>
+        <div className="flex items-center space-x-4 ml-8">
+          <LiveTopBarRate />
         </div>
 
         <div className="hidden md:flex rounded-xl border border-[#2C2C2C] bg-[#171717] px-5 py-2.5 items-center gap-2">
