@@ -9,6 +9,12 @@
   --color-accent-gold: var(--accent-gold);
   --color-accent-gold-hover: var(--accent-gold-hover);
   --color-border-theme: var(--border-theme);
+  --animate-kenburns: kenburns 20s ease-out infinite alternate;
+}
+
+@keyframes kenburns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
 }
 
 :root {

@@ -102,7 +102,16 @@ model Tenant {
   customDomain  String? @unique // e.g., 'www.ramjewellers.com'
   logoUrl       String?
   themeSettings Json?
-  isActive      Boolean @default(true)
+
+  // B2C CMS Fields
+  heroTitle    String?
+  heroSubtitle String?
+  heroImageUrl String?
+  contactEmail String?
+  contactPhone String?
+  aboutUsText  String?
+
+  isActive Boolean @default(true)
 
   // Relations will be implicitly created by Prisma 
   // or we can just leave the reverse relations empty if we don't query Tenant -> Models often.
@@ -628,6 +637,8 @@ model Product {
   name        String
   description String?
   category    String?
+  imageUrl    String?
+  isPublished Boolean @default(false)
 
   purity       String?
   weight       Float?

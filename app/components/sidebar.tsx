@@ -9,6 +9,7 @@ import {
   Settings,
   Headphones,
   Gem,
+  Globe,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -43,6 +44,11 @@ const menu = [
     icon: Settings,
     title: "Settings",
     href: "/dashboard/settings",
+  },
+  {
+    icon: Globe,
+    title: "Website",
+    href: "/dashboard/website",
   },
 ];
 
