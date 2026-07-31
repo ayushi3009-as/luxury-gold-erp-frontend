@@ -10,19 +10,36 @@ import StoreNavbar from "./StoreNavbar";
 export default function AppLayout({ children, userRole }: { children: React.ReactNode, userRole?: string }) {
   const pathname = usePathname();
 
-  const isPublicPage = 
-    pathname === "/" || 
-    pathname === "/login" || 
-    pathname.startsWith("/shop") || 
-    pathname.startsWith("/cart");
+  // All routes that are part of the B2C storefront (no ERP sidebar)
+  const storefrontPaths = [
+    "/store",
+    "/collections",
+    "/product",
+    "/wishlist",
+    "/checkout",
+    "/account",
+    "/search",
+    "/gifting",
+    "/custom-orders",
+    "/size-guide",
+    "/care",
+    "/certification",
+    "/book-appointment",
+    "/journal",
+    "/faq",
+    "/contact",
+    "/policies",
+    "/cart",
+    "/shop",
+  ];
+
+  const isPublicPage =
+    pathname === "/" ||
+    pathname === "/login" ||
+    storefrontPaths.some(p => pathname.startsWith(p));
 
   if (isPublicPage) {
-    return (
-      <div className="min-h-screen bg-background-primary text-text-primary flex flex-col">
-        {pathname !== "/login" && <StoreNavbar />}
-        <main className="flex-1">{children}</main>
-      </div>
-    );
+    return <>{children}</>;
   }
 
   return (

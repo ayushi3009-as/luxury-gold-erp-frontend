@@ -22,7 +22,7 @@ export default function middleware(req: NextRequest) {
 
   // We define our root domains. In production, this would be your actual domain.
   // For localhost, we use localhost:3000
-  const rootDomains = ['gold.tivra.marketing', 'tivra.marketing', 'localhost:3000'];
+  const rootDomains = ['gold.tivra.marketing', 'tivra.marketing', 'localhost:3000', 'localhost:3005'];
 
   // Identify if we are on a subdomain
   let isSubdomain = false;

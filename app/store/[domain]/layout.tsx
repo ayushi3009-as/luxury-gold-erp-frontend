@@ -136,6 +136,17 @@ export default async function StoreLayout({
           <p className="text-[9px] tracking-[0.2em] text-[#8a7a5a] uppercase">
             © {new Date().getFullYear()} {tenant?.name || 'Luxury Gold'}. All rights reserved.
           </p>
+
+          {/* Centre: Staff login — subtle, for store owner */}
+          <Link
+            href="/login"
+            className="text-[8px] tracking-[0.25em] text-[#2A2724] hover:text-[#8a7a5a] uppercase transition-colors duration-500 flex items-center gap-2 group"
+          >
+            <span className="w-3 h-px bg-[#2A2724] group-hover:bg-[#8a7a5a] transition-colors duration-500"></span>
+            Staff · ERP Login
+            <span className="w-3 h-px bg-[#2A2724] group-hover:bg-[#8a7a5a] transition-colors duration-500"></span>
+          </Link>
+
           <p className="text-[9px] tracking-[0.2em] text-[#8a7a5a] uppercase">
             Powered by <span className="text-[#D4AF37]">Tivra</span>
           </p>
