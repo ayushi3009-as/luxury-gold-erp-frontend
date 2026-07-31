@@ -11,7 +11,6 @@ import {
   ShoppingBag,
   TrendingUp,
   Users,
-  Users,
   Loader2
 } from "lucide-react";
 import { exportToCsv } from "@/lib/exportCsv";

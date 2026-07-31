@@ -97,6 +97,7 @@ export default function ReportsDashboardPage() {
           <p className="text-text-secondary mt-2">
             Overview of all reports in the Luxury Gold ERP System
           </p>
+        </div>
         <div className="flex items-center gap-3">
           <button onClick={() => alert("Export PDF feature coming soon")} className="flex items-center gap-2 rounded-lg border border-border-theme bg-background-secondary px-4 py-2 text-sm text-text-secondary hover:border-red-500 hover:text-red-500 transition-colors">
             <FileText size={16} />
