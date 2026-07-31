@@ -4,12 +4,11 @@ const prompts = [
   "Show today's sales report",
   "List low stock products",
   "Show pending repair orders",
-  "Generate GST report",
-  "Top selling jewellery",
-  "Today's customer registrations",
+  "How many customers do we have?",
+  "What is our total revenue?",
 ];
 
-export default function SuggestedPrompts() {
+export default function SuggestedPrompts({ onPromptClick }: { onPromptClick: (p: string) => void }) {
   return (
     <div className="mb-6">
       <h2 className="text-xl font-bold text-accent-gold mb-4">
@@ -20,6 +19,7 @@ export default function SuggestedPrompts() {
         {prompts.map((prompt, index) => (
           <button
             key={index}
+            onClick={() => onPromptClick(prompt)}
             className="
               px-4
               py-2

@@ -2,32 +2,16 @@
 
 import ChatMessage from "./ChatMessage";
 
-const messages = [
-  {
-    id: 1,
-    sender: "ai" as const,
-    message:
-      "Hello! 👋 Welcome to Luxury Gold ERP AI Assistant. How can I help you today?",
-    time: "10:00 AM",
-  },
-  {
-    id: 2,
-    sender: "user" as const,
-    message: "Show today's sales report.",
-    time: "10:01 AM",
-  },
-  {
-    id: 3,
-    sender: "ai" as const,
-    message:
-      "Today's sales are ₹2,45,000. A total of 18 invoices have been generated and the best-selling product is the 22K Gold Ring.",
-    time: "10:01 AM",
-  },
-];
+interface Message {
+  id: string;
+  sender: "ai" | "user";
+  message: string;
+  time: string;
+}
 
-export default function ChatWindow() {
+export default function ChatWindow({ messages }: { messages: Message[] }) {
   return (
-    <div className="bg-background-secondary border border-border-theme rounded-2xl p-6 h-[550px] overflow-y-auto space-y-4">
+    <div className="bg-background-secondary border border-border-theme rounded-2xl p-6 h-[550px] overflow-y-auto space-y-4 flex flex-col">
       {messages.map((item) => (
         <ChatMessage
           key={item.id}
