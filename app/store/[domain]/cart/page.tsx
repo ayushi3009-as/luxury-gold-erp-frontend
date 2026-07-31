@@ -20,7 +20,7 @@ export default function CartPage() {
           {/* Item 1 */}
           <div className="flex gap-6 items-center border-b border-white/5 pb-8">
             <div className="w-32 h-40 bg-[#111] overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1599643478514-4a7f052843cb?w=400&q=80" alt="Necklace" className="w-full h-full object-cover" />
+              <img src="/necklace.jpg" alt="Necklace" className="w-full h-full object-cover" />
             </div>
             <div className="flex-grow">
               <div className="flex justify-between items-start mb-2">
@@ -38,7 +38,7 @@ export default function CartPage() {
           {/* Item 2 */}
           <div className="flex gap-6 items-center border-b border-white/5 pb-8">
             <div className="w-32 h-40 bg-[#111] overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1605100804763-247f67b2548e?w=400&q=80" alt="Ring" className="w-full h-full object-cover" />
+              <img src="/ring.jpg" alt="Ring" className="w-full h-full object-cover" />
             </div>
             <div className="flex-grow">
               <div className="flex justify-between items-start mb-2">
