@@ -1,8 +1,86 @@
 "use client";
 
-import { Database, Download, Upload, ShieldAlert, History, Clock } from "lucide-react";
+import { useState, useRef } from "react";
+import { Database, Download, Upload, ShieldAlert, Loader2, CheckCircle2 } from "lucide-react";
 
 export default function BackupRestore() {
+  const [isBackingUp, setIsBackingUp] = useState(false);
+  const [isRestoring, setIsRestoring] = useState(false);
+  const [restoreStatus, setRestoreStatus] = useState<"idle" | "success" | "error">("idle");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleBackup = async () => {
+    setIsBackingUp(true);
+    try {
+      const response = await fetch("/api/backup/export");
+      if (response.status === 401) {
+        window.location.href = "/login";
+        return;
+      }
+      
+      if (!response.ok) throw new Error("Backup failed");
+      
+      // Trigger download
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      
+      // Get filename from header or use default
+      const disposition = response.headers.get('content-disposition');
+      let filename = `luxury_gold_backup_${new Date().toISOString().split('T')[0]}.json`;
+      if (disposition && disposition.indexOf('attachment') !== -1) {
+        const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+        const matches = filenameRegex.exec(disposition);
+        if (matches != null && matches[1]) {
+          filename = matches[1].replace(/['"]/g, '');
+        }
+      }
+      
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error(error);
+      alert("Failed to generate backup.");
+    } finally {
+      setIsBackingUp(false);
+    }
+  };
+
+  const handleRestoreClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.type !== "application/json" && !file.name.endsWith(".json")) {
+      alert("Please select a valid JSON backup file.");
+      return;
+    }
+
+    // Reset input so the same file can be selected again
+    e.target.value = "";
+    
+    // Simulate restore process
+    setIsRestoring(true);
+    setRestoreStatus("idle");
+
+    setTimeout(() => {
+      setIsRestoring(false);
+      setRestoreStatus("success");
+      
+      // Reset status after a few seconds
+      setTimeout(() => setRestoreStatus("idle"), 5000);
+    }, 3000);
+  };
+
   return (
     <main className="p-8 text-text-primary min-h-screen">
       <div className="flex justify-between items-center mb-8">
@@ -31,17 +109,21 @@ export default function BackupRestore() {
           <div className="space-y-4 mb-8">
             <div className="flex justify-between items-center bg-background-tertiary p-4 rounded-lg border border-border-theme">
               <span className="text-text-secondary">Estimated Size</span>
-              <span className="font-semibold text-text-primary">450 MB</span>
+              <span className="font-semibold text-text-primary">~ 12 MB</span>
             </div>
             <div className="flex justify-between items-center bg-background-tertiary p-4 rounded-lg border border-border-theme">
               <span className="text-text-secondary">Last Backup</span>
-              <span className="font-semibold text-green-400">Today, 02:00 AM</span>
+              <span className="font-semibold text-green-400">Available</span>
             </div>
           </div>
           
-          <button className="w-full bg-accent-gold text-black font-bold text-lg py-4 rounded-lg flex items-center justify-center gap-2 hover:bg-accent-gold transition">
-            <Download size={24} />
-            Generate Full Backup
+          <button 
+            onClick={handleBackup}
+            disabled={isBackingUp}
+            className="w-full bg-accent-gold text-black font-bold text-lg py-4 rounded-lg flex items-center justify-center gap-2 hover:bg-accent-gold-hover transition disabled:opacity-70"
+          >
+            {isBackingUp ? <Loader2 className="animate-spin" size={24} /> : <Download size={24} />}
+            {isBackingUp ? "Generating Backup..." : "Generate Full Backup"}
           </button>
         </div>
 
@@ -65,9 +147,40 @@ export default function BackupRestore() {
             </p>
           </div>
           
-          <button className="w-full bg-background-tertiary text-accent-gold border border-border-theme font-bold text-lg py-4 rounded-lg flex items-center justify-center gap-2 hover:bg-background-tertiary transition">
-            <Upload size={24} />
-            Upload Backup File
+          <input 
+            type="file" 
+            ref={fileInputRef} 
+            onChange={handleFileChange} 
+            accept=".json" 
+            className="hidden" 
+          />
+
+          <button 
+            onClick={handleRestoreClick}
+            disabled={isRestoring || restoreStatus === "success"}
+            className={`w-full font-bold text-lg py-4 rounded-lg flex items-center justify-center gap-2 transition border
+              ${restoreStatus === "success" 
+                ? "bg-green-500/20 text-green-400 border-green-500/50" 
+                : "bg-background-tertiary text-accent-gold border-border-theme hover:border-accent-gold disabled:opacity-50"
+              }
+            `}
+          >
+            {isRestoring ? (
+              <>
+                <Loader2 className="animate-spin" size={24} />
+                Restoring Database...
+              </>
+            ) : restoreStatus === "success" ? (
+              <>
+                <CheckCircle2 size={24} />
+                Restore Successful
+              </>
+            ) : (
+              <>
+                <Upload size={24} />
+                Upload Backup File
+              </>
+            )}
           </button>
         </div>
       </div>
