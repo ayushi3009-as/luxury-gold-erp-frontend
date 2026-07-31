@@ -82,9 +82,15 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
   const displayGold = (goldProducts.length > 0 ? goldProducts : demoGoldProducts).map(mapProduct);
   const displayDiamonds = (diamondProducts.length > 0 ? diamondProducts : demoDiamondProducts).map(mapProduct);
 
+  // Hero: use tenant image if set, else use a curated set of premium jewelry images
+  const heroImages = [
+    'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=1400&auto=format&fit=crop&q=90', // Gold necklace close-up
+    'https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=1400&auto=format&fit=crop&q=90', // Diamond ring editorial
+    'https://images.unsplash.com/photo-1619119069152-a2b331eb392a?w=1400&auto=format&fit=crop&q=90', // Luxury jewelry flat lay
+  ];
   const heroImage = (tenant?.heroImageUrl && tenant.heroImageUrl.trim() !== '')
     ? tenant.heroImageUrl
-    : 'https://images.unsplash.com/photo-1599643478514-4a7f052843cb?w=1200&auto=format&fit=crop&q=80';
+    : heroImages[0];
 
   return (
     <>
@@ -93,7 +99,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
       {/* ═══════════════════════════════════════════════════════
           1. ASYMMETRIC EDITORIAL HERO
           ═══════════════════════════════════════════════════════ */}
-      <section className="grid grid-cols-1 md:grid-cols-[40px_1fr_1fr] min-h-[78vh] border-b border-[#2A2724] pt-[96px]">
+      <section className="grid grid-cols-1 md:grid-cols-[40px_1fr_1fr] min-h-[80vh] border-b border-[#2A2724] pt-[64px]">
 
         {/* Vertical rail — hidden on mobile */}
         <div className="hidden md:flex border-r border-[#2A2724] items-end justify-center pb-8">
