@@ -47,6 +47,7 @@ Manage supplier jewellery returns
 
 
 <button
+onClick={() => alert("Create Purchase Return feature coming soon")}
 className="
 bg-[#D4AF37]
 text-black
@@ -56,6 +57,8 @@ py-3
 rounded-xl
 w-full
 md:w-auto
+hover:bg-yellow-400
+transition-colors
 "
 >
 

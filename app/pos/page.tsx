@@ -13,7 +13,7 @@ export default function POSBilling() {
 
   useEffect(() => {
     // Fetch products
-    fetch('/API/products')
+    fetch('/api/products')
       .then(res => res.json())
       .then(data => {
         setProducts(data);
@@ -67,7 +67,7 @@ export default function POSBilling() {
 
     try {
       // Create a dummy customer or use an existing one if we had a full selector
-      const customerRes = await fetch('/API/customers', {
+      const customerRes = await fetch('/api/customers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -77,7 +77,7 @@ export default function POSBilling() {
       });
       const customer = await customerRes.json();
 
-      const invoiceRes = await fetch('/API/invoices', {
+      const invoiceRes = await fetch('/api/invoices', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

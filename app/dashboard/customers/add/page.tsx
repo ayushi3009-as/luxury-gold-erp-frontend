@@ -37,12 +37,26 @@ export default function AddCustomerPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      router.push("/dashboard/customers");
-    }, 2000);
+    try {
+      const res = await fetch("/api/customers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form)
+      });
+      if (res.ok) {
+        setSubmitted(true);
+        setTimeout(() => {
+          router.push("/dashboard/customers");
+        }, 2000);
+      } else {
+        alert("Failed to save customer");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error saving customer");
+    }
   };
 
   return (

@@ -30,7 +30,7 @@ export default function CartPage() {
 
     try {
       // 1. Create a dummy customer for online sales
-      const customerRes = await fetch('/API/customers', {
+      const customerRes = await fetch('/api/customers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -46,7 +46,7 @@ export default function CartPage() {
       // 2. Create Invoice and deduct stock
       const totalAmount = cart.reduce((acc, item) => acc + item.sellingPrice, 0);
       
-      const invoiceRes = await fetch('/API/invoices', {
+      const invoiceRes = await fetch('/api/invoices', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

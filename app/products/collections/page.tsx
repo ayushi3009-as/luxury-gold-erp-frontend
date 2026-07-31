@@ -16,7 +16,7 @@ export default function CollectionsPage() {
             </h1>
             <p className="mt-1 text-sm text-text-secondary">Manage special jewellery collections (e.g. Wedding, Summer).</p>
           </div>
-          <button className="flex items-center gap-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 px-6 py-2.5 text-sm font-bold text-indigo-400 transition-all hover:bg-indigo-500/20">
+          <button onClick={() => alert("New Collection feature is coming soon")} className="flex items-center gap-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 px-6 py-2.5 text-sm font-bold text-indigo-400 transition-all hover:bg-indigo-500/20">
             <Plus size={18} />
             New Collection
           </button>

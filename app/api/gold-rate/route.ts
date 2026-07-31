@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { getSession } from '@/lib/session';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const session = await getSession();
@@ -18,7 +20,7 @@ export async function GET() {
       console.log("User from DB for fallback:", user);
       if (user?.tenantId) {
         tenantId = user.tenantId;
-      } else {
+      } else if (session.role !== 'Super Admin' && session.role !== 'SUPER_ADMIN') {
         console.log("No tenantId in DB user");
         return NextResponse.json({ error: 'Unauthorized. No Tenant ID found.' }, { status: 401 });
       }
@@ -60,7 +62,7 @@ export async function POST(req: Request) {
       console.log("User from DB for fallback in POST:", user);
       if (user?.tenantId) {
         tenantId = user.tenantId;
-      } else {
+      } else if (session.role !== 'Super Admin' && session.role !== 'SUPER_ADMIN') {
         console.log("No tenantId in DB user for POST");
         return NextResponse.json({ error: 'Unauthorized. No Tenant ID found.' }, { status: 401 });
       }

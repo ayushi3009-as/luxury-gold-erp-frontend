@@ -11,12 +11,17 @@ import {
   ShoppingBag,
   TrendingUp,
   Users,
+  Users,
   Loader2
 } from "lucide-react";
+import { exportToCsv } from "@/lib/exportCsv";
+import { useRouter } from "next/navigation";
 
 export default function SalesDashboard() {
+  const router = useRouter();
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [timeFilter, setTimeFilter] = useState("This Month");
 
   useEffect(() => {
     async function fetchSalesData() {
@@ -74,13 +79,18 @@ export default function SalesDashboard() {
           </div>
 
           <div className="flex items-center gap-3">
-            <button className="flex items-center gap-2 rounded-xl border border-white/10 bg-background-secondary/50 backdrop-blur-md px-5 py-2.5 text-sm font-medium text-white transition-all hover:border-accent-gold/50">
-              <CalendarDays size={16} className="text-accent-gold" />
-              This Month
-              <ChevronDown size={15} />
-            </button>
+            <select 
+              value={timeFilter}
+              onChange={(e) => setTimeFilter(e.target.value)}
+              className="rounded-xl border border-white/10 bg-background-secondary/50 backdrop-blur-md px-5 py-2.5 text-sm font-medium text-white outline-none transition-all hover:border-accent-gold/50 cursor-pointer appearance-none"
+            >
+              <option value="Today">Today</option>
+              <option value="This Week">This Week</option>
+              <option value="This Month">This Month</option>
+              <option value="This Year">This Year</option>
+            </select>
 
-            <button className="rounded-xl bg-accent-gold px-6 py-2.5 text-sm font-bold text-black transition-all hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-[1.02]">
+            <button onClick={() => exportToCsv('sales_report.csv', recentTransactions)} className="rounded-xl bg-accent-gold px-6 py-2.5 text-sm font-bold text-black transition-all hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-[1.02]">
               Export Report
             </button>
           </div>
@@ -190,7 +200,7 @@ export default function SalesDashboard() {
           <div className="rounded-2xl border border-white/5 bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl xl:col-span-2">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-bold tracking-wide text-white">TOP SELLING PRODUCTS</h2>
-              <span className="cursor-pointer text-xs font-semibold text-accent-gold hover:text-yellow-400 transition-colors">View All →</span>
+              <button onClick={() => router.push('/reports/sales')} className="cursor-pointer text-xs font-semibold text-accent-gold hover:text-yellow-400 transition-colors">View All →</button>
             </div>
 
             <div className="overflow-x-auto rounded-xl border border-white/10 bg-black/20">
@@ -246,7 +256,7 @@ export default function SalesDashboard() {
           <div className="absolute bottom-0 right-0 w-full h-1 bg-gradient-to-r from-transparent via-accent-gold/20 to-transparent"></div>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-bold tracking-wide text-white">RECENT TRANSACTIONS</h2>
-            <span className="cursor-pointer text-xs font-semibold text-accent-gold hover:text-yellow-400 transition-colors">View All →</span>
+            <button onClick={() => router.push('/reports/sales')} className="cursor-pointer text-xs font-semibold text-accent-gold hover:text-yellow-400 transition-colors">View All →</button>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

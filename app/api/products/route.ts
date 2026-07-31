@@ -1,33 +1,24 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const products = await prisma.product.findMany({
       include: {
-        category: true
+        inventory: true,
       },
       orderBy: { createdAt: 'desc' }
     });
 
     const metrics = {
       totalProducts: products.length,
-      goldProducts: products.filter(p => p.metalType === 'Gold').length,
-      diamondProducts: products.filter(p => p.metalType === 'Diamond').length,
+      goldProducts: products.filter(p => p.category === 'Gold Jewellery').length,
+      diamondProducts: products.filter(p => p.category === 'Diamond Jewellery').length,
     };
 
-    return NextResponse.json({
-      products: products.map(p => ({
-        id: p.id,
-        sku: p.sku,
-        name: p.name,
-        category: p.category.name,
-        metalType: p.metalType,
-        grossWeight: p.grossWeight,
-        status: p.status
-      })),
-      metrics
-    });
+    return NextResponse.json(products);
   } catch (error) {
     console.error('Error fetching products:', error);
     return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
@@ -38,22 +29,38 @@ export async function POST(req: Request) {
   try {
     const data = await req.json();
     
-    // Auto-generate SKU if not provided
-    const sku = data.sku || `SKU-${Math.floor(100000 + Math.random() * 900000)}`;
+    // Auto-generate productCode if not provided
+    const productCode = data.productCode || `PRD-${Math.floor(100000 + Math.random() * 900000)}`;
 
-    const product = await prisma.product.create({
-      data: {
-        sku,
-        name: data.name,
-        categoryId: data.categoryId,
-        metalType: data.metalType || 'Gold',
-        purity: data.purity || '22K',
-        grossWeight: Number(data.grossWeight) || 0,
-        netWeight: Number(data.netWeight) || 0,
-        makingChargeType: data.makingChargeType || 'PER_GRAM',
-        makingCharge: Number(data.makingCharge) || 0,
-        status: 'IN_STOCK'
+    const product = await prisma.$transaction(async (prisma) => {
+      const newProduct = await prisma.product.create({
+        data: {
+          productCode,
+          barcode: data.barcode || productCode,
+          name: data.name,
+          category: data.category || 'Gold Jewellery',
+          purity: data.purity || '22K',
+          weight: Number(data.weight) || 0,
+          sellingPrice: Number(data.sellingPrice) || 0,
+          costPrice: Number(data.costPrice) || 0,
+          makingCharge: Number(data.makingCharge) || 0,
+          isPublished: true,
+        }
+      });
+
+      // Create initial inventory
+      if (data.quantity !== undefined) {
+        await prisma.inventory.create({
+          data: {
+            productId: newProduct.id,
+            quantity: Number(data.quantity) || 0,
+            minimumStock: Number(data.minimumStock) || 5,
+            type: "FINISHED_GOOD",
+          }
+        });
       }
+
+      return newProduct;
     });
 
     return NextResponse.json(product, { status: 201 });

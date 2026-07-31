@@ -23,7 +23,7 @@ export default function ImagesPage() {
     );
   }
 
-  const products = data?.products || [];
+  const products = Array.isArray(data) ? data : (data?.products || []);
 
   return (
     <div className="relative min-h-[80vh] p-6 text-text-primary">
@@ -38,7 +38,7 @@ export default function ImagesPage() {
             </h1>
             <p className="mt-1 text-sm text-text-secondary">View and upload high-quality images for your inventory.</p>
           </div>
-          <button className="flex items-center gap-2 rounded-xl bg-purple-500/10 border border-purple-500/20 px-6 py-2.5 text-sm font-bold text-purple-400 transition-all hover:bg-purple-500/20">
+          <button onClick={() => alert("Bulk Upload Images feature coming soon")} className="flex items-center gap-2 rounded-xl bg-purple-500/10 border border-purple-500/20 px-6 py-2.5 text-sm font-bold text-purple-400 transition-all hover:bg-purple-500/20">
             <Upload size={18} />
             Bulk Upload
           </button>

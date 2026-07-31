@@ -22,6 +22,7 @@ import {
   getRecentTransactions, 
   getLowStockProducts 
 } from "@/lib/actions/dashboard.actions";
+import { CustomizeDashboardButton, AskAIAssistantButton } from "./DashboardActionButtons";
 
 function MiniChart() {
   return (
@@ -318,9 +319,7 @@ export default async function Home() {
       <div className="mt-5 rounded-xl border border-border-theme bg-background-secondary p-5">
         <div className="flex items-center justify-between">
           <h3 className="font-semibold text-accent-gold">BUSINESS & MANAGEMENT SHORTCUTS</h3>
-          <button className="rounded-md border border-border-theme px-3 py-2 text-xs text-accent-gold hover:bg-background-tertiary">
-            Customize Dashboard
-          </button>
+          <CustomizeDashboardButton />
         </div>
         <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
           {[
@@ -359,10 +358,7 @@ export default async function Home() {
               <p className="mt-1 text-sm text-text-secondary">Your intelligent business assistant is ready to help.</p>
             </div>
           </div>
-          <button className="flex items-center justify-center gap-2 rounded-lg bg-accent-gold px-5 py-3 text-sm font-semibold text-black transition hover:bg-yellow-500">
-            <Bot size={17} />
-            Ask AI Assistant
-          </button>
+          <AskAIAssistantButton />
         </div>
         <div className="mt-5 grid gap-3 md:grid-cols-3">
           <div className="rounded-lg border border-border-theme bg-background-secondary p-4 relative z-10">

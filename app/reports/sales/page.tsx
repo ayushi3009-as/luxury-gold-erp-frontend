@@ -20,10 +20,7 @@ export default function SalesReportPage() {
     setIsLoading(true);
     try {
       const res = await fetch('/api/reports/sales');
-      if (res.status === 401) {
-        window.location.href = '/login';
-        return;
-      }
+      if (res.status === 401) { console.warn("Unauthorized fetch"); }
       if (res.ok) {
         const json = await res.json();
         setSales(json);

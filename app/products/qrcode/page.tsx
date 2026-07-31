@@ -23,7 +23,7 @@ export default function QRCodePage() {
     );
   }
 
-  const products = data?.products || [];
+  const products = Array.isArray(data) ? data : (data?.products || []);
 
   return (
     <div className="relative min-h-[80vh] p-6 text-text-primary">
@@ -36,7 +36,7 @@ export default function QRCodePage() {
             </h1>
             <p className="mt-1 text-sm text-text-secondary">Generate and print QR codes for quick mobile scanning.</p>
           </div>
-          <button className="flex items-center gap-2 rounded-xl bg-white/10 px-6 py-2.5 text-sm font-bold text-white transition-all hover:bg-white/20">
+          <button onClick={() => window.print()} className="flex items-center gap-2 rounded-xl bg-white/10 px-6 py-2.5 text-sm font-bold text-white transition-all hover:bg-white/20">
             <Printer size={18} />
             Print All
           </button>

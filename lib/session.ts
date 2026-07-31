@@ -28,7 +28,7 @@ export async function createSession(userId: string, role: string, tenantId?: str
   cookieStore.set("session", session, {
     expires,
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: false, // Set to false to prevent dropping on EC2 without proper HTTPS proxy
     sameSite: "lax",
     path: "/",
   });
@@ -39,7 +39,7 @@ export async function logout() {
   cookieStore.set("session", "", {
     expires: new Date(0),
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: false,
     sameSite: "lax",
     path: "/",
   });

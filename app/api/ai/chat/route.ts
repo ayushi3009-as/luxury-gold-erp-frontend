@@ -14,7 +14,7 @@ export async function POST(req: Request) {
       const user = await prisma.user.findUnique({ where: { id: session.userId } });
       if (user?.tenantId) {
         tenantId = user.tenantId;
-      } else {
+      } else if (session.role !== 'Super Admin' && session.role !== 'SUPER_ADMIN') {
         return NextResponse.json({ error: 'Unauthorized. No Tenant ID found.' }, { status: 401 });
       }
     }

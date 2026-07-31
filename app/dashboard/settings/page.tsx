@@ -14,7 +14,7 @@ export default function StoreSettingsPage() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    fetch("/API/settings")
+    fetch("/api/settings")
       .then(res => res.json())
       .then(data => {
         setSettings({
@@ -30,7 +30,7 @@ export default function StoreSettingsPage() {
   const handleSave = async () => {
     setSaving(true);
     try {
-      const res = await fetch("/API/settings", {
+      const res = await fetch("/api/settings", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(settings)

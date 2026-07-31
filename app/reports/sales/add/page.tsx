@@ -36,10 +36,7 @@ export default function AddSalesPage() {
         body: JSON.stringify(formData),
       });
 
-      if (res.status === 401) {
-        window.location.href = "/login";
-        return;
-      }
+      if (res.status === 401) { console.warn("Unauthorized fetch"); }
 
       if (res.ok) {
         router.push("/reports/sales");

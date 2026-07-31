@@ -23,7 +23,7 @@ export default function PricingPage() {
     );
   }
 
-  const products = data?.products || [];
+  const products = Array.isArray(data) ? data : (data?.products || []);
 
   return (
     <div className="relative min-h-[80vh] p-6 text-text-primary">
@@ -38,7 +38,7 @@ export default function PricingPage() {
             </h1>
             <p className="mt-1 text-sm text-text-secondary">View weight and estimated pricing details for all items.</p>
           </div>
-          <button className="flex items-center gap-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 px-6 py-2.5 text-sm font-bold text-emerald-400 transition-all hover:bg-emerald-500/20">
+          <button onClick={() => alert("Update Gold Rate feature coming soon")} className="flex items-center gap-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 px-6 py-2.5 text-sm font-bold text-emerald-400 transition-all hover:bg-emerald-500/20">
             <Calculator size={18} />
             Update Gold Rate
           </button>

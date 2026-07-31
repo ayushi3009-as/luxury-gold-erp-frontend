@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const invoices = await prisma.invoice.findMany({
@@ -70,16 +72,21 @@ export async function POST(request: Request) {
         }
       });
 
-      // Update Inventory
+      // Update Inventory safely
       for (const item of items) {
-        await prisma.inventory.update({
-          where: { productId: item.productId },
-          data: {
-            quantity: {
-              decrement: item.quantity
-            }
-          }
+        const inv = await prisma.inventory.findUnique({
+          where: { productId: item.productId }
         });
+        if (inv) {
+          await prisma.inventory.update({
+            where: { productId: item.productId },
+            data: {
+              quantity: {
+                decrement: item.quantity
+              }
+            }
+          });
+        }
       }
 
       return invoice;

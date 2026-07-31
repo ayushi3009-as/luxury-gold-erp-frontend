@@ -22,10 +22,9 @@ export default function FinanceDashboard() {
   async function fetchDashboardData() {
     setIsLoading(true);
     try {
-      const res = await fetch('/api/finance/dashboard');
+      const res = await fetch(`/api/finance/dashboard?t=${Date.now()}`);
       if (res.status === 401) {
-        window.location.href = '/login';
-        return;
+        console.warn('Unauthorized fetch to finance dashboard');
       }
       if (res.ok) {
         const json = await res.json();

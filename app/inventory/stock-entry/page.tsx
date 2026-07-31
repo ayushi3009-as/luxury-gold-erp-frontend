@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   CalendarDays,
@@ -22,6 +22,11 @@ export default function StockEntry() {
   const [products, setProducts] = useState<any[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [entryNumber, setEntryNumber] = useState("");
+
+  useEffect(() => {
+    setEntryNumber(`SE-${new Date().getFullYear()}-${Math.floor(Math.random()*9000)+1000}`);
+  }, []);
   
   const [newProduct, setNewProduct] = useState({
     name: "",
@@ -55,7 +60,7 @@ export default function StockEntry() {
     setIsSaving(true);
     try {
       for (const prod of products) {
-        await fetch('/API/products', {
+        await fetch('/api/products', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -126,7 +131,7 @@ export default function StockEntry() {
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             <div className="group">
               <label className="mb-2 block text-xs font-semibold tracking-wider text-text-secondary group-focus-within:text-accent-gold transition-colors">STOCK ENTRY NUMBER</label>
-              <input type="text" value={`SE-${new Date().getFullYear()}-${Math.floor(Math.random()*9000)+1000}`} readOnly className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3.5 text-sm font-mono text-white/70 outline-none transition-all cursor-not-allowed" />
+              <input type="text" value={entryNumber} readOnly className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3.5 text-sm font-mono text-white/70 outline-none transition-all cursor-not-allowed" />
             </div>
 
             <div className="group">

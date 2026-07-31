@@ -22,7 +22,13 @@ export default function AddProductPage() {
   useEffect(() => {
     fetch('/api/categories')
       .then(res => res.json())
-      .then(data => setCategories(data))
+      .then(data => {
+        if (Array.isArray(data)) {
+          setCategories(data);
+        } else if (data && Array.isArray(data.categories)) {
+          setCategories(data.categories);
+        }
+      })
       .catch(console.error);
   }, []);
 

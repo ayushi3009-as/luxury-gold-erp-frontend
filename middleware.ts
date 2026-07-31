@@ -44,7 +44,7 @@ export default function middleware(req: NextRequest) {
   // ERP/Admin paths that should never be rewritten to the storefront
   const erpPaths = ['/login', '/register', '/dashboard', '/inventory', '/products',
     '/pos', '/reports', '/settings', '/hr', '/purchase', '/saas-admin',
-    '/api', '/analytics', '/audit-logs', '/backup', '/gold-rate', '/notifications', '/ai-assistant'];
+    '/api', '/analytics', '/audit-logs', '/backup', '/gold-rate', '/notifications', '/ai-assistant', '/repair', '/manufacturing'];
   const isErpPath = erpPaths.some(p => url.pathname.startsWith(p));
 
   // If it's a subdomain (e.g. ram.tivra.marketing), route to that tenant's store

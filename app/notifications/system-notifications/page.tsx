@@ -21,10 +21,7 @@ export default function SystemNotificationsPage() {
     setIsLoading(true);
     try {
       const res = await fetch("/api/notifications");
-      if (res.status === 401) {
-        window.location.href = "/login";
-        return;
-      }
+      if (res.status === 401) { console.warn("Unauthorized fetch"); }
       if (res.ok) {
         const data = await res.json();
         setNotifications(data);

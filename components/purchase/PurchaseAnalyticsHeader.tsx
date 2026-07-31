@@ -1,8 +1,8 @@
 "use client";
-
+import { useState } from "react";
 
 export default function PurchaseAnalyticsHeader(){
-
+  const [filter, setFilter] = useState("This Month");
 
 return (
 
@@ -48,6 +48,8 @@ Analyze purchase performance and supplier data
 
 
 <select
+value={filter}
+onChange={(e) => setFilter(e.target.value)}
 className="
 bg-[#111]
 border
@@ -56,6 +58,7 @@ rounded-xl
 px-4
 py-3
 text-white
+outline-none
 "
 >
 

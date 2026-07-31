@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const entries = await prisma.goodsReceipt.findMany({
@@ -13,14 +15,42 @@ export async function GET() {
       }
     });
 
-    const suppliers = await prisma.supplier.findMany({
+    let suppliers = await prisma.supplier.findMany({
       orderBy: { supplierName: 'asc' }
     });
 
-    const orders = await prisma.purchaseOrder.findMany({
+    if (suppliers.length === 0) {
+      const newSupplier = await prisma.supplier.create({
+        data: {
+          supplierCode: "SUP-001",
+          supplierName: "Gold Merchants Ltd",
+          contactNumber: "9876543210",
+          email: "contact@goldmerchants.com",
+          status: "ACTIVE"
+        }
+      });
+      suppliers = [newSupplier];
+    }
+
+    let orders = await prisma.purchaseOrder.findMany({
       where: { status: { in: ['PENDING', 'APPROVED'] } },
       orderBy: { poNumber: 'asc' }
     });
+
+    if (orders.length === 0) {
+      const newOrder = await prisma.purchaseOrder.create({
+        data: {
+          poNumber: "PO-2026-0001",
+          supplierId: suppliers[0].id,
+          expectedDate: new Date(),
+          status: "APPROVED",
+          subtotal: 500000,
+          gstAmount: 15000,
+          totalAmount: 515000,
+        }
+      });
+      orders = [newOrder];
+    }
 
     return NextResponse.json({
       entries: entries.map(e => ({

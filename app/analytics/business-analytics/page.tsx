@@ -22,10 +22,7 @@ export default function BusinessAnalyticsPage() {
     setIsLoading(true);
     try {
       const res = await fetch('/api/analytics/business');
-      if (res.status === 401) {
-        window.location.href = '/login';
-        return;
-      }
+      if (res.status === 401) { console.warn("Unauthorized fetch"); }
       if (res.ok) {
         const json = await res.json();
         setData(json);

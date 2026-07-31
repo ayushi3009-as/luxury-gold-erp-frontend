@@ -16,7 +16,7 @@ export default function BrandsPage() {
             </h1>
             <p className="mt-1 text-sm text-text-secondary">Manage jewellery brands associated with your products.</p>
           </div>
-          <button className="flex items-center gap-2 rounded-xl bg-red-500/10 border border-red-500/20 px-6 py-2.5 text-sm font-bold text-red-400 transition-all hover:bg-red-500/20">
+          <button onClick={() => alert("New Brand feature is coming soon")} className="flex items-center gap-2 rounded-xl bg-red-500/10 border border-red-500/20 px-6 py-2.5 text-sm font-bold text-red-400 transition-all hover:bg-red-500/20">
             <Plus size={18} />
             New Brand
           </button>

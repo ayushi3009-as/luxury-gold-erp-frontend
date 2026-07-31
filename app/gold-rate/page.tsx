@@ -19,10 +19,7 @@ export default function GoldRatePage() {
   async function fetchRates() {
     try {
       const res = await fetch('/api/gold-rate');
-      if (res.status === 401) {
-        window.location.href = '/login';
-        return;
-      }
+      if (res.status === 401) { console.warn("Unauthorized fetch"); }
       if (res.ok) {
         const json = await res.json();
         setData(json);
@@ -52,10 +49,7 @@ export default function GoldRatePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newRates)
       });
-      if (res.status === 401) {
-        window.location.href = '/login';
-        return;
-      }
+      if (res.status === 401) { console.warn("Unauthorized fetch"); }
       if (res.ok) {
         setIsModalOpen(false);
         fetchRates();

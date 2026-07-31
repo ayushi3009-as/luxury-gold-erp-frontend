@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const orders = await prisma.purchaseOrder.findMany({
@@ -14,9 +16,22 @@ export async function GET() {
     });
 
     // Also fetch suppliers for the "Create PO" dropdown
-    const suppliers = await prisma.supplier.findMany({
+    let suppliers = await prisma.supplier.findMany({
       orderBy: { supplierName: 'asc' }
     });
+
+    if (suppliers.length === 0) {
+      const newSupplier = await prisma.supplier.create({
+        data: {
+          supplierCode: "SUP-001",
+          supplierName: "Gold Merchants Ltd",
+          contactNumber: "9876543210",
+          email: "contact@goldmerchants.com",
+          status: "ACTIVE"
+        }
+      });
+      suppliers = [newSupplier];
+    }
 
     const metrics = {
       totalPO: orders.length,

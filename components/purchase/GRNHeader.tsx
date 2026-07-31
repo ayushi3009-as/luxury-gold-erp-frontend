@@ -47,6 +47,7 @@ Manage received jewellery stock and verification
 
 
 <button
+onClick={() => alert("Create GRN feature coming soon. Please use Purchase Entry module.")}
 className="
 bg-[#D4AF37]
 text-black

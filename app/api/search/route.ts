@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { getSession } from '@/lib/session';
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: Request) {
   try {
     const session = await getSession();
@@ -14,7 +16,7 @@ export async function GET(req: Request) {
       const user = await prisma.user.findUnique({ where: { id: session.userId } });
       if (user?.tenantId) {
         tenantId = user.tenantId;
-      } else {
+      } else if (session.role !== 'Super Admin' && session.role !== 'SUPER_ADMIN') {
         return NextResponse.json({ error: 'Unauthorized. No Tenant ID found.' }, { status: 401 });
       }
     }

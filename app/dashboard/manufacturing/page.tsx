@@ -27,7 +27,15 @@ export default function ManufacturingPage() {
     fetchData();
     fetch('/api/products')
       .then(res => res.json())
-      .then(json => setProducts(json.products || []))
+      .then(json => {
+        if (Array.isArray(json)) {
+          setProducts(json);
+        } else if (json && Array.isArray(json.products)) {
+          setProducts(json.products);
+        } else {
+          setProducts([]);
+        }
+      })
       .catch(err => console.error(err));
   }, []);
 

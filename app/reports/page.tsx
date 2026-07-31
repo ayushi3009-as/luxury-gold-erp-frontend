@@ -10,6 +10,8 @@ import {
   ArrowRight,
   Loader2,
   RefreshCw,
+  FileText,
+  FileSpreadsheet
 } from "lucide-react";
 
 export default function ReportsDashboardPage() {
@@ -19,10 +21,9 @@ export default function ReportsDashboardPage() {
   async function fetchReportsData() {
     setIsLoading(true);
     try {
-      const res = await fetch('/api/reports/dashboard');
+      const res = await fetch(`/api/reports/dashboard?t=${Date.now()}`);
       if (res.status === 401) {
-        window.location.href = '/login';
-        return;
+        console.warn('Unauthorized fetch to reports dashboard');
       }
       if (res.ok) {
         const json = await res.json();
@@ -96,11 +97,20 @@ export default function ReportsDashboardPage() {
           <p className="text-text-secondary mt-2">
             Overview of all reports in the Luxury Gold ERP System
           </p>
+        <div className="flex items-center gap-3">
+          <button onClick={() => alert("Export PDF feature coming soon")} className="flex items-center gap-2 rounded-lg border border-border-theme bg-background-secondary px-4 py-2 text-sm text-text-secondary hover:border-red-500 hover:text-red-500 transition-colors">
+            <FileText size={16} />
+            Export PDF
+          </button>
+          <button onClick={() => alert("Export Excel feature coming soon")} className="flex items-center gap-2 rounded-lg border border-border-theme bg-background-secondary px-4 py-2 text-sm text-text-secondary hover:border-green-500 hover:text-green-500 transition-colors">
+            <FileSpreadsheet size={16} />
+            Export Excel
+          </button>
+          <button onClick={fetchReportsData} className="flex items-center gap-2 rounded-lg border border-[#6d5318] bg-[#17150d] px-4 py-2 text-sm text-accent-gold hover:bg-[#2a2414] transition-colors">
+            <RefreshCw size={16} className={isLoading ? "animate-spin" : ""} />
+            Refresh
+          </button>
         </div>
-        <button onClick={fetchReportsData} className="flex items-center gap-2 rounded-lg border border-[#6d5318] bg-[#17150d] px-4 py-2 text-sm text-accent-gold hover:bg-[#2a2414] transition-colors">
-          <RefreshCw size={16} className={isLoading ? "animate-spin" : ""} />
-          Refresh
-        </button>
       </div>
 
       {/* Summary Cards */}

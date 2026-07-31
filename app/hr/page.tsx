@@ -1,11 +1,67 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Users, Clock, FileText, Settings, Search, Plus, Loader2 } from "lucide-react";
+import { Users, Clock, FileText, Settings, Search, Plus, Loader2, X } from "lucide-react";
 
 export default function HRDashboard() {
   const [employees, setEmployees] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [formData, setFormData] = useState({
+    employeeCode: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    designation: '',
+    basicSalary: '',
+    joiningDate: new Date().toISOString().split('T')[0],
+    gender: 'MALE',
+    dateOfBirth: '1990-01-01',
+    address: ''
+  });
+  const [submitting, setSubmitting] = useState(false);
+
+  const fetchEmployees = () => {
+    fetch('/api/hr/employees')
+      .then(res => res.json())
+      .then(data => {
+        setEmployees(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchEmployees();
+  }, []);
+
+  const handleAddEmployee = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    try {
+      const res = await fetch('/api/hr/employees', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      if (res.ok) {
+        setShowAddModal(false);
+        fetchEmployees();
+        alert('Employee added successfully!');
+      } else {
+        alert('Failed to add employee');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('An error occurred');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     fetch('/api/hr/employees')
@@ -30,7 +86,7 @@ export default function HRDashboard() {
           </h1>
           <p className="text-text-secondary mt-1">Manage staff, attendance, and generate salary slips</p>
         </div>
-        <button className="flex items-center gap-2 bg-accent-gold text-black px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow">
+        <button onClick={() => setShowAddModal(true)} className="flex items-center gap-2 bg-accent-gold text-black px-4 py-2 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow">
           <Plus size={18} />
           Add Employee
         </button>
@@ -122,6 +178,64 @@ export default function HRDashboard() {
           </table>
         </div>
       </div>
+
+      {showAddModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-background-secondary border border-border-theme rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-bold text-accent-gold">Add New Employee</h2>
+              <button onClick={() => setShowAddModal(false)} className="text-text-secondary hover:text-white transition-colors">
+                <X size={24} />
+              </button>
+            </div>
+            
+            <form onSubmit={handleAddEmployee} className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm text-text-secondary mb-1">Employee Code</label>
+                  <input required type="text" value={formData.employeeCode} onChange={e => setFormData({...formData, employeeCode: e.target.value})} className="w-full bg-background-tertiary border border-border-theme rounded-lg p-2 focus:border-accent-gold outline-none" placeholder="EMP-001" />
+                </div>
+                <div>
+                  <label className="block text-sm text-text-secondary mb-1">Designation</label>
+                  <input required type="text" value={formData.designation} onChange={e => setFormData({...formData, designation: e.target.value})} className="w-full bg-background-tertiary border border-border-theme rounded-lg p-2 focus:border-accent-gold outline-none" placeholder="Sales Executive" />
+                </div>
+                <div>
+                  <label className="block text-sm text-text-secondary mb-1">First Name</label>
+                  <input required type="text" value={formData.firstName} onChange={e => setFormData({...formData, firstName: e.target.value})} className="w-full bg-background-tertiary border border-border-theme rounded-lg p-2 focus:border-accent-gold outline-none" />
+                </div>
+                <div>
+                  <label className="block text-sm text-text-secondary mb-1">Last Name</label>
+                  <input required type="text" value={formData.lastName} onChange={e => setFormData({...formData, lastName: e.target.value})} className="w-full bg-background-tertiary border border-border-theme rounded-lg p-2 focus:border-accent-gold outline-none" />
+                </div>
+                <div>
+                  <label className="block text-sm text-text-secondary mb-1">Email</label>
+                  <input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full bg-background-tertiary border border-border-theme rounded-lg p-2 focus:border-accent-gold outline-none" />
+                </div>
+                <div>
+                  <label className="block text-sm text-text-secondary mb-1">Phone</label>
+                  <input required type="text" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full bg-background-tertiary border border-border-theme rounded-lg p-2 focus:border-accent-gold outline-none" />
+                </div>
+                <div>
+                  <label className="block text-sm text-text-secondary mb-1">Basic Salary</label>
+                  <input required type="number" value={formData.basicSalary} onChange={e => setFormData({...formData, basicSalary: e.target.value})} className="w-full bg-background-tertiary border border-border-theme rounded-lg p-2 focus:border-accent-gold outline-none" placeholder="30000" />
+                </div>
+                <div>
+                  <label className="block text-sm text-text-secondary mb-1">Joining Date</label>
+                  <input required type="date" value={formData.joiningDate} onChange={e => setFormData({...formData, joiningDate: e.target.value})} className="w-full bg-background-tertiary border border-border-theme rounded-lg p-2 focus:border-accent-gold outline-none" />
+                </div>
+              </div>
+              
+              <div className="flex justify-end gap-3 mt-8">
+                <button type="button" onClick={() => setShowAddModal(false)} className="px-4 py-2 rounded-lg border border-border-theme hover:bg-background-tertiary transition-colors">Cancel</button>
+                <button type="submit" disabled={submitting} className="px-4 py-2 rounded-lg bg-accent-gold text-black font-semibold hover:bg-yellow-500 transition-colors disabled:opacity-50 flex items-center gap-2">
+                  {submitting && <Loader2 size={16} className="animate-spin" />}
+                  Save Employee
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

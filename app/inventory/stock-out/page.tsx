@@ -1,5 +1,7 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   CalendarDays,
   ChevronDown,
@@ -9,14 +11,103 @@ import {
   Save,
   X,
   Trash2,
+  Loader2
 } from "lucide-react";
 
-const stockOutItems = [
-  { id: 1, name: "Gold Necklace 22K", category: "Gold Jewellery", sku: "GLD-NEC-001", quantity: 1, weight: "18.500 g", reason: "Sales" },
-  { id: 2, name: "Diamond Earrings", category: "Diamond Jewellery", sku: "DIA-EAR-002", quantity: 2, weight: "6.250 g", reason: "Sales" },
-];
-
 export default function StockOut() {
+  const router = useRouter();
+  
+  const [items, setItems] = useState<any[]>([]);
+  const [stockOutNo, setStockOutNo] = useState("");
+  const [reason, setReason] = useState("");
+  const [reference, setReference] = useState("");
+  const [notes, setNotes] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+
+  useEffect(() => {
+    setStockOutNo(`SO-${new Date().getFullYear()}-${Math.floor(Math.random()*9000)+1000}`);
+  }, []);
+
+  const handleSearch = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && searchQuery.trim() !== '') {
+      setIsSearching(true);
+      try {
+        // We'll search by fetching all and filtering for now, or you could create a specific search API
+        const res = await fetch('/api/products');
+        const data = await res.json();
+        
+        // Find product by SKU or name
+        const product = data.find((p: any) => 
+          p.sku?.toLowerCase() === searchQuery.toLowerCase() || 
+          p.productCode?.toLowerCase() === searchQuery.toLowerCase() ||
+          p.barcode?.toLowerCase() === searchQuery.toLowerCase()
+        );
+
+        if (product) {
+          const existingItem = items.find(i => i.id === product.id);
+          if (existingItem) {
+             setItems(items.map(i => i.id === product.id ? {...i, quantity: i.quantity + 1} : i));
+          } else {
+             setItems([...items, {
+               id: product.id,
+               name: product.name,
+               category: product.category,
+               sku: product.sku || product.productCode || "N/A",
+               quantity: 1,
+               weight: `${product.grossWeight || 0} g`,
+               reason: reason || "Sales"
+             }]);
+          }
+          setSearchQuery("");
+        } else {
+          alert("Product not found with this SKU/Barcode.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Error searching for product.");
+      } finally {
+        setIsSearching(false);
+      }
+    }
+  };
+
+  const handleSave = async () => {
+    if (items.length === 0) return alert("Please add at least one item.");
+    setIsSaving(true);
+    try {
+      const res = await fetch('/api/inventory/stock-out', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items,
+          reason,
+          referenceNumber: reference,
+          notes
+        })
+      });
+      if (res.ok) {
+        alert("Stock Out processed successfully!");
+        router.push('/inventory');
+      } else {
+        const err = await res.json();
+        alert(err.error || "Failed to process stock out.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error saving stock out.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const removeItem = (id: string) => {
+    setItems(items.filter(item => item.id !== id));
+  };
+
+  const totalQuantity = items.reduce((acc, curr) => acc + curr.quantity, 0);
+
   return (
     <div className="min-h-screen bg-background-primary text-text-primary relative overflow-hidden">
       
@@ -35,13 +126,13 @@ export default function StockOut() {
           </div>
 
           <div className="flex gap-3">
-            <button className="group flex items-center gap-2 rounded-xl border border-border-theme bg-background-secondary/50 backdrop-blur-md px-5 py-2.5 text-sm font-medium text-text-secondary transition-all hover:border-accent-gold/50 hover:text-white">
+            <button onClick={() => router.push('/inventory')} className="group flex items-center gap-2 rounded-xl border border-border-theme bg-background-secondary/50 backdrop-blur-md px-5 py-2.5 text-sm font-medium text-text-secondary transition-all hover:border-accent-gold/50 hover:text-white">
               <X size={18} className="transition-transform group-hover:rotate-90" />
               Cancel
             </button>
-            <button className="flex items-center gap-2 rounded-xl bg-accent-gold px-6 py-2.5 text-sm font-bold text-black transition-all hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-[1.02]">
-              <Save size={18} />
-              Save Stock Out
+            <button onClick={handleSave} disabled={isSaving || items.length === 0} className="flex items-center gap-2 rounded-xl bg-accent-gold px-6 py-2.5 text-sm font-bold text-black transition-all hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed">
+              {isSaving ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
+              {isSaving ? "Saving..." : "Save Stock Out"}
             </button>
           </div>
         </div>
@@ -66,7 +157,7 @@ export default function StockOut() {
               <label className="mb-2 block text-xs font-semibold tracking-wider text-text-secondary group-focus-within:text-accent-gold transition-colors">STOCK OUT NUMBER</label>
               <input
                 type="text"
-                value="SO-2026-0001"
+                value={stockOutNo}
                 readOnly
                 className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3.5 text-sm font-mono text-white/70 outline-none transition-all cursor-not-allowed"
               />
@@ -88,13 +179,13 @@ export default function StockOut() {
             <div className="group">
               <label className="mb-2 block text-xs font-semibold tracking-wider text-text-secondary group-focus-within:text-accent-gold transition-colors">STOCK OUT REASON</label>
               <div className="relative">
-                <select className="w-full appearance-none rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white outline-none transition-all focus:border-accent-gold/50 focus:bg-white/10 focus:ring-4 focus:ring-accent-gold/10">
-                  <option className="bg-background-secondary text-white">Select Reason</option>
-                  <option className="bg-background-secondary text-white">Sales</option>
-                  <option className="bg-background-secondary text-white">Sales Return</option>
-                  <option className="bg-background-secondary text-white">Damage</option>
-                  <option className="bg-background-secondary text-white">Internal Use</option>
-                  <option className="bg-background-secondary text-white">Manufacturing</option>
+                <select value={reason} onChange={e => setReason(e.target.value)} className="w-full appearance-none rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white outline-none transition-all focus:border-accent-gold/50 focus:bg-white/10 focus:ring-4 focus:ring-accent-gold/10">
+                  <option className="bg-background-secondary text-white" value="">Select Reason</option>
+                  <option className="bg-background-secondary text-white" value="Sales">Sales</option>
+                  <option className="bg-background-secondary text-white" value="Sales Return">Sales Return</option>
+                  <option className="bg-background-secondary text-white" value="Damage">Damage</option>
+                  <option className="bg-background-secondary text-white" value="Internal Use">Internal Use</option>
+                  <option className="bg-background-secondary text-white" value="Manufacturing">Manufacturing</option>
                 </select>
                 <ChevronDown size={18} className="absolute right-4 top-3.5 text-text-secondary pointer-events-none" />
               </div>
@@ -105,6 +196,8 @@ export default function StockOut() {
               <label className="mb-2 block text-xs font-semibold tracking-wider text-text-secondary group-focus-within:text-accent-gold transition-colors">REFERENCE NUMBER</label>
               <input
                 type="text"
+                value={reference}
+                onChange={e => setReference(e.target.value)}
                 placeholder="Enter reference number"
                 className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white outline-none transition-all placeholder:text-white/20 focus:border-accent-gold/50 focus:bg-white/10 focus:ring-4 focus:ring-accent-gold/10"
               />
@@ -126,11 +219,14 @@ export default function StockOut() {
             </div>
 
             {/* SEARCH */}
-            <div className="relative w-full md:w-80">
-              <Search size={18} className="absolute left-4 top-3.5 text-text-secondary" />
+            <div className="relative w-full md:w-80 flex items-center">
+              {isSearching ? <Loader2 size={18} className="absolute left-4 top-3.5 text-accent-gold animate-spin" /> : <Search size={18} className="absolute left-4 top-3.5 text-text-secondary" />}
               <input
                 type="text"
-                placeholder="Scan Barcode or Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleSearch}
+                placeholder="Scan Barcode or Search SKU & Press Enter..."
                 className="w-full rounded-xl border border-white/10 bg-white/5 py-3.5 pl-11 pr-4 text-sm text-white outline-none transition-all placeholder:text-white/30 focus:border-accent-gold/50 focus:bg-white/10 focus:ring-4 focus:ring-accent-gold/10"
               />
             </div>
@@ -151,7 +247,13 @@ export default function StockOut() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
-                {stockOutItems.map((item) => (
+                {items.length === 0 ? (
+                  <tr>
+                    <td colSpan={7} className="py-12 text-center text-text-secondary">
+                      Scan or search for a product to add it to the list.
+                    </td>
+                  </tr>
+                ) : items.map((item) => (
                   <tr key={item.id} className="transition-colors hover:bg-white/5">
                     <td className="px-5 py-4 font-semibold text-white">{item.name}</td>
                     <td className="px-5 py-4 text-text-secondary">{item.category}</td>
@@ -164,7 +266,7 @@ export default function StockOut() {
                       </span>
                     </td>
                     <td className="px-5 py-4 text-right">
-                      <button className="inline-flex items-center justify-center rounded-lg p-2 text-white/40 transition-all hover:bg-red-500/20 hover:text-red-400">
+                      <button onClick={() => removeItem(item.id)} className="inline-flex items-center justify-center rounded-lg p-2 text-white/40 transition-all hover:bg-red-500/20 hover:text-red-400">
                         <Trash2 size={18} />
                       </button>
                     </td>
@@ -181,6 +283,8 @@ export default function StockOut() {
             <label className="mb-3 block text-xs font-semibold tracking-wider text-text-secondary">NOTES / REMARKS</label>
             <textarea
               rows={4}
+              value={notes}
+              onChange={e => setNotes(e.target.value)}
               placeholder="Enter any additional notes or remarks..."
               className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white outline-none transition-all placeholder:text-white/20 focus:border-accent-gold/50 focus:bg-white/10 focus:ring-4 focus:ring-accent-gold/10"
             />
@@ -190,15 +294,11 @@ export default function StockOut() {
             <div className="space-y-6">
               <div className="flex items-center justify-between border-b border-white/10 pb-4">
                 <span className="text-sm font-medium text-text-secondary">Total Products</span>
-                <span className="text-2xl font-bold text-white">3</span>
-              </div>
-              <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                <span className="text-sm font-medium text-text-secondary">Total Quantity</span>
-                <span className="text-2xl font-bold text-white">3 Units</span>
+                <span className="text-2xl font-bold text-white">{items.length}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-accent-gold">Total Weight</span>
-                <span className="text-3xl font-bold text-accent-gold">24.750 g</span>
+                <span className="text-sm font-medium text-accent-gold">Total Quantity</span>
+                <span className="text-3xl font-bold text-accent-gold">{totalQuantity} Units</span>
               </div>
             </div>
           </div>

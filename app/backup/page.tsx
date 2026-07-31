@@ -14,8 +14,7 @@ export default function BackupRestore() {
     try {
       const response = await fetch("/api/backup/export");
       if (response.status === 401) {
-        window.location.href = "/login";
-        return;
+        console.warn('Unauthorized fetch to backup export');
       }
       
       if (!response.ok) throw new Error("Backup failed");

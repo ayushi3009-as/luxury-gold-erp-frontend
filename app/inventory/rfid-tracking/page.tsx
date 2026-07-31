@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Activity,
   CalendarDays,
@@ -49,10 +50,11 @@ const rfidItems = [
 ];
 
 export default function RFIDTracking() {
+  const [isScanning, setIsScanning] = useState(false);
+
   return (
     <div className="min-h-screen bg-background-primary text-text-primary">
       
-
       <main className=" min-h-screen p-5">
 
         {/* HEADER */}
@@ -72,15 +74,17 @@ export default function RFIDTracking() {
           </div>
 
           <div className="flex gap-3">
-            <button className="flex items-center gap-2 rounded-lg border border-border-theme px-4 py-2 text-sm text-text-secondary hover:border-accent-gold hover:text-accent-gold">
-              <XCircle size={16} />
-              Stop Scanning
-            </button>
-
-            <button className="flex items-center gap-2 rounded-lg bg-accent-gold px-4 py-2 text-sm font-semibold text-black hover:bg-accent-gold">
-              <Radio size={16} />
-              Start Scanning
-            </button>
+            {isScanning ? (
+              <button onClick={() => setIsScanning(false)} className="flex items-center gap-2 rounded-lg border border-red-500 text-red-500 px-4 py-2 text-sm hover:bg-red-500/10 transition-colors">
+                <XCircle size={16} />
+                Stop Scanning
+              </button>
+            ) : (
+              <button onClick={() => setIsScanning(true)} className="flex items-center gap-2 rounded-lg bg-accent-gold px-4 py-2 text-sm font-semibold text-black hover:bg-accent-gold/90 transition-colors">
+                <Radio size={16} />
+                Start Scanning
+              </button>
+            )}
           </div>
         </div>
 
@@ -89,11 +93,11 @@ export default function RFIDTracking() {
 
           <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
             <div className="flex items-center justify-between">
-              <Radio className="text-accent-gold" size={26} />
+              <Radio className={isScanning ? "text-accent-gold animate-pulse" : "text-text-secondary"} size={26} />
 
-              <span className="flex items-center gap-1 text-xs text-green-400">
-                <Activity size={14} />
-                Live
+              <span className={`flex items-center gap-1 text-xs ${isScanning ? 'text-green-400' : 'text-text-secondary'}`}>
+                <Activity size={14} className={isScanning ? "animate-pulse" : ""} />
+                {isScanning ? 'Live' : 'Offline'}
               </span>
             </div>
 
@@ -101,8 +105,8 @@ export default function RFIDTracking() {
               RFID SYSTEM STATUS
             </p>
 
-            <h2 className="mt-2 text-2xl font-bold text-green-400">
-              Active
+            <h2 className={`mt-2 text-2xl font-bold ${isScanning ? 'text-green-400' : 'text-text-secondary'}`}>
+              {isScanning ? 'Active' : 'Inactive'}
             </h2>
           </div>
 

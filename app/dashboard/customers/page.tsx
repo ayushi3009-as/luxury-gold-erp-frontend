@@ -21,7 +21,7 @@ export default function CustomersPage() {
   }, []);
 
   const fetchCustomers = () => {
-    fetch('/API/customers')
+    fetch('/api/customers')
       .then(res => res.json())
       .then(data => {
         setCustomers(data);
@@ -37,7 +37,7 @@ export default function CustomersPage() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const res = await fetch('/API/customers', {
+      const res = await fetch('/api/customers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

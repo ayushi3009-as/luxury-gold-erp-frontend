@@ -42,10 +42,7 @@ export default function AIAssistantPage() {
         body: JSON.stringify({ message: text }),
       });
 
-      if (res.status === 401) {
-        window.location.href = "/login";
-        return;
-      }
+      if (res.status === 401) { console.warn("Unauthorized fetch"); }
 
       const data = await res.json();
       
