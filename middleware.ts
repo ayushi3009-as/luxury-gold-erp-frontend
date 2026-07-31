@@ -28,11 +28,16 @@ export default function middleware(req: NextRequest) {
   let isSubdomain = false;
   let subdomain = '';
 
-  for (const domain of rootDomains) {
-    if (hostname.endsWith(`.${domain}`)) {
-      isSubdomain = true;
-      subdomain = hostname.replace(`.${domain}`, '');
-      break;
+  // Check if it's exactly a root domain first
+  const isExactRoot = rootDomains.includes(hostname);
+
+  if (!isExactRoot) {
+    for (const domain of rootDomains) {
+      if (hostname.endsWith(`.${domain}`)) {
+        isSubdomain = true;
+        subdomain = hostname.replace(`.${domain}`, '');
+        break;
+      }
     }
   }
 
