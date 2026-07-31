@@ -1,239 +1,122 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import {
   TrendingUp,
   TrendingDown,
   RefreshCw,
   Clock,
-  Coins,
+  BarChart2,
+  Loader2,
 } from "lucide-react";
+import Link from "next/link";
 
+export default function RateComparisonPage() {
+  const [history, setHistory] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [lastUpdated, setLastUpdated] = useState("");
 
+  async function fetchRates() {
+    setIsLoading(true);
+    try {
+      const res = await fetch('/api/gold-rate/history');
+      if (res.ok) {
+        const data = await res.json();
+        setHistory(data);
+        setLastUpdated(new Date().toLocaleTimeString());
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
-export default function SilverRatePage() {
+  useEffect(() => {
+    fetchRates();
+  }, []);
+
+  if (isLoading && history.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background-primary">
+        <Loader2 className="animate-spin text-accent-gold" size={40} />
+      </div>
+    );
+  }
+
+  const currentRate = history[0] || { gold24k: 74250, gold22k: 68100, silver: 92500, platinum: 45000, createdAt: new Date() };
+
+  // Generate comparison data
+  const comparisonData = [
+    { name: "24K Gold", price: currentRate.gold24k, unit: "10 Grams" },
+    { name: "22K Gold", price: currentRate.gold22k, unit: "10 Grams" },
+    { name: "18K Gold", price: currentRate.gold18k, unit: "10 Grams" },
+    { name: "Silver", price: currentRate.silver / 100, unit: "10 Grams" },
+    { name: "Platinum", price: currentRate.platinum, unit: "10 Grams" },
+  ];
+
   return (
     <div className="min-h-screen bg-background-primary text-text-primary">
-      
-
-      <main className=" p-8">
-
+      <main className="p-8">
         {/* Header */}
         <div className="mb-8">
-          <p className="text-sm text-text-secondary">
-            Gold Rate / Silver Rate
-          </p>
-
+          <p className="text-sm text-text-secondary">Gold Rate / Rate Comparison</p>
           <div className="mt-2 flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold">
-                Silver Rate
-              </h1>
-
-              <p className="mt-2 text-text-secondary">
-                Monitor current silver market rates and price movement.
-              </p>
+              <h1 className="text-3xl font-bold">Rate Comparison</h1>
+              <p className="mt-2 text-text-secondary">Compare current market rates across all precious metals.</p>
             </div>
-
-            <button className="flex items-center gap-2 rounded-lg border border-[#6d5318] bg-[#17150d] px-4 py-2 text-sm text-accent-gold">
-              <RefreshCw size={16} />
-              Update Rate
+            <button onClick={fetchRates} className="flex items-center gap-2 rounded-lg border border-[#6d5318] bg-[#17150d] px-4 py-2 text-sm text-accent-gold hover:bg-[#2a2414] transition-colors">
+              <RefreshCw size={16} className={isLoading ? "animate-spin" : ""} />
+              Update Rates
             </button>
           </div>
         </div>
 
-        {/* KPI Cards */}
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-
-          {/* Per Gram */}
-          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
-            <div className="flex items-center justify-between">
-              <Coins
-                size={26}
-                className="text-accent-gold"
-              />
-
-              <span className="flex items-center gap-1 text-sm text-green-400">
-                <TrendingUp size={15} />
-                2.4%
-              </span>
-            </div>
-
-            <p className="mt-5 text-sm text-text-secondary">
-              SILVER RATE / GRAM
-            </p>
-
-            <h2 className="mt-2 text-2xl font-bold">
-              ₹ 92.50
+        {/* Comparison Table */}
+        <div className="mt-8 overflow-hidden rounded-xl border border-border-theme bg-background-secondary">
+          <div className="p-6 border-b border-border-theme flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-accent-gold flex items-center gap-2">
+              <BarChart2 size={20} /> Today's Live Comparison
             </h2>
+            <span className="text-xs text-text-secondary">Last Updated: {lastUpdated}</span>
           </div>
-
-          {/* 10 Gram */}
-          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
-            <p className="text-sm text-text-secondary">
-              SILVER RATE / 10 GRAM
-            </p>
-
-            <h2 className="mt-5 text-2xl font-bold">
-              ₹ 925
-            </h2>
-
-            <p className="mt-2 text-xs text-text-secondary">
-              Current market rate
-            </p>
-          </div>
-
-          {/* 1 KG */}
-          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
-            <p className="text-sm text-text-secondary">
-              SILVER RATE / KG
-            </p>
-
-            <h2 className="mt-5 text-2xl font-bold">
-              ₹ 92,500
-            </h2>
-
-            <p className="mt-2 text-xs text-text-secondary">
-              Based on current market price
-            </p>
-          </div>
-
-          {/* Last Updated */}
-          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
-            <Clock
-              size={26}
-              className="text-accent-gold"
-            />
-
-            <p className="mt-5 text-sm text-text-secondary">
-              LAST UPDATED
-            </p>
-
-            <h2 className="mt-2 text-2xl font-bold">
-              10:45 AM
-            </h2>
-
-            <p className="mt-2 text-xs text-green-400">
-              Live market data
-            </p>
-          </div>
-
-        </div>
-
-        {/* Rate Details */}
-        <div className="mt-6 rounded-xl border border-border-theme bg-background-secondary p-6">
-
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-accent-gold">
-              SILVER RATE DETAILS
-            </h2>
-
-            <span className="rounded-full border border-green-900 bg-green-950 px-3 py-1 text-xs text-green-400">
-              Market Open
-            </span>
-          </div>
-
-          <div className="mt-6 grid gap-5 md:grid-cols-3">
-
-            <div className="rounded-lg border border-[#302a1b] bg-[#151611] p-4">
-              <p className="text-xs text-text-secondary">
-                PURITY
-              </p>
-
-              <p className="mt-2 text-lg font-semibold">
-                999 Fine Silver
-              </p>
-            </div>
-
-            <div className="rounded-lg border border-[#302a1b] bg-[#151611] p-4">
-              <p className="text-xs text-text-secondary">
-                TODAY'S CHANGE
-              </p>
-
-              <p className="mt-2 flex items-center gap-2 text-lg font-semibold text-green-400">
-                <TrendingUp size={18} />
-                +₹ 2.20
-              </p>
-            </div>
-
-            <div className="rounded-lg border border-[#302a1b] bg-[#151611] p-4">
-              <p className="text-xs text-text-secondary">
-                PREVIOUS RATE
-              </p>
-
-              <p className="mt-2 text-lg font-semibold">
-                ₹ 90.30 / gram
-              </p>
-            </div>
-
-          </div>
-
+          <table className="w-full text-left">
+            <thead className="bg-[#151611]">
+              <tr>
+                <th className="px-6 py-4 text-sm text-text-secondary">METAL</th>
+                <th className="px-6 py-4 text-sm text-text-secondary">PURITY</th>
+                <th className="px-6 py-4 text-sm text-text-secondary">UNIT</th>
+                <th className="px-6 py-4 text-sm text-text-secondary">CURRENT RATE</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonData.map((item, idx) => (
+                <tr key={idx} className="border-t border-[#292519] hover:bg-background-tertiary">
+                  <td className="px-6 py-5 font-bold text-white">{item.name}</td>
+                  <td className="px-6 py-5 text-text-secondary">{item.name.includes("Gold") ? item.name.split(" ")[0] : "999"}</td>
+                  <td className="px-6 py-5 text-sm text-text-secondary">{item.unit}</td>
+                  <td className="px-6 py-5 font-bold text-accent-gold">₹ {item.price.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
         {/* Market Summary */}
-        <div className="mt-6 grid gap-5 xl:grid-cols-2">
-
+        <div className="mt-8 grid gap-5 xl:grid-cols-2">
           <div className="rounded-xl border border-border-theme bg-background-secondary p-6">
-            <h2 className="text-lg font-semibold text-accent-gold">
-              MARKET SUMMARY
-            </h2>
-
-            <div className="mt-5 space-y-4">
-
-              <div className="flex items-center justify-between border-b border-[#292519] pb-3">
-                <span className="text-text-secondary">
-                  Opening Rate
-                </span>
-
-                <span>
-                  ₹ 90.80 / gram
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between border-b border-[#292519] pb-3">
-                <span className="text-text-secondary">
-                  Highest Today
-                </span>
-
-                <span className="text-green-400">
-                  ₹ 93.10 / gram
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <span className="text-text-secondary">
-                  Lowest Today
-                </span>
-
-                <span className="text-red-400">
-                  ₹ 90.10 / gram
-                </span>
-              </div>
-
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-border-theme bg-background-secondary p-6">
-            <h2 className="text-lg font-semibold text-accent-gold">
-              QUICK ACTIONS
-            </h2>
-
+            <h2 className="text-lg font-semibold text-accent-gold">QUICK ACTIONS</h2>
             <div className="mt-5 grid gap-3">
-
-              <button className="rounded-lg border border-[#4a3a18] bg-[#151611] p-3 text-left text-sm hover:bg-[#211c0e]">
-                Update Silver Rate
-              </button>
-
-              <button className="rounded-lg border border-[#4a3a18] bg-[#151611] p-3 text-left text-sm hover:bg-[#211c0e]">
-                View Rate History
-              </button>
-
-              <button className="rounded-lg border border-[#4a3a18] bg-[#151611] p-3 text-left text-sm hover:bg-[#211c0e]">
-                Compare With Gold
-              </button>
-
+              <Link href="/gold-rate" className="rounded-lg border border-[#4a3a18] bg-[#151611] p-3 text-left text-sm hover:bg-[#211c0e] transition-colors block text-white text-decoration-none">
+                Update Live Rates
+              </Link>
+              <Link href="/gold-rate/gold-rate-history" className="rounded-lg border border-[#4a3a18] bg-[#151611] p-3 text-left text-sm hover:bg-[#211c0e] transition-colors block text-white text-decoration-none">
+                View Detailed History
+              </Link>
             </div>
           </div>
-
         </div>
-
       </main>
     </div>
   );
