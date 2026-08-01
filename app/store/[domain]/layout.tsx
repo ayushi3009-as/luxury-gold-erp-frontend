@@ -104,16 +104,11 @@ export default async function StoreLayout({
               </div>
               <a
                 className="absolute left-1/2 z-10 -translate-x-1/2 shrink-0 px-6 xl:px-10"
-                aria-label="ZOIAS Home"
+                aria-label="Microtechnique IT Home"
                 href="/store/[domain]/"
                 data-discover="true"
               >
-                <img
-                  alt="ZOIAS"
-                  className="select-none object-contain  h-[74px] w-[74px] transition-opacity duration-500 hover:opacity-80 xl:h-[78px] xl:w-[78px]"
-                  draggable="false"
-                  src="/zoias-logo.png"
-                />
+                <span className="text-lg md:text-xl font-serif tracking-widest text-[#111] font-bold uppercase">MICROTECHNIQUE IT</span>
               </a>
               <div className="flex flex-1 items-center justify-end">
                 <div className="flex items-center gap-1.5 rounded-full border border-[#f0ece4] bg-white/60 px-1.5 py-1 shadow-[0_1px_0_rgba(15,23,42,0.02)]">
@@ -289,16 +284,11 @@ export default async function StoreLayout({
               </button>
               <a
                 className="absolute left-1/2 z-10 -translate-x-1/2"
-                aria-label="ZOIAS Home"
+                aria-label="Microtechnique IT Home"
                 href="/store/[domain]/"
                 data-discover="true"
               >
-                <img
-                  alt="ZOIAS"
-                  className="select-none object-contain  h-[54px] w-[54px] sm:h-[58px] sm:w-[58px]"
-                  draggable="false"
-                  src="/zoias-logo.png"
-                />
+                <span className="text-lg md:text-xl font-serif tracking-widest text-[#111] font-bold uppercase">MICROTECHNIQUE IT</span>
               </a>
               <div className="flex items-center gap-0.5">
                 <button
@@ -385,12 +375,7 @@ export default async function StoreLayout({
       <div className="w-full px-4 sm:px-6 lg:px-10 py-10 sm:py-16 lg:py-20">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
           <div className="col-span-2 lg:col-span-1">
-            <img
-              alt="ZOIAS"
-              className="select-none object-contain  mb-3 h-20 w-24 sm:mb-4 sm:h-24 sm:w-28"
-              draggable="false"
-              src="/zoias-logo.png"
-            />
+            <span className="text-lg md:text-xl font-serif tracking-widest text-[#111] font-bold uppercase">MICROTECHNIQUE IT</span>
             <p className="text-xs sm:text-sm leading-relaxed text-gray-400 mb-4 sm:mb-6">
               Crafting timeless silver jewellery that celebrates elegance and
               individuality. Every piece tells a story.
@@ -511,7 +496,7 @@ export default async function StoreLayout({
             </h3>
             <div className="flex flex-col gap-2 sm:gap-3">
               <a
-                href="mailto:hello@zoias.in"
+                href="mailto:hello@microtechnique.in"
                 className="flex items-center gap-2 text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
               >
                 <svg
@@ -546,7 +531,7 @@ export default async function StoreLayout({
                   <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
                   <rect x="2" y="4" width="20" height="16" rx="2"></rect>
                 </svg>{" "}
-                hello@zoias.in
+                hello@microtechnique.in
               </a>
               <a
                 href="tel:+919876543210"
@@ -624,7 +609,7 @@ export default async function StoreLayout({
         </div>
         <div className="border-t border-gray-800 mt-8 sm:mt-12 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
           <p className="text-[10px] sm:text-xs text-gray-500">
-            © 2025 ZOIAS. All rights reserved.
+            © 2025 Microtechnique IT. All rights reserved.
           </p>
           <p className="text-center text-[10px] sm:text-xs text-gray-500 sm:text-left">
             Designed &amp; Developed by{" "}

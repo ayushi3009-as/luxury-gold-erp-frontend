@@ -195,7 +195,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
                 </div>
                 <div className="absolute top-2.5 right-2.5">
                   <span className="text-[8px] sm:text-[9px] text-white/60 font-light tracking-[0.15em] uppercase">
-                    ZOIAS
+                    Microtechnique IT
                   </span>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10 cursor-pointer">
@@ -275,7 +275,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
                 </div>
                 <div className="absolute top-2.5 right-2.5">
                   <span className="text-[8px] sm:text-[9px] text-white/60 font-light tracking-[0.15em] uppercase">
-                    ZOIAS
+                    Microtechnique IT
                   </span>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10 cursor-pointer">
@@ -355,7 +355,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
                 </div>
                 <div className="absolute top-2.5 right-2.5">
                   <span className="text-[8px] sm:text-[9px] text-white/60 font-light tracking-[0.15em] uppercase">
-                    ZOIAS
+                    Microtechnique IT
                   </span>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10 cursor-pointer">
@@ -435,7 +435,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
                 </div>
                 <div className="absolute top-2.5 right-2.5">
                   <span className="text-[8px] sm:text-[9px] text-white/60 font-light tracking-[0.15em] uppercase">
-                    ZOIAS
+                    Microtechnique IT
                   </span>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10 cursor-pointer">
@@ -515,7 +515,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
                 </div>
                 <div className="absolute top-2.5 right-2.5">
                   <span className="text-[8px] sm:text-[9px] text-white/60 font-light tracking-[0.15em] uppercase">
-                    ZOIAS
+                    Microtechnique IT
                   </span>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10 cursor-pointer">
@@ -595,7 +595,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
                 </div>
                 <div className="absolute top-2.5 right-2.5">
                   <span className="text-[8px] sm:text-[9px] text-white/60 font-light tracking-[0.15em] uppercase">
-                    ZOIAS
+                    Microtechnique IT
                   </span>
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10 cursor-pointer">
@@ -715,7 +715,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               </h2>
               <div className="w-10 sm:w-12 h-[1px] bg-gray-300 mb-4 sm:mb-6"></div>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-3 sm:mb-4">
-                At ZOIAS, every piece of silver jewellery is a testament to
+                At Microtechnique IT, every piece of silver jewellery is a testament to
                 artistry and intention. Born from the desire to make luxury
                 accessible, we craft each design with meticulous attention to
                 detail - from the first sketch to the final polish.
@@ -723,7 +723,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-6 sm:mb-8">
                 Our collections are inspired by the modern Indian woman - bold,
                 graceful, and unapologetically herself. Whether it's a statement
-                ring or a delicate anklet, ZOIAS is designed to be worn, loved,
+                ring or a delicate anklet, Microtechnique IT is designed to be worn, loved,
                 and treasured.
               </p>
               <a
@@ -4304,7 +4304,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
                 Use code at checkout
               </p>
               <span className="inline-block bg-white text-gray-900 px-3 py-1 sm:px-4 sm:py-1.5 text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] uppercase font-medium">
-                ZOIAS10
+                Microtechnique IT10
               </span>
             </div>
             <div
@@ -4892,7 +4892,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               </div>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3 line-clamp-3">
                 "The sapphire halo ring is breathtaking. Looks way more
-                expensive than it is. ZOIAS never disappoints!"
+                expensive than it is. Microtechnique IT never disappoints!"
               </p>
               <p className="text-[10px] sm:text-[11px] tracking-[0.12em] uppercase text-gray-400">
                 Kavya N.
@@ -5767,7 +5767,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               </div>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-3 line-clamp-3">
                 "The sapphire halo ring is breathtaking. Looks way more
-                expensive than it is. ZOIAS never disappoints!"
+                expensive than it is. Microtechnique IT never disappoints!"
               </p>
               <p className="text-[10px] sm:text-[11px] tracking-[0.12em] uppercase text-gray-400">
                 Kavya N.
@@ -6123,7 +6123,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               className="aspect-square overflow-hidden group"
             >
               <img
-                alt="ZOIAS"
+                alt="Microtechnique IT"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 loading="lazy"
                 src="https://images.pexels.com/photos/1191531/pexels-photo-1191531.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400"
@@ -6136,7 +6136,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               className="aspect-square overflow-hidden group"
             >
               <img
-                alt="ZOIAS"
+                alt="Microtechnique IT"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 loading="lazy"
                 src="https://images.pexels.com/photos/2735970/pexels-photo-2735970.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400"
@@ -6149,7 +6149,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               className="aspect-square overflow-hidden group"
             >
               <img
-                alt="ZOIAS"
+                alt="Microtechnique IT"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 loading="lazy"
                 src="https://images.pexels.com/photos/1616403/pexels-photo-1616403.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400"
@@ -6162,7 +6162,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               className="aspect-square overflow-hidden group"
             >
               <img
-                alt="ZOIAS"
+                alt="Microtechnique IT"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 loading="lazy"
                 src="https://images.pexels.com/photos/2442893/pexels-photo-2442893.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400"
@@ -6175,7 +6175,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               className="aspect-square overflow-hidden group"
             >
               <img
-                alt="ZOIAS"
+                alt="Microtechnique IT"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 loading="lazy"
                 src="https://images.pexels.com/photos/3266700/pexels-photo-3266700.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400"
@@ -6188,7 +6188,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               className="aspect-square overflow-hidden group"
             >
               <img
-                alt="ZOIAS"
+                alt="Microtechnique IT"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 loading="lazy"
                 src="https://images.pexels.com/photos/3014856/pexels-photo-3014856.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400"
