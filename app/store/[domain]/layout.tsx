@@ -375,13 +375,13 @@ export default async function StoreLayout({
       <div className="w-full px-4 sm:px-6 lg:px-10 py-10 sm:py-16 lg:py-20">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
           <div className="col-span-2 lg:col-span-1">
-            <span className="text-lg md:text-xl font-serif tracking-widest text-[#111] font-bold uppercase">MICROTECHNIQUE IT</span>
+            <span className="text-lg md:text-xl font-serif tracking-widest text-white font-bold uppercase">MICROTECHNIQUE IT</span>
             <p className="text-xs sm:text-sm leading-relaxed text-gray-400 mb-4 sm:mb-6">
               Crafting timeless silver jewellery that celebrates elegance and
               individuality. Every piece tells a story.
             </p>
             <a
-              href="https://www.instagram.com/z0ias?igsh=MXhhMDBmaTdnNWszeQ=="
+              href="https://www.instagram.com/microtechnique?igsh=MXhhMDBmaTdnNWszeQ=="
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-xs sm:text-sm hover:text-white transition-colors"
@@ -403,7 +403,7 @@ export default async function StoreLayout({
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                 <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
               </svg>{" "}
-              @z0ias
+              @microtechnique
             </a>
           </div>
           <div>
