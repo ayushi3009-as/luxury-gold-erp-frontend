@@ -15,6 +15,8 @@ model Tenant {
   logoUrl              String?
   themeSettings        Json?
   isActive             Boolean               @default(true)
+  approvalStatus       TenantApprovalStatus  @default(PENDING)
+  paymentReference     String?
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
   aboutUsText          String?
@@ -1365,4 +1367,10 @@ enum TransferStatus {
   IN_TRANSIT
   RECEIVED
   CANCELLED
+}
+
+enum TenantApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }

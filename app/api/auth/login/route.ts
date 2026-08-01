@@ -13,7 +13,7 @@ export async function POST(request: Request) {
 
     const user = await prisma.user.findUnique({
       where: { email },
-      include: { role: true },
+      include: { role: true, tenant: true },
     });
 
     if (!user) {
@@ -24,6 +24,14 @@ export async function POST(request: Request) {
 
     if (!isMatch) {
       return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
+    }
+
+    if (user.tenant && user.tenant.approvalStatus === 'PENDING') {
+      return NextResponse.json({ error: 'Your account is pending approval by the Super Admin.' }, { status: 403 });
+    }
+    
+    if (user.tenant && user.tenant.approvalStatus === 'REJECTED') {
+      return NextResponse.json({ error: 'Your account registration was rejected.' }, { status: 403 });
     }
 
     await createSession(user.id, user.role.name, user.tenantId);
