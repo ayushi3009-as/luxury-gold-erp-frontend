@@ -79,7 +79,7 @@ export default async function StoreLayout({
                 </a>
                 <a
                   className="group relative py-3 text-[10.5px] xl:text-[11px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#6f6a61] hover:text-[#17191d]"
-                  href="/products"
+                  href="/collections"
                   data-discover="true"
                 >
                   Shop
@@ -214,7 +214,7 @@ export default async function StoreLayout({
               <div className="scrollbar-hide flex h-[42px] items-center justify-center gap-9 overflow-x-auto px-8 xl:gap-12">
                 <a
                   className="relative shrink-0 py-3 text-[10px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#7a7469] hover:text-[#17191d]"
-                  href="/products?category=rings"
+                  href="/collections/rings"
                   data-discover="true"
                 >
                   Rings
@@ -222,7 +222,7 @@ export default async function StoreLayout({
                 </a>
                 <a
                   className="relative shrink-0 py-3 text-[10px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#7a7469] hover:text-[#17191d]"
-                  href="/products?category=necklaces"
+                  href="/collections/necklaces"
                   data-discover="true"
                 >
                   Necklaces
@@ -230,7 +230,7 @@ export default async function StoreLayout({
                 </a>
                 <a
                   className="relative shrink-0 py-3 text-[10px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#7a7469] hover:text-[#17191d]"
-                  href="/products?category=earrings"
+                  href="/collections/earrings"
                   data-discover="true"
                 >
                   Earrings
@@ -238,7 +238,7 @@ export default async function StoreLayout({
                 </a>
                 <a
                   className="relative shrink-0 py-3 text-[10px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#7a7469] hover:text-[#17191d]"
-                  href="/products?category=bracelets"
+                  href="/collections/bracelets"
                   data-discover="true"
                 >
                   Bracelets
@@ -246,7 +246,7 @@ export default async function StoreLayout({
                 </a>
                 <a
                   className="relative shrink-0 py-3 text-[10px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#7a7469] hover:text-[#17191d]"
-                  href="/products?category=anklets"
+                  href="/collections/anklets"
                   data-discover="true"
                 >
                   Anklets
@@ -254,7 +254,7 @@ export default async function StoreLayout({
                 </a>
                 <a
                   className="relative shrink-0 py-3 text-[10px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#7a7469] hover:text-[#17191d]"
-                  href="/products?category=pendents"
+                  href="/collections/pendents"
                   data-discover="true"
                 >
                   Pendents
@@ -428,35 +428,35 @@ export default async function StoreLayout({
             <div className="flex flex-col gap-2 sm:gap-3">
               <a
                 className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
-                href="/products?category=rings"
+                href="/collections/rings"
                 data-discover="true"
               >
                 Rings
               </a>
               <a
                 className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
-                href="/products?category=necklaces"
+                href="/collections/necklaces"
                 data-discover="true"
               >
                 Necklaces
               </a>
               <a
                 className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
-                href="/products?category=earrings"
+                href="/collections/earrings"
                 data-discover="true"
               >
                 Earrings
               </a>
               <a
                 className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
-                href="/products?category=bracelets"
+                href="/collections/bracelets"
                 data-discover="true"
               >
                 Bracelets
               </a>
               <a
                 className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
-                href="/products?category=anklets"
+                href="/collections/anklets"
                 data-discover="true"
               >
                 Anklets

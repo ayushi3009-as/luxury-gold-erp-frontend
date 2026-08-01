@@ -31,7 +31,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
           <div className="" >
             <a
               className="group block"
-              href="/products?category=rings"
+              href="/collections/rings"
               data-discover="true"
             >
               <div className="relative aspect-[3/4] overflow-hidden bg-gray-100 rounded-sm">
@@ -53,7 +53,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
           <div className="" >
             <a
               className="group block"
-              href="/products?category=necklaces"
+              href="/collections/necklaces"
               data-discover="true"
             >
               <div className="relative aspect-[3/4] overflow-hidden bg-gray-100 rounded-sm">
@@ -75,7 +75,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
           <div className="" >
             <a
               className="group block"
-              href="/products?category=earrings"
+              href="/collections/earrings"
               data-discover="true"
             >
               <div className="relative aspect-[3/4] overflow-hidden bg-gray-100 rounded-sm">
@@ -97,7 +97,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
           <div className="" >
             <a
               className="group block"
-              href="/products?category=bracelets"
+              href="/collections/bracelets"
               data-discover="true"
             >
               <div className="relative aspect-[3/4] overflow-hidden bg-gray-100 rounded-sm">
@@ -119,7 +119,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
           <div className="" >
             <a
               className="group block"
-              href="/products?category=anklets"
+              href="/collections/anklets"
               data-discover="true"
             >
               <div className="relative aspect-[3/4] overflow-hidden bg-gray-100 rounded-sm">
@@ -141,7 +141,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
           <div className="" >
             <a
               className="group block"
-              href="/products?category=pendents"
+              href="/collections/pendents"
               data-discover="true"
             >
               <div className="relative aspect-[3/4] overflow-hidden bg-gray-100 rounded-sm">
@@ -728,7 +728,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               </p>
               <a
                 className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase font-medium text-gray-900 hover:text-gray-600 transition-colors group"
-                href="/products"
+                href="/collections"
                 data-discover="true"
               >
                 Discover Collection{" "}
@@ -1995,7 +1995,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
           <div className="text-center mt-6 sm:mt-8 px-4">
             <a
               className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] tracking-[0.15em] uppercase font-medium text-gray-900 border-b border-gray-900 pb-0.5 hover:text-gray-600 transition-colors group"
-              href="/products?sort=rating"
+              href="/collections?sort=rating"
               data-discover="true"
             >
               View All Bestsellers{" "}
@@ -2035,7 +2035,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
             </div>
             <a
               className="mt-3 inline-block text-[10px] uppercase tracking-[0.12em] text-gray-500 transition-colors hover:text-gray-900 sm:absolute sm:right-0 sm:top-1/2 sm:mt-0 sm:-translate-y-1/2 sm:text-[11px]"
-              href="/products?sort=newest"
+              href="/collections?sort=newest"
               data-discover="true"
             >
               View All →
