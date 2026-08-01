@@ -48,7 +48,8 @@ export default function middleware(req: NextRequest) {
   const isErpPath = erpPaths.some(p => url.pathname.startsWith(p));
 
   // If it's a subdomain (e.g. ram.tivra.marketing), route to that tenant's store
-  if (isSubdomain && subdomain !== 'app' && subdomain !== 'www') {
+  // Do not rewrite if it's an ERP path, so tenant admins can access their dashboard on their subdomain.
+  if (isSubdomain && subdomain !== 'app' && subdomain !== 'www' && !isErpPath) {
     return NextResponse.rewrite(new URL(`/store/${subdomain}${url.pathname}`, req.url));
   }
 

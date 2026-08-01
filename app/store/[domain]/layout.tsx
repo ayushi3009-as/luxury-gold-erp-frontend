@@ -1,12 +1,4 @@
 import prisma from '@/lib/prisma';
-import { Search, ShoppingBag, User } from 'lucide-react';
-import Link from 'next/link';
-
-import { Playfair_Display, Inter, Roboto } from 'next/font/google';
-
-const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-serif', weight: ['400', '500', '600'] });
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
-const roboto = Roboto({ subsets: ['latin'], variable: '--font-roboto', weight: ['300', '400', '500'] });
 
 export default async function StoreLayout({
   children,
@@ -19,170 +11,740 @@ export default async function StoreLayout({
     where: { subdomain: params.domain }
   });
 
-  const defaultTheme = {
-    primaryColor: "#B08A57",
-    backgroundColor: "#FFFDF9",
-    textColor: "#0B1324",
-    typography: "playfair",
-  };
-
-  const theme = tenant?.themeSettings ? (tenant.themeSettings as any) : defaultTheme;
-  const primaryColor = theme.primaryColor || defaultTheme.primaryColor;
-  const backgroundColor = theme.backgroundColor || defaultTheme.backgroundColor;
-  const textColor = theme.textColor || defaultTheme.textColor;
-  const fontClass = theme.typography === 'inter' ? inter.variable : theme.typography === 'roboto' ? roboto.variable : playfair.variable;
-
   return (
-    <div 
-      className={`min-h-screen flex flex-col font-sans ${playfair.variable} ${inter.variable} ${fontClass}`}
-      style={{ 
-        backgroundColor,
-        color: textColor,
-        '--store-primary': primaryColor,
-        '--store-bg': backgroundColor,
-        '--store-text': textColor,
-        '--store-border': `${textColor}20`,
-        '--store-text-muted': `${textColor}80`
-      } as React.CSSProperties}
-    >
-      <style>{`
-        .text-store-primary { color: var(--store-primary); }
-        .bg-store-primary { background-color: var(--store-primary); }
-        .border-store-primary { border-color: var(--store-primary); }
-        .hover\\:text-store-primary:hover { color: var(--store-primary); }
-        
-        .text-store-text { color: var(--store-text); }
-        .text-store-muted { color: var(--store-text-muted); }
-        .border-store-border { border-color: var(--store-border); }
-        .bg-store-border { background-color: var(--store-border); }
-        
-        .font-store-heading { font-family: var(--font-serif); }
-        ${theme.typography === 'inter' ? '.font-store-heading { font-family: var(--font-sans); }' : ''}
-        ${theme.typography === 'roboto' ? '.font-store-heading { font-family: var(--font-roboto); }' : ''}
-      `}</style>
-
-      {/* ── EDITORIAL NAVBAR ── */}
-      <nav className="fixed top-0 w-full z-50 border-b border-store-border transition-colors duration-300" style={{ backgroundColor }}>
-        <div className="grid grid-cols-[40px_1fr_auto] md:grid-cols-[40px_auto_1fr_auto] items-stretch h-[64px]">
-
-          <div className="border-r border-store-border flex items-center justify-center">
-            <span className="text-[8px] text-store-muted">◆</span>
+    <div className="min-h-screen flex flex-col font-sans antialiased text-gray-900 bg-white">
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:translate-y-0 lg:opacity-100 ">
+      <div className="relative h-8 overflow-hidden border-b border-[#ece7dc] bg-[#fbfaf7] text-[#27251f]">
+        <div className="flex h-full items-center justify-center px-10 sm:px-14">
+          <span
+            className="text-[9px] sm:text-[10px] tracking-[0.22em] uppercase font-medium text-center text-[#484238]"
+            style={{ opacity: "1", transform: "translateY(-7.19519px)" }}
+          >
+            Free Shipping on Orders Above ₹999
+          </span>
+        </div>
+        <button
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-[#8b8375] hover:text-[#2d2a24] transition-colors"
+          aria-label="Previous announcement"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-chevron-left"
+            aria-hidden="true"
+          >
+            <path d="m15 18-6-6 6-6"></path>
+          </svg>
+        </button>
+        <button
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-[#8b8375] hover:text-[#2d2a24] transition-colors"
+          aria-label="Next announcement"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-chevron-right"
+            aria-hidden="true"
+          >
+            <path d="m9 18 6-6-6-6"></path>
+          </svg>
+        </button>
+      </div>
+      <nav className="border-b transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] border-[#f1eee8] bg-white">
+        <div className="w-full">
+          <div className="hidden lg:block">
+            <div className="relative flex h-[82px] xl:h-[86px] items-center justify-between pl-10 pr-5 xl:pl-16 xl:pr-7">
+              <div className="flex flex-1 items-center justify-start gap-8 pr-8 xl:gap-10">
+                <a
+                  className="group relative py-3 text-[10.5px] xl:text-[11px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#15171b]"
+                  href="/store/[domain]/"
+                  data-discover="true"
+                >
+                  Home
+                  <span className="absolute bottom-1 left-0 h-px bg-gradient-to-r from-[#b9a36a] via-[#d7d3ca] to-[#b9a36a] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] w-full opacity-100"></span>
+                </a>
+                <a
+                  className="group relative py-3 text-[10.5px] xl:text-[11px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#6f6a61] hover:text-[#17191d]"
+                  href="/products"
+                  data-discover="true"
+                >
+                  Shop
+                  <span className="absolute bottom-1 left-0 h-px bg-gradient-to-r from-[#b9a36a] via-[#d7d3ca] to-[#b9a36a] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] w-0 opacity-0"></span>
+                </a>
+                <a
+                  className="group relative py-3 text-[10.5px] xl:text-[11px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#6f6a61] hover:text-[#17191d]"
+                  href="/#about"
+                  data-discover="true"
+                >
+                  About Us
+                  <span className="absolute bottom-1 left-0 h-px bg-gradient-to-r from-[#b9a36a] via-[#d7d3ca] to-[#b9a36a] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] w-0 opacity-0"></span>
+                </a>
+                <a
+                  className="group relative py-3 text-[10.5px] xl:text-[11px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#6f6a61] hover:text-[#17191d]"
+                  href="/contact"
+                  data-discover="true"
+                >
+                  Contact Us
+                  <span className="absolute bottom-1 left-0 h-px bg-gradient-to-r from-[#b9a36a] via-[#d7d3ca] to-[#b9a36a] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] w-0 opacity-0"></span>
+                </a>
+              </div>
+              <a
+                className="absolute left-1/2 z-10 -translate-x-1/2 shrink-0 px-6 xl:px-10"
+                aria-label="ZOIAS Home"
+                href="/store/[domain]/"
+                data-discover="true"
+              >
+                <img
+                  alt="ZOIAS"
+                  className="select-none object-contain  h-[74px] w-[74px] transition-opacity duration-500 hover:opacity-80 xl:h-[78px] xl:w-[78px]"
+                  draggable="false"
+                  src="/zoias-logo.png"
+                />
+              </a>
+              <div className="flex flex-1 items-center justify-end">
+                <div className="flex items-center gap-1.5 rounded-full border border-[#f0ece4] bg-white/60 px-1.5 py-1 shadow-[0_1px_0_rgba(15,23,42,0.02)]">
+                  <button
+                    className="flex h-10 w-10 items-center justify-center rounded-full text-[#20242b] transition-all duration-300 hover:bg-[#f8f6f1] hover:text-[#0e1116]"
+                    aria-label="Search"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.35"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-search"
+                      aria-hidden="true"
+                    >
+                      <path d="m21 21-4.34-4.34"></path>
+                      <circle cx="11" cy="11" r="8"></circle>
+                    </svg>
+                  </button>
+                  <a
+                    className="flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:bg-[#f8f6f1] hover:text-[#0e1116] text-[#20242b]"
+                    aria-label="Account"
+                    href="/login"
+                    data-discover="true"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.35"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-user"
+                      aria-hidden="true"
+                    >
+                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  </a>
+                  <a
+                    className="relative flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:bg-[#f8f6f1] hover:text-[#0e1116] text-[#20242b]"
+                    aria-label="Wishlist"
+                    href="/wishlist"
+                    data-discover="true"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.35"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-heart"
+                      aria-hidden="true"
+                    >
+                      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                    </svg>
+                  </a>
+                  <a
+                    className="relative flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:bg-[#f8f6f1] hover:text-[#0e1116] text-[#20242b]"
+                    aria-label="Cart"
+                    href="/cart"
+                    data-discover="true"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.35"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-shopping-bag"
+                      aria-hidden="true"
+                    >
+                      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                      <path d="M3 6h18"></path>
+                      <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="border-t border-[#f0ece5] bg-[#fffefa]/92">
+              <div className="scrollbar-hide flex h-[42px] items-center justify-center gap-9 overflow-x-auto px-8 xl:gap-12">
+                <a
+                  className="relative shrink-0 py-3 text-[10px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#7a7469] hover:text-[#17191d]"
+                  href="/products?category=rings"
+                  data-discover="true"
+                >
+                  Rings
+                  <span className="absolute bottom-2 left-0 h-px bg-gradient-to-r from-[#b9a36a] via-[#d7d3ca] to-[#b9a36a] transition-all duration-500 w-0 opacity-0"></span>
+                </a>
+                <a
+                  className="relative shrink-0 py-3 text-[10px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#7a7469] hover:text-[#17191d]"
+                  href="/products?category=necklaces"
+                  data-discover="true"
+                >
+                  Necklaces
+                  <span className="absolute bottom-2 left-0 h-px bg-gradient-to-r from-[#b9a36a] via-[#d7d3ca] to-[#b9a36a] transition-all duration-500 w-0 opacity-0"></span>
+                </a>
+                <a
+                  className="relative shrink-0 py-3 text-[10px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#7a7469] hover:text-[#17191d]"
+                  href="/products?category=earrings"
+                  data-discover="true"
+                >
+                  Earrings
+                  <span className="absolute bottom-2 left-0 h-px bg-gradient-to-r from-[#b9a36a] via-[#d7d3ca] to-[#b9a36a] transition-all duration-500 w-0 opacity-0"></span>
+                </a>
+                <a
+                  className="relative shrink-0 py-3 text-[10px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#7a7469] hover:text-[#17191d]"
+                  href="/products?category=bracelets"
+                  data-discover="true"
+                >
+                  Bracelets
+                  <span className="absolute bottom-2 left-0 h-px bg-gradient-to-r from-[#b9a36a] via-[#d7d3ca] to-[#b9a36a] transition-all duration-500 w-0 opacity-0"></span>
+                </a>
+                <a
+                  className="relative shrink-0 py-3 text-[10px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#7a7469] hover:text-[#17191d]"
+                  href="/products?category=anklets"
+                  data-discover="true"
+                >
+                  Anklets
+                  <span className="absolute bottom-2 left-0 h-px bg-gradient-to-r from-[#b9a36a] via-[#d7d3ca] to-[#b9a36a] transition-all duration-500 w-0 opacity-0"></span>
+                </a>
+                <a
+                  className="relative shrink-0 py-3 text-[10px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#7a7469] hover:text-[#17191d]"
+                  href="/products?category=pendents"
+                  data-discover="true"
+                >
+                  Pendents
+                  <span className="absolute bottom-2 left-0 h-px bg-gradient-to-r from-[#b9a36a] via-[#d7d3ca] to-[#b9a36a] transition-all duration-500 w-0 opacity-0"></span>
+                </a>
+              </div>
+            </div>
           </div>
-
-          <Link href="/" className="px-6 flex items-center border-r border-store-border shrink-0">
-            {tenant?.logoUrl ? (
-              <img src={tenant.logoUrl} alt={tenant.name} className="h-8 object-contain" />
-            ) : (
-              <span className="text-sm font-store-heading tracking-[0.3em] uppercase text-store-text">
-                {tenant?.name || 'Luxury Gold'}
-              </span>
-            )}
-          </Link>
-
-          <div className="hidden md:flex items-center px-6 gap-8 text-[10px] uppercase tracking-[0.2em] text-store-muted">
-            <Link href="/collections/gold" className="hover:text-store-primary transition-colors duration-500">Gold Collection</Link>
-            <Link href="/collections/diamonds" className="hover:text-store-primary transition-colors duration-500">Diamonds</Link>
-            <Link href="/gifting" className="hover:text-store-primary transition-colors duration-500">Gifting</Link>
-            <Link href="/about" className="hover:text-store-primary transition-colors duration-500">Heritage</Link>
-          </div>
-
-          <div className="flex items-center border-l border-store-border">
-            <Link href="/search" className="h-full px-4 flex items-center border-r border-store-border hover:bg-store-border transition-colors">
-              <Search size={16} strokeWidth={1.5} className="text-store-muted hover:text-store-primary" />
-            </Link>
-            <Link href="/account" className="h-full px-4 flex items-center border-r border-store-border hover:bg-store-border transition-colors">
-              <User size={16} strokeWidth={1.5} className="text-store-muted hover:text-store-primary" />
-            </Link>
-            <Link href="/cart" className="h-full px-4 flex items-center hover:bg-store-border transition-colors relative">
-              <ShoppingBag size={16} strokeWidth={1.5} className="text-store-muted hover:text-store-primary" />
-              <span className="absolute top-3 right-2 w-3.5 h-3.5 bg-store-primary text-black text-[8px] font-bold flex items-center justify-center" style={{ color: backgroundColor }}>0</span>
-            </Link>
+          <div className="lg:hidden">
+            <div className="relative flex h-16 items-center justify-between px-4 sm:h-[68px] sm:px-6">
+              <button
+                className="flex h-11 w-11 -ml-2 items-center justify-center rounded-full text-[#15171d] transition-all duration-300 active:bg-[#f5f2ec]"
+                aria-label="Toggle menu"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="21"
+                  height="21"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.35"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-menu"
+                  aria-hidden="true"
+                >
+                  <path d="M4 12h16"></path>
+                  <path d="M4 18h16"></path>
+                  <path d="M4 6h16"></path>
+                </svg>
+              </button>
+              <a
+                className="absolute left-1/2 z-10 -translate-x-1/2"
+                aria-label="ZOIAS Home"
+                href="/store/[domain]/"
+                data-discover="true"
+              >
+                <img
+                  alt="ZOIAS"
+                  className="select-none object-contain  h-[54px] w-[54px] sm:h-[58px] sm:w-[58px]"
+                  draggable="false"
+                  src="/zoias-logo.png"
+                />
+              </a>
+              <div className="flex items-center gap-0.5">
+                <button
+                  className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full text-[#15171d] transition-all duration-300 active:bg-[#f5f2ec]"
+                  aria-label="Search"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.35"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-search"
+                    aria-hidden="true"
+                  >
+                    <path d="m21 21-4.34-4.34"></path>
+                    <circle cx="11" cy="11" r="8"></circle>
+                  </svg>
+                </button>
+                <a
+                  className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full text-[#15171d] transition-all duration-300 active:bg-[#f5f2ec]"
+                  aria-label="Wishlist"
+                  href="/wishlist"
+                  data-discover="true"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.35"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-heart"
+                    aria-hidden="true"
+                  >
+                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                  </svg>
+                </a>
+                <a
+                  className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full text-[#15171d] transition-all duration-300 active:bg-[#f5f2ec]"
+                  aria-label="Cart"
+                  href="/cart"
+                  data-discover="true"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.35"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-shopping-bag"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                    <path d="M3 6h18"></path>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
-
-      {/* 📄 PAGE CONTENT */}
-      <main className="flex-grow pt-[64px]">
+    </header>
+      <div className="site-header-spacer hidden lg:block" aria-hidden="true"></div>
+      <main className="flex-grow pt-[64px] sm:pt-[68px] lg:pt-[118px]">
         {children}
       </main>
-
-      {/* ── EDITORIAL FOOTER ── */}
-      <footer className="border-t border-store-border mt-auto" style={{ backgroundColor }}>
-        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] divide-y md:divide-y-0 md:divide-x divide-store-border">
-          <div className="p-10">
-            {tenant?.logoUrl ? (
-              <img src={tenant.logoUrl} alt={tenant.name} className="h-10 object-contain mb-6 grayscale opacity-80" />
-            ) : (
-              <h2 className="font-store-heading tracking-[0.3em] text-store-text uppercase text-sm mb-6">
-                {tenant?.name || 'Luxury Gold'}
-              </h2>
-            )}
-            <p className="text-store-muted text-xs leading-relaxed font-sans font-light max-w-xs mb-8">
-              {tenant?.aboutUsText || 'Crafting timeless masterpieces since 1995.'}
+      <footer
+      id="contact"
+      className="scroll-mt-32 w-full min-w-0 bg-gray-950 text-gray-300"
+    >
+      <div className="w-full px-4 sm:px-6 lg:px-10 py-10 sm:py-16 lg:py-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
+          <div className="col-span-2 lg:col-span-1">
+            <img
+              alt="ZOIAS"
+              className="select-none object-contain  mb-3 h-20 w-24 sm:mb-4 sm:h-24 sm:w-28"
+              draggable="false"
+              src="/zoias-logo.png"
+            />
+            <p className="text-xs sm:text-sm leading-relaxed text-gray-400 mb-4 sm:mb-6">
+              Crafting timeless silver jewellery that celebrates elegance and
+              individuality. Every piece tells a story.
             </p>
-            <Link href="/book-appointment" className="text-[10px] tracking-[0.2em] text-store-primary uppercase border-b border-store-primary/40 pb-1 hover:border-store-primary transition-colors">
-              Book an appointment →
-            </Link>
+            <a
+              href="https://www.instagram.com/z0ias?igsh=MXhhMDBmaTdnNWszeQ=="
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm hover:text-white transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-instagram"
+                aria-hidden="true"
+              >
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+              </svg>{" "}
+              @z0ias
+            </a>
           </div>
-
-          <div className="p-10">
-            <p className="text-[9px] tracking-[0.3em] text-store-muted uppercase mb-6 opacity-60">Explore</p>
-            <ul className="space-y-4 text-xs text-store-muted font-sans">
-              {[
-                { label: 'Gold Collection', href: '/collections/gold' },
-                { label: 'Diamond Collection', href: '/collections/diamonds' },
-                { label: 'The Gifting Edit', href: '/gifting' },
-              ].map(l => (
-                <li key={l.href}><Link href={l.href} className="hover:text-store-primary transition-colors duration-500">{l.label}</Link></li>
-              ))}
-            </ul>
+          <div>
+            <h3 className="text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white mb-3 sm:mb-4 font-medium">
+              Shop
+            </h3>
+            <div className="flex flex-col gap-2 sm:gap-3">
+              <a
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                href="/products?category=rings"
+                data-discover="true"
+              >
+                Rings
+              </a>
+              <a
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                href="/products?category=necklaces"
+                data-discover="true"
+              >
+                Necklaces
+              </a>
+              <a
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                href="/products?category=earrings"
+                data-discover="true"
+              >
+                Earrings
+              </a>
+              <a
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                href="/products?category=bracelets"
+                data-discover="true"
+              >
+                Bracelets
+              </a>
+              <a
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                href="/products?category=anklets"
+                data-discover="true"
+              >
+                Anklets
+              </a>
+            </div>
           </div>
-
-          <div className="p-10">
-            <p className="text-[9px] tracking-[0.3em] text-store-muted uppercase mb-6 opacity-60">Client Care</p>
-            <ul className="space-y-4 text-xs text-store-muted font-sans">
-              {[
-                { label: 'My Account', href: '/account' },
-                { label: 'Size Guide', href: '/size-guide' },
-                { label: 'FAQ', href: '/faq' },
-              ].map(l => (
-                <li key={l.href}><Link href={l.href} className="hover:text-store-primary transition-colors duration-500">{l.label}</Link></li>
-              ))}
-            </ul>
+          <div>
+            <h3 className="text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white mb-3 sm:mb-4 font-medium">
+              Help
+            </h3>
+            <div className="flex flex-col gap-2 sm:gap-3">
+              <a
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                href="/shipping-returns"
+                data-discover="true"
+              >
+                Shipping &amp; Returns
+              </a>
+              <a
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                href="/size-guide"
+                data-discover="true"
+              >
+                Size Guide
+              </a>
+              <a
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                href="/care-instructions"
+                data-discover="true"
+              >
+                Care Instructions
+              </a>
+              <a
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                href="/faqs"
+                data-discover="true"
+              >
+                FAQs
+              </a>
+              <a
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                href="/contact"
+                data-discover="true"
+              >
+                Contact Us
+              </a>
+            </div>
           </div>
-
-          <div className="p-10">
-            <p className="text-[9px] tracking-[0.3em] text-store-muted uppercase mb-6 opacity-60">Legal</p>
-            <ul className="space-y-4 text-xs text-store-muted font-sans">
-              {[
-                { label: 'Privacy Policy', href: '/policies/privacy' },
-                { label: 'Terms of Service', href: '/policies/terms' },
-              ].map(l => (
-                <li key={l.href}><Link href={l.href} className="hover:text-store-primary transition-colors duration-500">{l.label}</Link></li>
-              ))}
-            </ul>
+          <div className="col-span-2 sm:col-span-1">
+            <h3 className="text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white mb-3 sm:mb-4 font-medium">
+              Contact
+            </h3>
+            <div className="flex flex-col gap-2 sm:gap-3">
+              <a
+                href="mailto:hello@zoias.in"
+                className="flex items-center gap-2 text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-mail sm:hidden"
+                  aria-hidden="true"
+                >
+                  <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
+                  <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-mail hidden sm:block"
+                  aria-hidden="true"
+                >
+                  <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
+                  <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                </svg>{" "}
+                hello@zoias.in
+              </a>
+              <a
+                href="tel:+919876543210"
+                className="flex items-center gap-2 text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-phone sm:hidden"
+                  aria-hidden="true"
+                >
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-phone hidden sm:block"
+                  aria-hidden="true"
+                >
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>{" "}
+                +91 98765 43210
+              </a>
+              <span className="flex items-start gap-2 text-xs sm:text-sm text-gray-400">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-map-pin mt-0.5 shrink-0 sm:hidden"
+                  aria-hidden="true"
+                >
+                  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-map-pin mt-0.5 shrink-0 hidden sm:block"
+                  aria-hidden="true"
+                >
+                  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>{" "}
+                Mumbai, India
+              </span>
+            </div>
           </div>
         </div>
-
-        <div className="border-t border-store-border px-10 py-4 flex flex-col md:flex-row justify-between items-center gap-3">
-          <p className="text-[9px] tracking-[0.2em] text-store-muted uppercase">
-            © {new Date().getFullYear()} {tenant?.name || 'Luxury Gold'}. All rights reserved.
+        <div className="border-t border-gray-800 mt-8 sm:mt-12 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
+          <p className="text-[10px] sm:text-xs text-gray-500">
+            © 2025 ZOIAS. All rights reserved.
           </p>
-
-          <Link
-            href="/login"
-            className="text-[8px] tracking-[0.25em] text-store-muted hover:text-store-text uppercase transition-colors duration-500 flex items-center gap-2 group"
-          >
-            <span className="w-3 h-px bg-store-border group-hover:bg-store-primary transition-colors duration-500"></span>
-            Staff Login
-            <span className="w-3 h-px bg-store-border group-hover:bg-store-primary transition-colors duration-500"></span>
-          </Link>
-
-          <p className="text-[9px] tracking-[0.2em] text-store-muted uppercase">
-            Powered by <span className="text-store-primary">Tivra</span>
+          <p className="text-center text-[10px] sm:text-xs text-gray-500 sm:text-left">
+            Designed &amp; Developed by{" "}
+            <a
+              href="https://www.instagram.com/growweb_solutions"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative inline-flex font-semibold text-white transition-colors hover:text-amber-300 focus:outline-none focus:text-amber-300"
+            >
+              Grow Web Solutions
+              <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 whitespace-nowrap rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-[10px] font-medium text-gray-100 shadow-xl sm:group-hover:block sm:group-focus:block">
+                <span className="inline-flex items-center gap-1.5">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="11"
+                    height="11"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-instagram"
+                    aria-hidden="true"
+                  >
+                    <rect
+                      width="20"
+                      height="20"
+                      x="2"
+                      y="2"
+                      rx="5"
+                      ry="5"
+                    ></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                  </svg>
+                  growweb_solutions
+                  <span className="mx-0.5 text-gray-500">|</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="11"
+                    height="11"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-phone"
+                    aria-hidden="true"
+                  >
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                  +91-9727155628
+                </span>
+              </span>
+            </a>
+            <span className="mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 sm:hidden">
+              <a
+                href="https://www.instagram.com/growweb_solutions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-gray-400 hover:text-white"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="11"
+                  height="11"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-instagram"
+                  aria-hidden="true"
+                >
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                </svg>
+                growweb_solutions
+              </a>
+              <a
+                href="tel:+919727155628"
+                className="inline-flex items-center gap-1.5 text-gray-400 hover:text-white"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="11"
+                  height="11"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-phone"
+                  aria-hidden="true"
+                >
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                +91-9727155628
+              </a>
+            </span>
           </p>
+          <div className="flex gap-4 sm:gap-6 text-[10px] sm:text-xs text-gray-500">
+            <span className="hover:text-white transition-colors cursor-pointer">
+              Privacy
+            </span>
+            <span className="hover:text-white transition-colors cursor-pointer">
+              Terms
+            </span>
+            <span className="hover:text-white transition-colors cursor-pointer">
+              Refund
+            </span>
+          </div>
         </div>
-      </footer>
+      </div>
+    </footer>
     </div>
   );
 }
