@@ -9,8 +9,9 @@ export default function StoreSettingsPage() {
     aboutUsText: "",
     logoUrl: "",
     themeSettings: {
-      primaryColor: "#D4AF37",
-      backgroundColor: "#0a0a0a",
+      primaryColor: "#B08A57",
+      backgroundColor: "#FFFDF9",
+      textColor: "#0B1324",
       typography: "playfair",
       heroImageUrl: "",
       heroHeadline: "",
@@ -149,6 +150,18 @@ export default function StoreSettingsPage() {
                   <span className="font-mono text-sm">{settings.themeSettings.backgroundColor}</span>
                 </div>
               </div>
+              <div className="col-span-1 md:col-span-2">
+                <label className="block text-sm text-text-secondary mb-2">Text Color</label>
+                <div className="flex gap-4 items-center">
+                  <input 
+                    type="color" 
+                    value={settings.themeSettings.textColor || "#0B1324"}
+                    onChange={e => updateTheme("textColor", e.target.value)}
+                    className="h-12 w-24 bg-background-primary border border-border-theme rounded cursor-pointer"
+                  />
+                  <span className="font-mono text-sm">{settings.themeSettings.textColor || "#0B1324"}</span>
+                </div>
+              </div>
             </div>
 
             <div className="border-t border-border-theme pt-6">
@@ -228,7 +241,7 @@ export default function StoreSettingsPage() {
               style={{ backgroundColor: settings.themeSettings.backgroundColor }}
             >
               {/* Fake Navbar */}
-              <div className="p-4 flex justify-center border-b border-white/10 shrink-0">
+              <div className="p-4 flex justify-center border-b shrink-0" style={{ borderColor: `${settings.themeSettings.textColor || '#000'}20` }}>
                 <span 
                   className="text-lg font-bold tracking-[0.2em] uppercase"
                   style={{ color: settings.themeSettings.primaryColor }}
@@ -246,18 +259,18 @@ export default function StoreSettingsPage() {
                   </div>
                 )}
                 
-                <div className="relative z-10 w-full">
+                <div className="relative z-10 w-full" style={{ color: settings.themeSettings.textColor || '#000' }}>
                   <h2 
-                    className="text-2xl mb-3 font-semibold text-white shadow-sm"
+                    className="text-2xl mb-3 font-semibold shadow-sm"
                   >
                     {settings.themeSettings.heroHeadline || "Your Headline Here"}
                   </h2>
-                  <p className="text-xs text-white/80 mb-6">
+                  <p className="text-xs mb-6 opacity-80">
                     {settings.themeSettings.heroSubheadline || "Add a captivating subheadline to engage your visitors."}
                   </p>
                   <button 
                     className="px-6 py-2 text-xs uppercase tracking-widest font-bold"
-                    style={{ backgroundColor: settings.themeSettings.primaryColor, color: '#000' }}
+                    style={{ backgroundColor: settings.themeSettings.primaryColor, color: settings.themeSettings.backgroundColor }}
                   >
                     Shop Now
                   </button>

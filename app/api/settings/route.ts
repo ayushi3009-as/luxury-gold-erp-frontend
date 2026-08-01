@@ -19,13 +19,13 @@ export async function GET() {
       return NextResponse.json({ error: "Tenant not found" }, { status: 404 });
     }
 
-    // Default theme settings
     const defaultTheme = {
-      primaryColor: "#D4AF37",
-      backgroundColor: "#0a0a0a",
+      primaryColor: "#B08A57", // Soft gold/bronze
+      backgroundColor: "#FFFDF9", // Light warm white/beige
+      textColor: "#0B1324", // Deep navy/black
       typography: "playfair",
       heroImageUrl: "https://images.unsplash.com/photo-1599643478514-4a820cbf311e?auto=format&fit=crop&w=2000&q=80",
-      heroHeadline: "Elegance that lasts forever",
+      heroHeadline: "Elegance curated for eternity",
       heroSubheadline: "Discover our latest collection of handcrafted masterpieces.",
     };
 
