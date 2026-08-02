@@ -60,102 +60,91 @@ export default function InventoryDashboard() {
         </div>
 
         {/* KPI CARDS */}
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          <div className="group relative overflow-hidden rounded-2xl border border-border-theme bg-background-secondary p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
-            <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="group relative overflow-hidden rounded-2xl border border-border-theme bg-background-secondary p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
+            <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="relative z-10 flex items-center justify-between">
               <Package className="text-accent-gold" size={28} />
-              <span className="flex items-center text-sm text-green-400">
-                <ArrowUpRight size={16} /> Live
+              <span className="flex items-center text-sm text-green-400 bg-green-500/10 px-2 py-1 rounded-full">
+                <ArrowUpRight size={14} className="mr-1"/> Live
               </span>
             </div>
-            <p className="relative z-10 mt-5 text-sm text-text-secondary">TOTAL STOCK VALUE</p>
-            <h2 className="relative z-10 mt-2 text-2xl font-bold text-accent-gold">
+            <p className="relative z-10 mt-6 text-xs font-semibold tracking-wider text-text-secondary">TOTAL STOCK VALUE</p>
+            <h2 className="relative z-10 mt-2 text-3xl font-bold text-accent-gold">
               ₹ {stats.totalStockValue.toLocaleString()}
             </h2>
           </div>
 
-          <div className="group relative overflow-hidden rounded-2xl border border-border-theme bg-background-secondary p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
-            <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="group relative overflow-hidden rounded-2xl border border-border-theme bg-background-secondary p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
+            <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="relative z-10 flex items-center justify-between">
               <Warehouse className="text-accent-gold" size={28} />
-              <span className="flex items-center text-sm text-green-400">
-                <ArrowUpRight size={16} /> Live
+              <span className="flex items-center text-sm text-green-400 bg-green-500/10 px-2 py-1 rounded-full">
+                <ArrowUpRight size={14} className="mr-1"/> Live
               </span>
             </div>
-            <p className="relative z-10 mt-5 text-sm text-text-secondary">TOTAL PRODUCTS</p>
-            <h2 className="relative z-10 mt-2 text-2xl font-bold">{stats.totalProducts}</h2>
+            <p className="relative z-10 mt-6 text-xs font-semibold tracking-wider text-text-secondary">TOTAL PRODUCTS</p>
+            <h2 className="relative z-10 mt-2 text-3xl font-bold">{stats.totalProducts}</h2>
           </div>
 
-          <div className="group relative overflow-hidden rounded-2xl border border-border-theme bg-background-secondary p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
-            <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="relative z-10 flex items-center justify-between">
-              <TrendingUp className="text-accent-gold" size={28} />
-            </div>
-            <p className="relative z-10 mt-5 text-sm text-text-secondary">STOCK MOVEMENT (MONTH)</p>
-            <h2 className="relative z-10 mt-2 text-2xl font-bold">1,248</h2>
-          </div>
-
-          <div className="group relative overflow-hidden rounded-2xl border border-border-theme bg-background-secondary p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
-            <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="group relative overflow-hidden rounded-2xl border border-border-theme bg-background-secondary p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)]">
+            <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="relative z-10 flex items-center justify-between">
               <AlertTriangle className={stats.lowStockItems > 0 ? "text-red-500" : "text-accent-gold"} size={28} />
-              {stats.lowStockItems > 0 && <span className="text-sm text-red-500 font-semibold animate-pulse">Attention</span>}
+              {stats.lowStockItems > 0 && <span className="text-xs text-red-400 font-semibold bg-red-500/10 px-2 py-1 rounded-full animate-pulse">Attention</span>}
             </div>
-            <p className="relative z-10 mt-5 text-sm text-text-secondary">LOW STOCK ALERTS</p>
-            <h2 className={`relative z-10 mt-2 text-2xl font-bold ${stats.lowStockItems > 0 ? "text-red-500" : ""}`}>
+            <p className="relative z-10 mt-6 text-xs font-semibold tracking-wider text-text-secondary">LOW STOCK ALERTS</p>
+            <h2 className={`relative z-10 mt-2 text-3xl font-bold ${stats.lowStockItems > 0 ? "text-red-500" : ""}`}>
               {stats.lowStockItems}
             </h2>
           </div>
         </div>
 
-        {/* INVENTORY OVERVIEW */}
-        <div className="mt-6 grid gap-5 xl:grid-cols-2">
-          <div className="relative overflow-hidden rounded-2xl border border-border-theme bg-background-secondary p-6 shadow-sm">
-            <div className="flex items-center justify-between relative z-10">
-              <h2 className="text-lg font-semibold text-accent-gold">INVENTORY OVERVIEW</h2>
-              <button className="rounded-lg border border-border-theme px-3 py-1 text-xs text-text-secondary">This Month</button>
-            </div>
-            <div className="relative z-10 mt-8 h-64 rounded-lg border border-dashed border-border-theme p-5">
-              <div className="flex h-full items-end justify-around gap-3">
-                {[45, 70, 55, 85, 65, 95, 75, 90].map((height, index) => (
-                  <div key={index} className="w-8 rounded-t-md bg-accent-gold/80 hover:bg-accent-gold transition-colors" style={{ height: `${height}%` }} />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* STOCK ALERTS */}
-          <div className="relative overflow-hidden rounded-2xl border border-border-theme bg-background-secondary p-6 shadow-sm">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-accent-gold/5 blur-3xl rounded-full" />
+        {/* STOCK ALERTS - FULL WIDTH */}
+        <div className="mt-6">
+          <div className="relative overflow-hidden rounded-2xl border border-border-theme bg-background-secondary p-8 shadow-sm">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-accent-gold/5 blur-3xl rounded-full pointer-events-none" />
             <div className="relative z-10">
-              <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-accent-gold">CURRENT STOCK ALERTS</h2>
-                <AlertTriangle size={20} className="text-accent-gold" />
+              <div className="flex items-center justify-between border-b border-border-theme pb-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-accent-gold/10 rounded-lg">
+                    <AlertTriangle size={24} className="text-accent-gold" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-accent-gold">CURRENT STOCK ALERTS</h2>
+                    <p className="text-sm text-text-secondary mt-1">Products requiring immediate restocking</p>
+                  </div>
+                </div>
               </div>
 
-              <div className="mt-5 space-y-3">
+              <div className="mt-6 space-y-4">
                 {alerts.length === 0 ? (
-                  <div className="p-4 border border-border-theme rounded-lg text-center text-text-secondary text-sm">
-                    No low stock alerts. All inventory is well stocked!
+                  <div className="p-8 border border-dashed border-border-theme rounded-xl text-center flex flex-col items-center justify-center bg-background-primary/50">
+                    <Package size={40} className="text-text-secondary mb-3 opacity-50" />
+                    <p className="text-lg font-medium text-text-primary">All good!</p>
+                    <p className="text-sm text-text-secondary mt-1">No low stock alerts. Your inventory is perfectly balanced.</p>
                   </div>
                 ) : (
-                  alerts.map((alert: any) => (
-                    <div
-                      key={alert.id}
-                      className="flex items-center justify-between rounded-lg border border-border-theme bg-background-tertiary p-4 transition-colors hover:border-accent-gold/50"
-                    >
-                      <div>
-                        <p className="text-sm font-medium">{alert.product?.name}</p>
-                        <p className="mt-1 text-xs text-red-500 font-semibold">
-                          Only {alert.quantity} units left (Min: {alert.minimumStock})
-                        </p>
+                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {alerts.map((alert: any) => (
+                      <div
+                        key={alert.id}
+                        className="flex flex-col justify-between rounded-xl border border-border-theme bg-background-primary p-5 transition-colors hover:border-accent-gold/50 group"
+                      >
+                        <div>
+                          <p className="text-lg font-bold text-white group-hover:text-accent-gold transition-colors">{alert.product?.name}</p>
+                          <p className="mt-2 text-sm bg-red-500/10 text-red-400 py-2 px-3 rounded-lg border border-red-500/20 inline-block font-medium">
+                            {alert.quantity} units left (Min: {alert.minimumStock})
+                          </p>
+                        </div>
+                        <div className="mt-5 pt-4 border-t border-border-theme flex justify-end">
+                          <button className="rounded-lg border border-border-theme px-4 py-2 text-sm font-semibold text-accent-gold hover:bg-accent-gold hover:text-black hover:border-accent-gold transition-all">
+                            Reorder Now
+                          </button>
+                        </div>
                       </div>
-                      <button className="rounded-md border border-border-theme px-3 py-1 text-xs text-accent-gold hover:bg-accent-gold/10 transition-colors">
-                        Reorder
-                      </button>
-                    </div>
-                  ))
+                    ))}
+                  </div>
                 )}
               </div>
             </div>
