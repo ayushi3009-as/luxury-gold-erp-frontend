@@ -42,10 +42,16 @@ export async function GET() {
         currentStock: item.quantity,
         minimumStock: item.minimumStock,
         status: isCritical ? "Critical" : "Low",
+        valueAtRisk: (item.product.costPrice || 0) * (item.minimumStock - item.quantity > 0 ? item.minimumStock - item.quantity : 0)
       };
     });
 
-    return NextResponse.json(formatted);
+    const activeBranchesCount = await prisma.branch.count({ where: { tenantId, isActive: true } });
+
+    return NextResponse.json({
+      items: formatted,
+      totalBranches: activeBranchesCount
+    });
   } catch (error) {
     console.error('Error fetching low stock:', error);
     return NextResponse.json({ error: 'Failed to fetch low stock' }, { status: 500 });

@@ -19,10 +19,12 @@ type LowStockProduct = {
   currentStock: number;
   minimumStock: number;
   status: string;
+  valueAtRisk: number;
 };
 
 export default function LowStockPage() {
   const [lowStockProducts, setLowStockProducts] = useState<LowStockProduct[]>([]);
+  const [totalBranches, setTotalBranches] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -34,7 +36,8 @@ export default function LowStockPage() {
       const res = await fetch("/api/notifications/low-stock");
       if (res.ok) {
         const data = await res.json();
-        setLowStockProducts(data);
+        setLowStockProducts(data.items || []);
+        setTotalBranches(data.totalBranches || 1);
       }
     } catch (error) {
       console.error("Failed to fetch low stock", error);
@@ -45,6 +48,9 @@ export default function LowStockPage() {
 
   const totalLowStock = lowStockProducts.length;
   const criticalStock = lowStockProducts.filter(p => p.status === "Critical").length;
+  
+  const totalValueAtRisk = lowStockProducts.reduce((sum, item) => sum + (item.valueAtRisk || 0), 0);
+  const formattedValue = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: "compact", maximumFractionDigits: 1 }).format(totalValueAtRisk);
 
   return (
     <div className="min-h-screen bg-background-primary text-text-primary">
@@ -102,7 +108,7 @@ export default function LowStockPage() {
               <p className="text-xs text-text-secondary">Stock Value at Risk</p>
               <TrendingDown size={19} className="text-accent-gold" />
             </div>
-            <h2 className="mt-3 text-3xl font-bold">$84.6K</h2>
+            <h2 className="mt-3 text-3xl font-bold">{loading ? "-" : formattedValue}</h2>
             <p className="mt-2 text-xs text-text-secondary">Estimated inventory value</p>
           </div>
 
@@ -111,7 +117,7 @@ export default function LowStockPage() {
               <p className="text-xs text-text-secondary">Warehouses Affected</p>
               <Warehouse size={19} className="text-accent-gold" />
             </div>
-            <h2 className="mt-3 text-3xl font-bold">6</h2>
+            <h2 className="mt-3 text-3xl font-bold">{loading ? "-" : totalBranches}</h2>
             <p className="mt-2 text-xs text-text-secondary">Across all locations</p>
           </div>
         </div>
