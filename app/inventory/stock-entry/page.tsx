@@ -14,7 +14,7 @@ import {
   UserRound,
   X,
   Loader2,
-  History
+  Clock
 } from "lucide-react";
 
 export default function StockEntry() {
@@ -262,7 +262,7 @@ export default function StockEntry() {
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-gold/10 text-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.15)] ring-1 ring-accent-gold/20">
-                <History size={24} />
+                <Clock size={24} />
               </div>
               <div>
                 <h2 className="text-lg font-bold tracking-wide text-text-primary">RECENTLY ADDED PRODUCTS</h2>
