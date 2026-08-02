@@ -188,27 +188,7 @@ export default function LowStockPage() {
 
         </div>
 
-        {/* AUTOMATIC ALERT INFO */}
-        <div className="mt-6 rounded-xl border border-border-theme bg-background-secondary p-6">
-          <div className="flex items-start gap-4">
-            <div className="rounded-xl bg-accent-gold/20 p-3">
-              <AlertTriangle size={22} className="text-accent-gold" />
-            </div>
-            <div>
-              <h2 className="font-semibold text-accent-gold">
-                Automatic Low Stock Monitoring
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-text-secondary">
-                The system automatically monitors inventory levels and creates
-                alerts whenever a product falls below its minimum stock level.
-              </p>
-              <div className="mt-4 flex items-center gap-2 text-sm text-green-500">
-                <Package size={16} />
-                Automatic stock monitoring is enabled.
-              </div>
-            </div>
-          </div>
-        </div>
+
 
       </main>
 

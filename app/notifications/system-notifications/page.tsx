@@ -93,7 +93,7 @@ export default function SystemNotificationsPage() {
         </div>
 
         {/* SUMMARY CARDS */}
-        <div className="mt-8 grid grid-cols-4 gap-5">
+        <div className="mt-8 grid grid-cols-3 gap-5">
           <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
             <p className="text-xs text-text-secondary">Total Notifications</p>
             <h2 className="mt-3 text-3xl font-bold">{totalNotifications}</h2>
@@ -108,11 +108,6 @@ export default function SystemNotificationsPage() {
             <p className="text-xs text-text-secondary">Unread</p>
             <h2 className="mt-3 text-3xl font-bold text-accent-gold">{unreadCount}</h2>
             <p className="mt-2 text-xs text-text-secondary">New system updates</p>
-          </div>
-          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
-            <p className="text-xs text-text-secondary">System Status</p>
-            <h2 className="mt-3 text-3xl font-bold text-green-400">Healthy</h2>
-            <p className="mt-2 text-xs text-green-400">All systems operational</p>
           </div>
         </div>
 
@@ -201,25 +196,7 @@ export default function SystemNotificationsPage() {
           )}
         </div>
 
-        {/* SYSTEM STATUS */}
-        <div className="mt-6 rounded-xl border border-green-900/40 bg-background-secondary p-6">
-          <div className="flex items-start gap-4">
-            <div className="rounded-xl bg-green-500/10 p-3">
-              <CheckCircle2 size={22} className="text-green-400" />
-            </div>
-            <div>
-              <h2 className="font-semibold text-green-400">All Systems Operational</h2>
-              <p className="mt-2 text-sm leading-6 text-text-secondary">
-                All major ERP services are currently running normally.
-                System activity, database and security services are operational.
-              </p>
-              <div className="mt-4 flex items-center gap-2 text-sm text-text-secondary">
-                <Info size={16} />
-                Last system health check: Just now
-              </div>
-            </div>
-          </div>
-        </div>
+
 
       </main>
     </div>
