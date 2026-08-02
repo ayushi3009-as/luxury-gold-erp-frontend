@@ -59,33 +59,26 @@ export default function TaskCenterPage() {
         <div className="flex items-end justify-between">
 
           <div>
-
             <p className="text-xs text-text-secondary">
-              Notifications / Task Center
+              Notifications / Tasks & Reminders
             </p>
-
             <div className="mt-2 flex items-center gap-3">
-
-              <div className="rounded-xl bg-[#211c0d] p-3">
-                <CheckSquare
-                  size={25}
-                  className="text-accent-gold"
-                />
+              <div className="rounded-xl bg-background-tertiary p-3">
+                <CheckSquare size={25} className="text-accent-gold" />
               </div>
-
               <h1 className="text-3xl font-bold text-accent-gold">
-                Task Center
+                Tasks & Reminders
               </h1>
-
             </div>
-
             <p className="mt-3 text-sm text-text-secondary">
-              Manage, track and complete your business tasks.
+              Manage, track and complete your business tasks and reminders.
             </p>
-
           </div>
 
-          <button className="flex items-center gap-2 rounded-lg bg-[#b98c20] px-4 py-2 text-xs font-medium text-black transition hover:bg-[#d0a52d]">
+          <button 
+            onClick={() => alert("Add Task functionality will open a modal here.")}
+            className="flex items-center gap-2 rounded-lg bg-accent-gold px-4 py-2 text-xs font-medium text-black transition hover:bg-accent-gold/80"
+          >
             <Plus size={15} />
             Add New Task
           </button>
@@ -94,106 +87,49 @@ export default function TaskCenterPage() {
 
         {/* SUMMARY CARDS */}
         <div className="mt-8 grid grid-cols-4 gap-5">
-
-          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
-
-            <p className="text-xs text-text-secondary">
-              Total Tasks
-            </p>
-
-            <h2 className="mt-3 text-3xl font-bold">
-              48
-            </h2>
-
-            <p className="mt-2 text-xs text-text-secondary">
-              All assigned tasks
-            </p>
-
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
+            <p className="text-xs text-text-secondary">Total Tasks</p>
+            <h2 className="mt-3 text-3xl font-bold">48</h2>
+            <p className="mt-2 text-xs text-text-secondary">All assigned tasks</p>
           </div>
 
-          <div className="rounded-xl border border-yellow-900/40 bg-[#11130f] p-5">
-
-            <p className="text-xs text-text-secondary">
-              In Progress
-            </p>
-
-            <h2 className="mt-3 text-3xl font-bold text-accent-gold">
-              16
-            </h2>
-
-            <p className="mt-2 text-xs text-accent-gold">
-              Currently being worked on
-            </p>
-
+          <div className="rounded-xl border border-yellow-900/40 bg-background-secondary p-5">
+            <p className="text-xs text-text-secondary">In Progress</p>
+            <h2 className="mt-3 text-3xl font-bold text-accent-gold">16</h2>
+            <p className="mt-2 text-xs text-accent-gold">Currently being worked on</p>
           </div>
 
-          <div className="rounded-xl border border-red-900/40 bg-[#11130f] p-5">
-
-            <p className="text-xs text-text-secondary">
-              Pending
-            </p>
-
-            <h2 className="mt-3 text-3xl font-bold text-red-400">
-              12
-            </h2>
-
-            <p className="mt-2 text-xs text-red-400">
-              Waiting to be started
-            </p>
-
+          <div className="rounded-xl border border-red-900/40 bg-background-secondary p-5">
+            <p className="text-xs text-text-secondary">Pending</p>
+            <h2 className="mt-3 text-3xl font-bold text-red-400">12</h2>
+            <p className="mt-2 text-xs text-red-400">Waiting to be started</p>
           </div>
 
-          <div className="rounded-xl border border-green-900/40 bg-[#11130f] p-5">
-
-            <p className="text-xs text-text-secondary">
-              Completed
-            </p>
-
-            <h2 className="mt-3 text-3xl font-bold text-green-400">
-              20
-            </h2>
-
-            <p className="mt-2 text-xs text-green-400">
-              Successfully completed
-            </p>
-
+          <div className="rounded-xl border border-green-900/40 bg-background-secondary p-5">
+            <p className="text-xs text-text-secondary">Completed</p>
+            <h2 className="mt-3 text-3xl font-bold text-green-400">20</h2>
+            <p className="mt-2 text-xs text-green-400">Successfully completed</p>
           </div>
-
         </div>
 
         {/* TASK LIST */}
-        <div className="mt-6 rounded-xl border border-border-theme bg-[#11130f] p-6">
-
+        <div className="mt-6 rounded-xl border border-border-theme bg-background-secondary p-6">
           <div className="flex items-center justify-between">
-
             <div>
-
-              <h2 className="text-lg font-semibold text-accent-gold">
-                My Tasks
-              </h2>
-
-              <p className="mt-1 text-xs text-text-secondary">
-                Tasks assigned to you and your team
-              </p>
-
+              <h2 className="text-lg font-semibold text-accent-gold">My Tasks</h2>
+              <p className="mt-1 text-xs text-text-secondary">Tasks assigned to you and your team</p>
             </div>
-
             <div className="flex gap-2">
-
-              <button className="rounded-lg border border-border-theme px-3 py-2 text-xs text-text-secondary hover:border-[#e4b52d] hover:text-accent-gold">
+              <button className="rounded-lg border border-border-theme px-3 py-2 text-xs text-text-secondary hover:border-accent-gold hover:text-accent-gold bg-accent-gold/5">
                 All
               </button>
-
-              <button className="rounded-lg border border-border-theme px-3 py-2 text-xs text-text-secondary hover:border-[#e4b52d] hover:text-accent-gold">
+              <button className="rounded-lg border border-border-theme px-3 py-2 text-xs text-text-secondary hover:border-accent-gold hover:text-accent-gold">
                 Pending
               </button>
-
-              <button className="rounded-lg border border-border-theme px-3 py-2 text-xs text-text-secondary hover:border-[#e4b52d] hover:text-accent-gold">
+              <button className="rounded-lg border border-border-theme px-3 py-2 text-xs text-text-secondary hover:border-accent-gold hover:text-accent-gold">
                 Completed
               </button>
-
             </div>
-
           </div>
 
           <div className="mt-6 space-y-3">
@@ -202,7 +138,7 @@ export default function TaskCenterPage() {
 
               <div
                 key={task.title}
-                className="flex items-center justify-between rounded-xl border border-[#2f2a1b] bg-[#151711] p-5 transition hover:border-[#6c5420]"
+                className="flex items-center justify-between rounded-xl border border-border-theme bg-background-primary p-5 transition hover:border-accent-gold"
               >
 
                 <div className="flex items-center gap-4">
@@ -293,37 +229,25 @@ export default function TaskCenterPage() {
         </div>
 
         {/* TASK INSIGHT */}
-        <div className="mt-6 rounded-xl border border-[#6c5420] bg-[#18150c] p-6">
-
+        <div className="mt-6 rounded-xl border border-border-theme bg-background-secondary p-6">
           <div className="flex items-start gap-4">
-
-            <div className="rounded-xl bg-[#b98c20] p-3">
-              <AlertTriangle
-                size={22}
-                className="text-black"
-              />
+            <div className="rounded-xl bg-accent-gold/20 p-3">
+              <AlertTriangle size={22} className="text-accent-gold" />
             </div>
-
             <div>
-
               <h2 className="font-semibold text-accent-gold">
                 Task Management
               </h2>
-
               <p className="mt-2 text-sm leading-6 text-text-secondary">
                 Assign tasks, track progress and make sure important business
                 activities are completed on time.
               </p>
-
-              <div className="mt-4 flex items-center gap-2 text-sm text-green-400">
+              <div className="mt-4 flex items-center gap-2 text-sm text-green-500">
                 <CheckSquare size={16} />
                 Task progress can be monitored from one central location.
               </div>
-
             </div>
-
           </div>
-
         </div>
 
       </main>
