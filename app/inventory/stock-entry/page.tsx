@@ -13,19 +13,34 @@ import {
   Trash2,
   UserRound,
   X,
-  Loader2
+  Loader2,
+  History
 } from "lucide-react";
 
 export default function StockEntry() {
   const router = useRouter();
   
   const [products, setProducts] = useState<any[]>([]);
+  const [recentProducts, setRecentProducts] = useState<any[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [entryNumber, setEntryNumber] = useState("");
 
   useEffect(() => {
     setEntryNumber(`SE-${new Date().getFullYear()}-${Math.floor(Math.random()*9000)+1000}`);
+    
+    const fetchRecent = async () => {
+      try {
+        const res = await fetch('/api/products');
+        if (res.ok) {
+          const data = await res.json();
+          setRecentProducts(data.slice(0, 5));
+        }
+      } catch (err) {
+        console.error("Failed to fetch recent products", err);
+      }
+    };
+    fetchRecent();
   }, []);
   
   const [newProduct, setNewProduct] = useState({
@@ -131,7 +146,7 @@ export default function StockEntry() {
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             <div className="group">
               <label className="mb-2 block text-xs font-semibold tracking-wider text-text-secondary group-focus-within:text-accent-gold transition-colors">STOCK ENTRY NUMBER</label>
-              <input type="text" value={entryNumber} readOnly className="w-full rounded-xl border border-border-theme bg-background-tertiary px-4 py-3.5 text-sm font-mono text-text-primary/70 outline-none transition-all cursor-not-allowed" />
+              <input type="text" value={entryNumber} onChange={(e) => setEntryNumber(e.target.value)} className="w-full rounded-xl border border-border-theme bg-background-secondary px-4 py-3.5 text-sm font-mono text-text-primary outline-none transition-all focus:border-accent-gold/50 focus:ring-4 focus:ring-accent-gold/10" />
             </div>
 
             <div className="group">
@@ -146,13 +161,7 @@ export default function StockEntry() {
               <label className="mb-2 block text-xs font-semibold tracking-wider text-text-secondary group-focus-within:text-accent-gold transition-colors">SUPPLIER / VENDOR</label>
               <div className="relative">
                 <UserRound size={18} className="absolute left-4 top-3.5 text-accent-gold/70" />
-                <select className="w-full appearance-none rounded-xl border border-border-theme bg-text-primary/5 px-11 py-3.5 text-sm text-text-primary outline-none transition-all focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10">
-                  <option className="bg-background-secondary text-text-primary">Select Supplier</option>
-                  <option className="bg-background-secondary text-text-primary">Rajesh Jewellers</option>
-                  <option className="bg-background-secondary text-text-primary">Shree Gold Traders</option>
-                  <option className="bg-background-secondary text-text-primary">Diamond World</option>
-                </select>
-                <ChevronDown size={18} className="absolute right-4 top-3.5 text-text-secondary pointer-events-none" />
+                <input type="text" placeholder="Enter supplier name" className="w-full rounded-xl border border-border-theme bg-text-primary/5 px-11 py-3.5 text-sm text-text-primary outline-none transition-all placeholder:text-text-secondary/50 focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10" />
               </div>
             </div>
 
@@ -248,6 +257,59 @@ export default function StockEntry() {
           </div>
         </div>
 
+        {/* RECENTLY ADDED INVENTORY */}
+        <div className="mt-8 rounded-2xl border border-border-theme bg-background-primary/50 backdrop-blur-xl p-8 shadow-2xl">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-gold/10 text-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.15)] ring-1 ring-accent-gold/20">
+                <History size={24} />
+              </div>
+              <div>
+                <h2 className="text-lg font-bold tracking-wide text-text-primary">RECENTLY ADDED PRODUCTS</h2>
+                <p className="text-xs text-text-secondary mt-0.5">Products from previous stock entries</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto rounded-xl border border-border-theme bg-background-secondary/50">
+            <table className="w-full min-w-[1050px] text-left text-sm">
+              <thead className="border-b border-border-theme bg-text-primary/5 text-xs font-semibold tracking-wider text-text-secondary">
+                <tr>
+                  <th className="px-5 py-4">PRODUCT</th>
+                  <th className="px-5 py-4">CATEGORY</th>
+                  <th className="px-5 py-4">SKU / CODE</th>
+                  <th className="px-5 py-4">WEIGHT</th>
+                  <th className="px-5 py-4">PRICE</th>
+                  <th className="px-5 py-4">STATUS</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border-theme">
+                {recentProducts.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className="py-8 text-center text-text-secondary">
+                      No recent products found.
+                    </td>
+                  </tr>
+                ) : (
+                  recentProducts.map((product) => (
+                    <tr key={product.id} className="transition-colors hover:bg-text-primary/5">
+                      <td className="px-5 py-4 font-semibold text-text-primary">{product.name}</td>
+                      <td className="px-5 py-4 text-text-primary/80">{product.category || 'N/A'}</td>
+                      <td className="px-5 py-4 font-mono text-text-secondary/80">{product.productCode || product.barcode || 'N/A'}</td>
+                      <td className="px-5 py-4 text-text-primary/80">{product.weight || product.netWeight || 'N/A'} g</td>
+                      <td className="px-5 py-4 font-bold text-accent-gold">₹ {(product.price || product.amount || 0).toLocaleString('en-IN')}</td>
+                      <td className="px-5 py-4">
+                        <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${product.isPublished ? 'bg-green-500/10 text-green-500' : 'bg-yellow-500/10 text-yellow-500'}`}>
+                          {product.isPublished ? 'Active' : 'Draft'}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </main>
 
       {/* ADD PRODUCT MODAL */}
