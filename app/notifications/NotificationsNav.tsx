@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Bell, AlertTriangle, Package, Clock3, CheckSquare, Settings } from "lucide-react";
+import clsx from "clsx";
 
 const menuItems = [
   {
@@ -33,84 +34,43 @@ const menuItems = [
 ];
 
 export default function NotificationsNav() {
+  const pathname = usePathname();
+  
   return (
     <nav className="flex items-center gap-2 overflow-x-auto border-b border-border-theme bg-background-primary px-6 py-3 w-full [&::-webkit-scrollbar]:hidden">
-
-    
-
-      {/* LOGO */}
-      <div className="flex h-[92px] items-center gap-3 border-b border-border-theme px-5">
-
-        
-
-        <div>
-          
-
-          <p className="text-[10px] text-text-secondary">
-            Jewellery ERP System
-          </p>
-        </div>
-
+      <div className="flex items-center gap-2 pr-6 border-r border-border-theme mr-2">
+        <Bell size={18} className="text-accent-gold" />
+        <span className="text-sm font-bold uppercase tracking-wider text-accent-gold">
+          Notifications
+        </span>
       </div>
 
-      {/* MODULE TITLE */}
-      <div className="border-b border-border-theme px-5 py-5">
+      {menuItems.map((item) => {
+        const Icon = item.icon;
+        const isActive = pathname === item.href;
 
-        <div className="flex items-center gap-2">
-
-          <Bell
-            size={16}
-            className="text-accent-gold"
-          />
-
-          <p className="text-xs font-bold uppercase tracking-wider text-accent-gold">
-            Notifications
-          </p>
-
-        </div>
-
-      </div>
-
-      {/* MENU */}
-      
-
-        {menuItems.map((item) => {
-
-          const Icon = item.icon;
-
-          return (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="group flex items-center justify-between rounded-lg px-4 py-3 text-sm text-text-secondary transition hover:bg-[#211c0d] hover:text-accent-gold"
-            >
-
-              <div className="flex items-center gap-3">
-
-                <Icon
-                  size={18}
-                  className="text-text-secondary transition group-hover:text-accent-gold"
-                />
-
-                <span>
-                  {item.name}
-                </span>
-
-              </div>
-
-              <span className="text-accent-gold">
-                ›
-              </span>
-
-            </Link>
-          );
-
-        })}
-
-      
-
-    
-  
+        return (
+          <Link
+            key={item.name}
+            href={item.href}
+            className={clsx(
+              "group flex items-center gap-2 rounded-lg px-4 py-2 text-sm transition-colors",
+              isActive 
+                ? "bg-accent-gold/10 text-accent-gold font-medium" 
+                : "text-text-secondary hover:bg-background-secondary hover:text-text-primary"
+            )}
+          >
+            <Icon
+              size={16}
+              className={clsx(
+                "transition-colors",
+                isActive ? "text-accent-gold" : "text-text-secondary group-hover:text-text-primary"
+              )}
+            />
+            <span className="whitespace-nowrap">{item.name}</span>
+          </Link>
+        );
+      })}
     </nav>
   );
 }
