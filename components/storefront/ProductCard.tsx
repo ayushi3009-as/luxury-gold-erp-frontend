@@ -1,50 +1,51 @@
 'use client';
 import Link from 'next/link';
+import { useCartStore } from '@/lib/store/cartStore';
 
-function getFallbackImage(category: string | undefined, name: string | undefined) {
-  const c = (category || '').toLowerCase();
-  const n = (name || '').toLowerCase();
-  if (c.includes('ring') || n.includes('ring'))
-    return 'https://images.unsplash.com/photo-1605100804763-247f67b2548e?w=600&auto=format&fit=crop&q=80';
-  if (c.includes('necklace') || n.includes('necklace'))
-    return 'https://images.unsplash.com/photo-1599643478514-4a7f052843cb?w=600&auto=format&fit=crop&q=80';
-  if (c.includes('bangle') || c.includes('bracelet') || n.includes('bangle') || n.includes('bracelet'))
-    return 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&auto=format&fit=crop&q=80';
-  if (c.includes('earring') || n.includes('earring') || n.includes('jhumka'))
-    return 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&auto=format&fit=crop&q=80';
-  return 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&auto=format&fit=crop&q=80';
-}
+export function ProductCard({ item }: { item: any }) {
+  const addItem = useCartStore(state => state.addItem);
 
-// Editorial catalog card — hairline border, NO rounded corners, NO shadows
-export function ProductCard({ product, index = 0 }: { product: any; index?: number }) {
-  const fallback = getFallbackImage(product.category, product.name);
-  const catalogNum = String(product.catalogNumber ?? (index + 1)).padStart(3, '0');
+  const fallbackImage = 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&auto=format&fit=crop&q=80';
+  const imgUrl = item.imageUrl || fallbackImage;
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    addItem({
+      id: item.id,
+      productId: item.id,
+      name: item.name,
+      price: item.price || item.sellingPrice || 0,
+      imageUrl: imgUrl,
+      purity: item.purity || '22K',
+      weight: item.weight || 'N/A'
+    });
+    alert('Added to Cart!');
+  };
 
   return (
-    <Link href={`/product/${product.id}`} className="group cursor-pointer block">
-      {/* Hairline-framed image — editorial, no card bg, no shadow */}
-      <div className="border border-[#2A2724] p-1 mb-4 overflow-hidden">
-        <img
-          src={product.imageUrl || fallback}
-          alt={product.name}
-          onError={(e) => { e.currentTarget.src = fallback; }}
-          className="w-full h-[200px] md:h-[260px] object-cover transition-[object-position] duration-[900ms] ease-luxury group-hover:object-[70%_30%]"
+    <Link href={`/product/${item.id}`} className="group cursor-pointer block">
+      <div className="relative h-[300px] sm:h-[400px] w-full overflow-hidden bg-gray-100 mb-6">
+        <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors z-10"></div>
+        <img 
+          src={imgUrl}
+          onError={(e) => { e.currentTarget.src = fallbackImage; }}
+          alt={item.name} 
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-in-out" 
         />
+        <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/60 to-transparent z-20 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+          <button 
+            onClick={handleAddToCart}
+            className="w-full bg-[#111] text-white py-3 uppercase tracking-widest text-xs font-bold hover:bg-black transition-colors"
+          >
+            Add to Cart
+          </button>
+        </div>
       </div>
-
-      {/* Catalog number placard */}
-      <p className="text-[9px] tracking-widest text-[#8a7a5a] uppercase mb-1.5">
-        N°{catalogNum}
-      </p>
-      <h4 className="text-sm font-serif text-white/90 group-hover:text-[#D4AF37] transition-colors duration-500 leading-snug mb-1">
-        {product.name}
-      </h4>
-      <p className="text-xs text-[#8a7a5a] uppercase tracking-widest mb-1">
-        {product.purity || '22K'} {product.weight ? `· ${product.weight}` : ''}
-      </p>
-      <p className="text-sm text-[#D4AF37] font-light">
-        ₹{product.price?.toLocaleString('en-IN')}
-      </p>
+      <div className="text-center">
+        <h4 className="text-lg font-serif text-[#111]">{item.name}</h4>
+        <p className="text-gray-500 text-xs mt-1 mb-1">{item.purity || '22K'} • {item.weight || '45g'}</p>
+        <p className="text-md text-gray-800 tracking-wide">₹{(item.price || item.sellingPrice || 0).toLocaleString("en-IN")}</p>
+      </div>
     </Link>
   );
 }
