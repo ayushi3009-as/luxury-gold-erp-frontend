@@ -11,25 +11,31 @@ export async function GET() {
     
     let branches = await prisma.branch.findMany({
       where,
-      orderBy: { name: 'asc' }
+      orderBy: { branchName: 'asc' }
     });
 
     if (branches.length === 0) {
       // Create some default branches for testing if none exist
       await prisma.branch.createMany({
         data: [
-          { name: 'Main Warehouse', code: 'WH-01', isHeadOffice: true, tenantId: session?.tenantId },
-          { name: 'Surat Branch', code: 'BR-01', isHeadOffice: false, tenantId: session?.tenantId },
-          { name: 'Mumbai Branch', code: 'BR-02', isHeadOffice: false, tenantId: session?.tenantId },
+          { branchName: 'Main Warehouse', branchCode: 'WH-01', branchType: 'HEAD_OFFICE', isHeadOffice: true, tenantId: session?.tenantId },
+          { branchName: 'Surat Branch', branchCode: 'BR-01', branchType: 'SUB_BRANCH', isHeadOffice: false, tenantId: session?.tenantId },
+          { branchName: 'Mumbai Branch', branchCode: 'BR-02', branchType: 'SUB_BRANCH', isHeadOffice: false, tenantId: session?.tenantId },
         ]
       });
       branches = await prisma.branch.findMany({
         where,
-        orderBy: { name: 'asc' }
+        orderBy: { branchName: 'asc' }
       });
     }
 
-    return NextResponse.json(branches);
+    const mappedBranches = branches.map(b => ({
+      ...b,
+      name: b.branchName,
+      code: b.branchCode
+    }));
+
+    return NextResponse.json(mappedBranches);
   } catch (error) {
     console.error('Error fetching branches:', error);
     return NextResponse.json({ error: 'Failed to fetch branches' }, { status: 500 });
