@@ -12,49 +12,87 @@ import {
   Plus,
 } from "lucide-react";
 
-const tasks = [
-  {
-    title: "Complete Inventory Verification",
-    description: "Verify physical stock for the gold jewellery section.",
-    assignee: "Hasti Patel",
-    dueDate: "Today, 05:00 PM",
-    priority: "High",
-    status: "In Progress",
-  },
-  {
-    title: "Review Monthly Sales Report",
-    description: "Review the monthly sales and revenue performance.",
-    assignee: "Manager",
-    dueDate: "Tomorrow, 11:00 AM",
-    priority: "Medium",
-    status: "Pending",
-  },
-  {
-    title: "Update Product Catalogue",
-    description: "Add new jewellery products and update pricing.",
-    assignee: "Product Team",
-    dueDate: "Friday, 03:00 PM",
-    priority: "Medium",
-    status: "Pending",
-  },
-  {
-    title: "Customer Follow-up",
-    description: "Contact customers with pending jewellery inquiries.",
-    assignee: "Sales Team",
-    dueDate: "Saturday, 12:00 PM",
-    priority: "Low",
-    status: "Completed",
-  },
-];
+import { useEffect, useState } from "react";
+import { format, isToday, isTomorrow } from "date-fns";
+
+type Task = {
+  id: string;
+  title: string;
+  description: string;
+  priority: string;
+  status: string;
+  dueDate: string;
+  assignee: { fullName: string } | null;
+};
 
 export default function TaskCenterPage() {
-  return (
-  <div className="min-h-screen bg-background-primary text-text-primary">
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("All");
 
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  const fetchTasks = async () => {
+    try {
+      const res = await fetch("/api/tasks");
+      if (res.ok) {
+        const data = await res.json();
+        setTasks(data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch tasks", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAddTask = async () => {
+    const title = prompt("Enter task title:");
+    if (!title) return;
+    const description = prompt("Enter task description:");
     
+    try {
+      const res = await fetch("/api/tasks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title,
+          description,
+          priority: "Medium",
+          status: "Pending",
+        }),
+      });
+      if (res.ok) {
+        fetchTasks();
+      }
+    } catch (error) {
+      console.error("Failed to add task", error);
+    }
+  };
 
-    <main className=" min-h-screen p-8">
+  const filteredTasks = tasks.filter((t) => {
+    if (filter === "All") return true;
+    return t.status === filter;
+  });
 
+  const totalTasks = tasks.length;
+  const inProgress = tasks.filter((t) => t.status === "In Progress").length;
+  const pending = tasks.filter((t) => t.status === "Pending").length;
+  const completed = tasks.filter((t) => t.status === "Completed").length;
+
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return "No due date";
+    const d = new Date(dateStr);
+    if (isToday(d)) return "Today, " + format(d, "hh:mm a");
+    if (isTomorrow(d)) return "Tomorrow, " + format(d, "hh:mm a");
+    return format(d, "MMM dd, hh:mm a");
+  };
+
+  return (
+    <div className="min-h-screen bg-background-primary text-text-primary">
+      <main className=" min-h-screen p-8">
         {/* HEADER */}
         <div className="flex items-end justify-between">
 
@@ -76,7 +114,7 @@ export default function TaskCenterPage() {
           </div>
 
           <button 
-            onClick={() => alert("Add Task functionality will open a modal here.")}
+            onClick={handleAddTask}
             className="flex items-center gap-2 rounded-lg bg-accent-gold px-4 py-2 text-xs font-medium text-black transition hover:bg-accent-gold/80"
           >
             <Plus size={15} />
@@ -89,25 +127,25 @@ export default function TaskCenterPage() {
         <div className="mt-8 grid grid-cols-4 gap-5">
           <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
             <p className="text-xs text-text-secondary">Total Tasks</p>
-            <h2 className="mt-3 text-3xl font-bold">48</h2>
+            <h2 className="mt-3 text-3xl font-bold">{loading ? "-" : totalTasks}</h2>
             <p className="mt-2 text-xs text-text-secondary">All assigned tasks</p>
           </div>
 
           <div className="rounded-xl border border-yellow-900/40 bg-background-secondary p-5">
             <p className="text-xs text-text-secondary">In Progress</p>
-            <h2 className="mt-3 text-3xl font-bold text-accent-gold">16</h2>
+            <h2 className="mt-3 text-3xl font-bold text-accent-gold">{loading ? "-" : inProgress}</h2>
             <p className="mt-2 text-xs text-accent-gold">Currently being worked on</p>
           </div>
 
           <div className="rounded-xl border border-red-900/40 bg-background-secondary p-5">
             <p className="text-xs text-text-secondary">Pending</p>
-            <h2 className="mt-3 text-3xl font-bold text-red-400">12</h2>
+            <h2 className="mt-3 text-3xl font-bold text-red-400">{loading ? "-" : pending}</h2>
             <p className="mt-2 text-xs text-red-400">Waiting to be started</p>
           </div>
 
           <div className="rounded-xl border border-green-900/40 bg-background-secondary p-5">
             <p className="text-xs text-text-secondary">Completed</p>
-            <h2 className="mt-3 text-3xl font-bold text-green-400">20</h2>
+            <h2 className="mt-3 text-3xl font-bold text-green-400">{loading ? "-" : completed}</h2>
             <p className="mt-2 text-xs text-green-400">Successfully completed</p>
           </div>
         </div>
@@ -120,80 +158,56 @@ export default function TaskCenterPage() {
               <p className="mt-1 text-xs text-text-secondary">Tasks assigned to you and your team</p>
             </div>
             <div className="flex gap-2">
-              <button className="rounded-lg border border-border-theme px-3 py-2 text-xs text-text-secondary hover:border-accent-gold hover:text-accent-gold bg-accent-gold/5">
+              <button onClick={() => setFilter("All")} className={`rounded-lg border border-border-theme px-3 py-2 text-xs text-text-secondary hover:border-accent-gold hover:text-accent-gold ${filter === "All" ? "bg-accent-gold/5" : ""}`}>
                 All
               </button>
-              <button className="rounded-lg border border-border-theme px-3 py-2 text-xs text-text-secondary hover:border-accent-gold hover:text-accent-gold">
+              <button onClick={() => setFilter("Pending")} className={`rounded-lg border border-border-theme px-3 py-2 text-xs text-text-secondary hover:border-accent-gold hover:text-accent-gold ${filter === "Pending" ? "bg-accent-gold/5" : ""}`}>
                 Pending
               </button>
-              <button className="rounded-lg border border-border-theme px-3 py-2 text-xs text-text-secondary hover:border-accent-gold hover:text-accent-gold">
+              <button onClick={() => setFilter("Completed")} className={`rounded-lg border border-border-theme px-3 py-2 text-xs text-text-secondary hover:border-accent-gold hover:text-accent-gold ${filter === "Completed" ? "bg-accent-gold/5" : ""}`}>
                 Completed
               </button>
             </div>
           </div>
 
           <div className="mt-6 space-y-3">
-
-            {tasks.map((task) => (
-
+            {loading ? (
+              <div className="text-center text-sm text-text-secondary py-10">Loading tasks...</div>
+            ) : filteredTasks.length === 0 ? (
+              <div className="text-center text-sm text-text-secondary py-10">No tasks found.</div>
+            ) : (
+              filteredTasks.map((task) => (
               <div
-                key={task.title}
+                key={task.id}
                 className="flex items-center justify-between rounded-xl border border-border-theme bg-background-primary p-5 transition hover:border-accent-gold"
               >
-
                 <div className="flex items-center gap-4">
-
                   <div>
-
                     {task.status === "Completed" ? (
-                      <CheckCircle2
-                        size={22}
-                        className="text-green-400"
-                      />
+                      <CheckCircle2 size={22} className="text-green-400" />
                     ) : task.status === "In Progress" ? (
-                      <Clock3
-                        size={22}
-                        className="text-accent-gold"
-                      />
+                      <Clock3 size={22} className="text-accent-gold" />
                     ) : (
-                      <Circle
-                        size={22}
-                        className="text-text-secondary"
-                      />
+                      <Circle size={22} className="text-text-secondary" />
                     )}
-
                   </div>
-
                   <div>
-
-                    <h3 className="text-sm font-semibold">
-                      {task.title}
-                    </h3>
-
-                    <p className="mt-1 text-xs text-text-secondary">
-                      {task.description}
-                    </p>
-
+                    <h3 className="text-sm font-semibold">{task.title}</h3>
+                    <p className="mt-1 text-xs text-text-secondary">{task.description}</p>
                     <div className="mt-2 flex items-center gap-3 text-[10px] text-text-secondary">
-
                       <span className="flex items-center gap-1">
                         <UserRound size={12} />
-                        {task.assignee}
+                        {task.assignee?.fullName || "Unassigned"}
                       </span>
-
                       <span className="flex items-center gap-1">
                         <CalendarDays size={12} />
-                        {task.dueDate}
+                        {formatDate(task.dueDate)}
                       </span>
-
                     </div>
-
                   </div>
-
                 </div>
 
                 <div className="flex items-center gap-4">
-
                   <span
                     className={`rounded-full px-3 py-1 text-[10px] ${
                       task.priority === "High"
@@ -205,7 +219,6 @@ export default function TaskCenterPage() {
                   >
                     {task.priority}
                   </span>
-
                   <span
                     className={`rounded-full px-3 py-1 text-[10px] ${
                       task.status === "Completed"
@@ -217,13 +230,9 @@ export default function TaskCenterPage() {
                   >
                     {task.status}
                   </span>
-
                 </div>
-
               </div>
-
-            ))}
-
+            )))}
           </div>
 
         </div>

@@ -96,6 +96,7 @@ model Tenant {
   users                User[]
   userSessions         UserSession[]
   workOrders           WorkOrder[]
+  tasks                Task[]
 }
 
 model Role {
@@ -203,6 +204,7 @@ model User {
   role                Role                 @relation(fields: [roleId], references: [id])
   tenant              Tenant?              @relation(fields: [tenantId], references: [id])
   sessions            UserSession[]
+  assignedTasks       Task[]
 }
 
 model DashboardSetting {
@@ -1373,4 +1375,19 @@ enum TenantApprovalStatus {
   PENDING
   APPROVED
   REJECTED
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  assigneeId  String?
+  dueDate     DateTime?
+  priority    String   @default("Medium")
+  status      String   @default("Pending")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tenantId    String?
+  tenant      Tenant?  @relation(fields: [tenantId], references: [id])
+  assignee    User?    @relation(fields: [assigneeId], references: [id])
 }

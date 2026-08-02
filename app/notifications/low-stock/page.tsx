@@ -10,48 +10,46 @@ import {
   ArrowDownRight,
 } from "lucide-react";
 
-const lowStockProducts = [
-  {
-    name: "Gold Chain Collection",
-    sku: "GLD-CH-1024",
-    category: "Gold Jewellery",
-    currentStock: 5,
-    minimumStock: 20,
-    status: "Critical",
-  },
-  {
-    name: "Diamond Engagement Ring",
-    sku: "DIA-RG-2088",
-    category: "Diamond Jewellery",
-    currentStock: 8,
-    minimumStock: 15,
-    status: "Low",
-  },
-  {
-    name: "Classic Gold Bangles",
-    sku: "GLD-BG-3045",
-    category: "Gold Jewellery",
-    currentStock: 12,
-    minimumStock: 25,
-    status: "Low",
-  },
-  {
-    name: "Premium Silver Bracelet",
-    sku: "SLV-BR-4056",
-    category: "Silver Jewellery",
-    currentStock: 4,
-    minimumStock: 12,
-    status: "Critical",
-  },
-];
+import { useEffect, useState } from "react";
+import Link from "next/link";
+
+type LowStockProduct = {
+  name: string;
+  sku: string;
+  category: string;
+  currentStock: number;
+  minimumStock: number;
+  status: string;
+};
 
 export default function LowStockPage() {
+  const [lowStockProducts, setLowStockProducts] = useState<LowStockProduct[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchLowStock();
+  }, []);
+
+  const fetchLowStock = async () => {
+    try {
+      const res = await fetch("/api/notifications/low-stock");
+      if (res.ok) {
+        const data = await res.json();
+        setLowStockProducts(data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch low stock", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const totalLowStock = lowStockProducts.length;
+  const criticalStock = lowStockProducts.filter(p => p.status === "Critical").length;
+
   return (
-  <div className="min-h-screen bg-background-primary text-text-primary">
-
-    
-
-    <main className=" min-h-screen p-8">
+    <div className="min-h-screen bg-background-primary text-text-primary">
+      <main className=" min-h-screen p-8">
         {/* HEADER */}
         <div>
 
@@ -87,7 +85,7 @@ export default function LowStockPage() {
               <p className="text-xs text-text-secondary">Low Stock Items</p>
               <Package size={19} className="text-accent-gold" />
             </div>
-            <h2 className="mt-3 text-3xl font-bold">24</h2>
+            <h2 className="mt-3 text-3xl font-bold">{loading ? "-" : totalLowStock}</h2>
             <p className="mt-2 text-xs text-accent-gold">Requires attention</p>
           </div>
 
@@ -96,7 +94,7 @@ export default function LowStockPage() {
               <p className="text-xs text-text-secondary">Critical Stock</p>
               <AlertTriangle size={19} className="text-red-400" />
             </div>
-            <h2 className="mt-3 text-3xl font-bold text-red-400">8</h2>
+            <h2 className="mt-3 text-3xl font-bold text-red-400">{loading ? "-" : criticalStock}</h2>
             <p className="mt-2 text-xs text-red-400">Immediate restocking required</p>
           </div>
 
@@ -147,53 +145,40 @@ export default function LowStockPage() {
             </div>
 
             {/* TABLE ROWS */}
-            {lowStockProducts.map((product) => (
-              <div
-                key={product.sku}
-                className="grid grid-cols-6 items-center border-b border-border-theme px-5 py-5 last:border-b-0"
-              >
-
-                <span className="text-sm font-medium">
-                  {product.name}
-                </span>
-
-                <span className="text-xs text-text-secondary">
-                  {product.sku}
-                </span>
-
-                <span className="text-xs text-text-secondary">
-                  {product.category}
-                </span>
-
-                <span
-                  className={`text-sm font-semibold ${
-                    product.status === "Critical"
-                      ? "text-red-400"
-                      : "text-accent-gold"
-                  }`}
+            {loading ? (
+              <div className="p-5 text-center text-sm text-text-secondary">Loading low stock products...</div>
+            ) : lowStockProducts.length === 0 ? (
+              <div className="p-5 text-center text-sm text-text-secondary">No low stock products found! All good.</div>
+            ) : (
+              lowStockProducts.map((product) => (
+                <div
+                  key={product.sku}
+                  className="grid grid-cols-6 items-center border-b border-border-theme px-5 py-5 last:border-b-0"
                 >
-                  {product.currentStock} units
-                </span>
-
-                <span className="text-sm text-text-secondary">
-                  {product.minimumStock} units
-                </span>
-
-                <span
-                  className={`flex w-fit items-center gap-1 rounded-full px-3 py-1 text-[10px] ${
-                    product.status === "Critical"
-                      ? "bg-red-500/10 text-red-400"
-                      : "bg-accent-gold/10 text-accent-gold"
-                  }`}
-                >
-                  <ArrowDownRight size={12} />
-                  {product.status}
-                </span>
-
-              </div>
-
-            ))}
-
+                  <span className="text-sm font-medium">{product.name}</span>
+                  <span className="text-xs text-text-secondary">{product.sku}</span>
+                  <span className="text-xs text-text-secondary">{product.category}</span>
+                  <span
+                    className={`text-sm font-semibold ${
+                      product.status === "Critical" ? "text-red-400" : "text-accent-gold"
+                    }`}
+                  >
+                    {product.currentStock} units
+                  </span>
+                  <span className="text-sm text-text-secondary">{product.minimumStock} units</span>
+                  <span
+                    className={`flex w-fit items-center gap-1 rounded-full px-3 py-1 text-[10px] ${
+                      product.status === "Critical"
+                        ? "bg-red-500/10 text-red-400"
+                        : "bg-accent-gold/10 text-accent-gold"
+                    }`}
+                  >
+                    <ArrowDownRight size={12} />
+                    {product.status}
+                  </span>
+                </div>
+              ))
+            )}
           </div>
 
         </div>
