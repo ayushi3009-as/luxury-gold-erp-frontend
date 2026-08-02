@@ -60,7 +60,7 @@ export default function PurchaseDashboard() {
           </div>
 
           <div className="flex items-center gap-3">
-            <button className="flex items-center gap-2 rounded-xl border border-white/10 bg-background-secondary/50 backdrop-blur-md px-5 py-2.5 text-sm font-medium text-white transition-all hover:border-accent-gold/50">
+            <button className="flex items-center gap-2 rounded-xl border border-border-theme bg-background-secondary/50 backdrop-blur-md px-5 py-2.5 text-sm font-medium text-text-primary transition-all hover:border-accent-gold/50">
               <CalendarDays size={16} className="text-accent-gold" />
               This Month
               <ChevronDown size={15} />
@@ -100,20 +100,20 @@ export default function PurchaseDashboard() {
         </div>
 
         {/* RECENT ORDERS */}
-        <div className="mt-8 rounded-2xl border border-white/5 bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative overflow-hidden">
+        <div className="mt-8 rounded-2xl border border-border-theme bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/20 via-transparent to-transparent"></div>
           
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-lg font-bold tracking-wide text-white">RECENT PURCHASE ORDERS</h2>
+              <h2 className="text-lg font-bold tracking-wide text-text-primary">RECENT PURCHASE ORDERS</h2>
               <p className="mt-0.5 text-xs text-text-secondary">Latest orders sent to suppliers</p>
             </div>
             <span className="cursor-pointer text-xs font-semibold text-accent-gold hover:text-yellow-400 transition-colors">View All →</span>
           </div>
 
-          <div className="overflow-x-auto rounded-xl border border-white/10 bg-black/20">
+          <div className="overflow-x-auto rounded-xl border border-border-theme bg-background-tertiary">
             <table className="w-full text-left text-sm">
-              <thead className="border-b border-white/10 bg-white/5 text-xs font-semibold tracking-wider text-text-secondary">
+              <thead className="border-b border-border-theme bg-text-primary/5 text-xs font-semibold tracking-wider text-text-secondary">
                 <tr>
                   <th className="px-5 py-4">PO NUMBER</th>
                   <th className="px-5 py-4">SUPPLIER</th>
@@ -122,24 +122,24 @@ export default function PurchaseDashboard() {
                   <th className="px-5 py-4 text-right">AMOUNT</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-border-theme">
                 {recentOrders.length === 0 ? (
                   <tr>
                     <td colSpan={5} className="px-5 py-8 text-center text-text-secondary">No purchase orders found.</td>
                   </tr>
                 ) : (
                   recentOrders.map((order: any, idx: number) => (
-                    <tr key={idx} className="transition-colors hover:bg-white/5 group">
+                    <tr key={idx} className="transition-colors hover:bg-text-primary/5 group">
                       <td className="px-5 py-4">
-                        <span className="font-mono text-white/70 group-hover:text-white transition-colors">{order.id}</span>
+                        <span className="font-mono text-text-primary/70 group-hover:text-text-primary transition-colors">{order.id}</span>
                       </td>
-                      <td className="px-5 py-4 font-semibold text-white">{order.supplier}</td>
+                      <td className="px-5 py-4 font-semibold text-text-primary">{order.supplier}</td>
                       <td className="px-5 py-4 text-text-secondary">{new Date(order.date).toLocaleDateString()}</td>
                       <td className="px-5 py-4">
                         <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border ${
                           order.status === 'APPROVED' ? 'bg-green-400/10 text-green-400 border-green-400/20' :
                           order.status === 'PENDING' ? 'bg-yellow-400/10 text-yellow-400 border-yellow-400/20' :
-                          'bg-white/10 text-white/70 border-white/20'
+                          'bg-text-primary/10 text-text-primary/70 border-border-theme'
                         }`}>
                           {order.status}
                         </span>
@@ -159,7 +159,7 @@ export default function PurchaseDashboard() {
 
 function StatCard({ title, value, change, icon }: { title: string; value: string; change: string; icon: React.ReactNode; }) {
   return (
-    <div className="group rounded-2xl border border-white/5 bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl transition-all hover:border-accent-gold/30 hover:bg-white/5 hover:shadow-[0_0_30px_rgba(212,175,55,0.05)] relative overflow-hidden">
+    <div className="group rounded-2xl border border-border-theme bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl transition-all hover:border-accent-gold/30 hover:bg-text-primary/5 hover:shadow-[0_0_30px_rgba(212,175,55,0.05)] relative overflow-hidden">
       <div className="absolute top-0 right-0 p-32 bg-accent-gold/5 rounded-full blur-3xl -mr-16 -mt-16 transition-opacity opacity-0 group-hover:opacity-100"></div>
       
       <div className="relative z-10">
@@ -167,13 +167,13 @@ function StatCard({ title, value, change, icon }: { title: string; value: string
           <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-gold/10 text-accent-gold ring-1 ring-accent-gold/20 shadow-inner">
             {icon}
           </div>
-          <span className="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/60">
+          <span className="flex items-center gap-1 rounded-full border border-border-theme bg-text-primary/5 px-3 py-1.5 text-xs font-medium text-text-primary/60">
             {change}
           </span>
         </div>
 
-        <p className="mt-6 text-xs font-semibold tracking-wider text-text-secondary group-hover:text-white/70 transition-colors">{title}</p>
-        <h3 className="mt-1 text-3xl font-bold text-white tracking-tight">{value}</h3>
+        <p className="mt-6 text-xs font-semibold tracking-wider text-text-secondary group-hover:text-text-primary/70 transition-colors">{title}</p>
+        <h3 className="mt-1 text-3xl font-bold text-text-primary tracking-tight">{value}</h3>
       </div>
     </div>
   );

@@ -53,7 +53,7 @@ export default function RepairStatus() {
           </div>
           <button 
             onClick={fetchData}
-            className="flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/20 transition-all"
+            className="flex items-center gap-2 rounded-xl bg-text-primary/10 px-4 py-2 text-sm font-semibold text-text-primary hover:bg-text-primary/20 transition-all"
           >
             <RefreshCw size={16} />
             Refresh
@@ -62,22 +62,22 @@ export default function RepairStatus() {
 
         <div className="grid grid-cols-1 gap-4">
           {activeOrders.length === 0 ? (
-            <div className="p-12 text-center text-text-secondary bg-[#111111]/60 rounded-2xl border border-white/5">
+            <div className="p-12 text-center text-text-secondary bg-[#111111]/60 rounded-2xl border border-border-theme">
               No active repairs found.
             </div>
           ) : (
             activeOrders.map((order: any) => (
-              <div key={order.id} className="bg-[#111111]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:border-blue-500/30 transition-all">
+              <div key={order.id} className="bg-[#111111]/80 backdrop-blur-xl border border-border-theme rounded-2xl p-6 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:border-blue-500/30 transition-all">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
                     <span className="font-mono text-sm font-bold text-accent-gold bg-accent-gold/10 px-2 py-0.5 rounded">{order.repairNumber}</span>
-                    <h3 className="font-bold text-white text-lg">{order.itemName}</h3>
+                    <h3 className="font-bold text-text-primary text-lg">{order.itemName}</h3>
                   </div>
                   <p className="text-sm text-text-secondary">
-                    <span className="text-white/70">Customer:</span> {order.customerName} ({order.customerPhone}) 
+                    <span className="text-text-primary/70">Customer:</span> {order.customerName} ({order.customerPhone}) 
                   </p>
                   {order.description && (
-                    <p className="text-xs text-text-secondary mt-2 p-2 bg-black/40 rounded border border-white/5">
+                    <p className="text-xs text-text-secondary mt-2 p-2 bg-background-tertiary rounded border border-border-theme">
                       {order.description}
                     </p>
                   )}
@@ -87,7 +87,7 @@ export default function RepairStatus() {
                   <label className="text-xs font-semibold text-text-secondary uppercase tracking-wider">Current Status</label>
                   <select 
                     defaultValue={order.status}
-                    className={`rounded-xl border border-white/20 px-4 py-2 text-sm font-bold focus:outline-none appearance-none cursor-pointer ${
+                    className={`rounded-xl border border-border-theme px-4 py-2 text-sm font-bold focus:outline-none appearance-none cursor-pointer ${
                       order.status === 'PENDING' ? 'bg-red-500/10 text-red-400' :
                       order.status === 'IN_PROGRESS' ? 'bg-yellow-500/10 text-yellow-400' :
                       'bg-green-500/10 text-green-400'

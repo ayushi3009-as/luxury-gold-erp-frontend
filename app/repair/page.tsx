@@ -51,7 +51,7 @@ export default function RepairDashboard() {
 
         {/* METRICS */}
         <div className="grid gap-6 md:grid-cols-5 mb-10">
-          <MetricCard icon={<ClipboardList />} title="Total Repairs" value={metrics.totalRepairs} color="text-white" />
+          <MetricCard icon={<ClipboardList />} title="Total Repairs" value={metrics.totalRepairs} color="text-text-primary" />
           <MetricCard icon={<Clock />} title="Pending" value={metrics.pending} color="text-red-400" bg="bg-red-500/10" iconColor="text-red-500" />
           <MetricCard icon={<Wrench />} title="In Progress" value={metrics.inProgress} color="text-yellow-400" bg="bg-yellow-500/10" iconColor="text-yellow-500" />
           <MetricCard icon={<CheckCircle />} title="Completed" value={metrics.completed} color="text-green-400" bg="bg-green-500/10" iconColor="text-green-500" />
@@ -59,16 +59,16 @@ export default function RepairDashboard() {
         </div>
 
         {/* TABLE */}
-        <div className="rounded-2xl border border-white/5 bg-[#111111]/60 backdrop-blur-xl p-8 shadow-2xl relative overflow-hidden">
+        <div className="rounded-2xl border border-border-theme bg-[#111111]/60 backdrop-blur-xl p-8 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/40 via-transparent to-transparent"></div>
           
           <h2 className="text-lg font-bold text-accent-gold mb-6 tracking-wider uppercase flex items-center gap-2">
             <Calendar size={18} /> Recent Repair Orders
           </h2>
 
-          <div className="overflow-x-auto rounded-xl border border-white/10 bg-black/40">
+          <div className="overflow-x-auto rounded-xl border border-border-theme bg-background-tertiary">
             <table className="w-full text-left text-sm">
-              <thead className="border-b border-white/10 bg-white/5 text-xs font-semibold tracking-wider text-text-secondary uppercase">
+              <thead className="border-b border-border-theme bg-text-primary/5 text-xs font-semibold tracking-wider text-text-secondary uppercase">
                 <tr>
                   <th className="px-6 py-4">Repair No.</th>
                   <th className="px-6 py-4">Customer</th>
@@ -77,7 +77,7 @@ export default function RepairDashboard() {
                   <th className="px-6 py-4">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-border-theme">
                 {orders.length === 0 ? (
                   <tr>
                     <td colSpan={5} className="px-6 py-12 text-center text-text-secondary">
@@ -86,9 +86,9 @@ export default function RepairDashboard() {
                   </tr>
                 ) : (
                   orders.map((order: any) => (
-                    <tr key={order.id} className="transition-colors hover:bg-white/5 group">
-                      <td className="px-6 py-4 font-mono font-medium text-white/70 group-hover:text-accent-gold">{order.repairNumber}</td>
-                      <td className="px-6 py-4 font-bold text-white">{order.customerName}</td>
+                    <tr key={order.id} className="transition-colors hover:bg-text-primary/5 group">
+                      <td className="px-6 py-4 font-mono font-medium text-text-primary/70 group-hover:text-accent-gold">{order.repairNumber}</td>
+                      <td className="px-6 py-4 font-bold text-text-primary">{order.customerName}</td>
                       <td className="px-6 py-4 text-text-secondary">{order.itemName}</td>
                       <td className="px-6 py-4 text-text-secondary">
                         {new Date(order.createdAt).toLocaleDateString()}
@@ -116,7 +116,7 @@ function PlusIcon() {
 
 function MetricCard({ icon, title, value, color, bg = "bg-accent-gold/10", iconColor = "text-accent-gold" }: any) {
   return (
-    <div className="bg-[#111111]/80 backdrop-blur-xl rounded-2xl p-6 border border-white/5 relative overflow-hidden group hover:border-white/10 transition-all shadow-xl">
+    <div className="bg-[#111111]/80 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:border-border-theme transition-all shadow-xl">
       <div className="flex items-center gap-3 mb-4">
         <div className={`p-2 rounded-lg ${bg} ${iconColor}`}>
           {icon}
@@ -129,7 +129,7 @@ function MetricCard({ icon, title, value, color, bg = "bg-accent-gold/10", iconC
 }
 
 function StatusBadge({ status }: { status: string }) {
-  let colors = "bg-white/10 text-white border-white/20";
+  let colors = "bg-text-primary/10 text-text-primary border-border-theme";
   if (status === 'PENDING') colors = "bg-red-500/10 text-red-500 border-red-500/20";
   if (status === 'IN_PROGRESS') colors = "bg-yellow-500/10 text-yellow-500 border-yellow-500/20";
   if (status === 'COMPLETED') colors = "bg-green-500/10 text-green-500 border-green-500/20";

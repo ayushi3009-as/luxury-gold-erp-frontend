@@ -48,32 +48,32 @@ export default function DiamondProductsPage() {
 
         {/* METRICS */}
         <div className="grid gap-6 md:grid-cols-3 mb-8">
-          <div className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl p-6 border border-white/5 relative overflow-hidden shadow-xl">
+          <div className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden shadow-xl">
             <h3 className="text-xs tracking-widest uppercase font-semibold text-text-secondary">Total Diamond Items</h3>
             <p className="text-4xl font-bold mt-2 text-blue-400">{diamondProducts.length}</p>
           </div>
         </div>
 
         {/* TABLE */}
-        <div className="rounded-2xl border border-white/5 bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative overflow-hidden">
+        <div className="rounded-2xl border border-border-theme bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400/20 via-transparent to-transparent"></div>
           
           <div className="flex justify-between items-center mb-6">
             <div className="relative w-72">
-              <Search className="absolute left-3 top-2.5 text-white/40" size={18} />
+              <Search className="absolute left-3 top-2.5 text-text-primary/40" size={18} />
               <input 
                 type="text" 
                 placeholder="Search Diamond Items..." 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-black/30 border border-white/10 rounded-xl py-2 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-blue-400/50 focus:ring-1 focus:ring-blue-400/50 transition-all placeholder-white/20"
+                className="w-full bg-background-tertiary border border-border-theme rounded-xl py-2 pl-10 pr-4 text-sm text-text-primary focus:outline-none focus:border-blue-400/50 focus:ring-1 focus:ring-blue-400/50 transition-all placeholder-text-secondary/50"
               />
             </div>
           </div>
 
-          <div className="overflow-x-auto rounded-xl border border-white/10 bg-black/20">
+          <div className="overflow-x-auto rounded-xl border border-border-theme bg-background-tertiary">
             <table className="w-full text-left text-sm">
-              <thead className="border-b border-white/10 bg-white/5 text-xs font-semibold tracking-wider text-text-secondary uppercase">
+              <thead className="border-b border-border-theme bg-text-primary/5 text-xs font-semibold tracking-wider text-text-secondary uppercase">
                 <tr>
                   <th className="px-6 py-4">SKU</th>
                   <th className="px-6 py-4">Product Name</th>
@@ -82,7 +82,7 @@ export default function DiamondProductsPage() {
                   <th className="px-6 py-4">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-border-theme">
                 {filtered.length === 0 ? (
                   <tr>
                     <td colSpan={5} className="px-6 py-12 text-center text-text-secondary">
@@ -91,9 +91,9 @@ export default function DiamondProductsPage() {
                   </tr>
                 ) : (
                   filtered.map((p: any) => (
-                    <tr key={p.id} className="transition-colors hover:bg-white/5 group">
-                      <td className="px-6 py-4 font-mono font-medium text-white/60 group-hover:text-white transition-colors">{p.sku}</td>
-                      <td className="px-6 py-4 font-bold text-white">{p.name}</td>
+                    <tr key={p.id} className="transition-colors hover:bg-text-primary/5 group">
+                      <td className="px-6 py-4 font-mono font-medium text-text-primary/60 group-hover:text-text-primary transition-colors">{p.sku}</td>
+                      <td className="px-6 py-4 font-bold text-text-primary">{p.name}</td>
                       <td className="px-6 py-4 text-text-secondary">{p.category}</td>
                       <td className="px-6 py-4 font-medium text-blue-400">{p.grossWeight} g</td>
                       <td className="px-6 py-4">

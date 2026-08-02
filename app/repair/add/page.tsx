@@ -57,70 +57,70 @@ export default function RepairEntry() {
           <p className="mt-2 text-text-secondary">Log a new repair job and generate an order number.</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-[#111111]/80 backdrop-blur-xl rounded-3xl border border-white/5 shadow-2xl relative overflow-hidden">
+        <form onSubmit={handleSubmit} className="bg-[#111111]/80 backdrop-blur-xl rounded-3xl border border-border-theme shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold via-yellow-300 to-accent-gold"></div>
           
           <div className="p-8 space-y-8">
             
             {/* Customer Section */}
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/10 pb-2">
+              <h3 className="text-lg font-bold text-text-primary flex items-center gap-2 border-b border-border-theme pb-2">
                 <User size={18} className="text-accent-gold"/> Customer Details
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-xs font-semibold text-text-secondary mb-2 uppercase tracking-wider">Customer Name</label>
-                  <input required name="customerName" type="text" className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white focus:border-accent-gold/50 focus:outline-none transition-all placeholder:text-white/20" placeholder="e.g. Rahul Sharma" />
+                  <input required name="customerName" type="text" className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none transition-all placeholder:text-text-primary/20" placeholder="e.g. Rahul Sharma" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-text-secondary mb-2 uppercase tracking-wider">Phone Number</label>
-                  <input required name="customerPhone" type="text" className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white focus:border-accent-gold/50 focus:outline-none transition-all placeholder:text-white/20" placeholder="e.g. 9876543210" />
+                  <input required name="customerPhone" type="text" className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none transition-all placeholder:text-text-primary/20" placeholder="e.g. 9876543210" />
                 </div>
               </div>
             </div>
 
             {/* Item Section */}
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/10 pb-2">
+              <h3 className="text-lg font-bold text-text-primary flex items-center gap-2 border-b border-border-theme pb-2">
                 <Package size={18} className="text-accent-gold"/> Item Details
               </h3>
               <div className="grid grid-cols-1 gap-6">
                 <div>
                   <label className="block text-xs font-semibold text-text-secondary mb-2 uppercase tracking-wider">Item Name / Type</label>
-                  <input required name="itemName" type="text" className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white focus:border-accent-gold/50 focus:outline-none transition-all placeholder:text-white/20" placeholder="e.g. Broken Gold Chain 22K" />
+                  <input required name="itemName" type="text" className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none transition-all placeholder:text-text-primary/20" placeholder="e.g. Broken Gold Chain 22K" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-text-secondary mb-2 uppercase tracking-wider">Repair Instructions</label>
-                  <textarea name="description" rows={3} className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white focus:border-accent-gold/50 focus:outline-none transition-all placeholder:text-white/20" placeholder="Detailed instructions for the worker..."></textarea>
+                  <textarea name="description" rows={3} className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none transition-all placeholder:text-text-primary/20" placeholder="Detailed instructions for the worker..."></textarea>
                 </div>
               </div>
             </div>
 
             {/* Pricing & Dates */}
             <div className="space-y-4">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/10 pb-2">
+              <h3 className="text-lg font-bold text-text-primary flex items-center gap-2 border-b border-border-theme pb-2">
                 <CircleDollarSign size={18} className="text-accent-gold"/> Estimates & Timeline
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                   <label className="block text-xs font-semibold text-text-secondary mb-2 uppercase tracking-wider">Est. Cost (₹)</label>
-                  <input name="estimatedCost" type="number" min="0" className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white focus:border-accent-gold/50 focus:outline-none transition-all" />
+                  <input name="estimatedCost" type="number" min="0" className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none transition-all" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-text-secondary mb-2 uppercase tracking-wider">Advance Paid (₹)</label>
-                  <input name="advancePaid" type="number" min="0" className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white focus:border-accent-gold/50 focus:outline-none transition-all" />
+                  <input name="advancePaid" type="number" min="0" className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none transition-all" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-text-secondary mb-2 uppercase tracking-wider">Expected Date</label>
-                  <input name="expectedDate" type="date" className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white focus:border-accent-gold/50 focus:outline-none transition-all" />
+                  <input name="expectedDate" type="date" className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none transition-all" />
                 </div>
               </div>
             </div>
             
           </div>
           
-          <div className="p-6 bg-black/40 border-t border-white/5 flex justify-end gap-4">
-            <button type="button" onClick={() => router.back()} className="px-6 py-3 rounded-xl border border-white/10 text-white font-semibold hover:bg-white/5 transition-all text-sm">
+          <div className="p-6 bg-background-tertiary border-t border-border-theme flex justify-end gap-4">
+            <button type="button" onClick={() => router.back()} className="px-6 py-3 rounded-xl border border-border-theme text-text-primary font-semibold hover:bg-text-primary/5 transition-all text-sm">
               Cancel
             </button>
             <button disabled={isSubmitting} type="submit" className="px-8 py-3 rounded-xl bg-accent-gold text-black font-bold hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all flex items-center gap-2 text-sm disabled:opacity-50">

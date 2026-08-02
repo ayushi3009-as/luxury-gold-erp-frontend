@@ -202,7 +202,7 @@ export default function RegisterForm() {
               <Image src="/upi-qr.jpg" alt="UPI QR Code" fill className="object-contain" />
             </div>
             
-            <p className="font-mono bg-black px-4 py-2 rounded-lg text-accent-gold border border-gray-700">
+            <p className="font-mono bg-background-primary px-4 py-2 rounded-lg text-accent-gold border border-gray-700">
               9712922340@barodampay
             </p>
             <p className="text-sm mt-3 text-text-secondary">MICROTECHNIQUE IT AND COMMUNICATIONS SOL</p>

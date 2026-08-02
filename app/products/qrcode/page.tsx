@@ -36,7 +36,7 @@ export default function QRCodePage() {
             </h1>
             <p className="mt-1 text-sm text-text-secondary">Generate and print QR codes for quick mobile scanning.</p>
           </div>
-          <button onClick={() => window.print()} className="flex items-center gap-2 rounded-xl bg-white/10 px-6 py-2.5 text-sm font-bold text-white transition-all hover:bg-white/20">
+          <button onClick={() => window.print()} className="flex items-center gap-2 rounded-xl bg-text-primary/10 px-6 py-2.5 text-sm font-bold text-text-primary transition-all hover:bg-text-primary/20">
             <Printer size={18} />
             Print All
           </button>
@@ -52,7 +52,7 @@ export default function QRCodePage() {
                  <div className="w-6 h-6 border-4 border-black absolute top-5 right-5"></div>
                  <div className="w-6 h-6 border-4 border-black absolute bottom-12 left-5"></div>
                  {[...Array(64)].map((_, i) => (
-                   <div key={i} className={`w-2.5 h-2.5 ${Math.random() > 0.5 ? 'bg-black' : 'bg-transparent'}`}></div>
+                   <div key={i} className={`w-2.5 h-2.5 ${Math.random() > 0.5 ? 'bg-background-primary' : 'bg-transparent'}`}></div>
                  ))}
               </div>
               <div className="text-center">

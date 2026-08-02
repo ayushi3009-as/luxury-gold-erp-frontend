@@ -18,9 +18,9 @@ export default function NotificationsPage() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-white/5 bg-[#111111]/40 backdrop-blur-xl p-12 shadow-2xl flex flex-col items-center justify-center text-center">
-          <Bell size={64} className="text-white/10 mb-4" />
-          <h2 className="text-xl font-bold text-white mb-2">Notifications Module Coming Soon</h2>
+        <div className="rounded-2xl border border-border-theme bg-[#111111]/40 backdrop-blur-xl p-12 shadow-2xl flex flex-col items-center justify-center text-center">
+          <Bell size={64} className="text-text-primary/10 mb-4" />
+          <h2 className="text-xl font-bold text-text-primary mb-2">Notifications Module Coming Soon</h2>
           <p className="text-text-secondary max-w-md">
             The SMS and Email notification system is currently being provisioned.
           </p>

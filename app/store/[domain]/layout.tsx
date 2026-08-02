@@ -375,7 +375,7 @@ export default async function StoreLayout({
       <div className="w-full px-4 sm:px-6 lg:px-10 py-10 sm:py-16 lg:py-20">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
           <div className="col-span-2 lg:col-span-1">
-            <span className="text-lg md:text-xl font-serif tracking-widest text-white font-bold uppercase">MICROTECHNIQUE IT</span>
+            <span className="text-lg md:text-xl font-serif tracking-widest text-text-primary font-bold uppercase">MICROTECHNIQUE IT</span>
             <p className="text-xs sm:text-sm leading-relaxed text-gray-400 mb-4 sm:mb-6">
               Crafting timeless silver jewellery that celebrates elegance and
               individuality. Every piece tells a story.
@@ -384,7 +384,7 @@ export default async function StoreLayout({
               href="https://www.instagram.com/microtechniqueit?igsh=MXhhMDBmaTdnNWszeQ=="
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs sm:text-sm hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm hover:text-text-primary transition-colors"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -407,40 +407,40 @@ export default async function StoreLayout({
             </a>
           </div>
           <div>
-            <h3 className="text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white mb-3 sm:mb-4 font-medium">
+            <h3 className="text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-text-primary mb-3 sm:mb-4 font-medium">
               Shop
             </h3>
             <div className="flex flex-col gap-2 sm:gap-3">
               <a
-                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                className="text-xs sm:text-sm text-gray-400 hover:text-text-primary transition-colors"
                 href="/collections/rings"
                 data-discover="true"
               >
                 Rings
               </a>
               <a
-                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                className="text-xs sm:text-sm text-gray-400 hover:text-text-primary transition-colors"
                 href="/collections/necklaces"
                 data-discover="true"
               >
                 Necklaces
               </a>
               <a
-                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                className="text-xs sm:text-sm text-gray-400 hover:text-text-primary transition-colors"
                 href="/collections/earrings"
                 data-discover="true"
               >
                 Earrings
               </a>
               <a
-                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                className="text-xs sm:text-sm text-gray-400 hover:text-text-primary transition-colors"
                 href="/collections/bracelets"
                 data-discover="true"
               >
                 Bracelets
               </a>
               <a
-                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                className="text-xs sm:text-sm text-gray-400 hover:text-text-primary transition-colors"
                 href="/collections/anklets"
                 data-discover="true"
               >
@@ -449,40 +449,40 @@ export default async function StoreLayout({
             </div>
           </div>
           <div>
-            <h3 className="text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white mb-3 sm:mb-4 font-medium">
+            <h3 className="text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-text-primary mb-3 sm:mb-4 font-medium">
               Help
             </h3>
             <div className="flex flex-col gap-2 sm:gap-3">
               <a
-                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                className="text-xs sm:text-sm text-gray-400 hover:text-text-primary transition-colors"
                 href="/shipping-returns"
                 data-discover="true"
               >
                 Shipping &amp; Returns
               </a>
               <a
-                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                className="text-xs sm:text-sm text-gray-400 hover:text-text-primary transition-colors"
                 href="/size-guide"
                 data-discover="true"
               >
                 Size Guide
               </a>
               <a
-                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                className="text-xs sm:text-sm text-gray-400 hover:text-text-primary transition-colors"
                 href="/care-instructions"
                 data-discover="true"
               >
                 Care Instructions
               </a>
               <a
-                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                className="text-xs sm:text-sm text-gray-400 hover:text-text-primary transition-colors"
                 href="/faqs"
                 data-discover="true"
               >
                 FAQs
               </a>
               <a
-                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                className="text-xs sm:text-sm text-gray-400 hover:text-text-primary transition-colors"
                 href="/contact"
                 data-discover="true"
               >
@@ -491,13 +491,13 @@ export default async function StoreLayout({
             </div>
           </div>
           <div className="col-span-2 sm:col-span-1">
-            <h3 className="text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white mb-3 sm:mb-4 font-medium">
+            <h3 className="text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-text-primary mb-3 sm:mb-4 font-medium">
               Contact
             </h3>
             <div className="flex flex-col gap-2 sm:gap-3">
               <a
                 href="mailto:hello@microtechniqueit.in"
-                className="flex items-center gap-2 text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                className="flex items-center gap-2 text-xs sm:text-sm text-gray-400 hover:text-text-primary transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -535,7 +535,7 @@ export default async function StoreLayout({
               </a>
               <a
                 href="tel:+919876543210"
-                className="flex items-center gap-2 text-xs sm:text-sm text-gray-400 hover:text-white transition-colors"
+                className="flex items-center gap-2 text-xs sm:text-sm text-gray-400 hover:text-text-primary transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -617,7 +617,7 @@ export default async function StoreLayout({
               href="https://www.instagram.com/growweb_solutions"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative inline-flex font-semibold text-white transition-colors hover:text-amber-300 focus:outline-none focus:text-amber-300"
+              className="group relative inline-flex font-semibold text-text-primary transition-colors hover:text-amber-300 focus:outline-none focus:text-amber-300"
             >
               Grow Web Solutions
               <span className="pointer-events-none absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 whitespace-nowrap rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-[10px] font-medium text-gray-100 shadow-xl sm:group-hover:block sm:group-focus:block">
@@ -672,7 +672,7 @@ export default async function StoreLayout({
                 href="https://www.instagram.com/growweb_solutions"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-gray-400 hover:text-white"
+                className="inline-flex items-center gap-1.5 text-gray-400 hover:text-text-primary"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -695,7 +695,7 @@ export default async function StoreLayout({
               </a>
               <a
                 href="tel:+919727155628"
-                className="inline-flex items-center gap-1.5 text-gray-400 hover:text-white"
+                className="inline-flex items-center gap-1.5 text-gray-400 hover:text-text-primary"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -717,13 +717,13 @@ export default async function StoreLayout({
             </span>
           </p>
           <div className="flex gap-4 sm:gap-6 text-[10px] sm:text-xs text-gray-500">
-            <span className="hover:text-white transition-colors cursor-pointer">
+            <span className="hover:text-text-primary transition-colors cursor-pointer">
               Privacy
             </span>
-            <span className="hover:text-white transition-colors cursor-pointer">
+            <span className="hover:text-text-primary transition-colors cursor-pointer">
               Terms
             </span>
-            <span className="hover:text-white transition-colors cursor-pointer">
+            <span className="hover:text-text-primary transition-colors cursor-pointer">
               Refund
             </span>
           </div>

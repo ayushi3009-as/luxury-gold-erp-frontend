@@ -57,7 +57,7 @@ border-[#D4AF37]/30
 rounded-xl
 px-4
 py-3
-text-white
+text-text-primary
 outline-none
 "
 >

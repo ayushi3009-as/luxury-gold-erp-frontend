@@ -80,10 +80,10 @@ export default function AddProductPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="bg-[#111] border border-white/10 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+          <div className="bg-[#111] border border-border-theme rounded-2xl p-8 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/50 via-yellow-300 to-accent-gold/50"></div>
             
-            <h2 className="text-lg font-bold text-white mb-6">Basic Information</h2>
+            <h2 className="text-lg font-bold text-text-primary mb-6">Basic Information</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-xs font-semibold text-text-secondary mb-2 uppercase tracking-wider">Product Name</label>
@@ -93,7 +93,7 @@ export default function AddProductPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Traditional Gold Necklace"
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/20 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 />
               </div>
 
@@ -103,7 +103,7 @@ export default function AddProductPage() {
                   required
                   value={categoryId}
                   onChange={(e) => setCategoryId(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 >
                   <option value="">-- Select Category --</option>
                   {categories.map((c: any) => (
@@ -118,7 +118,7 @@ export default function AddProductPage() {
                   required
                   value={metalType}
                   onChange={(e) => setMetalType(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 >
                   <option value="Gold">Gold</option>
                   <option value="Silver">Silver</option>
@@ -132,7 +132,7 @@ export default function AddProductPage() {
                 <select 
                   value={purity}
                   onChange={(e) => setPurity(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 >
                   <option value="24K">24K</option>
                   <option value="22K">22K</option>
@@ -143,8 +143,8 @@ export default function AddProductPage() {
             </div>
           </div>
 
-          <div className="bg-[#111] border border-white/10 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
-            <h2 className="text-lg font-bold text-white mb-6">Weight & Pricing</h2>
+          <div className="bg-[#111] border border-border-theme rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+            <h2 className="text-lg font-bold text-text-primary mb-6">Weight & Pricing</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label className="block text-xs font-semibold text-text-secondary mb-2 uppercase tracking-wider">Gross Wt. (g)</label>
@@ -155,7 +155,7 @@ export default function AddProductPage() {
                   value={grossWeight}
                   onChange={(e) => setGrossWeight(e.target.value)}
                   placeholder="0.000"
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/20 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 />
               </div>
 
@@ -168,7 +168,7 @@ export default function AddProductPage() {
                   value={netWeight}
                   onChange={(e) => setNetWeight(e.target.value)}
                   placeholder="0.000"
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/20 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 />
               </div>
 
@@ -180,7 +180,7 @@ export default function AddProductPage() {
                   value={makingCharge}
                   onChange={(e) => setMakingCharge(e.target.value)}
                   placeholder="0.00"
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/20 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 />
               </div>
             </div>
@@ -188,7 +188,7 @@ export default function AddProductPage() {
 
           <div className="flex justify-end gap-4 mt-8">
             <Link href="/products">
-              <button type="button" className="rounded-xl border border-white/10 bg-white/5 px-8 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors">
+              <button type="button" className="rounded-xl border border-border-theme bg-text-primary/5 px-8 py-3 text-sm font-semibold text-text-primary hover:bg-text-primary/10 transition-colors">
                 Cancel
               </button>
             </Link>

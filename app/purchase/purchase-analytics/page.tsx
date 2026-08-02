@@ -16,7 +16,7 @@ return (
 className="
 min-h-screen
 bg-[#050505]
-text-white
+text-text-primary
 p-4
 sm:p-6
 space-y-6

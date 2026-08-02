@@ -52,7 +52,7 @@ export default function ProductNav() {
   }, []);
 
   return (
-    <nav className="relative z-[100] flex items-center justify-between border-b border-white/5 bg-[#111111]/80 backdrop-blur-xl px-6 py-4 w-full">
+    <nav className="relative z-[100] flex items-center justify-between border-b border-border-theme bg-[#111111]/80 backdrop-blur-xl px-6 py-4 w-full">
       <div className="flex items-center gap-6">
         <span className="text-sm font-bold tracking-widest uppercase text-accent-gold hidden md:block">
           Products
@@ -71,7 +71,7 @@ export default function ProductNav() {
                 className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all ${
                   isActive
                     ? "bg-accent-gold text-black shadow-[0_0_15px_rgba(212,175,55,0.3)]"
-                    : "text-text-secondary hover:bg-white/10 hover:text-white"
+                    : "text-text-secondary hover:bg-text-primary/10 hover:text-text-primary"
                 }`}
               >
                 <Icon size={16} />
@@ -86,7 +86,7 @@ export default function ProductNav() {
               className={`flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all ${
                 morePages.some(p => pathname === p.href) 
                 ? "bg-accent-gold text-black shadow-[0_0_15px_rgba(212,175,55,0.3)]" 
-                : "text-text-secondary hover:bg-white/10 hover:text-white"
+                : "text-text-secondary hover:bg-text-primary/10 hover:text-text-primary"
               }`}
             >
               <MoreHorizontal size={16} />
@@ -95,7 +95,7 @@ export default function ProductNav() {
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute top-full left-0 mt-3 w-56 rounded-2xl border border-white/10 bg-[#1a1a1a] p-2 shadow-2xl z-50">
+              <div className="absolute top-full left-0 mt-3 w-56 rounded-2xl border border-border-theme bg-[#1a1a1a] p-2 shadow-2xl z-50">
                 <div className="grid grid-cols-1 gap-1">
                   {morePages.map((page) => {
                     const Icon = page.icon;
@@ -108,7 +108,7 @@ export default function ProductNav() {
                         className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm transition-all ${
                           isActive
                             ? "bg-accent-gold/20 text-accent-gold font-semibold"
-                            : "text-text-secondary hover:bg-white/5 hover:text-white"
+                            : "text-text-secondary hover:bg-text-primary/5 hover:text-text-primary"
                         }`}
                       >
                         <Icon size={16} />

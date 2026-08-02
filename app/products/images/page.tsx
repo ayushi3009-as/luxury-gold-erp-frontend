@@ -46,17 +46,17 @@ export default function ImagesPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.map((p: any) => (
-            <div key={p.id} className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl border border-white/5 overflow-hidden group hover:border-purple-400/30 transition-all shadow-xl">
-              <div className="h-48 bg-black/40 flex items-center justify-center relative group-hover:bg-black/60 transition-colors">
-                <ImageIcon size={48} className="text-white/10 group-hover:scale-110 transition-transform" />
+            <div key={p.id} className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl border border-border-theme overflow-hidden group hover:border-purple-400/30 transition-all shadow-xl">
+              <div className="h-48 bg-background-tertiary flex items-center justify-center relative group-hover:bg-background-primary transition-colors">
+                <ImageIcon size={48} className="text-text-primary/10 group-hover:scale-110 transition-transform" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
-                  <span className="text-xs font-bold px-2 py-1 bg-white/10 rounded-md backdrop-blur-md">{p.sku}</span>
+                  <span className="text-xs font-bold px-2 py-1 bg-text-primary/10 rounded-md backdrop-blur-md">{p.sku}</span>
                 </div>
               </div>
               <div className="p-4">
-                <h3 className="font-bold text-white truncate">{p.name}</h3>
+                <h3 className="font-bold text-text-primary truncate">{p.name}</h3>
                 <p className="text-xs text-text-secondary mt-1">{p.category} • {p.metalType}</p>
-                <button className="mt-4 w-full py-2 bg-white/5 hover:bg-purple-500/20 text-xs font-semibold rounded-lg transition-colors text-purple-200">
+                <button className="mt-4 w-full py-2 bg-text-primary/5 hover:bg-purple-500/20 text-xs font-semibold rounded-lg transition-colors text-purple-200">
                   Manage Images
                 </button>
               </div>

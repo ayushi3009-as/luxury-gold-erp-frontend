@@ -97,18 +97,18 @@ export default function PurchaseEntryPage() {
 
         {/* METRICS */}
         <div className="grid gap-6 md:grid-cols-4 mb-8">
-          <StatBox label="Total Receipts" value={entries.length} icon={<Box size={20} className="text-white/60" />} />
+          <StatBox label="Total Receipts" value={entries.length} icon={<Box size={20} className="text-text-primary/60" />} />
           <StatBox label="Received Today" value={entries.filter((e:any) => new Date(e.date).toDateString() === new Date().toDateString()).length} icon={<CheckCircle size={20} className="text-green-400" />} color="text-green-400" />
           <StatBox label="Pending Quality Check" value={0} icon={<Clock size={20} className="text-yellow-400" />} color="text-yellow-400" />
         </div>
 
         {/* ENTRIES TABLE */}
-        <div className="rounded-2xl border border-white/5 bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl">
-          <h2 className="text-lg font-bold tracking-wide text-white mb-6">GOODS RECEIPT LIST</h2>
+        <div className="rounded-2xl border border-border-theme bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl">
+          <h2 className="text-lg font-bold tracking-wide text-text-primary mb-6">GOODS RECEIPT LIST</h2>
           
-          <div className="overflow-x-auto rounded-xl border border-white/10 bg-black/20">
+          <div className="overflow-x-auto rounded-xl border border-border-theme bg-background-tertiary">
             <table className="w-full text-left text-sm">
-              <thead className="border-b border-white/10 bg-white/5 text-xs font-semibold tracking-wider text-text-secondary">
+              <thead className="border-b border-border-theme bg-text-primary/5 text-xs font-semibold tracking-wider text-text-secondary">
                 <tr>
                   <th className="px-6 py-4">GRN NO</th>
                   <th className="px-6 py-4">PO NO</th>
@@ -118,17 +118,17 @@ export default function PurchaseEntryPage() {
                   <th className="px-6 py-4">STATUS</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-border-theme">
                 {entries.length === 0 ? (
                   <tr>
                     <td colSpan={6} className="px-6 py-8 text-center text-text-secondary">No goods received yet.</td>
                   </tr>
                 ) : (
                   entries.map((entry: any, idx: number) => (
-                    <tr key={idx} className="transition-colors hover:bg-white/5">
-                      <td className="px-6 py-4 font-mono font-medium text-white/80">{entry.id}</td>
-                      <td className="px-6 py-4 font-mono font-medium text-white/60">{entry.poNumber}</td>
-                      <td className="px-6 py-4 font-semibold text-white">{entry.supplierName}</td>
+                    <tr key={idx} className="transition-colors hover:bg-text-primary/5">
+                      <td className="px-6 py-4 font-mono font-medium text-text-primary/80">{entry.id}</td>
+                      <td className="px-6 py-4 font-mono font-medium text-text-primary/60">{entry.poNumber}</td>
+                      <td className="px-6 py-4 font-semibold text-text-primary">{entry.supplierName}</td>
                       <td className="px-6 py-4 text-text-secondary">{new Date(entry.date).toLocaleDateString()}</td>
                       <td className="px-6 py-4 font-bold text-accent-gold">{entry.weight}</td>
                       <td className="px-6 py-4">
@@ -150,11 +150,11 @@ export default function PurchaseEntryPage() {
 
       {/* CREATE MODAL */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="w-full max-w-md rounded-2xl border border-white/10 bg-[#111] p-6 shadow-[0_0_40px_rgba(212,175,55,0.15)] relative overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background-primary backdrop-blur-sm p-4">
+          <div className="w-full max-w-md rounded-2xl border border-border-theme bg-[#111] p-6 shadow-[0_0_40px_rgba(212,175,55,0.15)] relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/50 via-yellow-300 to-accent-gold/50"></div>
             
-            <h2 className="text-xl font-bold text-white mb-6">Receive Goods (GRN)</h2>
+            <h2 className="text-xl font-bold text-text-primary mb-6">Receive Goods (GRN)</h2>
             
             <form onSubmit={handleCreateEntry} className="space-y-4">
               <div>
@@ -163,7 +163,7 @@ export default function PurchaseEntryPage() {
                   required
                   value={supplierId}
                   onChange={(e) => setSupplierId(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 >
                   <option value="">-- Choose Supplier --</option>
                   {suppliers.map((s: any) => (
@@ -178,7 +178,7 @@ export default function PurchaseEntryPage() {
                   required
                   value={purchaseOrderId}
                   onChange={(e) => setPurchaseOrderId(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 >
                   <option value="">-- Choose PO --</option>
                   {orders.map((o: any) => (
@@ -196,7 +196,7 @@ export default function PurchaseEntryPage() {
                   placeholder="0.00"
                   value={weight}
                   onChange={(e) => setWeight(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/20 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 />
               </div>
 
@@ -204,7 +204,7 @@ export default function PurchaseEntryPage() {
                 <button 
                   type="button" 
                   onClick={() => setIsModalOpen(false)}
-                  className="flex-1 rounded-xl border border-white/10 bg-white/5 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
+                  className="flex-1 rounded-xl border border-border-theme bg-text-primary/5 py-3 text-sm font-semibold text-text-primary hover:bg-text-primary/10 transition-colors"
                 >
                   Cancel
                 </button>
@@ -224,9 +224,9 @@ export default function PurchaseEntryPage() {
   );
 }
 
-function StatBox({ label, value, icon, color = "text-white" }: { label: string; value: number | string; icon: React.ReactNode; color?: string; }) {
+function StatBox({ label, value, icon, color = "text-text-primary" }: { label: string; value: number | string; icon: React.ReactNode; color?: string; }) {
   return (
-    <div className="rounded-xl border border-white/5 bg-background-secondary/30 p-4 backdrop-blur-md">
+    <div className="rounded-xl border border-border-theme bg-background-secondary/30 p-4 backdrop-blur-md">
       <div className="flex items-center justify-between mb-2">
         <span className="text-xs font-semibold tracking-wider text-text-secondary">{label}</span>
         {icon}

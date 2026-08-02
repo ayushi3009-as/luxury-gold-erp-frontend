@@ -45,7 +45,7 @@ export default async function ECommerceHomepage() {
             <span style={{color: "var(--brand-color)"}} className="font-medium tracking-widest uppercase text-sm mb-4 block">
               {storeName} Collection
             </span>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-[1.1] text-white">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-[1.1] text-text-primary">
               {tagline.split(' ').slice(0, Math.ceil(tagline.split(' ').length / 2)).join(' ')} <br />
               {tagline.split(' ').slice(Math.ceil(tagline.split(' ').length / 2)).join(' ')}
             </h1>
@@ -120,7 +120,7 @@ export default async function ECommerceHomepage() {
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   {product.quantity <= 0 && (
-                    <div className="absolute top-4 left-4 bg-red-500/90 text-white px-3 py-1 text-xs font-bold uppercase rounded">
+                    <div className="absolute top-4 left-4 bg-red-500/90 text-text-primary px-3 py-1 text-xs font-bold uppercase rounded">
                       Out of Stock
                     </div>
                   )}
@@ -174,7 +174,7 @@ export default async function ECommerceHomepage() {
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-700 z-0"
                 />
-                <h3 className="absolute bottom-6 left-0 right-0 text-white font-bold text-xl z-20">{cat}</h3>
+                <h3 className="absolute bottom-6 left-0 right-0 text-text-primary font-bold text-xl z-20">{cat}</h3>
               </Link>
             ))}
           </div>
@@ -187,14 +187,14 @@ export default async function ECommerceHomepage() {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-2 justify-center md:justify-start mb-4">
               <div className="text-2xl text-accent-gold">◇</div>
-              <span className="text-xl font-bold text-white tracking-wide">Sharma Jewellers</span>
+              <span className="text-xl font-bold text-text-primary tracking-wide">Sharma Jewellers</span>
             </div>
             <p className="text-text-secondary text-sm max-w-sm">
               Crafting legacy since 1990. We bring you the finest 22K gold and IGI certified diamonds, securely delivered to your doorstep.
             </p>
           </div>
           <div>
-            <h4 className="font-bold text-white mb-4">Quick Links</h4>
+            <h4 className="font-bold text-text-primary mb-4">Quick Links</h4>
             <div className="flex flex-col gap-2">
               <Link href="/shop" className="text-sm text-text-secondary hover:text-accent-gold">All Products</Link>
               <Link href="/about" className="text-sm text-text-secondary hover:text-accent-gold">About Us</Link>
@@ -203,7 +203,7 @@ export default async function ECommerceHomepage() {
             </div>
           </div>
           <div>
-            <h4 className="font-bold text-white mb-4">Legal</h4>
+            <h4 className="font-bold text-text-primary mb-4">Legal</h4>
             <div className="flex flex-col gap-2">
               <Link href="#" className="text-sm text-text-secondary hover:text-accent-gold">Privacy Policy</Link>
               <Link href="#" className="text-sm text-text-secondary hover:text-accent-gold">Terms of Service</Link>

@@ -70,7 +70,7 @@ export default async function ShopPage({
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 {product.quantity <= 0 && (
-                  <div className="absolute top-4 left-4 bg-red-500/90 text-white px-3 py-1 text-xs font-bold uppercase rounded">
+                  <div className="absolute top-4 left-4 bg-red-500/90 text-text-primary px-3 py-1 text-xs font-bold uppercase rounded">
                     Out of Stock
                   </div>
                 )}

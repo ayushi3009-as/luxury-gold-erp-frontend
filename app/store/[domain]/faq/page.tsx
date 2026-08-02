@@ -12,22 +12,22 @@ interface FAQItemProps {
 
 function FAQItem({ question, answer, isOpen, onClick }: FAQItemProps) {
   return (
-    <div className="border-b border-white/10">
+    <div className="border-b border-border-theme">
       <button
         onClick={onClick}
         className="w-full flex items-center justify-between py-6 text-left focus:outline-none group"
       >
-        <h3 className={`text-lg md:text-xl font-serif transition-colors duration-300 ${isOpen ? 'text-[#D4AF37]' : 'text-white group-hover:text-[#D4AF37]'}`}>
+        <h3 className={`text-lg md:text-xl font-serif transition-colors duration-300 ${isOpen ? 'text-[#D4AF37]' : 'text-text-primary group-hover:text-[#D4AF37]'}`}>
           {question}
         </h3>
-        <span className="ml-6 flex-shrink-0 text-white/50 group-hover:text-[#D4AF37] transition-colors duration-300">
+        <span className="ml-6 flex-shrink-0 text-text-primary/50 group-hover:text-[#D4AF37] transition-colors duration-300">
           {isOpen ? <Minus size={20} /> : <Plus size={20} />}
         </span>
       </button>
       <div 
         className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96 opacity-100 pb-6' : 'max-h-0 opacity-0'}`}
       >
-        <p className="text-white/60 font-sans leading-relaxed text-sm md:text-base pr-8">
+        <p className="text-text-primary/60 font-sans leading-relaxed text-sm md:text-base pr-8">
           {answer}
         </p>
       </div>
@@ -89,8 +89,8 @@ export default function FAQPage() {
       {/* Header */}
       <div className="text-center mb-16 relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-[#D4AF37]/10 blur-[60px] rounded-full pointer-events-none" />
-        <h1 className="text-4xl md:text-6xl font-serif text-white mb-6 tracking-wide">FAQ</h1>
-        <p className="text-white/60 text-lg md:text-xl font-light">Answers to your most frequently asked questions.</p>
+        <h1 className="text-4xl md:text-6xl font-serif text-text-primary mb-6 tracking-wide">FAQ</h1>
+        <p className="text-text-primary/60 text-lg md:text-xl font-light">Answers to your most frequently asked questions.</p>
         <div className="w-16 h-px bg-[#D4AF37] mx-auto mt-8 opacity-50" />
       </div>
 
@@ -101,7 +101,7 @@ export default function FAQPage() {
             <h2 className="text-sm font-bold tracking-[0.2em] text-[#D4AF37] uppercase mb-6">
               {section.category}
             </h2>
-            <div className="border-t border-white/10">
+            <div className="border-t border-border-theme">
               {section.items.map((item, iIdx) => {
                 const globalIndex = sIdx * 10 + iIdx; // simple unique index
                 return (
@@ -120,9 +120,9 @@ export default function FAQPage() {
       </div>
 
       {/* Contact Support Footer */}
-      <div className="mt-24 text-center border border-white/10 rounded-2xl p-10 bg-white/[0.02]">
-        <h3 className="text-2xl font-serif text-white mb-4">Still have questions?</h3>
-        <p className="text-white/60 font-sans mb-8 max-w-lg mx-auto">
+      <div className="mt-24 text-center border border-border-theme rounded-2xl p-10 bg-white/[0.02]">
+        <h3 className="text-2xl font-serif text-text-primary mb-4">Still have questions?</h3>
+        <p className="text-text-primary/60 font-sans mb-8 max-w-lg mx-auto">
           Our dedicated concierge team is available 24/7 to assist you with any inquiries regarding our collections or your orders.
         </p>
         <a href="/contact" className="inline-block bg-[#D4AF37] text-black font-bold font-sans tracking-wide px-8 py-3 rounded-none hover:bg-white transition-colors duration-300">

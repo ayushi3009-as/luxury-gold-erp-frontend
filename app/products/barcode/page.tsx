@@ -36,7 +36,7 @@ export default function BarcodePage() {
             </h1>
             <p className="mt-1 text-sm text-text-secondary">Generate and print barcodes for your jewellery products.</p>
           </div>
-          <button onClick={() => window.print()} className="flex items-center gap-2 rounded-xl bg-white/10 px-6 py-2.5 text-sm font-bold text-white transition-all hover:bg-white/20">
+          <button onClick={() => window.print()} className="flex items-center gap-2 rounded-xl bg-text-primary/10 px-6 py-2.5 text-sm font-bold text-text-primary transition-all hover:bg-text-primary/20">
             <Printer size={18} />
             Print All
           </button>
@@ -50,7 +50,7 @@ export default function BarcodePage() {
                 <p className="text-[9px] text-gray-600">{p.metalType} • {p.grossWeight}g</p>
               </div>
               {/* Fake Barcode visualization */}
-              <div className="w-full h-12 bg-black opacity-80 flex items-end justify-between px-1">
+              <div className="w-full h-12 bg-background-primary opacity-80 flex items-end justify-between px-1">
                 {[...Array(20)].map((_, i) => (
                   <div key={i} className="bg-white h-full" style={{ width: Math.random() * 4 + 1 + 'px' }}></div>
                 ))}

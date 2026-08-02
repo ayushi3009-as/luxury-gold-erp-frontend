@@ -45,8 +45,8 @@ export default function CarePage() {
       {/* Hero Section */}
       <div className="text-center mb-20 relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-[#D4AF37]/10 blur-[80px] rounded-full pointer-events-none" />
-        <h1 className="text-4xl md:text-6xl font-serif text-white mb-6 tracking-wide">Jewellery Care</h1>
-        <p className="text-white/60 text-lg md:text-xl font-light max-w-2xl mx-auto">
+        <h1 className="text-4xl md:text-6xl font-serif text-text-primary mb-6 tracking-wide">Jewellery Care</h1>
+        <p className="text-text-primary/60 text-lg md:text-xl font-light max-w-2xl mx-auto">
           Learn how to preserve the brilliance, integrity, and legacy of your Luxury Gold masterpieces for generations to come.
         </p>
         <div className="w-16 h-px bg-[#D4AF37] mx-auto mt-10 opacity-50" />
@@ -54,7 +54,7 @@ export default function CarePage() {
 
       {/* Intro Text */}
       <div className="max-w-3xl mx-auto text-center mb-24">
-        <p className="text-white/80 font-serif text-xl leading-relaxed italic">
+        <p className="text-text-primary/80 font-serif text-xl leading-relaxed italic">
           "A masterpiece of jewellery is not merely worn; it is curated. Proper care ensures that the light caught within your diamonds today will shine just as brilliantly for your descendants tomorrow."
         </p>
       </div>
@@ -64,22 +64,22 @@ export default function CarePage() {
         {careSections.map((section, idx) => (
           <div 
             key={section.id} 
-            className="group relative border border-white/10 p-8 rounded-2xl bg-white/[0.01] hover:bg-white/[0.03] transition-colors duration-500 overflow-hidden"
+            className="group relative border border-border-theme p-8 rounded-2xl bg-white/[0.01] hover:bg-white/[0.03] transition-colors duration-500 overflow-hidden"
           >
             {/* Hover Gradient */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#D4AF37]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
             <div className="relative z-10">
               {section.icon}
-              <h3 className="text-2xl font-serif text-white mb-4 tracking-wide">{section.title}</h3>
-              <p className="text-white/60 font-sans text-sm leading-relaxed mb-8">
+              <h3 className="text-2xl font-serif text-text-primary mb-4 tracking-wide">{section.title}</h3>
+              <p className="text-text-primary/60 font-sans text-sm leading-relaxed mb-8">
                 {section.description}
               </p>
               <ul className="space-y-4">
                 {section.tips.map((tip, i) => (
                   <li key={i} className="flex items-start">
                     <Droplets className="text-[#D4AF37] w-4 h-4 mt-1 mr-3 flex-shrink-0 opacity-70" />
-                    <span className="text-white/70 font-sans text-sm leading-relaxed">{tip}</span>
+                    <span className="text-text-primary/70 font-sans text-sm leading-relaxed">{tip}</span>
                   </li>
                 ))}
               </ul>
@@ -94,11 +94,11 @@ export default function CarePage() {
         
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="max-w-xl">
-            <h2 className="text-3xl md:text-4xl font-serif text-white mb-4">Complimentary Spa Services</h2>
-            <p className="text-white/70 font-sans leading-relaxed mb-6">
+            <h2 className="text-3xl md:text-4xl font-serif text-text-primary mb-4">Complimentary Spa Services</h2>
+            <p className="text-text-primary/70 font-sans leading-relaxed mb-6">
               As part of the Luxury Gold experience, we invite our exclusive clientele to bring their pieces to any of our boutiques for a complimentary ultrasonic cleaning, prong inspection, and professional polishing.
             </p>
-            <ul className="space-y-2 text-white/50 text-sm font-sans mb-8">
+            <ul className="space-y-2 text-text-primary/50 text-sm font-sans mb-8">
               <li>• Deep ultrasonic cleaning</li>
               <li>• Diamond and gemstone setting check</li>
               <li>• Platinum and gold polishing</li>

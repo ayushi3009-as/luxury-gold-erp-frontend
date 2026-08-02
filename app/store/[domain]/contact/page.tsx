@@ -106,7 +106,7 @@ export default function ContactPage() {
                 <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Message</label>
                 <textarea required name="message" value={formData.message} onChange={handleInputChange} rows={4} className="w-full border-b border-gray-300 bg-transparent py-2 focus:outline-none focus:border-black transition-colors resize-none"></textarea>
               </div>
-              <button disabled={loading} type="submit" className="w-full bg-[#111] text-white py-4 text-xs uppercase tracking-widest font-semibold hover:bg-black transition-colors disabled:opacity-50">
+              <button disabled={loading} type="submit" className="w-full bg-[#111] text-text-primary py-4 text-xs uppercase tracking-widest font-semibold hover:bg-background-primary transition-colors disabled:opacity-50">
                 {loading ? 'Sending...' : 'Submit Inquiry'}
               </button>
             </form>

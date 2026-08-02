@@ -100,7 +100,7 @@ export default function GoldRatePage() {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="rounded-xl border border-white/5 bg-[#111111]/80 px-4 py-2 shadow-lg">
+            <div className="rounded-xl border border-border-theme bg-[#111111]/80 px-4 py-2 shadow-lg">
               <p className="text-[10px] text-text-secondary tracking-wider uppercase">Last Updated</p>
               <p className="text-sm font-bold text-accent-gold flex items-center gap-2">
                 <RefreshCw size={12} className="animate-spin-slow" />
@@ -122,7 +122,7 @@ export default function GoldRatePage() {
           {rates.map((rate) => (
             <div
               key={rate.metal}
-              className="rounded-2xl border border-white/5 bg-[#111111]/80 backdrop-blur-xl p-6 shadow-xl relative overflow-hidden group hover:border-accent-gold/30 transition-all"
+              className="rounded-2xl border border-border-theme bg-[#111111]/80 backdrop-blur-xl p-6 shadow-xl relative overflow-hidden group hover:border-accent-gold/30 transition-all"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent-gold/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="flex items-center justify-between">
@@ -131,7 +131,7 @@ export default function GoldRatePage() {
                   {rate.change}
                 </span>
               </div>
-              <h2 className="mt-6 text-3xl font-bold text-white group-hover:text-accent-gold transition-colors">
+              <h2 className="mt-6 text-3xl font-bold text-text-primary group-hover:text-accent-gold transition-colors">
                 ₹{rate.price.toLocaleString("en-IN")}
               </h2>
               <p className="mt-1 text-xs text-text-secondary font-medium">
@@ -143,22 +143,22 @@ export default function GoldRatePage() {
 
         {/* Market Overview */}
         <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-2">
-          <div className="rounded-2xl border border-white/5 bg-[#111111]/60 backdrop-blur-xl p-8 shadow-xl">
+          <div className="rounded-2xl border border-border-theme bg-[#111111]/60 backdrop-blur-xl p-8 shadow-xl">
             <h2 className="text-lg font-bold text-accent-gold mb-6 uppercase tracking-wider">
               Market Overview
             </h2>
             <div className="space-y-4">
-              <div className="flex justify-between border-b border-white/5 pb-4">
+              <div className="flex justify-between border-b border-border-theme pb-4">
                 <span className="text-text-secondary font-medium">Global Market Status</span>
                 <span className="text-green-400 font-bold flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> Market Open</span>
               </div>
-              <div className="flex justify-between border-b border-white/5 pb-4">
+              <div className="flex justify-between border-b border-border-theme pb-4">
                 <span className="text-text-secondary font-medium">Today's Trend</span>
                 <span className="text-green-400 font-bold">Bullish ↑</span>
               </div>
-              <div className="flex justify-between border-b border-white/5 pb-4">
+              <div className="flex justify-between border-b border-border-theme pb-4">
                 <span className="text-text-secondary font-medium">Base Currency</span>
-                <span className="text-white font-bold">INR (₹)</span>
+                <span className="text-text-primary font-bold">INR (₹)</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-text-secondary font-medium">Auto-Sync</span>
@@ -171,29 +171,29 @@ export default function GoldRatePage() {
 
       {/* UPDATE MODAL */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="bg-[#111111] border border-white/10 rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in fade-in zoom-in-95 duration-200">
-            <h2 className="text-2xl font-bold text-white mb-6">Update Market Rates</h2>
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-background-primary backdrop-blur-sm">
+          <div className="bg-[#111111] border border-border-theme rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+            <h2 className="text-2xl font-bold text-text-primary mb-6">Update Market Rates</h2>
             <form onSubmit={handleUpdateRate} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-text-secondary uppercase mb-2">24K Gold (Per 10g)</label>
-                <input required defaultValue={data?.gold24k || 74250} name="gold24k" type="number" className="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-accent-gold/50 focus:outline-none" />
+                <input required defaultValue={data?.gold24k || 74250} name="gold24k" type="number" className="w-full bg-background-primary border border-border-theme rounded-xl p-3 text-text-primary focus:border-accent-gold/50 focus:outline-none" />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-text-secondary uppercase mb-2">22K Gold (Per 10g)</label>
-                <input required defaultValue={data?.gold22k || 68100} name="gold22k" type="number" className="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-accent-gold/50 focus:outline-none" />
+                <input required defaultValue={data?.gold22k || 68100} name="gold22k" type="number" className="w-full bg-background-primary border border-border-theme rounded-xl p-3 text-text-primary focus:border-accent-gold/50 focus:outline-none" />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-text-secondary uppercase mb-2">18K Gold (Per 10g)</label>
-                <input required defaultValue={data?.gold18k || 55680} name="gold18k" type="number" className="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-accent-gold/50 focus:outline-none" />
+                <input required defaultValue={data?.gold18k || 55680} name="gold18k" type="number" className="w-full bg-background-primary border border-border-theme rounded-xl p-3 text-text-primary focus:border-accent-gold/50 focus:outline-none" />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-text-secondary uppercase mb-2">Silver (Per 1kg)</label>
-                <input required defaultValue={data?.silver || 92500} name="silver" type="number" className="w-full bg-black/50 border border-white/10 rounded-xl p-3 text-white focus:border-accent-gold/50 focus:outline-none" />
+                <input required defaultValue={data?.silver || 92500} name="silver" type="number" className="w-full bg-background-primary border border-border-theme rounded-xl p-3 text-text-primary focus:border-accent-gold/50 focus:outline-none" />
               </div>
               
-              <div className="flex gap-4 pt-4 mt-6 border-t border-white/10">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 py-3 rounded-xl border border-white/10 text-white font-bold hover:bg-white/5 transition-all">Cancel</button>
+              <div className="flex gap-4 pt-4 mt-6 border-t border-border-theme">
+                <button type="button" onClick={() => setIsModalOpen(false)} className="flex-1 py-3 rounded-xl border border-border-theme text-text-primary font-bold hover:bg-text-primary/5 transition-all">Cancel</button>
                 <button disabled={isSubmitting} type="submit" className="flex-1 py-3 rounded-xl bg-accent-gold text-black font-bold hover:bg-yellow-400 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] transition-all flex justify-center items-center">
                   {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : "Save Rates"}
                 </button>

@@ -53,7 +53,7 @@ export default function SaaSAdminDashboard() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-gold/10 border border-accent-gold/20 text-accent-gold text-xs font-semibold tracking-widest uppercase mb-4">
               <Sparkles size={14} /> SaaS Control Center
             </div>
-            <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">
+            <h1 className="text-4xl font-bold text-text-primary mb-2 tracking-tight">
               Master Dashboard
             </h1>
             <p className="text-text-secondary text-lg max-w-xl">
@@ -61,7 +61,7 @@ export default function SaaSAdminDashboard() {
             </p>
           </div>
           <div className="flex gap-4">
-            <Link href="/saas-admin/clients" className="bg-background-tertiary border border-border-theme text-text-primary hover:text-white px-6 py-3 rounded-xl font-medium transition-all hover:border-accent-gold shadow-sm flex items-center gap-2">
+            <Link href="/saas-admin/clients" className="bg-background-tertiary border border-border-theme text-text-primary hover:text-text-primary px-6 py-3 rounded-xl font-medium transition-all hover:border-accent-gold shadow-sm flex items-center gap-2">
               <Building2 size={18} /> Manage Clients
             </Link>
             <button className="bg-gradient-to-r from-accent-gold to-yellow-500 text-black px-6 py-3 rounded-xl font-bold transition-all hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center gap-2">
@@ -95,7 +95,7 @@ export default function SaaSAdminDashboard() {
                 </span>
               </div>
               <div className="relative z-10">
-                <h3 className="text-4xl font-bold text-white tracking-tight">{stats.totalClients}</h3>
+                <h3 className="text-4xl font-bold text-text-primary tracking-tight">{stats.totalClients}</h3>
                 <p className="text-sm text-text-secondary font-medium mt-1">Total Active Tenants</p>
               </div>
             </div>
@@ -112,7 +112,7 @@ export default function SaaSAdminDashboard() {
                 </span>
               </div>
               <div className="relative z-10">
-                <h3 className="text-4xl font-bold text-white tracking-tight">{stats.activeSubscriptions}</h3>
+                <h3 className="text-4xl font-bold text-text-primary tracking-tight">{stats.activeSubscriptions}</h3>
                 <p className="text-sm text-text-secondary font-medium mt-1">Live Subscriptions</p>
               </div>
             </div>
@@ -140,11 +140,11 @@ export default function SaaSAdminDashboard() {
           {/* Recent Clients */}
           <div className="bg-background-secondary/40 backdrop-blur-md border border-border-theme rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
             <div className="p-6 border-b border-border-theme/50 flex justify-between items-center bg-background-secondary/50">
-              <h3 className="font-bold text-xl text-white flex items-center gap-2">
+              <h3 className="font-bold text-xl text-text-primary flex items-center gap-2">
                 <Users className="text-accent-gold" size={20} />
                 Recent Deployments
               </h3>
-              <Link href="/saas-admin/clients" className="text-sm text-accent-gold hover:text-white font-medium transition-colors flex items-center gap-1 group">
+              <Link href="/saas-admin/clients" className="text-sm text-accent-gold hover:text-text-primary font-medium transition-colors flex items-center gap-1 group">
                 View Network <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
@@ -179,7 +179,7 @@ export default function SaaSAdminDashboard() {
                               {client.name.charAt(0)}
                             </div>
                             <div>
-                              <p className="font-bold text-white">{client.name}</p>
+                              <p className="font-bold text-text-primary">{client.name}</p>
                               <p className="text-xs text-text-secondary flex items-center gap-1 mt-0.5">
                                 <CreditCard size={12} /> {client.email}
                               </p>
@@ -192,7 +192,7 @@ export default function SaaSAdminDashboard() {
                           </a>
                         </td>
                         <td className="p-5">
-                          <span className="font-medium text-sm text-white/90">
+                          <span className="font-medium text-sm text-text-primary/90">
                             {client.subscriptions?.[0]?.plan?.name || "Trial Mode"}
                           </span>
                         </td>

@@ -173,13 +173,13 @@ export default function SilverRatePage() {
           <div className="rounded-xl border border-border-theme bg-background-secondary p-6">
             <h2 className="text-lg font-semibold text-accent-gold">QUICK ACTIONS</h2>
             <div className="mt-5 grid gap-3">
-              <Link href="/gold-rate" className="rounded-lg border border-[#4a3a18] bg-[#151611] p-3 text-left text-sm hover:bg-[#211c0e] transition-colors block text-white text-decoration-none">
+              <Link href="/gold-rate" className="rounded-lg border border-[#4a3a18] bg-[#151611] p-3 text-left text-sm hover:bg-[#211c0e] transition-colors block text-text-primary text-decoration-none">
                 Update Silver Rate
               </Link>
-              <Link href="/gold-rate/gold-rate-history" className="rounded-lg border border-[#4a3a18] bg-[#151611] p-3 text-left text-sm hover:bg-[#211c0e] transition-colors block text-white text-decoration-none">
+              <Link href="/gold-rate/gold-rate-history" className="rounded-lg border border-[#4a3a18] bg-[#151611] p-3 text-left text-sm hover:bg-[#211c0e] transition-colors block text-text-primary text-decoration-none">
                 View Rate History
               </Link>
-              <Link href="/gold-rate/rate-comparison" className="rounded-lg border border-[#4a3a18] bg-[#151611] p-3 text-left text-sm hover:bg-[#211c0e] transition-colors block text-white text-decoration-none">
+              <Link href="/gold-rate/rate-comparison" className="rounded-lg border border-[#4a3a18] bg-[#151611] p-3 text-left text-sm hover:bg-[#211c0e] transition-colors block text-text-primary text-decoration-none">
                 Compare With Gold
               </Link>
             </div>

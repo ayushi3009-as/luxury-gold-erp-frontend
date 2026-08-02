@@ -132,7 +132,7 @@ export default function InventoryDashboard() {
                         className="flex flex-col justify-between rounded-xl border border-border-theme bg-background-primary p-5 transition-colors hover:border-accent-gold/50 group"
                       >
                         <div>
-                          <p className="text-lg font-bold text-white group-hover:text-accent-gold transition-colors">{alert.product?.name}</p>
+                          <p className="text-lg font-bold text-text-primary group-hover:text-accent-gold transition-colors">{alert.product?.name}</p>
                           <p className="mt-2 text-sm bg-red-500/10 text-red-400 py-2 px-3 rounded-lg border border-red-500/20 inline-block font-medium">
                             {alert.quantity} units left (Min: {alert.minimumStock})
                           </p>

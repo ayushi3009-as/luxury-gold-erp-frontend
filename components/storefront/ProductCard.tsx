@@ -25,7 +25,7 @@ export function ProductCard({ item }: { item: any }) {
   return (
     <Link href={`/product/${item.id}`} className="group cursor-pointer block">
       <div className="relative h-[300px] sm:h-[400px] w-full overflow-hidden bg-gray-100 mb-6">
-        <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors z-10"></div>
+        <div className="absolute inset-0 bg-background-primary/5 group-hover:bg-transparent transition-colors z-10"></div>
         <img 
           src={imgUrl}
           onError={(e) => { e.currentTarget.src = fallbackImage; }}
@@ -35,7 +35,7 @@ export function ProductCard({ item }: { item: any }) {
         <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/60 to-transparent z-20 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
           <button 
             onClick={handleAddToCart}
-            className="w-full bg-[#111] text-white py-3 uppercase tracking-widest text-xs font-bold hover:bg-black transition-colors"
+            className="w-full bg-[#111] text-text-primary py-3 uppercase tracking-widest text-xs font-bold hover:bg-background-primary transition-colors"
           >
             Add to Cart
           </button>

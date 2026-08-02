@@ -55,7 +55,7 @@ export default function ProductDetailsClient({ product }: { product: any }) {
       <div className="border-b border-[#2A2724] px-6 md:px-10 py-3 flex items-center gap-3 text-[9px] tracking-[0.2em] text-[#8a7a5a] uppercase">
         <span>Home</span><span>/</span>
         <span>{product?.category || 'Collection'}</span><span>/</span>
-        <span className="text-white/70">N°{catalogNum}</span>
+        <span className="text-text-primary/70">N°{catalogNum}</span>
       </div>
 
       <div className="px-6 md:px-10 py-16">
@@ -107,13 +107,13 @@ export default function ProductDetailsClient({ product }: { product: any }) {
               </span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-serif text-white/95 font-light mb-6 leading-tight">
+            <h1 className="text-3xl md:text-4xl font-serif text-text-primary/95 font-light mb-6 leading-tight">
               {product?.name || '22K Royal Kundan Necklace'}
             </h1>
 
             {/* Price */}
             <div className="flex items-baseline gap-4 mb-8 pb-8 border-b border-[#2A2724]">
-              <p className="text-2xl text-white font-light tracking-wide font-serif">
+              <p className="text-2xl text-text-primary font-light tracking-wide font-serif">
                 ₹{price.toLocaleString('en-IN')}
               </p>
               <span className="flex items-center gap-1 text-[#8a7a5a] text-[10px] uppercase tracking-widest">
@@ -122,7 +122,7 @@ export default function ProductDetailsClient({ product }: { product: any }) {
             </div>
 
             {/* Description */}
-            <p className="text-sm text-white/50 font-sans font-light leading-relaxed mb-8 pb-8 border-b border-[#2A2724]">
+            <p className="text-sm text-text-primary/50 font-sans font-light leading-relaxed mb-8 pb-8 border-b border-[#2A2724]">
               {product?.description || 'Experience the pinnacle of craftsmanship with this stunning piece, designed to elevate your everyday elegance and make your special moments unforgettable.'}
             </p>
 
@@ -130,11 +130,11 @@ export default function ProductDetailsClient({ product }: { product: any }) {
             <div className="grid grid-cols-2 divide-x divide-[#2A2724] mb-10 pb-10 border-b border-[#2A2724]">
               <div className="pr-6">
                 <p className="text-[9px] tracking-[0.2em] text-[#8a7a5a] uppercase mb-2">Purity</p>
-                <p className="text-white/90 font-serif">{product?.purity || '22K'}</p>
+                <p className="text-text-primary/90 font-serif">{product?.purity || '22K'}</p>
               </div>
               <div className="pl-6">
                 <p className="text-[9px] tracking-[0.2em] text-[#8a7a5a] uppercase mb-2">Gross Weight</p>
-                <p className="text-white/90 font-serif">{product?.weight || '45g'}</p>
+                <p className="text-text-primary/90 font-serif">{product?.weight || '45g'}</p>
               </div>
             </div>
 
@@ -151,7 +151,7 @@ export default function ProductDetailsClient({ product }: { product: any }) {
               <div className="border-b border-[#2A2724]">
                 <button
                   onClick={() => setShowPriceBreakdown(!showPriceBreakdown)}
-                  className="w-full flex justify-between items-center py-4 text-[10px] uppercase tracking-[0.2em] text-white/60 hover:text-white transition-colors"
+                  className="w-full flex justify-between items-center py-4 text-[10px] uppercase tracking-[0.2em] text-text-primary/60 hover:text-text-primary transition-colors"
                 >
                   Price Breakdown
                   {showPriceBreakdown ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
@@ -161,7 +161,7 @@ export default function ProductDetailsClient({ product }: { product: any }) {
                     <div className="flex justify-between"><span>Gold Value</span><span>₹{goldValue.toLocaleString()}</span></div>
                     <div className="flex justify-between"><span>Making Charges</span><span>₹{makingCharge.toLocaleString()}</span></div>
                     <div className="flex justify-between"><span>GST (3%)</span><span>₹{gst.toLocaleString()}</span></div>
-                    <div className="flex justify-between pt-3 border-t border-[#2A2724] text-white/80"><span>Total</span><span>₹{price.toLocaleString()}</span></div>
+                    <div className="flex justify-between pt-3 border-t border-[#2A2724] text-text-primary/80"><span>Total</span><span>₹{price.toLocaleString()}</span></div>
                   </div>
                 )}
               </div>
@@ -170,7 +170,7 @@ export default function ProductDetailsClient({ product }: { product: any }) {
               <div className="border-b border-[#2A2724]">
                 <button
                   onClick={() => setShowCare(!showCare)}
-                  className="w-full flex justify-between items-center py-4 text-[10px] uppercase tracking-[0.2em] text-white/60 hover:text-white transition-colors"
+                  className="w-full flex justify-between items-center py-4 text-[10px] uppercase tracking-[0.2em] text-text-primary/60 hover:text-text-primary transition-colors"
                 >
                   Care Instructions
                   {showCare ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
@@ -216,7 +216,7 @@ export default function ProductDetailsClient({ product }: { product: any }) {
                     <img src={p.imageUrl} alt={p.name} onError={(e) => { e.currentTarget.src = fb; }} className="w-full h-[200px] object-cover transition-[object-position] duration-[900ms] ease-luxury group-hover:object-[70%_30%]" />
                   </div>
                   <p className="text-[9px] tracking-widest text-[#8a7a5a] uppercase mb-1">N°{cn}</p>
-                  <p className="text-sm font-serif text-white/90 group-hover:text-[#D4AF37] transition-colors mb-1">{p.name}</p>
+                  <p className="text-sm font-serif text-text-primary/90 group-hover:text-[#D4AF37] transition-colors mb-1">{p.name}</p>
                   <p className="text-sm text-[#D4AF37]">₹{p.price.toLocaleString('en-IN')}</p>
                 </a>
               );
@@ -226,10 +226,10 @@ export default function ProductDetailsClient({ product }: { product: any }) {
       </div>
 
       {/* Sticky mobile CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-between border-t border-[#2A2724] bg-black/95 backdrop-blur-md px-5 py-4 md:hidden">
+      <div className="fixed bottom-0 left-0 right-0 z-40 flex items-center justify-between border-t border-[#2A2724] bg-background-primary/95 backdrop-blur-md px-5 py-4 md:hidden">
         <div>
           <p className="text-[9px] uppercase tracking-widest text-[#8a7a5a] mb-1">Total</p>
-          <p className="font-serif text-lg text-white/90">₹{price.toLocaleString('en-IN')}</p>
+          <p className="font-serif text-lg text-text-primary/90">₹{price.toLocaleString('en-IN')}</p>
         </div>
         <MagneticButton onClick={handleAddToCart} className="px-8 py-3 text-xs">Add to Bag</MagneticButton>
       </div>

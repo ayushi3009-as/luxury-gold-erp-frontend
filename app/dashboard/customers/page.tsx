@@ -90,46 +90,46 @@ export default function CustomersPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl p-6 border border-white/5 relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
+          <div className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
             <h3 className="text-xs tracking-widest uppercase font-semibold text-text-secondary">Total Customers</h3>
             <p className="text-4xl font-bold mt-2 text-accent-gold">
               {loading ? <Loader2 className="animate-spin" /> : customers.length}
             </p>
           </div>
-          <div className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl p-6 border border-white/5 relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
+          <div className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
             <h3 className="text-xs tracking-widest uppercase font-semibold text-text-secondary">Active This Month</h3>
-            <p className="text-4xl font-bold mt-2 text-white">
+            <p className="text-4xl font-bold mt-2 text-text-primary">
               {loading ? <Loader2 className="animate-spin" /> : customers.length}
             </p>
           </div>
-          <div className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl p-6 border border-white/5 relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
+          <div className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
             <h3 className="text-xs tracking-widest uppercase font-semibold text-text-secondary">Loyalty Members</h3>
-            <p className="text-4xl font-bold mt-2 text-white">0</p>
+            <p className="text-4xl font-bold mt-2 text-text-primary">0</p>
           </div>
         </div>
 
-        <div className="bg-background-secondary/40 backdrop-blur-xl border border-white/5 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+        <div className="bg-background-secondary/40 backdrop-blur-xl border border-border-theme rounded-2xl p-6 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/20 via-transparent to-transparent"></div>
           
           <div className="flex justify-between items-center mb-6">
             <div className="relative w-72">
-              <Search className="absolute left-3 top-2.5 text-white/40" size={18} />
+              <Search className="absolute left-3 top-2.5 text-text-primary/40" size={18} />
               <input 
                 type="text" 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search customers..." 
-                className="w-full bg-black/30 border border-white/10 rounded-xl py-2 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-accent-gold/50 focus:ring-1 focus:ring-accent-gold/50 transition-all placeholder-white/20"
+                className="w-full bg-background-tertiary border border-border-theme rounded-xl py-2 pl-10 pr-4 text-sm text-text-primary focus:outline-none focus:border-accent-gold/50 focus:ring-1 focus:ring-accent-gold/50 transition-all placeholder-text-secondary/50"
               />
             </div>
-            <button className="flex items-center gap-2 border border-white/10 bg-white/5 px-4 py-2 rounded-xl text-sm font-medium text-text-secondary hover:text-white hover:bg-white/10 transition-colors">
+            <button className="flex items-center gap-2 border border-border-theme bg-text-primary/5 px-4 py-2 rounded-xl text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-text-primary/10 transition-colors">
               <Filter size={16} /> Filter
             </button>
           </div>
 
-          <div className="overflow-x-auto rounded-xl border border-white/10 bg-black/20">
+          <div className="overflow-x-auto rounded-xl border border-border-theme bg-background-tertiary">
             <table className="w-full text-left text-sm">
-              <thead className="border-b border-white/10 bg-white/5 text-xs font-semibold tracking-wider text-text-secondary uppercase">
+              <thead className="border-b border-border-theme bg-text-primary/5 text-xs font-semibold tracking-wider text-text-secondary uppercase">
                 <tr>
                   <th className="px-6 py-4">Customer Name</th>
                   <th className="px-6 py-4">Phone</th>
@@ -138,7 +138,7 @@ export default function CustomersPage() {
                   <th className="px-6 py-4 text-right">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-border-theme">
                 {loading ? (
                   <tr>
                     <td colSpan={5} className="py-12 text-center">
@@ -153,8 +153,8 @@ export default function CustomersPage() {
                   </tr>
                 ) : (
                   filteredCustomers.map(customer => (
-                    <tr key={customer.id} className="hover:bg-white/5 transition-colors group">
-                      <td className="px-6 py-4 font-bold text-white group-hover:text-accent-gold transition-colors">
+                    <tr key={customer.id} className="hover:bg-text-primary/5 transition-colors group">
+                      <td className="px-6 py-4 font-bold text-text-primary group-hover:text-accent-gold transition-colors">
                         {customer.name || customer.firstName || 'Walk-in Customer'}
                       </td>
                       <td className="px-6 py-4 text-text-secondary font-mono">{customer.mobile || customer.phone || 'N/A'}</td>
@@ -178,11 +178,11 @@ export default function CustomersPage() {
 
       {/* CREATE CUSTOMER MODAL */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="w-full max-w-md rounded-2xl border border-white/10 bg-[#111] p-6 shadow-[0_0_40px_rgba(212,175,55,0.15)] relative overflow-hidden">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background-primary backdrop-blur-sm p-4">
+          <div className="w-full max-w-md rounded-2xl border border-border-theme bg-[#111] p-6 shadow-[0_0_40px_rgba(212,175,55,0.15)] relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/50 via-yellow-300 to-accent-gold/50"></div>
             
-            <h2 className="text-xl font-bold text-white mb-6">Add New Customer</h2>
+            <h2 className="text-xl font-bold text-text-primary mb-6">Add New Customer</h2>
             
             <form onSubmit={handleCreateCustomer} className="space-y-4">
               <div>
@@ -193,7 +193,7 @@ export default function CustomersPage() {
                   placeholder="e.g. Rahul Sharma"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/20 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 />
               </div>
 
@@ -205,7 +205,7 @@ export default function CustomersPage() {
                   placeholder="e.g. 9876543210"
                   value={mobile}
                   onChange={(e) => setMobile(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/20 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 />
               </div>
 
@@ -216,7 +216,7 @@ export default function CustomersPage() {
                   placeholder="e.g. rahul@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/20 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 />
               </div>
 
@@ -227,7 +227,7 @@ export default function CustomersPage() {
                   placeholder="e.g. Mumbai, India"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/20 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 />
               </div>
 
@@ -235,7 +235,7 @@ export default function CustomersPage() {
                 <button 
                   type="button" 
                   onClick={() => setIsModalOpen(false)}
-                  className="flex-1 rounded-xl border border-white/10 bg-white/5 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
+                  className="flex-1 rounded-xl border border-border-theme bg-text-primary/5 py-3 text-sm font-semibold text-text-primary hover:bg-text-primary/10 transition-colors"
                 >
                   Cancel
                 </button>

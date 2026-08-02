@@ -90,7 +90,7 @@ export default function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModal
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-24 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-24 bg-background-primary backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose}>
       <div 
         className="w-full max-w-2xl bg-background-secondary border border-border-theme rounded-2xl shadow-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
@@ -107,7 +107,7 @@ export default function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModal
             className="flex-1 bg-transparent text-lg text-text-primary focus:outline-none placeholder:text-text-secondary"
           />
           {isLoading && <Loader2 className="animate-spin text-accent-gold ml-2" size={20} />}
-          <button onClick={onClose} className="p-2 ml-2 rounded-full text-text-secondary hover:bg-[#252525] hover:text-white transition">
+          <button onClick={onClose} className="p-2 ml-2 rounded-full text-text-secondary hover:bg-[#252525] hover:text-text-primary transition">
             <X size={20} />
           </button>
         </div>

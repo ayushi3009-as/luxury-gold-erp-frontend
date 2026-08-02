@@ -126,7 +126,7 @@ export default function StockOut() {
           </div>
 
           <div className="flex gap-3">
-            <button onClick={() => router.push('/inventory')} className="group flex items-center gap-2 rounded-xl border border-border-theme bg-background-secondary/50 backdrop-blur-md px-5 py-2.5 text-sm font-medium text-text-secondary transition-all hover:border-accent-gold/50 hover:text-white">
+            <button onClick={() => router.push('/inventory')} className="group flex items-center gap-2 rounded-xl border border-border-theme bg-background-secondary/50 backdrop-blur-md px-5 py-2.5 text-sm font-medium text-text-secondary transition-all hover:border-accent-gold/50 hover:text-text-primary">
               <X size={18} className="transition-transform group-hover:rotate-90" />
               Cancel
             </button>
@@ -138,15 +138,15 @@ export default function StockOut() {
         </div>
 
         {/* STOCK OUT INFORMATION */}
-        <div className="rounded-2xl border border-white/5 bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative overflow-hidden">
+        <div className="rounded-2xl border border-border-theme bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent-gold/30 to-transparent"></div>
           
-          <div className="mb-6 flex items-center gap-4 border-b border-white/5 pb-5">
+          <div className="mb-6 flex items-center gap-4 border-b border-border-theme pb-5">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-gold/10 text-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.15)] ring-1 ring-accent-gold/20">
               <FileOutput size={24} />
             </div>
             <div>
-              <h2 className="text-lg font-bold tracking-wide text-white">STOCK OUT INFORMATION</h2>
+              <h2 className="text-lg font-bold tracking-wide text-text-primary">STOCK OUT INFORMATION</h2>
               <p className="text-xs text-text-secondary mt-0.5">Enter details of stock leaving inventory</p>
             </div>
           </div>
@@ -159,7 +159,7 @@ export default function StockOut() {
                 type="text"
                 value={stockOutNo}
                 readOnly
-                className="w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3.5 text-sm font-mono text-white/70 outline-none transition-all cursor-not-allowed"
+                className="w-full rounded-xl border border-border-theme bg-background-tertiary px-4 py-3.5 text-sm font-mono text-text-primary/70 outline-none transition-all cursor-not-allowed"
               />
             </div>
 
@@ -170,7 +170,7 @@ export default function StockOut() {
                 <CalendarDays size={18} className="absolute left-4 top-3.5 text-accent-gold/70" />
                 <input
                   type="date"
-                  className="w-full rounded-xl border border-white/10 bg-white/5 px-11 py-3.5 text-sm text-white outline-none transition-all focus:border-accent-gold/50 focus:bg-white/10 focus:ring-4 focus:ring-accent-gold/10"
+                  className="w-full rounded-xl border border-border-theme bg-text-primary/5 px-11 py-3.5 text-sm text-text-primary outline-none transition-all focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10"
                 />
               </div>
             </div>
@@ -179,13 +179,13 @@ export default function StockOut() {
             <div className="group">
               <label className="mb-2 block text-xs font-semibold tracking-wider text-text-secondary group-focus-within:text-accent-gold transition-colors">STOCK OUT REASON</label>
               <div className="relative">
-                <select value={reason} onChange={e => setReason(e.target.value)} className="w-full appearance-none rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white outline-none transition-all focus:border-accent-gold/50 focus:bg-white/10 focus:ring-4 focus:ring-accent-gold/10">
-                  <option className="bg-background-secondary text-white" value="">Select Reason</option>
-                  <option className="bg-background-secondary text-white" value="Sales">Sales</option>
-                  <option className="bg-background-secondary text-white" value="Sales Return">Sales Return</option>
-                  <option className="bg-background-secondary text-white" value="Damage">Damage</option>
-                  <option className="bg-background-secondary text-white" value="Internal Use">Internal Use</option>
-                  <option className="bg-background-secondary text-white" value="Manufacturing">Manufacturing</option>
+                <select value={reason} onChange={e => setReason(e.target.value)} className="w-full appearance-none rounded-xl border border-border-theme bg-text-primary/5 px-4 py-3.5 text-sm text-text-primary outline-none transition-all focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10">
+                  <option className="bg-background-secondary text-text-primary" value="">Select Reason</option>
+                  <option className="bg-background-secondary text-text-primary" value="Sales">Sales</option>
+                  <option className="bg-background-secondary text-text-primary" value="Sales Return">Sales Return</option>
+                  <option className="bg-background-secondary text-text-primary" value="Damage">Damage</option>
+                  <option className="bg-background-secondary text-text-primary" value="Internal Use">Internal Use</option>
+                  <option className="bg-background-secondary text-text-primary" value="Manufacturing">Manufacturing</option>
                 </select>
                 <ChevronDown size={18} className="absolute right-4 top-3.5 text-text-secondary pointer-events-none" />
               </div>
@@ -199,21 +199,21 @@ export default function StockOut() {
                 value={reference}
                 onChange={e => setReference(e.target.value)}
                 placeholder="Enter reference number"
-                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white outline-none transition-all placeholder:text-white/20 focus:border-accent-gold/50 focus:bg-white/10 focus:ring-4 focus:ring-accent-gold/10"
+                className="w-full rounded-xl border border-border-theme bg-text-primary/5 px-4 py-3.5 text-sm text-text-primary outline-none transition-all placeholder:text-text-primary/20 focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10"
               />
             </div>
           </div>
         </div>
 
         {/* PRODUCT SELECTION */}
-        <div className="mt-6 rounded-2xl border border-white/5 bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative">
-          <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/5 pb-5">
+        <div className="mt-6 rounded-2xl border border-border-theme bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative">
+          <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border-theme pb-5">
             <div className="flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-gold/10 text-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.15)] ring-1 ring-accent-gold/20">
                 <PackageMinus size={24} />
               </div>
               <div>
-                <h2 className="text-lg font-bold tracking-wide text-white">STOCK OUT PRODUCTS</h2>
+                <h2 className="text-lg font-bold tracking-wide text-text-primary">STOCK OUT PRODUCTS</h2>
                 <p className="text-xs text-text-secondary mt-0.5">Select products to remove from inventory</p>
               </div>
             </div>
@@ -227,15 +227,15 @@ export default function StockOut() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={handleSearch}
                 placeholder="Scan Barcode or Search SKU & Press Enter..."
-                className="w-full rounded-xl border border-white/10 bg-white/5 py-3.5 pl-11 pr-4 text-sm text-white outline-none transition-all placeholder:text-white/30 focus:border-accent-gold/50 focus:bg-white/10 focus:ring-4 focus:ring-accent-gold/10"
+                className="w-full rounded-xl border border-border-theme bg-text-primary/5 py-3.5 pl-11 pr-4 text-sm text-text-primary outline-none transition-all placeholder:text-text-primary/30 focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10"
               />
             </div>
           </div>
 
           {/* TABLE */}
-          <div className="overflow-x-auto rounded-xl border border-white/10 bg-black/20">
+          <div className="overflow-x-auto rounded-xl border border-border-theme bg-background-tertiary">
             <table className="w-full min-w-[1000px] text-left text-sm">
-              <thead className="border-b border-white/10 bg-white/5 text-xs font-semibold tracking-wider text-text-secondary">
+              <thead className="border-b border-border-theme bg-text-primary/5 text-xs font-semibold tracking-wider text-text-secondary">
                 <tr>
                   <th className="px-5 py-4">PRODUCT</th>
                   <th className="px-5 py-4">CATEGORY</th>
@@ -246,7 +246,7 @@ export default function StockOut() {
                   <th className="px-5 py-4 text-right">ACTION</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-border-theme">
                 {items.length === 0 ? (
                   <tr>
                     <td colSpan={7} className="py-12 text-center text-text-secondary">
@@ -254,19 +254,19 @@ export default function StockOut() {
                     </td>
                   </tr>
                 ) : items.map((item) => (
-                  <tr key={item.id} className="transition-colors hover:bg-white/5">
-                    <td className="px-5 py-4 font-semibold text-white">{item.name}</td>
+                  <tr key={item.id} className="transition-colors hover:bg-text-primary/5">
+                    <td className="px-5 py-4 font-semibold text-text-primary">{item.name}</td>
                     <td className="px-5 py-4 text-text-secondary">{item.category}</td>
                     <td className="px-5 py-4 font-mono text-accent-gold">{item.sku}</td>
-                    <td className="px-5 py-4 font-medium text-white">{item.quantity}</td>
-                    <td className="px-5 py-4 text-white/80">{item.weight}</td>
+                    <td className="px-5 py-4 font-medium text-text-primary">{item.quantity}</td>
+                    <td className="px-5 py-4 text-text-primary/80">{item.weight}</td>
                     <td className="px-5 py-4">
                       <span className="inline-flex items-center rounded-full border border-accent-gold/30 bg-accent-gold/10 px-3 py-1 text-xs font-medium text-accent-gold">
                         {item.reason}
                       </span>
                     </td>
                     <td className="px-5 py-4 text-right">
-                      <button onClick={() => removeItem(item.id)} className="inline-flex items-center justify-center rounded-lg p-2 text-white/40 transition-all hover:bg-red-500/20 hover:text-red-400">
+                      <button onClick={() => removeItem(item.id)} className="inline-flex items-center justify-center rounded-lg p-2 text-text-primary/40 transition-all hover:bg-red-500/20 hover:text-red-400">
                         <Trash2 size={18} />
                       </button>
                     </td>
@@ -279,22 +279,22 @@ export default function StockOut() {
 
         {/* SUMMARY & NOTES */}
         <div className="mt-6 grid gap-6 lg:grid-cols-3">
-          <div className="col-span-2 rounded-2xl border border-white/5 bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl">
+          <div className="col-span-2 rounded-2xl border border-border-theme bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl">
             <label className="mb-3 block text-xs font-semibold tracking-wider text-text-secondary">NOTES / REMARKS</label>
             <textarea
               rows={4}
               value={notes}
               onChange={e => setNotes(e.target.value)}
               placeholder="Enter any additional notes or remarks..."
-              className="w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm text-white outline-none transition-all placeholder:text-white/20 focus:border-accent-gold/50 focus:bg-white/10 focus:ring-4 focus:ring-accent-gold/10"
+              className="w-full resize-none rounded-xl border border-border-theme bg-text-primary/5 px-4 py-3.5 text-sm text-text-primary outline-none transition-all placeholder:text-text-primary/20 focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10"
             />
           </div>
 
           <div className="rounded-2xl border border-accent-gold/20 bg-gradient-to-br from-accent-gold/10 to-transparent backdrop-blur-xl p-6 shadow-[0_0_30px_rgba(212,175,55,0.05)] flex flex-col justify-center">
             <div className="space-y-6">
-              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <div className="flex items-center justify-between border-b border-border-theme pb-4">
                 <span className="text-sm font-medium text-text-secondary">Total Products</span>
-                <span className="text-2xl font-bold text-white">{items.length}</span>
+                <span className="text-2xl font-bold text-text-primary">{items.length}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-accent-gold">Total Quantity</span>

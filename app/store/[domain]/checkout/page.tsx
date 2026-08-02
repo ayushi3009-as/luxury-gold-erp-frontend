@@ -24,7 +24,7 @@ export default function CheckoutPage({ params }: { params: { domain: string } })
     return (
       <div className="pt-32 pb-24 px-6 max-w-5xl mx-auto min-h-[60vh] flex flex-col items-center justify-center text-center">
         <h1 className="text-4xl font-serif text-[#111] mb-6">Your Bag is Empty</h1>
-        <Link href="/collections" className="bg-[#111] text-white px-8 py-4 uppercase tracking-widest text-xs hover:bg-black transition-colors">
+        <Link href="/collections" className="bg-[#111] text-text-primary px-8 py-4 uppercase tracking-widest text-xs hover:bg-background-primary transition-colors">
           Return to Shop
         </Link>
       </div>
@@ -76,7 +76,7 @@ export default function CheckoutPage({ params }: { params: { domain: string } })
         <div className="w-full lg:w-2/3 space-y-12">
           <form id="checkout-form" onSubmit={handleSubmit}>
             <div className="flex items-center gap-4 mb-6 border-b border-gray-200 pb-4">
-              <div className="w-6 h-6 rounded-full bg-black text-white flex items-center justify-center text-xs font-bold">1</div>
+              <div className="w-6 h-6 rounded-full bg-background-primary text-text-primary flex items-center justify-center text-xs font-bold">1</div>
               <h2 className="text-2xl font-serif text-[#111]">Shipping & Contact Details</h2>
             </div>
             <div className="grid grid-cols-2 gap-6">
@@ -120,7 +120,7 @@ export default function CheckoutPage({ params }: { params: { domain: string } })
               <span>Total</span>
               <span>₹{subtotal.toLocaleString('en-IN')}</span>
             </div>
-            <button disabled={loading} form="checkout-form" type="submit" className="w-full block text-center bg-[#111] text-white py-4 uppercase tracking-widest text-sm font-bold hover:bg-black transition-colors disabled:opacity-50">
+            <button disabled={loading} form="checkout-form" type="submit" className="w-full block text-center bg-[#111] text-text-primary py-4 uppercase tracking-widest text-sm font-bold hover:bg-background-primary transition-colors disabled:opacity-50">
               {loading ? 'Processing...' : 'Place Order'}
             </button>
           </div>

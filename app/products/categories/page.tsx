@@ -92,11 +92,11 @@ export default function CategoriesPage() {
 
         {/* METRICS */}
         <div className="grid gap-6 md:grid-cols-3 mb-8">
-          <div className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl p-6 border border-white/5 relative overflow-hidden shadow-xl">
+          <div className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden shadow-xl">
             <h3 className="text-xs tracking-widest uppercase font-semibold text-text-secondary">Total Categories</h3>
-            <p className="text-4xl font-bold mt-2 text-white">{categories.length}</p>
+            <p className="text-4xl font-bold mt-2 text-text-primary">{categories.length}</p>
           </div>
-          <div className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl p-6 border border-white/5 relative overflow-hidden shadow-xl">
+          <div className="bg-background-secondary/50 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden shadow-xl">
             <h3 className="text-xs tracking-widest uppercase font-semibold text-text-secondary">Active</h3>
             <p className="text-4xl font-bold mt-2 text-green-400 flex items-center gap-2">
               <CheckCircle size={20} /> {categories.length}
@@ -105,25 +105,25 @@ export default function CategoriesPage() {
         </div>
 
         {/* CATEGORIES TABLE */}
-        <div className="rounded-2xl border border-white/5 bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative overflow-hidden">
+        <div className="rounded-2xl border border-border-theme bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/20 via-transparent to-transparent"></div>
           
           <div className="flex justify-between items-center mb-6">
             <div className="relative w-72">
-              <Search className="absolute left-3 top-2.5 text-white/40" size={18} />
+              <Search className="absolute left-3 top-2.5 text-text-primary/40" size={18} />
               <input 
                 type="text" 
                 placeholder="Search categories..." 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-black/30 border border-white/10 rounded-xl py-2 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-accent-gold/50 focus:ring-1 focus:ring-accent-gold/50 transition-all placeholder-white/20"
+                className="w-full bg-background-tertiary border border-border-theme rounded-xl py-2 pl-10 pr-4 text-sm text-text-primary focus:outline-none focus:border-accent-gold/50 focus:ring-1 focus:ring-accent-gold/50 transition-all placeholder-text-secondary/50"
               />
             </div>
           </div>
 
-          <div className="overflow-x-auto rounded-xl border border-white/10 bg-black/20">
+          <div className="overflow-x-auto rounded-xl border border-border-theme bg-background-tertiary">
             <table className="w-full text-left text-sm">
-              <thead className="border-b border-white/10 bg-white/5 text-xs font-semibold tracking-wider text-text-secondary uppercase">
+              <thead className="border-b border-border-theme bg-text-primary/5 text-xs font-semibold tracking-wider text-text-secondary uppercase">
                 <tr>
                   <th className="px-6 py-4">Category Name</th>
                   <th className="px-6 py-4">Description</th>
@@ -131,7 +131,7 @@ export default function CategoriesPage() {
                   <th className="px-6 py-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-border-theme">
                 {filteredCategories.length === 0 ? (
                   <tr>
                     <td colSpan={4} className="px-6 py-12 text-center text-text-secondary">
@@ -140,11 +140,11 @@ export default function CategoriesPage() {
                   </tr>
                 ) : (
                   filteredCategories.map((c: any) => (
-                    <tr key={c.id} className="transition-colors hover:bg-white/5 group">
-                      <td className="px-6 py-4 font-bold text-white group-hover:text-accent-gold transition-colors">{c.name}</td>
+                    <tr key={c.id} className="transition-colors hover:bg-text-primary/5 group">
+                      <td className="px-6 py-4 font-bold text-text-primary group-hover:text-accent-gold transition-colors">{c.name}</td>
                       <td className="px-6 py-4 text-text-secondary">{c.description || '-'}</td>
-                      <td className="px-6 py-4 text-center font-bold text-white">
-                        <span className="bg-white/10 px-3 py-1 rounded-full text-xs">
+                      <td className="px-6 py-4 text-center font-bold text-text-primary">
+                        <span className="bg-text-primary/10 px-3 py-1 rounded-full text-xs">
                           {c._count?.products || 0}
                         </span>
                       </td>
@@ -162,11 +162,11 @@ export default function CategoriesPage() {
 
       {/* CREATE CATEGORY MODAL */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="w-full max-w-md rounded-2xl border border-white/10 bg-[#111] p-6 shadow-[0_0_40px_rgba(212,175,55,0.15)] relative overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background-primary backdrop-blur-sm p-4">
+          <div className="w-full max-w-md rounded-2xl border border-border-theme bg-[#111] p-6 shadow-[0_0_40px_rgba(212,175,55,0.15)] relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/50 via-yellow-300 to-accent-gold/50"></div>
             
-            <h2 className="text-xl font-bold text-white mb-6">Create New Category</h2>
+            <h2 className="text-xl font-bold text-text-primary mb-6">Create New Category</h2>
             
             <form onSubmit={handleCreateCategory} className="space-y-4">
               <div>
@@ -177,7 +177,7 @@ export default function CategoriesPage() {
                   placeholder="e.g. Rings, Necklaces"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/20 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 />
               </div>
 
@@ -188,7 +188,7 @@ export default function CategoriesPage() {
                   placeholder="e.g. All types of gold and diamond rings."
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder-white/20 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
                 />
               </div>
 
@@ -196,7 +196,7 @@ export default function CategoriesPage() {
                 <button 
                   type="button" 
                   onClick={() => setIsModalOpen(false)}
-                  className="flex-1 rounded-xl border border-white/10 bg-white/5 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
+                  className="flex-1 rounded-xl border border-border-theme bg-text-primary/5 py-3 text-sm font-semibold text-text-primary hover:bg-text-primary/10 transition-colors"
                 >
                   Cancel
                 </button>

@@ -22,9 +22,9 @@ export default function BrandsPage() {
           </button>
         </div>
 
-        <div className="rounded-2xl border border-white/5 bg-background-secondary/40 backdrop-blur-xl p-12 shadow-2xl relative overflow-hidden flex flex-col items-center justify-center text-center">
-          <BadgeCheck size={64} className="text-white/10 mb-4" />
-          <h2 className="text-xl font-bold text-white mb-2">Brands Module Coming Soon</h2>
+        <div className="rounded-2xl border border-border-theme bg-background-secondary/40 backdrop-blur-xl p-12 shadow-2xl relative overflow-hidden flex flex-col items-center justify-center text-center">
+          <BadgeCheck size={64} className="text-text-primary/10 mb-4" />
+          <h2 className="text-xl font-bold text-text-primary mb-2">Brands Module Coming Soon</h2>
           <p className="text-text-secondary max-w-md">
             The Brands feature is currently being provisioned. Once activated, you will be able to tag products with specific partner brands.
           </p>

@@ -33,17 +33,17 @@ export default function HeroCarousel({ tenant }: { tenant?: any }) {
           className={`absolute inset-0 transition-opacity duration-1000 ${i === currentSlide ? 'opacity-100' : 'opacity-0'}`}
         >
           <img src={img} className="w-full h-full object-cover" alt="Hero" />
-          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-background-tertiary"></div>
         </div>
       ))}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-        <p className="text-white uppercase tracking-[0.3em] text-sm md:text-md mb-4 font-light">
+        <p className="text-text-primary uppercase tracking-[0.3em] text-sm md:text-md mb-4 font-light">
           {subtitle}
         </p>
-        <h1 className="text-5xl md:text-7xl font-serif text-white mb-8 leading-tight max-w-4xl">
+        <h1 className="text-5xl md:text-7xl font-serif text-text-primary mb-8 leading-tight max-w-4xl">
           {title}
         </h1>
-        <a href="/collections" className="bg-white text-black px-8 py-4 uppercase tracking-widest text-xs font-bold hover:bg-[#D4AF37] hover:text-white transition-colors duration-300">
+        <a href="/collections" className="bg-white text-black px-8 py-4 uppercase tracking-widest text-xs font-bold hover:bg-[#D4AF37] hover:text-text-primary transition-colors duration-300">
           Explore Collection
         </a>
       </div>

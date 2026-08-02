@@ -44,12 +44,12 @@ export default function PricingPage() {
           </button>
         </div>
 
-        <div className="rounded-2xl border border-white/5 bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative overflow-hidden">
+        <div className="rounded-2xl border border-border-theme bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400/20 via-transparent to-transparent"></div>
           
-          <div className="overflow-x-auto rounded-xl border border-white/10 bg-black/20">
+          <div className="overflow-x-auto rounded-xl border border-border-theme bg-background-tertiary">
             <table className="w-full text-left text-sm">
-              <thead className="border-b border-white/10 bg-white/5 text-xs font-semibold tracking-wider text-text-secondary uppercase">
+              <thead className="border-b border-border-theme bg-text-primary/5 text-xs font-semibold tracking-wider text-text-secondary uppercase">
                 <tr>
                   <th className="px-6 py-4">SKU</th>
                   <th className="px-6 py-4">Product Name</th>
@@ -59,7 +59,7 @@ export default function PricingPage() {
                   <th className="px-6 py-4 text-right">Est. Making (₹)</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-border-theme">
                 {products.length === 0 ? (
                   <tr>
                     <td colSpan={6} className="px-6 py-12 text-center text-text-secondary">
@@ -68,11 +68,11 @@ export default function PricingPage() {
                   </tr>
                 ) : (
                   products.map((p: any) => (
-                    <tr key={p.id} className="transition-colors hover:bg-white/5 group">
-                      <td className="px-6 py-4 font-mono font-medium text-white/60">{p.sku}</td>
-                      <td className="px-6 py-4 font-bold text-white">{p.name}</td>
+                    <tr key={p.id} className="transition-colors hover:bg-text-primary/5 group">
+                      <td className="px-6 py-4 font-mono font-medium text-text-primary/60">{p.sku}</td>
+                      <td className="px-6 py-4 font-bold text-text-primary">{p.name}</td>
                       <td className="px-6 py-4 text-text-secondary">{p.metalType}</td>
-                      <td className="px-6 py-4 text-right font-medium text-white">{p.grossWeight || 0}</td>
+                      <td className="px-6 py-4 text-right font-medium text-text-primary">{p.grossWeight || 0}</td>
                       <td className="px-6 py-4 text-right font-medium text-emerald-400">{p.netWeight || p.grossWeight || 0}</td>
                       <td className="px-6 py-4 text-right font-medium text-accent-gold">
                         ₹{((p.netWeight || p.grossWeight || 0) * 500).toLocaleString('en-IN')}

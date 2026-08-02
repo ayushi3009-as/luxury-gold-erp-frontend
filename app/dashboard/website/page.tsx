@@ -103,11 +103,11 @@ export default function WebsiteSettingsPage() {
 
         {/* Right Column: Tips & Preview */}
         <div className="space-y-6">
-          <div className="bg-gradient-to-br from-[#111] to-[#222] border border-accent-gold/30 p-6 rounded-2xl text-white shadow-lg relative overflow-hidden">
+          <div className="bg-gradient-to-br from-[#111] to-[#222] border border-accent-gold/30 p-6 rounded-2xl text-text-primary shadow-lg relative overflow-hidden">
             <div className="absolute top-0 right-0 p-4 opacity-10"><Globe size={100} /></div>
             <h3 className="text-lg font-bold text-accent-gold mb-3 relative z-10">Live on the Web!</h3>
-            <p className="text-sm text-white/70 mb-6 relative z-10">Your storefront is currently active on your designated subdomain. Changes made here will reflect instantly to your customers.</p>
-            <a href="#" className="inline-block text-center w-full bg-white/10 hover:bg-accent-gold text-white hover:text-black font-semibold px-4 py-2.5 rounded-lg transition-colors border border-white/20 relative z-10">
+            <p className="text-sm text-text-primary/70 mb-6 relative z-10">Your storefront is currently active on your designated subdomain. Changes made here will reflect instantly to your customers.</p>
+            <a href="#" className="inline-block text-center w-full bg-text-primary/10 hover:bg-accent-gold text-text-primary hover:text-black font-semibold px-4 py-2.5 rounded-lg transition-colors border border-border-theme relative z-10">
               View Live Storefront
             </a>
           </div>
@@ -120,7 +120,7 @@ export default function WebsiteSettingsPage() {
             <div className="p-4 bg-background-tertiary rounded-xl border border-border-theme flex items-center justify-between">
               <span className="text-sm font-medium text-text-primary">Show on Website</span>
               <div className="w-10 h-6 bg-accent-gold rounded-full relative">
-                <div className="absolute right-1 top-1 w-4 h-4 bg-black rounded-full"></div>
+                <div className="absolute right-1 top-1 w-4 h-4 bg-background-primary rounded-full"></div>
               </div>
             </div>
           </div>

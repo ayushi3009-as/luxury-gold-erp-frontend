@@ -42,7 +42,7 @@ export default function RepairDelivery() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {readyOrders.length === 0 ? (
-            <div className="col-span-full p-12 text-center text-text-secondary bg-[#111111]/60 rounded-2xl border border-white/5">
+            <div className="col-span-full p-12 text-center text-text-secondary bg-[#111111]/60 rounded-2xl border border-border-theme">
               No completed items ready for delivery right now.
             </div>
           ) : (
@@ -53,26 +53,26 @@ export default function RepairDelivery() {
                     <span className="font-mono text-sm font-bold text-accent-gold bg-accent-gold/10 px-2 py-0.5 rounded">{order.repairNumber}</span>
                     <span className="text-xs font-bold bg-green-500/20 text-green-400 px-2 py-1 rounded">READY</span>
                   </div>
-                  <h3 className="font-bold text-white text-lg mb-1">{order.itemName}</h3>
-                  <p className="text-sm text-text-secondary mb-4">Customer: <span className="text-white">{order.customerName}</span></p>
+                  <h3 className="font-bold text-text-primary text-lg mb-1">{order.itemName}</h3>
+                  <p className="text-sm text-text-secondary mb-4">Customer: <span className="text-text-primary">{order.customerName}</span></p>
                   
-                  <div className="space-y-2 mb-6 bg-black/40 p-4 rounded-xl border border-white/5">
+                  <div className="space-y-2 mb-6 bg-background-tertiary p-4 rounded-xl border border-border-theme">
                     <div className="flex justify-between text-sm">
                       <span className="text-text-secondary">Estimated Cost:</span>
-                      <span className="text-white font-medium">₹{order.estimatedCost}</span>
+                      <span className="text-text-primary font-medium">₹{order.estimatedCost}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-text-secondary">Advance Paid:</span>
                       <span className="text-green-400 font-medium">- ₹{order.advancePaid}</span>
                     </div>
-                    <div className="flex justify-between text-base font-bold pt-2 border-t border-white/10 mt-2">
-                      <span className="text-white">Balance Due:</span>
+                    <div className="flex justify-between text-base font-bold pt-2 border-t border-border-theme mt-2">
+                      <span className="text-text-primary">Balance Due:</span>
                       <span className="text-purple-400">₹{(order.estimatedCost || 0) - (order.advancePaid || 0)}</span>
                     </div>
                   </div>
                 </div>
                 
-                <button className="w-full py-3 rounded-xl bg-purple-500 hover:bg-purple-400 text-white font-bold transition-all shadow-[0_0_15px_rgba(168,85,247,0.4)] flex items-center justify-center gap-2">
+                <button className="w-full py-3 rounded-xl bg-purple-500 hover:bg-purple-400 text-text-primary font-bold transition-all shadow-[0_0_15px_rgba(168,85,247,0.4)] flex items-center justify-center gap-2">
                   <PackageCheck size={18} />
                   Mark as Delivered
                 </button>

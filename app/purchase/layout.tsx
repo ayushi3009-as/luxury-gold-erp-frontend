@@ -7,7 +7,7 @@ export default function PurchaseLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex h-screen flex-col overflow-hidden bg-background-primary text-white">
+    <div className="flex h-screen flex-col overflow-hidden bg-background-primary text-text-primary">
       {/* Top Navigation */}
       <PurchaseNav />
 

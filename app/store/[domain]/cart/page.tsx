@@ -12,7 +12,7 @@ export default function CartPage() {
       <div className="pt-32 pb-24 px-6 max-w-5xl mx-auto min-h-[60vh] flex flex-col items-center justify-center text-center">
         <h1 className="text-4xl font-serif text-[#111] mb-6">Your Bag is Empty</h1>
         <p className="text-gray-500 mb-8">Discover our latest collections and find something exceptional.</p>
-        <Link href="/collections" className="bg-[#111] text-white px-8 py-4 uppercase tracking-widest text-xs hover:bg-black transition-colors">
+        <Link href="/collections" className="bg-[#111] text-text-primary px-8 py-4 uppercase tracking-widest text-xs hover:bg-background-primary transition-colors">
           Explore Collections
         </Link>
       </div>
@@ -85,7 +85,7 @@ export default function CartPage() {
               <span>₹{subtotal.toLocaleString('en-IN')}</span>
             </div>
 
-            <Link href="/checkout" className="w-full bg-[#111] text-white py-4 uppercase tracking-widest text-sm font-bold hover:bg-black transition-colors mb-4 flex items-center justify-center gap-2">
+            <Link href="/checkout" className="w-full bg-[#111] text-text-primary py-4 uppercase tracking-widest text-sm font-bold hover:bg-background-primary transition-colors mb-4 flex items-center justify-center gap-2">
               Proceed to Checkout <ArrowRight size={16} />
             </Link>
             <p className="text-center text-gray-400 text-xs mt-4">Secure encrypted checkout.</p>

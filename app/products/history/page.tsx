@@ -38,7 +38,7 @@ export default function HistoryPage() {
           <p className="mt-1 text-sm text-text-secondary">Audit log of all recently added products in the system.</p>
         </div>
 
-        <div className="rounded-2xl border border-white/5 bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative overflow-hidden">
+        <div className="rounded-2xl border border-border-theme bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400/20 via-transparent to-transparent"></div>
           
           <div className="space-y-4">
@@ -46,16 +46,16 @@ export default function HistoryPage() {
               <p className="text-text-secondary text-center py-8">No history available.</p>
             ) : (
               products.map((p: any, index: number) => (
-                <div key={p.id} className="flex items-start gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 transition-colors">
+                <div key={p.id} className="flex items-start gap-4 p-4 rounded-xl border border-border-theme bg-text-primary/5 hover:bg-text-primary/10 transition-colors">
                   <div className="p-3 rounded-lg bg-orange-500/10 text-orange-400">
                     <Calendar size={20} />
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm text-white">
+                    <p className="text-sm text-text-primary">
                       <span className="font-bold text-accent-gold">New Product Created:</span> {p.name}
                     </p>
                     <p className="text-xs text-text-secondary mt-1">
-                      SKU: <span className="font-mono text-white/70">{p.sku}</span> | Category: {p.category} | Metal: {p.metalType} | Weight: {p.grossWeight}g
+                      SKU: <span className="font-mono text-text-primary/70">{p.sku}</span> | Category: {p.category} | Metal: {p.metalType} | Weight: {p.grossWeight}g
                     </p>
                   </div>
                   <div className="text-right">

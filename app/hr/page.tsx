@@ -180,11 +180,11 @@ export default function HRDashboard() {
       </div>
 
       {showAddModal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-background-primary backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-background-secondary border border-border-theme rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 shadow-2xl">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold text-accent-gold">Add New Employee</h2>
-              <button onClick={() => setShowAddModal(false)} className="text-text-secondary hover:text-white transition-colors">
+              <button onClick={() => setShowAddModal(false)} className="text-text-secondary hover:text-text-primary transition-colors">
                 <X size={24} />
               </button>
             </div>

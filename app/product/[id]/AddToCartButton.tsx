@@ -45,7 +45,7 @@ export default function AddToCartButton({ product }: { product: any }) {
       onClick={handleAddToCart}
       className={`w-full md:w-auto px-12 py-4 font-bold text-lg rounded-md uppercase tracking-wider flex items-center justify-center gap-3 transition-all duration-300 ${
         added 
-        ? "bg-green-500 text-white border-green-500" 
+        ? "bg-green-500 text-text-primary border-green-500" 
         : "bg-accent-gold text-[#0b0d0c] hover:bg-[#fff4d0]"
       }`}
     >

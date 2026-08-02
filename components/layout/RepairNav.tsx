@@ -84,7 +84,7 @@ export default function RepairNav() {
   };
 
   return (
-    <nav className="relative z-[100] flex items-center justify-between border-b border-white/5 bg-[#111111]/80 backdrop-blur-xl px-6 py-4 w-full">
+    <nav className="relative z-[100] flex items-center justify-between border-b border-border-theme bg-[#111111]/80 backdrop-blur-xl px-6 py-4 w-full">
       <div className="flex items-center gap-6">
         <span className="text-sm font-bold tracking-widest uppercase text-accent-gold hidden md:block">
           Repair Modules
@@ -100,7 +100,7 @@ export default function RepairNav() {
                 className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-300 ${
                   active
                     ? "bg-accent-gold text-black font-bold shadow-[0_0_15px_rgba(212,175,55,0.3)]"
-                    : "text-text-secondary hover:bg-white/5 hover:text-white"
+                    : "text-text-secondary hover:bg-text-primary/5 hover:text-text-primary"
                 }`}
               >
                 <Icon size={18} />
@@ -114,8 +114,8 @@ export default function RepairNav() {
               onClick={() => setIsMoreOpen(!isMoreOpen)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-300 ${
                 isMoreOpen || moreItems.some((i) => isActive(i.href))
-                  ? "bg-white/10 text-white font-bold"
-                  : "text-text-secondary hover:bg-white/5 hover:text-white"
+                  ? "bg-text-primary/10 text-text-primary font-bold"
+                  : "text-text-secondary hover:bg-text-primary/5 hover:text-text-primary"
               }`}
             >
               <span className="text-sm font-semibold">More</span>
@@ -123,7 +123,7 @@ export default function RepairNav() {
             </button>
 
             {isMoreOpen && (
-              <div className="absolute top-full left-0 mt-2 w-56 rounded-xl border border-white/10 bg-[#151515] shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2">
+              <div className="absolute top-full left-0 mt-2 w-56 rounded-xl border border-border-theme bg-[#151515] shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2">
                 <div className="p-2 flex flex-col gap-1">
                   {moreItems.map((item) => {
                     const Icon = item.icon;
@@ -136,7 +136,7 @@ export default function RepairNav() {
                         className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
                           active
                             ? "bg-accent-gold/20 text-accent-gold"
-                            : "text-text-secondary hover:bg-white/5 hover:text-white"
+                            : "text-text-secondary hover:bg-text-primary/5 hover:text-text-primary"
                         }`}
                       >
                         <Icon size={16} />
