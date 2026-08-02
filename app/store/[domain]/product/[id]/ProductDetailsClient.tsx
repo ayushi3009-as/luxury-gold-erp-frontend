@@ -1,5 +1,7 @@
 'use client';
 import { useState } from 'react';
+import { useCartStore } from '@/lib/store/cartStore';
+import { toast } from 'sonner';
 import { ShieldCheck, Truck, RotateCcw, ChevronDown, ChevronUp, Info } from 'lucide-react';
 import { GrainOverlay } from '@/components/storefront/GrainOverlay';
 import { MagneticButton } from '@/components/storefront/MagneticButton';
@@ -17,6 +19,21 @@ export default function ProductDetailsClient({ product }: { product: any }) {
   const [activeImage, setActiveImage] = useState(product?.imageUrl || fallback);
   const [showPriceBreakdown, setShowPriceBreakdown] = useState(false);
   const [showCare, setShowCare] = useState(false);
+  const addItem = useCartStore(state => state.addItem);
+
+  const handleAddToCart = () => {
+    addItem({
+      id: product.id,
+      productId: product.id,
+      name: product.name,
+      price: product.sellingPrice || product.price || 245000,
+      imageUrl: product.imageUrl || fallback,
+      purity: product.purity || '22K',
+      weight: product.weight || '45g'
+    });
+    alert('Added to Cart!');
+  };
+
 
   const thumbnails = [
     product?.imageUrl || fallback,
@@ -123,7 +140,7 @@ export default function ProductDetailsClient({ product }: { product: any }) {
 
             {/* CTA Desktop */}
             <div className="hidden md:block mb-10">
-              <MagneticButton className="w-full py-5 text-sm">
+              <MagneticButton onClick={handleAddToCart} className="w-full py-5 text-sm">
                 Add to Shopping Bag
               </MagneticButton>
             </div>
@@ -214,7 +231,7 @@ export default function ProductDetailsClient({ product }: { product: any }) {
           <p className="text-[9px] uppercase tracking-widest text-[#8a7a5a] mb-1">Total</p>
           <p className="font-serif text-lg text-white/90">₹{price.toLocaleString('en-IN')}</p>
         </div>
-        <MagneticButton className="px-8 py-3 text-xs">Add to Bag</MagneticButton>
+        <MagneticButton onClick={handleAddToCart} className="px-8 py-3 text-xs">Add to Bag</MagneticButton>
       </div>
     </div>
   );

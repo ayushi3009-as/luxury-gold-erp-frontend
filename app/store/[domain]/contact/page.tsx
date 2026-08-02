@@ -20,10 +20,10 @@ export default function ContactPage() {
           <div>
             <h3 className="font-serif text-2xl mb-4">Direct Inquiries</h3>
             <p className="text-gray-600 leading-relaxed font-light mb-2">
-              <strong>Email:</strong> concierge@tivra.marketing
+              <strong>Email:</strong> microtechniqueit@gmail.com
             </p>
             <p className="text-gray-600 leading-relaxed font-light">
-              <strong>Phone:</strong> +91 98765 43210
+              <strong>Phone:</strong> +91 6355997080
             </p>
           </div>
           

@@ -6112,12 +6112,12 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               Follow Us
             </p>
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-light tracking-[0.1em] sm:tracking-[0.15em] text-gray-900">
-              @microtechnique
+              @microtechniqueit
             </h2>
           </div>
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-1.5 sm:gap-2">
             <a
-              href="https://www.instagram.com/microtechnique?igsh=MXhhMDBmaTdnNWszeQ=="
+              href="https://www.instagram.com/microtechniqueit?igsh=MXhhMDBmaTdnNWszeQ=="
               target="_blank"
               rel="noopener noreferrer"
               className="aspect-square overflow-hidden group"
@@ -6130,7 +6130,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               />
             </a>
             <a
-              href="https://www.instagram.com/microtechnique?igsh=MXhhMDBmaTdnNWszeQ=="
+              href="https://www.instagram.com/microtechniqueit?igsh=MXhhMDBmaTdnNWszeQ=="
               target="_blank"
               rel="noopener noreferrer"
               className="aspect-square overflow-hidden group"
@@ -6143,7 +6143,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               />
             </a>
             <a
-              href="https://www.instagram.com/microtechnique?igsh=MXhhMDBmaTdnNWszeQ=="
+              href="https://www.instagram.com/microtechniqueit?igsh=MXhhMDBmaTdnNWszeQ=="
               target="_blank"
               rel="noopener noreferrer"
               className="aspect-square overflow-hidden group"
@@ -6156,7 +6156,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               />
             </a>
             <a
-              href="https://www.instagram.com/microtechnique?igsh=MXhhMDBmaTdnNWszeQ=="
+              href="https://www.instagram.com/microtechniqueit?igsh=MXhhMDBmaTdnNWszeQ=="
               target="_blank"
               rel="noopener noreferrer"
               className="aspect-square overflow-hidden group"
@@ -6169,7 +6169,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               />
             </a>
             <a
-              href="https://www.instagram.com/microtechnique?igsh=MXhhMDBmaTdnNWszeQ=="
+              href="https://www.instagram.com/microtechniqueit?igsh=MXhhMDBmaTdnNWszeQ=="
               target="_blank"
               rel="noopener noreferrer"
               className="aspect-square overflow-hidden group"
@@ -6182,7 +6182,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
               />
             </a>
             <a
-              href="https://www.instagram.com/microtechnique?igsh=MXhhMDBmaTdnNWszeQ=="
+              href="https://www.instagram.com/microtechniqueit?igsh=MXhhMDBmaTdnNWszeQ=="
               target="_blank"
               rel="noopener noreferrer"
               className="aspect-square overflow-hidden group"
@@ -6197,7 +6197,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
           </div>
           <div className="text-center mt-6 sm:mt-8">
             <a
-              href="https://www.instagram.com/microtechnique?igsh=MXhhMDBmaTdnNWszeQ=="
+              href="https://www.instagram.com/microtechniqueit?igsh=MXhhMDBmaTdnNWszeQ=="
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-gray-900 text-white px-6 sm:px-8 py-2.5 sm:py-3 text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase font-medium hover:bg-gray-800 transition-colors"
