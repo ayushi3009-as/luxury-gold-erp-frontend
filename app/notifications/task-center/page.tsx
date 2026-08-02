@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 
 import { useEffect, useState } from "react";
-import { format, isToday, isTomorrow } from "date-fns";
 
 type Task = {
   id: string;
@@ -85,9 +84,20 @@ export default function TaskCenterPage() {
   const formatDate = (dateStr: string) => {
     if (!dateStr) return "No due date";
     const d = new Date(dateStr);
-    if (isToday(d)) return "Today, " + format(d, "hh:mm a");
-    if (isTomorrow(d)) return "Tomorrow, " + format(d, "hh:mm a");
-    return format(d, "MMM dd, hh:mm a");
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const isSameDay = (d1: Date, d2: Date) => 
+      d1.getDate() === d2.getDate() &&
+      d1.getMonth() === d2.getMonth() &&
+      d1.getFullYear() === d2.getFullYear();
+
+    const timeStr = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    if (isSameDay(d, today)) return "Today, " + timeStr;
+    if (isSameDay(d, tomorrow)) return "Tomorrow, " + timeStr;
+    return d.toLocaleDateString([], { month: 'short', day: 'numeric' }) + ", " + timeStr;
   };
 
   return (

@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
 type LowStockProduct = {
   name: string;
