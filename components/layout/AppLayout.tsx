@@ -45,9 +45,9 @@ export default function AppLayout({ children, userRole }: { children: React.Reac
   return (
     <div className="flex min-h-screen bg-background-primary text-text-primary transition-colors duration-300">
       <MainSidebar userRole={userRole} />
-      <div className="flex-1 lg:ml-[230px] flex flex-col">
+      <div className="flex-1 lg:ml-[230px] flex flex-col min-w-0">
         <TopBar title={pathname === "/dashboard" ? "Dashboard" : ""} />
-        <main className="flex-1 overflow-y-auto">{children}</main>
+        <main className="flex-1 overflow-y-auto overflow-x-hidden">{children}</main>
       </div>
     </div>
   );
