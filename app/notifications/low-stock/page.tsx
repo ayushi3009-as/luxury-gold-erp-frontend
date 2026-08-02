@@ -1,6 +1,7 @@
 "use client";
 
 
+import Link from "next/link";
 import {
   Package,
   AlertTriangle,
@@ -81,152 +82,75 @@ export default function LowStockPage() {
 
         {/* SUMMARY CARDS */}
         <div className="mt-8 grid grid-cols-4 gap-5">
-
-          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
-
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
             <div className="flex items-center justify-between">
-
-              <p className="text-xs text-text-secondary">
-                Low Stock Items
-              </p>
-
-              <Package
-                size={19}
-                className="text-accent-gold"
-              />
-
+              <p className="text-xs text-text-secondary">Low Stock Items</p>
+              <Package size={19} className="text-accent-gold" />
             </div>
-
-            <h2 className="mt-3 text-3xl font-bold">
-              24
-            </h2>
-
-            <p className="mt-2 text-xs text-accent-gold">
-              Requires attention
-            </p>
-
+            <h2 className="mt-3 text-3xl font-bold">24</h2>
+            <p className="mt-2 text-xs text-accent-gold">Requires attention</p>
           </div>
 
-          <div className="rounded-xl border border-red-900/40 bg-[#11130f] p-5">
-
+          <div className="rounded-xl border border-red-900/40 bg-background-secondary p-5">
             <div className="flex items-center justify-between">
-
-              <p className="text-xs text-text-secondary">
-                Critical Stock
-              </p>
-
-              <AlertTriangle
-                size={19}
-                className="text-red-400"
-              />
-
+              <p className="text-xs text-text-secondary">Critical Stock</p>
+              <AlertTriangle size={19} className="text-red-400" />
             </div>
-
-            <h2 className="mt-3 text-3xl font-bold text-red-400">
-              8
-            </h2>
-
-            <p className="mt-2 text-xs text-red-400">
-              Immediate restocking required
-            </p>
-
+            <h2 className="mt-3 text-3xl font-bold text-red-400">8</h2>
+            <p className="mt-2 text-xs text-red-400">Immediate restocking required</p>
           </div>
 
-          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
-
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
             <div className="flex items-center justify-between">
-
-              <p className="text-xs text-text-secondary">
-                Stock Value at Risk
-              </p>
-
-              <TrendingDown
-                size={19}
-                className="text-accent-gold"
-              />
-
+              <p className="text-xs text-text-secondary">Stock Value at Risk</p>
+              <TrendingDown size={19} className="text-accent-gold" />
             </div>
-
-            <h2 className="mt-3 text-3xl font-bold">
-              $84.6K
-            </h2>
-
-            <p className="mt-2 text-xs text-text-secondary">
-              Estimated inventory value
-            </p>
-
+            <h2 className="mt-3 text-3xl font-bold">$84.6K</h2>
+            <p className="mt-2 text-xs text-text-secondary">Estimated inventory value</p>
           </div>
 
-          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
-
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
             <div className="flex items-center justify-between">
-
-              <p className="text-xs text-text-secondary">
-                Warehouses Affected
-              </p>
-
-              <Warehouse
-                size={19}
-                className="text-accent-gold"
-              />
-
+              <p className="text-xs text-text-secondary">Warehouses Affected</p>
+              <Warehouse size={19} className="text-accent-gold" />
             </div>
-
-            <h2 className="mt-3 text-3xl font-bold">
-              6
-            </h2>
-
-            <p className="mt-2 text-xs text-text-secondary">
-              Across all locations
-            </p>
-
+            <h2 className="mt-3 text-3xl font-bold">6</h2>
+            <p className="mt-2 text-xs text-text-secondary">Across all locations</p>
           </div>
-
         </div>
 
         {/* LOW STOCK TABLE */}
-        <div className="mt-6 rounded-xl border border-border-theme bg-[#11130f] p-6">
-
+        <div className="mt-6 rounded-xl border border-border-theme bg-background-secondary p-6">
           <div className="flex items-center justify-between">
-
             <div>
-
               <h2 className="text-lg font-semibold text-accent-gold">
                 Products Requiring Restock
               </h2>
-
               <p className="mt-1 text-xs text-text-secondary">
                 Products currently below the defined minimum stock level
               </p>
-
             </div>
-
-            <button className="rounded-lg border border-border-theme px-4 py-2 text-xs text-text-secondary transition hover:border-[#e4b52d] hover:text-accent-gold">
+            <Link href="/purchase/purchase-order" className="rounded-lg border border-border-theme px-4 py-2 text-xs text-text-secondary transition hover:border-[#e4b52d] hover:text-accent-gold">
               Create Purchase Order
-            </button>
-
+            </Link>
           </div>
-
-          <div className="mt-6 overflow-hidden rounded-lg border border-[#2f2a1b]">
+          <div className="mt-6 overflow-hidden rounded-lg border border-border-theme">
 
             {/* TABLE HEADER */}
-            <div className="grid grid-cols-6 border-b border-[#2f2a1b] bg-[#151711] px-5 py-4 text-xs text-text-secondary">
-
+            <div className="grid grid-cols-6 border-b border-border-theme bg-background-tertiary px-5 py-4 text-xs text-text-secondary">
               <span>Product</span>
               <span>SKU</span>
               <span>Category</span>
               <span>Current Stock</span>
               <span>Minimum Stock</span>
               <span>Status</span>
-
             </div>
 
             {/* TABLE ROWS */}
             {lowStockProducts.map((product) => (
-
               <div
                 key={product.sku}
-                className="grid grid-cols-6 items-center border-b border-[#242117] px-5 py-5 last:border-b-0"
+                className="grid grid-cols-6 items-center border-b border-border-theme px-5 py-5 last:border-b-0"
               >
 
                 <span className="text-sm font-medium">
@@ -275,37 +199,25 @@ export default function LowStockPage() {
         </div>
 
         {/* AUTOMATIC ALERT INFO */}
-        <div className="mt-6 rounded-xl border border-[#6c5420] bg-[#18150c] p-6">
-
+        <div className="mt-6 rounded-xl border border-border-theme bg-background-secondary p-6">
           <div className="flex items-start gap-4">
-
-            <div className="rounded-xl bg-[#b98c20] p-3">
-              <AlertTriangle
-                size={22}
-                className="text-black"
-              />
+            <div className="rounded-xl bg-accent-gold/20 p-3">
+              <AlertTriangle size={22} className="text-accent-gold" />
             </div>
-
             <div>
-
               <h2 className="font-semibold text-accent-gold">
                 Automatic Low Stock Monitoring
               </h2>
-
               <p className="mt-2 text-sm leading-6 text-text-secondary">
                 The system automatically monitors inventory levels and creates
                 alerts whenever a product falls below its minimum stock level.
               </p>
-
-              <div className="mt-4 flex items-center gap-2 text-sm text-green-400">
+              <div className="mt-4 flex items-center gap-2 text-sm text-green-500">
                 <Package size={16} />
                 Automatic stock monitoring is enabled.
               </div>
-
             </div>
-
           </div>
-
         </div>
 
       </main>
