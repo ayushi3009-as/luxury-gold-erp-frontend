@@ -1,7 +1,11 @@
 'use client';
 import { useState } from 'react';
+import { useParams } from 'next/navigation';
 
-export default function ContactPage({ params }: { params: { domain: string } }) {
+export default function ContactPage() {
+  const params = useParams();
+  const domain = params?.domain as string;
+
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
@@ -24,7 +28,7 @@ export default function ContactPage({ params }: { params: { domain: string } }) 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          tenantSubdomain: params.domain
+          tenantSubdomain: domain
         })
       });
 
