@@ -16,13 +16,18 @@ export async function GET() {
 
     if (branches.length === 0) {
       // Create some default branches for testing if none exist
-      await prisma.branch.createMany({
-        data: [
-          { branchName: 'Main Warehouse', branchCode: 'WH-01', branchType: 'HEAD_OFFICE', isHeadOffice: true, tenantId: session?.tenantId },
-          { branchName: 'Surat Branch', branchCode: 'BR-01', branchType: 'SUB_BRANCH', isHeadOffice: false, tenantId: session?.tenantId },
-          { branchName: 'Mumbai Branch', branchCode: 'BR-02', branchType: 'SUB_BRANCH', isHeadOffice: false, tenantId: session?.tenantId },
-        ]
-      });
+      const suffix = Math.floor(Math.random() * 10000).toString();
+      try {
+        await prisma.branch.createMany({
+          data: [
+            { branchName: 'Main Warehouse', branchCode: `WH-01-${suffix}`, branchType: 'HEAD_OFFICE', isHeadOffice: true, tenantId: session?.tenantId },
+            { branchName: 'Surat Branch', branchCode: `BR-01-${suffix}`, branchType: 'SUB_BRANCH', isHeadOffice: false, tenantId: session?.tenantId },
+            { branchName: 'Mumbai Branch', branchCode: `BR-02-${suffix}`, branchType: 'SUB_BRANCH', isHeadOffice: false, tenantId: session?.tenantId },
+          ]
+        });
+      } catch (e) {
+        console.error("Failed to create default branches, they might already exist globally:", e);
+      }
       branches = await prisma.branch.findMany({
         where,
         orderBy: { branchName: 'asc' }
