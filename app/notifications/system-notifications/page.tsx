@@ -140,6 +140,17 @@ export default function SystemNotificationsPage() {
               {notifications.map((notification) => {
                 const Icon = getIcon(notification.type);
                 const isSuccess = notification.type === "System Update" || notification.type === "Database";
+                const isInquiry = notification.type === "INQUIRY";
+                let replyEmail = "";
+                let displayMessage = notification.message;
+                
+                if (isInquiry) {
+                  const emailMatch = notification.message.match(/Reply to: (.*)/);
+                  if (emailMatch) {
+                    replyEmail = emailMatch[1].trim();
+                    displayMessage = notification.message.replace(/\n\nReply to: .*/, '');
+                  }
+                }
 
                 return (
                   <div
@@ -154,12 +165,19 @@ export default function SystemNotificationsPage() {
                         <h3 className={`text-sm font-semibold ${!notification.isRead ? 'text-white' : 'text-gray-300'}`}>
                           {notification.title}
                         </h3>
-                        <p className="mt-1 text-xs text-text-secondary">
-                          {notification.message}
+                        <p className="mt-1 text-xs text-text-secondary whitespace-pre-line">
+                          {displayMessage}
                         </p>
                         <p className="mt-2 text-[10px] text-gray-600">
                           {notification.type} • {new Date(notification.createdAt).toLocaleString()}
                         </p>
+                        {isInquiry && replyEmail && (
+                          <div className="mt-3">
+                            <a href={`mailto:${replyEmail}?subject=Re: ${notification.title}`} className="inline-block rounded bg-accent-gold/20 px-3 py-1.5 text-xs text-accent-gold hover:bg-accent-gold hover:text-black transition">
+                              Reply via Email
+                            </a>
+                          </div>
+                        )}
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
