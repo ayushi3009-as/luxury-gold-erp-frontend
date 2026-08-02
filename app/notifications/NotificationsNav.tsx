@@ -7,9 +7,9 @@ import clsx from "clsx";
 
 const menuItems = [
   {
-    name: "Alerts",
-    icon: AlertTriangle,
-    href: "/notifications/alerts",
+    name: "System Alerts & Inquiries",
+    icon: Settings,
+    href: "/notifications/system-notifications",
   },
   {
     name: "Low Stock",
@@ -17,19 +17,9 @@ const menuItems = [
     href: "/notifications/low-stock",
   },
   {
-    name: "Reminders",
-    icon: Clock3,
-    href: "/notifications/reminders",
-  },
-  {
-    name: "Task Center",
+    name: "Tasks & Reminders",
     icon: CheckSquare,
     href: "/notifications/task-center",
-  },
-  {
-    name: "System Notifications",
-    icon: Settings,
-    href: "/notifications/system-notifications",
   },
 ];
 

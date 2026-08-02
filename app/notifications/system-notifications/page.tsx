@@ -69,18 +69,18 @@ export default function SystemNotificationsPage() {
         <div className="flex items-end justify-between">
           <div>
             <p className="text-xs text-text-secondary">
-              Notifications / System Notifications
+              Notifications / System Alerts & Inquiries
             </p>
             <div className="mt-2 flex items-center gap-3">
               <div className="rounded-xl bg-[#211c0d] p-3">
                 <Bell size={25} className="text-accent-gold" />
               </div>
               <h1 className="text-3xl font-bold text-accent-gold">
-                System Notifications
+                System Alerts & Inquiries
               </h1>
             </div>
             <p className="mt-3 text-sm text-text-secondary">
-              View important system updates, security events and system activity.
+              View important system updates, security events, and storefront inquiries.
             </p>
           </div>
           <button 
