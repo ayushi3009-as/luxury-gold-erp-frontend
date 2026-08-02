@@ -94,22 +94,22 @@ export default function SystemNotificationsPage() {
 
         {/* SUMMARY CARDS */}
         <div className="mt-8 grid grid-cols-4 gap-5">
-          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
             <p className="text-xs text-text-secondary">Total Notifications</p>
             <h2 className="mt-3 text-3xl font-bold">{totalNotifications}</h2>
             <p className="mt-2 text-xs text-text-secondary">System activity records</p>
           </div>
-          <div className="rounded-xl border border-green-900/40 bg-[#11130f] p-5">
+          <div className="rounded-xl border border-green-900/40 bg-background-secondary p-5">
             <p className="text-xs text-text-secondary">Successful</p>
             <h2 className="mt-3 text-3xl font-bold text-green-400">{successfulCount}</h2>
             <p className="mt-2 text-xs text-green-400">Successfully completed</p>
           </div>
-          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
             <p className="text-xs text-text-secondary">Unread</p>
             <h2 className="mt-3 text-3xl font-bold text-accent-gold">{unreadCount}</h2>
             <p className="mt-2 text-xs text-text-secondary">New system updates</p>
           </div>
-          <div className="rounded-xl border border-border-theme bg-[#11130f] p-5">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-5">
             <p className="text-xs text-text-secondary">System Status</p>
             <h2 className="mt-3 text-3xl font-bold text-green-400">Healthy</h2>
             <p className="mt-2 text-xs text-green-400">All systems operational</p>
@@ -117,9 +117,9 @@ export default function SystemNotificationsPage() {
         </div>
 
         {/* SYSTEM NOTIFICATION LIST */}
-        <div className="mt-6 rounded-xl border border-border-theme bg-[#11130f] p-6 min-h-[300px] relative">
+        <div className="mt-6 rounded-xl border border-border-theme bg-background-secondary p-6 min-h-[300px] relative">
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-[#211c0d] p-3">
+            <div className="rounded-lg bg-background-tertiary p-3">
               <Settings size={20} className="text-accent-gold" />
             </div>
             <div>
@@ -155,14 +155,14 @@ export default function SystemNotificationsPage() {
                 return (
                   <div
                     key={notification.id}
-                    className={`flex items-center justify-between rounded-xl border ${notification.isRead ? 'border-[#2f2a1b] opacity-75' : 'border-[#6c5420]'} bg-[#151711] p-5 transition hover:border-[#e4b52d]`}
+                    className={`flex items-center justify-between rounded-xl border ${notification.isRead ? 'border-border-theme opacity-75' : 'border-accent-gold'} bg-background-primary p-5 transition hover:border-accent-gold`}
                   >
                     <div className="flex items-center gap-4">
-                      <div className="rounded-lg bg-[#211c0d] p-3">
+                      <div className="rounded-lg bg-background-tertiary p-3">
                         <Icon size={20} className="text-accent-gold" />
                       </div>
                       <div>
-                        <h3 className={`text-sm font-semibold ${!notification.isRead ? 'text-white' : 'text-gray-300'}`}>
+                        <h3 className={`text-sm font-semibold ${!notification.isRead ? 'text-text-primary' : 'text-text-secondary'}`}>
                           {notification.title}
                         </h3>
                         <p className="mt-1 text-xs text-text-secondary whitespace-pre-line">
@@ -202,7 +202,7 @@ export default function SystemNotificationsPage() {
         </div>
 
         {/* SYSTEM STATUS */}
-        <div className="mt-6 rounded-xl border border-green-900/40 bg-[#10150f] p-6">
+        <div className="mt-6 rounded-xl border border-green-900/40 bg-background-secondary p-6">
           <div className="flex items-start gap-4">
             <div className="rounded-xl bg-green-500/10 p-3">
               <CheckCircle2 size={22} className="text-green-400" />
