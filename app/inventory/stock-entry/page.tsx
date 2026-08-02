@@ -244,7 +244,7 @@ export default function StockEntry() {
           </div>
           <div className="rounded-2xl border border-accent-gold/30 bg-gradient-to-br from-accent-gold/10 to-transparent backdrop-blur-xl p-6 shadow-[0_0_30px_rgba(212,175,55,0.1)] flex flex-col justify-center">
             <p className="text-xs font-semibold tracking-wider text-accent-gold">TOTAL STOCK VALUE</p>
-            <p className="mt-2 text-4xl font-bold text-accent-gold">₹ {totalStockValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+            <p className="mt-2 text-4xl font-bold text-accent-gold">₹ {totalStockValue.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
           </div>
         </div>
 
