@@ -37,3 +37,59 @@ export async function GET() {
     return NextResponse.json({ error: 'Failed to fetch sales' }, { status: 500 });
   }
 }
+
+export async function DELETE(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+    
+    if (!id) {
+      return NextResponse.json({ error: 'ID is required' }, { status: 400 });
+    }
+
+    const tenantId = await getTenantId();
+    if (tenantId) {
+      const invoice = await prisma.invoice.findUnique({ where: { id } });
+      if (invoice?.tenantId !== tenantId) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+      }
+    }
+
+    await prisma.invoice.delete({
+      where: { id }
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting sale:', error);
+    return NextResponse.json({ error: 'Failed to delete sale' }, { status: 500 });
+  }
+}
+
+export async function POST(request: Request) {
+  try {
+    const data = await request.json();
+    const tenantId = await getTenantId();
+    
+    const newInvoice = await prisma.invoice.create({
+      data: {
+        invoiceNo: data.invoiceNumber || "INV-" + Date.now(),
+        totalAmount: Number(data.amount) || 0,
+        status: data.paymentStatus || "PAID",
+        tenantId: tenantId,
+        customer: {
+          create: {
+            name: data.customerName || "Walk-in Customer",
+            mobile: "0000000000",
+            tenantId: tenantId
+          }
+        }
+      }
+    });
+
+    return NextResponse.json(newInvoice);
+  } catch (error) {
+    console.error("Error creating sale:", error);
+    return NextResponse.json({ error: "Failed to create sale" }, { status: 500 });
+  }
+}

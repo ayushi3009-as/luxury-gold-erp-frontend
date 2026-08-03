@@ -148,7 +148,25 @@ export default function SalesReportPage() {
                           <Link href={`/reports/sales/edit/${item.id}`} className="text-accent-gold hover:text-yellow-600 transition">
                             <Pencil size={18} />
                           </Link>
-                          <button className="text-red-500 hover:text-red-600 transition">
+                          <button 
+                            onClick={async () => {
+                              if (confirm("Are you sure you want to delete this sale?")) {
+                                try {
+                                  const res = await fetch(`/api/reports/sales?id=${item.id}`, { method: 'DELETE' });
+                                  if (res.ok) {
+                                    const newData = sales.filter(s => s.id !== item.id);
+                                    setSales(newData);
+                                  } else {
+                                    alert("Failed to delete sale.");
+                                  }
+                                } catch (e) {
+                                  console.error(e);
+                                  alert("Error deleting sale.");
+                                }
+                              }
+                            }}
+                            className="text-red-500 hover:text-red-600 transition"
+                          >
                             <Trash2 size={18} />
                           </button>
                         </div>
