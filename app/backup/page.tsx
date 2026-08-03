@@ -12,7 +12,7 @@ export default function BackupRestore() {
   const handleBackup = async () => {
     setIsBackingUp(true);
     try {
-      const response = await fetch("/api/backup/export");
+      const response = await fetch("/api/backup/export", { credentials: "include" });
       if (response.status === 401) {
         console.warn('Unauthorized fetch to backup export');
       }
