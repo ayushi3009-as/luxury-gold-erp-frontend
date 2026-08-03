@@ -1,20 +1,97 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Wrench, Loader2, Calendar, ClipboardList, Clock, CheckCircle, PackageCheck } from "lucide-react";
-import Link from "next/link";
+import { Wrench, Loader2, Calendar, ClipboardList, Clock, CheckCircle, PackageCheck, X } from "lucide-react";
 
 export default function RepairDashboard() {
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isManageModalOpen, setIsManageModalOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState<any>(null);
+  const [editStatus, setEditStatus] = useState("PENDING");
+  const [isSaving, setIsSaving] = useState(false);
 
-  useEffect(() => {
+  // New repair form state
+  const [newRepair, setNewRepair] = useState({
+    customerName: "",
+    customerPhone: "",
+    itemName: "",
+    description: "",
+    estimatedCost: "",
+    advancePaid: "",
+    expectedDate: "",
+  });
+
+  const fetchData = () => {
+    setIsLoading(true);
     fetch('/api/repair')
       .then(res => res.json())
       .then(json => setData(json))
       .catch(err => console.error(err))
       .finally(() => setIsLoading(false));
+  };
+
+  useEffect(() => {
+    fetchData();
   }, []);
+
+  const handleAddSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSaving(true);
+    try {
+      const res = await fetch('/api/repair', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newRepair),
+      });
+      if (res.ok) {
+        setIsAddModalOpen(false);
+        setNewRepair({
+          customerName: "",
+          customerPhone: "",
+          itemName: "",
+          description: "",
+          estimatedCost: "",
+          advancePaid: "",
+          expectedDate: "",
+        });
+        fetchData();
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleManageClick = (order: any) => {
+    setSelectedOrder(order);
+    setEditStatus(order.status);
+    setIsManageModalOpen(true);
+  };
+
+  const handleUpdateStatus = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedOrder) return;
+    setIsSaving(true);
+    
+    try {
+      const res = await fetch(`/api/repair/${selectedOrder.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: editStatus }),
+      });
+      if (res.ok) {
+        setIsManageModalOpen(false);
+        fetchData();
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -40,13 +117,13 @@ export default function RepairDashboard() {
             </h1>
             <p className="mt-2 text-text-secondary">Monitor repair operations, statuses, and customer deliveries.</p>
           </div>
-          <Link 
-            href="/repair/add"
+          <button 
+            onClick={() => setIsAddModalOpen(true)}
             className="flex items-center gap-2 rounded-xl bg-accent-gold px-6 py-3 text-sm font-bold text-black transition-all hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:-translate-y-1"
           >
             <PlusIcon />
             New Repair Entry
-          </Link>
+          </button>
         </div>
 
         {/* METRICS */}
@@ -59,7 +136,7 @@ export default function RepairDashboard() {
         </div>
 
         {/* TABLE */}
-        <div className="rounded-2xl border border-border-theme bg-[#111111]/60 backdrop-blur-xl p-8 shadow-2xl relative overflow-hidden">
+        <div className="rounded-2xl border border-border-theme bg-background-secondary/60 backdrop-blur-xl p-8 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/40 via-transparent to-transparent"></div>
           
           <h2 className="text-lg font-bold text-accent-gold mb-6 tracking-wider uppercase flex items-center gap-2">
@@ -75,12 +152,13 @@ export default function RepairDashboard() {
                   <th className="px-6 py-4">Item</th>
                   <th className="px-6 py-4">Date</th>
                   <th className="px-6 py-4">Status</th>
+                  <th className="px-6 py-4 text-right">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border-theme">
                 {orders.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="px-6 py-12 text-center text-text-secondary">
+                    <td colSpan={6} className="px-6 py-12 text-center text-text-secondary">
                       No repairs found. Click "New Repair Entry" to start.
                     </td>
                   </tr>
@@ -96,6 +174,14 @@ export default function RepairDashboard() {
                       <td className="px-6 py-4">
                         <StatusBadge status={order.status} />
                       </td>
+                      <td className="px-6 py-4 text-right">
+                        <button
+                          onClick={() => handleManageClick(order)}
+                          className="px-3 py-1.5 text-xs font-bold rounded-lg border border-border-theme text-text-secondary hover:text-accent-gold hover:border-accent-gold transition-colors"
+                        >
+                          Manage
+                        </button>
+                      </td>
                     </tr>
                   ))
                 )}
@@ -104,6 +190,208 @@ export default function RepairDashboard() {
           </div>
         </div>
       </div>
+
+      {/* NEW REPAIR MODAL */}
+      {isAddModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-background-secondary border border-border-theme rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between p-6 border-b border-border-theme">
+              <h2 className="text-xl font-bold text-accent-gold flex items-center gap-2">
+                <Wrench size={20} />
+                New Repair Entry
+              </h2>
+              <button 
+                onClick={() => setIsAddModalOpen(false)}
+                className="text-text-secondary hover:text-red-400 transition-colors"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            <form onSubmit={handleAddSubmit} className="p-6">
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Customer Name</label>
+                    <input 
+                      type="text" 
+                      required
+                      value={newRepair.customerName}
+                      onChange={e => setNewRepair({...newRepair, customerName: e.target.value})}
+                      className="w-full bg-background-tertiary border border-border-theme rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Phone</label>
+                    <input 
+                      type="text" 
+                      required
+                      value={newRepair.customerPhone}
+                      onChange={e => setNewRepair({...newRepair, customerPhone: e.target.value})}
+                      className="w-full bg-background-tertiary border border-border-theme rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
+                      placeholder="1234567890"
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Item Name</label>
+                  <input 
+                    type="text" 
+                    required
+                    value={newRepair.itemName}
+                    onChange={e => setNewRepair({...newRepair, itemName: e.target.value})}
+                    className="w-full bg-background-tertiary border border-border-theme rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
+                    placeholder="E.g. Gold Necklace 22k"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Description</label>
+                  <textarea 
+                    value={newRepair.description}
+                    onChange={e => setNewRepair({...newRepair, description: e.target.value})}
+                    className="w-full bg-background-tertiary border border-border-theme rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
+                    placeholder="Describe the repair needed..."
+                    rows={3}
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Estimated Cost</label>
+                    <input 
+                      type="number" 
+                      value={newRepair.estimatedCost}
+                      onChange={e => setNewRepair({...newRepair, estimatedCost: e.target.value})}
+                      className="w-full bg-background-tertiary border border-border-theme rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
+                      placeholder="0.00"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Advance Paid</label>
+                    <input 
+                      type="number" 
+                      value={newRepair.advancePaid}
+                      onChange={e => setNewRepair({...newRepair, advancePaid: e.target.value})}
+                      className="w-full bg-background-tertiary border border-border-theme rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
+                      placeholder="0.00"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Expected Date</label>
+                  <input 
+                    type="date" 
+                    value={newRepair.expectedDate}
+                    onChange={e => setNewRepair({...newRepair, expectedDate: e.target.value})}
+                    className="w-full bg-background-tertiary border border-border-theme rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
+                  />
+                </div>
+              </div>
+              
+              <div className="mt-8 flex justify-end gap-3">
+                <button 
+                  type="button"
+                  onClick={() => setIsAddModalOpen(false)}
+                  className="px-6 py-2.5 rounded-xl font-bold text-text-secondary hover:bg-text-primary/5 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit"
+                  disabled={isSaving}
+                  className="px-6 py-2.5 rounded-xl font-bold bg-accent-gold text-black hover:bg-yellow-400 transition-colors disabled:opacity-50 flex items-center gap-2"
+                >
+                  {isSaving && <Loader2 size={16} className="animate-spin" />}
+                  Create Entry
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* MANAGE REPAIR MODAL */}
+      {isManageModalOpen && selectedOrder && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-background-secondary border border-border-theme rounded-2xl w-full max-w-md overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between p-6 border-b border-border-theme">
+              <h2 className="text-xl font-bold text-accent-gold flex items-center gap-2">
+                <Wrench size={20} />
+                Manage Repair {selectedOrder.repairNumber}
+              </h2>
+              <button 
+                onClick={() => setIsManageModalOpen(false)}
+                className="text-text-secondary hover:text-red-400 transition-colors"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            <form onSubmit={handleUpdateStatus} className="p-6">
+              <div className="space-y-6">
+                
+                <div className="bg-text-primary/5 rounded-xl p-4 border border-border-theme space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-sm text-text-secondary">Customer</span>
+                    <span className="text-sm font-bold text-text-primary">{selectedOrder.customerName}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-text-secondary">Item</span>
+                    <span className="text-sm font-bold text-text-primary">{selectedOrder.itemName}</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-text-secondary uppercase tracking-wider mb-3">Update Status</label>
+                  <div className="space-y-2">
+                    {['PENDING', 'IN_PROGRESS', 'COMPLETED', 'DELIVERED'].map((status) => (
+                      <label 
+                        key={status}
+                        className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer border transition-colors ${
+                          editStatus === status 
+                            ? 'border-accent-gold bg-accent-gold/5' 
+                            : 'border-border-theme bg-background-tertiary hover:border-text-primary/20'
+                        }`}
+                      >
+                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                          editStatus === status ? 'border-accent-gold' : 'border-text-secondary/50'
+                        }`}>
+                          {editStatus === status && <div className="w-2 h-2 rounded-full bg-accent-gold" />}
+                        </div>
+                        <span className={`text-sm font-bold ${
+                          editStatus === status ? 'text-accent-gold' : 'text-text-secondary'
+                        }`}>
+                          {status.replace('_', ' ')}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              
+              <div className="mt-8 flex justify-end gap-3">
+                <button 
+                  type="button"
+                  onClick={() => setIsManageModalOpen(false)}
+                  className="px-6 py-2.5 rounded-xl font-bold text-text-secondary hover:bg-text-primary/5 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit"
+                  disabled={isSaving || editStatus === selectedOrder.status}
+                  className="px-6 py-2.5 rounded-xl font-bold bg-accent-gold text-black hover:bg-yellow-400 transition-colors disabled:opacity-50 flex items-center gap-2"
+                >
+                  {isSaving && <Loader2 size={16} className="animate-spin" />}
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -116,7 +404,7 @@ function PlusIcon() {
 
 function MetricCard({ icon, title, value, color, bg = "bg-accent-gold/10", iconColor = "text-accent-gold" }: any) {
   return (
-    <div className="bg-[#111111]/80 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:border-border-theme transition-all shadow-xl">
+    <div className="bg-background-secondary/80 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:border-border-theme transition-all shadow-xl">
       <div className="flex items-center gap-3 mb-4">
         <div className={`p-2 rounded-lg ${bg} ${iconColor}`}>
           {icon}
