@@ -110,12 +110,12 @@ export default function BusinessAnalyticsPage() {
           <div className="flex items-center gap-4">
             <button
               onClick={fetchAnalytics}
-              className="flex items-center gap-2 rounded-lg border border-[#6d5318] bg-[#17150d] px-4 py-2 text-sm text-accent-gold hover:bg-[#2a2414] transition-colors"
+              className="flex items-center gap-2 rounded-lg border border-border-theme bg-background-secondary px-4 py-2 text-sm text-accent-gold hover:bg-background-tertiary transition-colors"
             >
               <RefreshCw size={16} className={isLoading ? "animate-spin" : ""} />
               Refresh
             </button>
-            <select className="rounded-lg border border-border-theme bg-[#11130f] px-4 py-2 text-xs text-text-secondary outline-none">
+            <select className="rounded-lg border border-border-theme bg-background-secondary px-4 py-2 text-xs text-text-secondary outline-none">
               <option>Last 30 Days</option>
               <option>Last 90 Days</option>
               <option>This Year</option>
@@ -130,10 +130,10 @@ export default function BusinessAnalyticsPage() {
             return (
               <div
                 key={item.title}
-                className="group relative overflow-hidden rounded-xl border border-border-theme bg-[#11130f] p-5 transition hover:border-[#b98c20]"
+                className="group relative overflow-hidden rounded-xl border border-border-theme bg-background-secondary p-5 transition hover:border-accent-gold"
               >
                 <div className="flex items-start justify-between">
-                  <div className="rounded-lg bg-[#211c0d] p-3">
+                  <div className="rounded-lg bg-background-tertiary p-3">
                     <Icon size={20} className="text-accent-gold" />
                   </div>
                   <span
@@ -147,7 +147,7 @@ export default function BusinessAnalyticsPage() {
                 </div>
                 <p className="mt-5 text-xs text-text-secondary">{item.title}</p>
                 <h2 className="mt-1 text-2xl font-bold">{item.value}</h2>
-                <div className="mt-4 h-1 overflow-hidden rounded-full bg-[#292519]">
+                <div className="mt-4 h-1 overflow-hidden rounded-full bg-border-theme">
                   <div className="h-full rounded-full bg-[#b98c20]" style={{ width: "82%" }} />
                 </div>
               </div>
@@ -159,7 +159,7 @@ export default function BusinessAnalyticsPage() {
         <div className="mt-6 grid grid-cols-3 gap-6">
 
           {/* REVENUE CHART */}
-          <div className="col-span-2 rounded-xl border border-border-theme bg-[#11130f] p-6">
+          <div className="col-span-2 rounded-xl border border-border-theme bg-background-secondary p-6">
             <div className="flex items-start justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-accent-gold">Revenue Performance</h2>
@@ -199,9 +199,9 @@ export default function BusinessAnalyticsPage() {
           </div>
 
           {/* BUSINESS HEALTH */}
-          <div className="rounded-xl border border-border-theme bg-[#11130f] p-6">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-6">
             <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-[#211c0d] p-3">
+              <div className="rounded-lg bg-background-tertiary p-3">
                 <Crown size={20} className="text-accent-gold" />
               </div>
               <div>
@@ -225,7 +225,7 @@ export default function BusinessAnalyticsPage() {
                   <span className="text-text-secondary">Sales Growth</span>
                   <span className="text-green-400">Good</span>
                 </div>
-                <div className="mt-2 h-1 rounded-full bg-[#292519]">
+                <div className="mt-2 h-1 rounded-full bg-border-theme">
                   <div className="h-full w-[80%] rounded-full bg-green-400" />
                 </div>
               </div>
@@ -234,7 +234,7 @@ export default function BusinessAnalyticsPage() {
                   <span className="text-text-secondary">Customer Retention</span>
                   <span className="text-accent-gold">Stable</span>
                 </div>
-                <div className="mt-2 h-1 rounded-full bg-[#292519]">
+                <div className="mt-2 h-1 rounded-full bg-border-theme">
                   <div className="h-full w-[65%] rounded-full bg-accent-gold" />
                 </div>
               </div>
@@ -243,7 +243,7 @@ export default function BusinessAnalyticsPage() {
                   <span className="text-text-secondary">Inventory Turnover</span>
                   <span className="text-red-400">Needs Attention</span>
                 </div>
-                <div className="mt-2 h-1 rounded-full bg-[#292519]">
+                <div className="mt-2 h-1 rounded-full bg-border-theme">
                   <div className="h-full w-[30%] rounded-full bg-red-400" />
                 </div>
               </div>
