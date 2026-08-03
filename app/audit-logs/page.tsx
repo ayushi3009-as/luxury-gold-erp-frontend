@@ -94,7 +94,7 @@ export default function AuditLogs() {
                   </tr>
                 )}
                 {logs.map((log) => (
-                  <tr key={log.id} className="hover:bg-[#1A1A1A] transition-colors">
+                  <tr key={log.id} className="hover:bg-black/5 transition-colors">
                     <td className="px-6 py-4 text-accent-gold font-medium truncate max-w-[120px]" title={log.id}>
                       {log.id.split('-')[0]}...
                     </td>
