@@ -12,17 +12,23 @@ export async function GET() {
     }
 
     let tenantId = session.tenantId;
+    let isSuperAdminWithoutTenant = false;
+
     if (!tenantId) {
       const user = await prisma.user.findUnique({ where: { id: session.userId } });
       if (user?.tenantId) {
         tenantId = user.tenantId;
-      } else if (session.role !== 'Super Admin' && session.role !== 'SUPER_ADMIN') {
+      } else if (session.role === 'Super Admin' || session.role === 'SUPER_ADMIN') {
+        isSuperAdminWithoutTenant = true;
+      } else {
         return NextResponse.json({ error: 'Unauthorized. No Tenant ID found.' }, { status: 401 });
       }
     }
 
+    const where = isSuperAdminWithoutTenant ? {} : { tenantId };
+
     const logs = await prisma.activityLog.findMany({
-      where: { tenantId },
+      where,
       include: {
         user: { select: { name: true, email: true } },
       },
