@@ -27,7 +27,7 @@ export async function GET() {
     const logs = await prisma.activityLog.findMany({
       where,
       include: {
-        user: { select: { name: true, email: true } },
+        user: { select: { fullName: true, email: true } },
       },
       orderBy: { createdAt: 'desc' },
       take: 50,

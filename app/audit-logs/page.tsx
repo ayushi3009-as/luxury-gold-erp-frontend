@@ -99,7 +99,7 @@ export default function AuditLogs() {
                       {log.id.split('-')[0]}...
                     </td>
                     <td className="px-6 py-4 text-text-primary capitalize">{log.module}</td>
-                    <td className="px-6 py-4 text-text-primary">{log.user?.name || log.user?.email || "System"}</td>
+                    <td className="px-6 py-4 text-text-primary">{log.user?.fullName || log.user?.email || "System"}</td>
                     <td className="px-6 py-4 text-text-secondary">{log.description}</td>
                     <td className="px-6 py-4 text-text-secondary">
                       {new Date(log.createdAt).toLocaleString()}
