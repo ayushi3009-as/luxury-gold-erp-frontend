@@ -58,7 +58,7 @@ export default function ReportsNav() {
           <Link
             key={item.href}
             href={item.href}
-            className={`flex items-center gap-3 rounded-xl px-4 py-3 transition ${
+            className={`flex items-center gap-3 rounded-xl px-4 py-3 transition whitespace-nowrap ${
               active
                 ? "bg-accent-gold text-black font-semibold"
                 : "text-text-secondary hover:bg-background-tertiary hover:text-accent-gold"
