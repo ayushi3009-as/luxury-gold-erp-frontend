@@ -181,7 +181,7 @@ export default function CategoriesPage() {
 
       {/* CREATE CATEGORY MODAL */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background-primary backdrop-blur-sm p-4">
+        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-background-primary backdrop-blur-sm p-4">
           <div className="w-full max-w-md rounded-2xl border border-border-theme bg-background-secondary p-6 shadow-[0_0_40px_rgba(212,175,55,0.15)] relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/50 via-yellow-300 to-accent-gold/50"></div>
             
