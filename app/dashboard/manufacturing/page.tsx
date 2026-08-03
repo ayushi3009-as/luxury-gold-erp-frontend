@@ -17,7 +17,10 @@ export default function ManufacturingPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [manageModalOpen, setManageModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState<any>(null);
+  const [editStatus, setEditStatus] = useState("");
 
   // Form State
   const [productId, setProductId] = useState("");
@@ -66,6 +69,34 @@ export default function ManufacturingPage() {
         setIsModalOpen(false);
         setProductId("");
         setQuantity("1");
+        fetchData();
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  function handleManageClick(order: any) {
+    setSelectedOrder(order);
+    setEditStatus(order.status);
+    setManageModalOpen(true);
+  }
+
+  async function handleUpdateStatus(e: React.FormEvent) {
+    e.preventDefault();
+    if (!selectedOrder) return;
+    setIsSubmitting(true);
+    try {
+      const res = await fetch(`/api/manufacturing/${selectedOrder.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: editStatus })
+      });
+      if (res.ok) {
+        setManageModalOpen(false);
+        setSelectedOrder(null);
         fetchData();
       }
     } catch (error) {
@@ -201,7 +232,12 @@ export default function ManufacturingPage() {
                         </span>
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <button className="text-xs font-semibold text-text-secondary hover:text-accent-gold transition-colors">Manage</button>
+                        <button 
+                          onClick={() => handleManageClick(order)}
+                          className="text-xs font-semibold text-text-secondary hover:text-accent-gold transition-colors"
+                        >
+                          Manage
+                        </button>
                       </td>
                     </tr>
                   ))
@@ -266,6 +302,52 @@ export default function ManufacturingPage() {
                   className="flex-1 rounded-xl bg-accent-gold py-3.5 text-sm font-bold text-black hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all disabled:opacity-50"
                 >
                   {isSubmitting ? 'Generating...' : 'Start Job'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* MANAGE ORDER MODAL */}
+      {manageModalOpen && selectedOrder && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background-primary backdrop-blur-sm p-4">
+          <div className="w-full max-w-md rounded-3xl border border-border-theme bg-background-secondary p-8 shadow-[0_0_50px_rgba(212,175,55,0.15)] relative overflow-hidden transform transition-all">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/50 via-yellow-300 to-accent-gold/50"></div>
+            
+            <h2 className="text-2xl font-bold text-text-primary mb-2">Manage Job Card</h2>
+            <p className="text-sm text-text-secondary mb-8">Update production status for {selectedOrder.orderNumber}</p>
+            
+            <form onSubmit={handleUpdateStatus} className="space-y-5">
+              <div>
+                <label className="block text-xs font-semibold text-text-secondary mb-2 uppercase tracking-wider">Status</label>
+                <select 
+                  required
+                  value={editStatus}
+                  onChange={(e) => setEditStatus(e.target.value)}
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3.5 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                >
+                  <option value="PENDING">Pending</option>
+                  <option value="IN_PROGRESS">In Progress</option>
+                  <option value="COMPLETED">Completed</option>
+                  <option value="CANCELLED">Cancelled</option>
+                </select>
+              </div>
+
+              <div className="pt-4 flex gap-3">
+                <button 
+                  type="button" 
+                  onClick={() => setManageModalOpen(false)}
+                  className="flex-1 rounded-xl border border-border-theme bg-text-primary/5 py-3.5 text-sm font-semibold text-text-primary hover:bg-text-primary/10 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="flex-1 rounded-xl bg-accent-gold py-3.5 text-sm font-bold text-black hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all disabled:opacity-50"
+                >
+                  {isSubmitting ? 'Saving...' : 'Save Changes'}
                 </button>
               </div>
             </form>
