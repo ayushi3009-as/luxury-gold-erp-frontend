@@ -195,7 +195,7 @@ export default function RepairDashboard() {
       {isAddModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
           <div className="bg-background-secondary border border-border-theme rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between p-6 border-b border-border-theme">
+            <div className="flex items-center justify-between p-4 border-b border-border-theme">
               <h2 className="text-xl font-bold text-accent-gold flex items-center gap-2">
                 <Wrench size={20} />
                 New Repair Entry
@@ -207,91 +207,93 @@ export default function RepairDashboard() {
                 <X size={24} />
               </button>
             </div>
-            <form onSubmit={handleAddSubmit} className="p-6">
-              <div className="space-y-4">
+            <form onSubmit={handleAddSubmit} className="p-4">
+              <div className="space-y-3">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Customer Name</label>
+                    <label className="block text-[10px] font-bold text-text-secondary uppercase tracking-wider mb-1">Customer Name</label>
                     <input 
                       type="text" 
                       required
                       value={newRepair.customerName}
                       onChange={e => setNewRepair({...newRepair, customerName: e.target.value})}
-                      className="w-full bg-background-tertiary border border-border-theme rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
+                      className="w-full bg-background-tertiary border border-border-theme rounded-xl px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
                       placeholder="John Doe"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Phone</label>
+                    <label className="block text-[10px] font-bold text-text-secondary uppercase tracking-wider mb-1">Phone</label>
                     <input 
                       type="text" 
                       required
                       value={newRepair.customerPhone}
                       onChange={e => setNewRepair({...newRepair, customerPhone: e.target.value})}
-                      className="w-full bg-background-tertiary border border-border-theme rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
+                      className="w-full bg-background-tertiary border border-border-theme rounded-xl px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
                       placeholder="1234567890"
                     />
                   </div>
                 </div>
                 
-                <div>
-                  <label className="block text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Item Name</label>
-                  <input 
-                    type="text" 
-                    required
-                    value={newRepair.itemName}
-                    onChange={e => setNewRepair({...newRepair, itemName: e.target.value})}
-                    className="w-full bg-background-tertiary border border-border-theme rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
-                    placeholder="E.g. Gold Necklace 22k"
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[10px] font-bold text-text-secondary uppercase tracking-wider mb-1">Item Name</label>
+                    <input 
+                      type="text" 
+                      required
+                      value={newRepair.itemName}
+                      onChange={e => setNewRepair({...newRepair, itemName: e.target.value})}
+                      className="w-full bg-background-tertiary border border-border-theme rounded-xl px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
+                      placeholder="E.g. Gold Necklace 22k"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-text-secondary uppercase tracking-wider mb-1">Expected Date</label>
+                    <input 
+                      type="date" 
+                      value={newRepair.expectedDate}
+                      onChange={e => setNewRepair({...newRepair, expectedDate: e.target.value})}
+                      className="w-full bg-background-tertiary border border-border-theme rounded-xl px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Description</label>
+                  <label className="block text-[10px] font-bold text-text-secondary uppercase tracking-wider mb-1">Description</label>
                   <textarea 
                     value={newRepair.description}
                     onChange={e => setNewRepair({...newRepair, description: e.target.value})}
-                    className="w-full bg-background-tertiary border border-border-theme rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
+                    className="w-full bg-background-tertiary border border-border-theme rounded-xl px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
                     placeholder="Describe the repair needed..."
-                    rows={3}
+                    rows={2}
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Estimated Cost</label>
+                    <label className="block text-[10px] font-bold text-text-secondary uppercase tracking-wider mb-1">Estimated Cost</label>
                     <input 
                       type="number" 
                       value={newRepair.estimatedCost}
                       onChange={e => setNewRepair({...newRepair, estimatedCost: e.target.value})}
-                      className="w-full bg-background-tertiary border border-border-theme rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
+                      className="w-full bg-background-tertiary border border-border-theme rounded-xl px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
                       placeholder="0.00"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Advance Paid</label>
+                    <label className="block text-[10px] font-bold text-text-secondary uppercase tracking-wider mb-1">Advance Paid</label>
                     <input 
                       type="number" 
                       value={newRepair.advancePaid}
                       onChange={e => setNewRepair({...newRepair, advancePaid: e.target.value})}
-                      className="w-full bg-background-tertiary border border-border-theme rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
+                      className="w-full bg-background-tertiary border border-border-theme rounded-xl px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
                       placeholder="0.00"
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-text-secondary uppercase tracking-wider mb-2">Expected Date</label>
-                  <input 
-                    type="date" 
-                    value={newRepair.expectedDate}
-                    onChange={e => setNewRepair({...newRepair, expectedDate: e.target.value})}
-                    className="w-full bg-background-tertiary border border-border-theme rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors"
-                  />
-                </div>
               </div>
               
-              <div className="mt-8 flex justify-end gap-3">
+              <div className="mt-4 flex justify-end gap-3">
                 <button 
                   type="button"
                   onClick={() => setIsAddModalOpen(false)}
