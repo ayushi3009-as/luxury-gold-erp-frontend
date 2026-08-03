@@ -45,10 +45,6 @@ export default function AuditLogs() {
             <RefreshCw size={16} className={isLoading ? "animate-spin" : ""} />
             Refresh
           </button>
-          <button className="flex items-center gap-2 bg-background-tertiary text-accent-gold border border-border-theme px-4 py-2 rounded-md hover:bg-background-tertiary">
-            <Download size={18} />
-            Export Logs
-          </button>
         </div>
       </div>
 
