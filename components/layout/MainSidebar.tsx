@@ -48,20 +48,22 @@ export default function MainSidebar({ userRole }: { userRole?: string }) {
   const pathname = usePathname();
 
   const filteredMenuItems = menuItems.filter(item => {
-    if (userRole === "Super Admin") {
-      // Super Admin only manages SaaS
-      return ["SaaS Admin", "Analytics", "Audit Logs"].includes(item.name);
+    // Only Super Admins can see the SaaS Admin portal
+    if (item.name === "SaaS Admin") {
+      return userRole === "SUPER_ADMIN" || userRole === "Super Admin";
     }
-    if (userRole === "Store Admin") {
-      // Store Admin manages the shop but NOT the SaaS platform
-      return item.name !== "SaaS Admin";
+
+    if (userRole === "SUPER_ADMIN" || userRole === "Super Admin") {
+      // Super Admin mainly manages SaaS, but they can see other things too if they want
+      return true;
     }
+
     if (userRole === "Sales Staff") {
       // Sales Staff only handles POS and basic sales
       return ["Dashboard", "POS Billing", "Sales", "Customers", "Products"].includes(item.name);
     }
     
-    // Default fallback
+    // Store Admin (and default fallback for others) sees everything EXCEPT SaaS Admin
     return true;
   });
 
