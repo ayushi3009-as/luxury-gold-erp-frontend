@@ -7,6 +7,12 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     const session = await getSession();
+    
+    // DEBUG LOGGING
+    const { headers } = await import("next/headers");
+    const reqHeaders = await headers();
+    console.log("BACKUP DEBUG - Session:", session, "Cookie:", reqHeaders.get("cookie"));
+    
     if (!session || !session.userId) {
       return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
     }
