@@ -23,7 +23,7 @@ export default function HistoryPage() {
     );
   }
 
-  const products = data?.products || [];
+  const products = Array.isArray(data) ? data : (data?.products || []);
 
   return (
     <div className="relative min-h-[80vh] p-6 text-text-primary">
