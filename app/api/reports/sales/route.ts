@@ -93,3 +93,40 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Failed to create sale" }, { status: 500 });
   }
 }
+
+export async function PUT(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+    
+    if (!id) {
+      return NextResponse.json({ error: 'ID is required' }, { status: 400 });
+    }
+
+    const data = await request.json();
+    const tenantId = await getTenantId();
+
+    const existingInvoice = await prisma.invoice.findUnique({ where: { id } });
+    if (tenantId && existingInvoice?.tenantId !== tenantId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+    }
+
+    const updatedInvoice = await prisma.invoice.update({
+      where: { id },
+      data: {
+        totalAmount: Number(data.amount) || existingInvoice?.totalAmount,
+        status: data.paymentStatus || existingInvoice?.status,
+        customer: data.customerName ? {
+          update: {
+            name: data.customerName
+          }
+        } : undefined
+      }
+    });
+
+    return NextResponse.json(updatedInvoice);
+  } catch (error) {
+    console.error("Error updating sale:", error);
+    return NextResponse.json({ error: "Failed to update sale" }, { status: 500 });
+  }
+}
