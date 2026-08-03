@@ -2,10 +2,20 @@
 import { ArrowRight, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { useCartStore } from '@/lib/store/cartStore';
+import { useState, useEffect } from 'react';
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, getTotalItems, getSubtotal } = useCartStore();
   const subtotal = getSubtotal();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null; // Avoid hydration mismatch on first render
+  }
 
   if (items.length === 0) {
     return (

@@ -123,7 +123,7 @@ export default function POSBilling() {
         <div>
           <h1 className="text-3xl font-bold text-accent-gold flex items-center gap-3">
             <Receipt size={32} />
-            POS Billing
+            TEST POS BILLING
           </h1>
           <p className="text-text-secondary mt-1">Point of Sale System for Fast Checkout</p>
         </div>
@@ -158,17 +158,38 @@ export default function POSBilling() {
                   <div 
                     key={product.id} 
                     onClick={() => addToCart(product)}
-                    className="group border border-border-theme rounded-xl p-4 cursor-pointer hover:border-accent-gold/50 hover:bg-background-tertiary transition-all relative overflow-hidden"
+                    className="group border border-border-theme rounded-xl p-4 cursor-pointer hover:border-accent-gold/50 hover:bg-background-tertiary transition-all relative flex flex-col"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                    <div className="w-full h-32 bg-background-primary rounded-lg mb-3 flex items-center justify-center border border-border-theme overflow-hidden">
-                       <span className="text-xs text-text-secondary">No Image</span>
+                    
+                    <div className="w-full h-32 bg-background-primary rounded-lg mb-3 flex items-center justify-center border border-border-theme">
+                      {product.images && product.images.length > 0 ? (
+                        <img 
+                          src={product.images[0].url} 
+                          alt={product.name || 'Product Image'}
+                          className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                        />
+                      ) : (
+                        <span className="text-xs text-text-secondary">No Image</span>
+                      )}
                     </div>
-                    <div style={{ color: "red", border: "1px solid red", padding: "10px", marginTop: "10px" }}>
-                      <h3>TEST: {product.name || 'NO NAME'}</h3>
-                      <p>CODE: {product.productCode || 'NO CODE'}</p>
-                      <p>PRICE: {product.sellingPrice || 0}</p>
-                      <p>STOCK: {product.inventory?.quantity || 0}</p>
+                    
+                    <div className="flex flex-col flex-1">
+                      <h3 className="font-semibold text-sm text-text-primary whitespace-normal break-words">{product.name || 'Unnamed Product'}</h3>
+                      <p className="text-xs text-text-secondary mt-1 whitespace-normal break-all">{product.productCode || 'No Code'}</p>
+                      
+                      <div className="mt-auto pt-3 flex justify-between items-center gap-2">
+                        <span className="font-bold text-text-primary text-sm whitespace-nowrap">
+                          ₹{Number(product.sellingPrice || 0).toLocaleString()}
+                        </span>
+                        <span className={`text-xs px-2 py-1 rounded-md whitespace-nowrap ${
+                          !product.inventory?.quantity || product.inventory.quantity <= 0 
+                            ? 'bg-red-500/10 text-red-500' 
+                            : 'bg-green-500/10 text-green-500'
+                        }`}>
+                          {product.inventory?.quantity || 0} in stock
+                        </span>
+                      </div>
                     </div>
                   </div>
                 ))

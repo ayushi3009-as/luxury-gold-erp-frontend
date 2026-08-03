@@ -62,10 +62,27 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const data = await req.json();
-    const { supplierId, expectedDate, items } = data;
+    const { supplierName, supplierId, expectedDate, items, status, amount } = data;
 
-    if (!supplierId || !items || items.length === 0) {
+    if ((!supplierId && !supplierName) || !items || items.length === 0) {
       return NextResponse.json({ error: 'Supplier and items are required' }, { status: 400 });
+    }
+
+    let finalSupplierId = supplierId;
+    if (!finalSupplierId && supplierName) {
+      let supplier = await prisma.supplier.findFirst({
+        where: { supplierName }
+      });
+      if (!supplier) {
+        supplier = await prisma.supplier.create({
+          data: {
+            supplierCode: `SUP-${Date.now()}`,
+            supplierName: supplierName,
+            status: "ACTIVE"
+          }
+        });
+      }
+      finalSupplierId = supplier.id;
     }
 
     // Generate PO Number
@@ -88,17 +105,17 @@ export async function POST(req: Request) {
       };
     });
 
-    // Dummy GST logic for now
-    const gstAmount = subtotal * 0.03;
-    const totalAmount = subtotal + gstAmount;
+    const finalSubtotal = amount ? Number(amount) : subtotal;
+    const gstAmount = amount ? 0 : finalSubtotal * 0.03;
+    const totalAmount = amount ? Number(amount) : finalSubtotal + gstAmount;
 
     const order = await prisma.purchaseOrder.create({
       data: {
         poNumber,
-        supplierId,
+        supplierId: finalSupplierId,
         expectedDate: expectedDate ? new Date(expectedDate) : null,
-        status: 'PENDING',
-        subtotal,
+        status: status || 'PENDING',
+        subtotal: finalSubtotal,
         gstAmount,
         totalAmount,
         items: {

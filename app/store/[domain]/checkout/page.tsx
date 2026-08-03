@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCartStore } from '@/lib/store/cartStore';
@@ -7,6 +7,7 @@ import { useCartStore } from '@/lib/store/cartStore';
 export default function CheckoutPage({ params }: { params: { domain: string } }) {
   const router = useRouter();
   const { items, getSubtotal, clearCart } = useCartStore();
+  const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -19,6 +20,14 @@ export default function CheckoutPage({ params }: { params: { domain: string } })
   });
 
   const subtotal = getSubtotal();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null; // Avoid hydration mismatch on first render
+  }
 
   if (items.length === 0) {
     return (

@@ -61,14 +61,15 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const data = await req.json();
-    const { supplierId, itemName, amount } = data;
+    const { supplierId, itemName, amount, invoiceNo, date } = data;
 
     if (!supplierId || !itemName || !amount) {
       return NextResponse.json({ error: 'Supplier, item name, and amount are required' }, { status: 400 });
     }
 
     const count = await prisma.purchaseInvoice.count();
-    const invoiceNumber = `PI-${new Date().getFullYear()}-${String(count + 1).padStart(4, '0')}`;
+    const invoiceNumber = invoiceNo || `PI-${new Date().getFullYear()}-${String(count + 1).padStart(4, '0')}`;
+    const invoiceDate = date ? new Date(date) : new Date();
 
     const numAmount = Number(amount);
 
@@ -76,7 +77,7 @@ export async function POST(req: Request) {
       data: {
         invoiceNumber,
         supplierId,
-        invoiceDate: new Date(),
+        invoiceDate,
         paymentStatus: 'PENDING',
         subtotal: numAmount,
         totalAmount: numAmount,

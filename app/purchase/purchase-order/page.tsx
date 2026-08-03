@@ -9,10 +9,13 @@ export default function PurchaseOrderPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // New PO State
-  const [supplierId, setSupplierId] = useState("");
+  const [supplierName, setSupplierName] = useState("");
   const [itemName, setItemName] = useState("");
   const [weight, setWeight] = useState("");
+  const [amount, setAmount] = useState("");
+  const [status, setStatus] = useState("PENDING");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchOrders();
@@ -20,7 +23,7 @@ export default function PurchaseOrderPage() {
 
   async function fetchOrders() {
     try {
-      const res = await fetch('/api/purchase/orders');
+      const res = await fetch('/api/purchase/orders?t=' + Date.now(), { cache: 'no-store' });
       if (res.ok) {
         const json = await res.json();
         setData(json);
@@ -37,11 +40,17 @@ export default function PurchaseOrderPage() {
     setIsSubmitting(true);
     
     try {
-      const res = await fetch('/api/purchase/orders', {
-        method: 'POST',
+      const isEditing = !!editingId;
+      const url = isEditing ? `/api/purchase/orders/${editingId}` : '/api/purchase/orders';
+      const method = isEditing ? 'PUT' : 'POST';
+
+      const res = await fetch(url, {
+        method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          supplierId,
+          supplierName,
+          status,
+          amount,
           items: [{
             itemName,
             weight: Number(weight),
@@ -53,16 +62,50 @@ export default function PurchaseOrderPage() {
 
       if (res.ok) {
         setIsModalOpen(false);
-        setSupplierId("");
+        setSupplierName("");
         setItemName("");
         setWeight("");
+        setAmount("");
+        setStatus("PENDING");
+        setEditingId(null);
         fetchOrders(); // Refresh data
       }
     } catch (error) {
-      console.error("Error creating PO:", error);
+      console.error("Error saving PO:", error);
     } finally {
       setIsSubmitting(false);
     }
+  }
+
+  async function handleDelete(id: string) {
+    if (!confirm("Are you sure you want to delete this purchase order?")) return;
+    try {
+      const res = await fetch(`/api/purchase/orders/${id}`, { method: 'DELETE' });
+      if (res.ok) fetchOrders();
+    } catch (error) {
+      console.error("Error deleting PO:", error);
+    }
+  }
+
+  function handleEditClick(order: any) {
+    setEditingId(order.id);
+    setSupplierName(order.supplierName);
+    // Since our table only shows total amount, we can extract the number roughly for the state
+    setAmount(order.amount.replace(/[^0-9.]/g, ''));
+    setStatus(order.status);
+    setItemName("Updated Item"); // Dummy default or you could fetch full item details
+    setWeight("10"); // Dummy default
+    setIsModalOpen(true);
+  }
+
+  function openCreateModal() {
+    setEditingId(null);
+    setSupplierName("");
+    setItemName("");
+    setWeight("");
+    setAmount("");
+    setStatus("PENDING");
+    setIsModalOpen(true);
   }
 
   if (isLoading) {
@@ -86,12 +129,12 @@ export default function PurchaseOrderPage() {
         {/* HEADER */}
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-accent-gold to-yellow-200 bg-clip-text text-transparent">Purchase Orders</h1>
+            <h1 className="text-3xl font-bold text-accent-gold">Purchase Orders</h1>
             <p className="mt-1 text-sm text-text-secondary">Manage supplier purchase orders and approvals.</p>
           </div>
 
           <button 
-            onClick={() => setIsModalOpen(true)}
+            onClick={openCreateModal}
             className="flex items-center gap-2 rounded-xl bg-accent-gold px-6 py-2.5 text-sm font-bold text-black transition-all hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-[1.02]"
           >
             <Plus size={18} />
@@ -109,12 +152,12 @@ export default function PurchaseOrderPage() {
         </div>
 
         {/* ORDERS TABLE */}
-        <div className="rounded-2xl border border-border-theme bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl">
+        <div className="rounded-2xl border border-border-theme bg-background-secondary p-6 shadow-lg">
           <h2 className="text-lg font-bold tracking-wide text-text-primary mb-6">PURCHASE ORDER LIST</h2>
           
-          <div className="overflow-x-auto rounded-xl border border-border-theme bg-background-tertiary">
+          <div className="overflow-x-auto rounded-xl border border-border-theme bg-background-secondary">
             <table className="w-full text-left text-sm">
-              <thead className="border-b border-border-theme bg-text-primary/5 text-xs font-semibold tracking-wider text-text-secondary">
+              <thead className="border-b border-border-theme bg-transparent text-xs font-semibold tracking-wider text-text-secondary">
                 <tr>
                   <th className="px-6 py-4">PO NO</th>
                   <th className="px-6 py-4">SUPPLIER</th>
@@ -131,7 +174,7 @@ export default function PurchaseOrderPage() {
                   </tr>
                 ) : (
                   orders.map((order: any, idx: number) => (
-                    <tr key={idx} className="transition-colors hover:bg-text-primary/5">
+                    <tr key={idx} className="transition-colors hover:bg-transparent">
                       <td className="px-6 py-4 font-mono font-medium text-text-primary/80">{order.id}</td>
                       <td className="px-6 py-4 font-semibold text-text-primary">{order.supplierName}</td>
                       <td className="px-6 py-4 text-text-secondary">{new Date(order.date).toLocaleDateString()}</td>
@@ -148,8 +191,8 @@ export default function PurchaseOrderPage() {
                         </span>
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <button className="text-xs font-semibold text-text-secondary hover:text-accent-gold transition-colors mr-3">View</button>
-                        <button className="text-xs font-semibold text-text-secondary hover:text-text-primary transition-colors">Edit</button>
+                        <button onClick={() => handleDelete(order.id)} className="text-xs font-semibold text-red-400 hover:text-red-300 transition-colors mr-3">Delete</button>
+                        <button onClick={() => handleEditClick(order)} className="text-xs font-semibold text-text-secondary hover:text-text-primary transition-colors">Edit</button>
                       </td>
                     </tr>
                   ))
@@ -162,67 +205,92 @@ export default function PurchaseOrderPage() {
 
       {/* CREATE MODAL */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background-primary backdrop-blur-sm p-4">
-          <div className="w-full max-w-md rounded-2xl border border-border-theme bg-[#111] p-6 shadow-[0_0_40px_rgba(212,175,55,0.15)] relative overflow-hidden">
+        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-background-primary/80 backdrop-blur-md p-4">
+          <div className="w-full max-w-lg rounded-2xl border border-border-theme bg-background-secondary/90 p-8 shadow-2xl relative overflow-hidden backdrop-blur-xl">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/50 via-yellow-300 to-accent-gold/50"></div>
             
-            <h2 className="text-xl font-bold text-text-primary mb-6">Create Purchase Order</h2>
+            <h2 className="text-2xl font-serif text-text-primary mb-6">{editingId ? 'Update Purchase Order' : 'Create Purchase Order'}</h2>
             
-            <form onSubmit={handleCreatePO} className="space-y-4">
-              <div>
-                <label className="block text-xs font-semibold text-text-secondary mb-1">Select Supplier</label>
-                <select 
-                  required
-                  value={supplierId}
-                  onChange={(e) => setSupplierId(e.target.value)}
-                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
-                >
-                  <option value="">-- Choose Supplier --</option>
-                  {suppliers.map((s: any) => (
-                    <option key={s.id} value={s.id}>{s.supplierName}</option>
-                  ))}
-                </select>
+            <form onSubmit={handleCreatePO} className="space-y-5">
+              <div className="grid grid-cols-2 gap-5">
+                <div className="col-span-2">
+                  <label className="block text-[10px] uppercase tracking-widest text-text-secondary mb-2">Supplier Name</label>
+                  <input 
+                    type="text" 
+                    required
+                    placeholder="e.g. Gold Merchants Ltd"
+                    value={supplierName}
+                    onChange={(e) => setSupplierName(e.target.value)}
+                    className="w-full rounded-none border-b border-border-theme bg-transparent px-2 py-2 text-sm text-text-primary placeholder-text-secondary/30 focus:border-accent-gold focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div className="col-span-2">
+                  <label className="block text-[10px] uppercase tracking-widest text-text-secondary mb-2">Item Name</label>
+                  <input 
+                    type="text" 
+                    required
+                    placeholder="e.g. Gold Bangles 22k"
+                    value={itemName}
+                    onChange={(e) => setItemName(e.target.value)}
+                    className="w-full rounded-none border-b border-border-theme bg-transparent px-2 py-2 text-sm text-text-primary placeholder-text-secondary/30 focus:border-accent-gold focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] uppercase tracking-widest text-text-secondary mb-2">Est. Weight (g)</label>
+                  <input 
+                    type="number" 
+                    step="0.01"
+                    required
+                    placeholder="0.00"
+                    value={weight}
+                    onChange={(e) => setWeight(e.target.value)}
+                    className="w-full rounded-none border-b border-border-theme bg-transparent px-2 py-2 text-sm text-text-primary placeholder-text-secondary/30 focus:border-accent-gold focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] uppercase tracking-widest text-text-secondary mb-2">Amount (₹)</label>
+                  <input 
+                    type="number" 
+                    required
+                    placeholder="Total amount"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                    className="w-full rounded-none border-b border-border-theme bg-transparent px-2 py-2 text-sm text-text-primary placeholder-text-secondary/30 focus:border-accent-gold focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div className="col-span-2">
+                  <label className="block text-[10px] uppercase tracking-widest text-text-secondary mb-2">Status</label>
+                  <select 
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                    className="w-full rounded-none border-b border-border-theme bg-background-secondary px-2 py-2 text-sm text-text-primary focus:border-accent-gold focus:outline-none transition-colors"
+                  >
+                    <option value="PENDING">Pending</option>
+                    <option value="APPROVED">Approved</option>
+                    <option value="COMPLETED">Completed</option>
+                    <option value="CANCELLED">Cancelled</option>
+                  </select>
+                </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-text-secondary mb-1">Item Name</label>
-                <input 
-                  type="text" 
-                  required
-                  placeholder="e.g. Gold Bangles 22k"
-                  value={itemName}
-                  onChange={(e) => setItemName(e.target.value)}
-                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-text-secondary mb-1">Est. Weight (g)</label>
-                <input 
-                  type="number" 
-                  step="0.01"
-                  required
-                  placeholder="0.00"
-                  value={weight}
-                  onChange={(e) => setWeight(e.target.value)}
-                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary placeholder-text-secondary/50 focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
-                />
-              </div>
-
-              <div className="mt-8 flex gap-3">
+              <div className="mt-10 flex gap-4 pt-4 border-t border-border-theme/50">
                 <button 
                   type="button" 
                   onClick={() => setIsModalOpen(false)}
-                  className="flex-1 rounded-xl border border-border-theme bg-text-primary/5 py-3 text-sm font-semibold text-text-primary hover:bg-text-primary/10 transition-colors"
+                  className="flex-1 border border-border-theme bg-transparent py-3 text-xs uppercase tracking-widest font-semibold text-text-primary hover:bg-transparent transition-colors"
                 >
                   Cancel
                 </button>
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="flex-1 rounded-xl bg-accent-gold py-3 text-sm font-bold text-black hover:bg-yellow-400 hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all disabled:opacity-50"
+                  className="flex-1 bg-accent-gold py-3 text-xs uppercase tracking-widest font-bold text-black hover:bg-yellow-400 hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all disabled:opacity-50"
                 >
-                  {isSubmitting ? 'Creating...' : 'Create PO'}
+                  {isSubmitting ? 'Saving...' : (editingId ? 'Update PO' : 'Create PO')}
                 </button>
               </div>
             </form>

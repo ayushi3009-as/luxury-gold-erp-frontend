@@ -21,26 +21,42 @@ export default function StockEntry() {
   const router = useRouter();
   
   const [products, setProducts] = useState<any[]>([]);
+  const [recentEntries, setRecentEntries] = useState<any[]>([]);
   const [recentProducts, setRecentProducts] = useState<any[]>([]);
+  const [goldRates, setGoldRates] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [entryNumber, setEntryNumber] = useState("");
+  const [supplierName, setSupplierName] = useState("");
+  const [supplierInvoiceNo, setSupplierInvoiceNo] = useState("");
 
   useEffect(() => {
     setEntryNumber(`SE-${new Date().getFullYear()}-${Math.floor(Math.random()*9000)+1000}`);
     
-    const fetchRecent = async () => {
+    const fetchInitialData = async () => {
       try {
-        const res = await fetch('/api/products');
-        if (res.ok) {
-          const data = await res.json();
-          setRecentProducts(data.slice(0, 5));
+        const [entriesRes, ratesRes, productsRes] = await Promise.all([
+          fetch('/api/inventory/stock-entries'),
+          fetch('/api/gold-rate'),
+          fetch('/api/products')
+        ]);
+        if (entriesRes.ok) {
+          const data = await entriesRes.json();
+          setRecentEntries(data.slice(0, 5));
+        }
+        if (ratesRes.ok) {
+          const ratesData = await ratesRes.json();
+          setGoldRates(ratesData);
+        }
+        if (productsRes.ok) {
+          const prodData = await productsRes.json();
+          setRecentProducts(prodData.slice(0, 5));
         }
       } catch (err) {
-        console.error("Failed to fetch recent products", err);
+        console.error("Failed to fetch initial data", err);
       }
     };
-    fetchRecent();
+    fetchInitialData();
   }, []);
   
   const [newProduct, setNewProduct] = useState({
@@ -52,6 +68,19 @@ export default function StockEntry() {
     quantity: "1",
     rate: "",
   });
+
+  // Autofill rate based on category and purity
+  useEffect(() => {
+    if (!goldRates) return;
+    if (newProduct.category === "Gold Jewellery") {
+      if (newProduct.purity === "24K") setNewProduct(prev => ({ ...prev, rate: (goldRates.gold24k / 10).toString() }));
+      else if (newProduct.purity === "22K") setNewProduct(prev => ({ ...prev, rate: (goldRates.gold22k / 10).toString() }));
+      else if (newProduct.purity === "18K") setNewProduct(prev => ({ ...prev, rate: (goldRates.gold18k / 10).toString() }));
+      else if (newProduct.purity === "14K") setNewProduct(prev => ({ ...prev, rate: ((goldRates.gold24k * 0.585) / 10).toString() }));
+    } else if (newProduct.category === "Silver Items") {
+      setNewProduct(prev => ({ ...prev, rate: (goldRates.silver / 1000).toString() })); // Assuming silver is per kg
+    }
+  }, [newProduct.category, newProduct.purity, goldRates]);
 
   const handleAddProduct = () => {
     if (!newProduct.name || !newProduct.netWeight || !newProduct.rate) {
@@ -74,27 +103,23 @@ export default function StockEntry() {
     if (products.length === 0) return alert("Please add at least one product before saving.");
     setIsSaving(true);
     try {
-      for (const prod of products) {
-        await fetch('/api/products', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            productCode: `PRD-${Date.now()}-${Math.floor(Math.random()*1000)}`,
-            name: prod.name,
-            category: prod.category,
-            purity: prod.purity,
-            weight: parseFloat(prod.netWeight),
-            sellingPrice: parseFloat(prod.rate),
-            quantity: parseInt(prod.quantity, 10),
-            minimumStock: 5,
-            type: "FINISHED_GOOD"
-          })
-        });
-      }
+      const res = await fetch('/api/inventory/stock-entries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          entryNumber,
+          supplierName,
+          supplierInvoiceNo,
+          products
+        })
+      });
+      
+      if (!res.ok) throw new Error("Failed to save");
+      
       alert("Stock Entry saved successfully!");
       router.push('/inventory');
     } catch (error) {
-      console.error("Failed to save stock:", error);
+      console.error("Failed to save stock entry:", error);
       alert("Error saving stock entry.");
     } finally {
       setIsSaving(false);
@@ -121,10 +146,6 @@ export default function StockEntry() {
             <button onClick={() => router.push('/inventory')} className="group flex items-center gap-2 rounded-xl border border-border-theme bg-background-secondary/50 backdrop-blur-md px-5 py-2.5 text-sm font-medium text-text-secondary transition-all hover:border-accent-gold/50 hover:text-text-primary">
               <X size={18} className="transition-transform group-hover:rotate-90" />
               Cancel
-            </button>
-            <button onClick={saveStockEntry} disabled={isSaving || products.length === 0} className="flex items-center gap-2 rounded-xl bg-accent-gold px-6 py-2.5 text-sm font-bold text-black transition-all hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-[1.02] disabled:opacity-50 disabled:hover:scale-100 disabled:hover:shadow-none">
-              {isSaving ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
-              Save & Update
             </button>
           </div>
         </div>
@@ -161,14 +182,67 @@ export default function StockEntry() {
               <label className="mb-2 block text-xs font-semibold tracking-wider text-text-secondary group-focus-within:text-accent-gold transition-colors">SUPPLIER / VENDOR</label>
               <div className="relative">
                 <UserRound size={18} className="absolute left-4 top-3.5 text-accent-gold/70" />
-                <input type="text" placeholder="Enter supplier name" className="w-full rounded-xl border border-border-theme bg-text-primary/5 px-11 py-3.5 text-sm text-text-primary outline-none transition-all placeholder:text-text-secondary/50 focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10" />
+                <input type="text" value={supplierName} onChange={(e) => setSupplierName(e.target.value)} placeholder="Enter supplier name" className="w-full rounded-xl border border-border-theme bg-text-primary/5 px-11 py-3.5 text-sm text-text-primary outline-none transition-all placeholder:text-text-secondary/50 focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10" />
               </div>
             </div>
 
             <div className="group">
               <label className="mb-2 block text-xs font-semibold tracking-wider text-text-secondary group-focus-within:text-accent-gold transition-colors">SUPPLIER INVOICE NO.</label>
-              <input type="text" placeholder="Enter invoice number" className="w-full rounded-xl border border-border-theme bg-text-primary/5 px-4 py-3.5 text-sm text-text-primary outline-none transition-all placeholder:text-text-primary/20 focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10" />
+              <input type="text" value={supplierInvoiceNo} onChange={(e) => setSupplierInvoiceNo(e.target.value)} placeholder="Enter invoice number" className="w-full rounded-xl border border-border-theme bg-text-primary/5 px-4 py-3.5 text-sm text-text-primary outline-none transition-all placeholder:text-text-primary/20 focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10" />
             </div>
+          </div>
+          
+          <div className="mt-6 flex justify-end border-t border-border-theme pt-6">
+            <button onClick={saveStockEntry} disabled={isSaving} className="flex items-center gap-2 rounded-xl bg-accent-gold px-8 py-3 text-sm font-bold text-black transition-all hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-[1.02] disabled:opacity-50 disabled:hover:scale-100 disabled:hover:shadow-none">
+              {isSaving ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
+              Save Stock Entry
+            </button>
+          </div>
+        </div>
+
+        {/* RECENTLY ADDED INVENTORY */}
+        <div className="mt-8 rounded-2xl border border-border-theme bg-background-primary/50 backdrop-blur-xl p-8 shadow-2xl">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-gold/10 text-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.15)] ring-1 ring-accent-gold/20">
+                <Clock size={24} />
+              </div>
+              <div>
+                <h2 className="text-lg font-bold tracking-wide text-text-primary">RECENT STOCK ENTRIES</h2>
+                <p className="text-xs text-text-secondary mt-0.5">Your recently saved stock entries</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto rounded-xl border border-border-theme bg-background-secondary/50">
+            <table className="w-full min-w-[1050px] text-left text-sm">
+              <thead className="border-b border-border-theme bg-text-primary/5 text-xs font-semibold tracking-wider text-text-secondary">
+                <tr>
+                  <th className="px-5 py-4">STOCK ENTRY NUMBER</th>
+                  <th className="px-5 py-4">ENTRY DATE</th>
+                  <th className="px-5 py-4">SUPPLIER / VENDOR</th>
+                  <th className="px-5 py-4">SUPPLIER INVOICE NO.</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border-theme">
+                {recentEntries.length === 0 ? (
+                  <tr>
+                    <td colSpan={4} className="py-8 text-center text-text-secondary">
+                      No recent entries found.
+                    </td>
+                  </tr>
+                ) : (
+                  recentEntries.map((entry) => (
+                    <tr key={entry.id} className="transition-colors hover:bg-text-primary/5">
+                      <td className="px-5 py-4 font-semibold text-text-primary">{entry.entryNumber}</td>
+                      <td className="px-5 py-4 text-text-secondary/80">{new Date(entry.createdAt).toLocaleDateString()}</td>
+                      <td className="px-5 py-4 text-text-primary/80">{entry.supplierName || 'N/A'}</td>
+                      <td className="px-5 py-4 text-text-primary/80">{entry.supplierInvoiceNo || 'N/A'}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -257,16 +331,16 @@ export default function StockEntry() {
           </div>
         </div>
 
-        {/* RECENTLY ADDED INVENTORY */}
+        {/* RECENTLY ADDED PRODUCTS */}
         <div className="mt-8 rounded-2xl border border-border-theme bg-background-primary/50 backdrop-blur-xl p-8 shadow-2xl">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-gold/10 text-accent-gold shadow-[0_0_15px_rgba(212,175,55,0.15)] ring-1 ring-accent-gold/20">
-                <Clock size={24} />
+                <PackagePlus size={24} />
               </div>
               <div>
                 <h2 className="text-lg font-bold tracking-wide text-text-primary">RECENTLY ADDED PRODUCTS</h2>
-                <p className="text-xs text-text-secondary mt-0.5">Products from previous stock entries</p>
+                <p className="text-xs text-text-secondary mt-0.5">Products created from your stock entries</p>
               </div>
             </div>
           </div>
@@ -279,6 +353,7 @@ export default function StockEntry() {
                   <th className="px-5 py-4">CATEGORY</th>
                   <th className="px-5 py-4">SKU / CODE</th>
                   <th className="px-5 py-4">WEIGHT</th>
+                  <th className="px-5 py-4">QTY</th>
                   <th className="px-5 py-4">PRICE</th>
                   <th className="px-5 py-4">STATUS</th>
                 </tr>
@@ -297,7 +372,8 @@ export default function StockEntry() {
                       <td className="px-5 py-4 text-text-primary/80">{product.category || 'N/A'}</td>
                       <td className="px-5 py-4 font-mono text-text-secondary/80">{product.productCode || product.barcode || 'N/A'}</td>
                       <td className="px-5 py-4 text-text-primary/80">{product.weight || product.netWeight || 'N/A'} g</td>
-                      <td className="px-5 py-4 font-bold text-accent-gold">₹ {(product.price || product.amount || 0).toLocaleString('en-IN')}</td>
+                      <td className="px-5 py-4 font-medium">{product.inventory?.quantity || 0}</td>
+                      <td className="px-5 py-4 font-bold text-accent-gold">₹ {(product.sellingPrice || 0).toLocaleString('en-IN')}</td>
                       <td className="px-5 py-4">
                         <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${product.isPublished ? 'bg-green-500/10 text-green-500' : 'bg-yellow-500/10 text-yellow-500'}`}>
                           {product.isPublished ? 'Active' : 'Draft'}
@@ -315,7 +391,7 @@ export default function StockEntry() {
       {/* ADD PRODUCT MODAL */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-background-primary/60 backdrop-blur-md p-4">
-          <div className="bg-[#111111] border border-border-theme rounded-2xl w-full max-w-2xl p-8 shadow-2xl transform transition-all scale-100 relative overflow-hidden">
+          <div className="bg-background-secondary border border-border-theme rounded-2xl w-full max-w-xl p-6 shadow-2xl transform transition-all scale-100 relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/50 via-yellow-200 to-accent-gold/50"></div>
             
             <div className="flex justify-between items-center mb-8 border-b border-border-theme pb-4">
@@ -333,9 +409,9 @@ export default function StockEntry() {
                 <label className="block text-xs font-semibold tracking-wider text-text-secondary mb-2 group-focus-within:text-accent-gold transition-colors">CATEGORY</label>
                 <div className="relative">
                   <select value={newProduct.category} onChange={e => setNewProduct({...newProduct, category: e.target.value})} className="w-full appearance-none rounded-xl border border-border-theme bg-text-primary/5 px-4 py-3.5 text-sm text-text-primary outline-none transition-all focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10">
-                    <option className="bg-[#111111] text-text-primary">Gold Jewellery</option>
-                    <option className="bg-[#111111] text-text-primary">Diamond Jewellery</option>
-                    <option className="bg-[#111111] text-text-primary">Silver Items</option>
+                    <option className="bg-background-secondary text-text-primary">Gold Jewellery</option>
+                    <option className="bg-background-secondary text-text-primary">Diamond Jewellery</option>
+                    <option className="bg-background-secondary text-text-primary">Silver Items</option>
                   </select>
                   <ChevronDown size={18} className="absolute right-4 top-3.5 text-text-secondary pointer-events-none" />
                 </div>
@@ -345,10 +421,10 @@ export default function StockEntry() {
                 <label className="block text-xs font-semibold tracking-wider text-text-secondary mb-2 group-focus-within:text-accent-gold transition-colors">PURITY</label>
                 <div className="relative">
                   <select value={newProduct.purity} onChange={e => setNewProduct({...newProduct, purity: e.target.value})} className="w-full appearance-none rounded-xl border border-border-theme bg-text-primary/5 px-4 py-3.5 text-sm text-text-primary outline-none transition-all focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10">
-                    <option className="bg-[#111111] text-text-primary">24K</option>
-                    <option className="bg-[#111111] text-text-primary">22K</option>
-                    <option className="bg-[#111111] text-text-primary">18K</option>
-                    <option className="bg-[#111111] text-text-primary">14K</option>
+                    <option className="bg-background-secondary text-text-primary">24K</option>
+                    <option className="bg-background-secondary text-text-primary">22K</option>
+                    <option className="bg-background-secondary text-text-primary">18K</option>
+                    <option className="bg-background-secondary text-text-primary">14K</option>
                   </select>
                   <ChevronDown size={18} className="absolute right-4 top-3.5 text-text-secondary pointer-events-none" />
                 </div>

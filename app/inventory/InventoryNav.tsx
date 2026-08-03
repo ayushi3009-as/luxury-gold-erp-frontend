@@ -55,11 +55,11 @@ export default function InventoryNav() {
                 href={page.href}
                 className={`flex items-center gap-2.5 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
                   isActive
-                    ? "bg-accent-gold text-black shadow-[0_0_20px_rgba(212,175,55,0.4)] scale-105"
-                    : "text-text-secondary hover:bg-accent-gold/10 hover:text-accent-gold"
+                    ? "text-accent-gold"
+                    : "text-text-secondary hover:text-accent-gold"
                 }`}
               >
-                <Icon size={18} className={isActive ? "text-black" : ""} />
+                <Icon size={18} className={isActive ? "text-accent-gold" : ""} />
                 <span>{page.name}</span>
               </Link>
             );

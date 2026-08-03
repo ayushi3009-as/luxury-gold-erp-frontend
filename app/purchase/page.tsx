@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   ArrowUpRight,
   ClipboardList,
@@ -65,9 +66,9 @@ export default function PurchaseDashboard() {
               This Month
               <ChevronDown size={15} />
             </button>
-            <button className="rounded-xl bg-accent-gold px-6 py-2.5 text-sm font-bold text-black transition-all hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-[1.02]">
+            <Link href="/purchase/purchase-order" className="rounded-xl bg-accent-gold px-6 py-2.5 text-sm font-bold text-black transition-all hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-[1.02]">
               New Purchase Order
-            </button>
+            </Link>
           </div>
         </div>
 

@@ -123,7 +123,7 @@ export default function POSBilling() {
         <div>
           <h1 className="text-3xl font-bold text-accent-gold flex items-center gap-3">
             <Receipt size={32} />
-            POS Billing
+            TEST POS BILLING
           </h1>
           <p className="text-text-secondary mt-1">Point of Sale System for Fast Checkout</p>
         </div>
@@ -161,14 +161,31 @@ export default function POSBilling() {
                     className="group border border-border-theme rounded-xl p-4 cursor-pointer hover:border-accent-gold/50 hover:bg-background-tertiary transition-all relative overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                    
                     <div className="w-full h-32 bg-background-primary rounded-lg mb-3 flex items-center justify-center border border-border-theme overflow-hidden">
-                       <span className="text-xs text-text-secondary">No Image</span>
+                      {product.images && product.images.length > 0 ? (
+                        <img 
+                          src={product.images[0].url} 
+                          alt={product.name || 'Product Image'}
+                          className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                        />
+                      ) : (
+                        <span className="text-xs text-text-secondary">No Image</span>
+                      )}
                     </div>
-                    <div style={{ color: "red", border: "1px solid red", padding: "10px", marginTop: "10px" }}>
-                      <h3>TEST: {product.name || 'NO NAME'}</h3>
-                      <p>CODE: {product.productCode || 'NO CODE'}</p>
-                      <p>PRICE: {product.sellingPrice || 0}</p>
-                      <p>STOCK: {product.inventory?.quantity || 0}</p>
+                    
+                    <div style={{ padding: '10px', marginTop: '10px' }}>
+                      <h3 style={{ fontSize: '16px', fontWeight: 'bold' }}>{product.name || 'Unnamed Product'}</h3>
+                      <p style={{ fontSize: '12px', color: '#666' }}>{product.productCode || 'No Code'}</p>
+                      
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
+                        <span style={{ fontWeight: 'bold' }}>
+                          ₹{Number(product.sellingPrice || 0).toLocaleString()}
+                        </span>
+                        <span style={{ fontSize: '12px' }}>
+                          {product.inventory?.quantity || 0} in stock
+                        </span>
+                      </div>
                     </div>
                   </div>
                 ))

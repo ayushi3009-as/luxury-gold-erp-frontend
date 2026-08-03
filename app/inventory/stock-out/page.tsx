@@ -22,59 +22,67 @@ export default function StockOut() {
   const [reason, setReason] = useState("");
   const [reference, setReference] = useState("");
   const [notes, setNotes] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
   const [isSaving, setIsSaving] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [availableProducts, setAvailableProducts] = useState<any[]>([]);
+  const [selectedProductId, setSelectedProductId] = useState("");
+  const [modalQuantity, setModalQuantity] = useState(1);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(false);
+  const [recentStockOuts, setRecentStockOuts] = useState<any[]>([]);
 
-  useEffect(() => {
-    setStockOutNo(`SO-${new Date().getFullYear()}-${Math.floor(Math.random()*9000)+1000}`);
-  }, []);
-
-  const handleSearch = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && searchQuery.trim() !== '') {
-      setIsSearching(true);
-      try {
-        // We'll search by fetching all and filtering for now, or you could create a specific search API
-        const res = await fetch('/api/products');
-        const data = await res.json();
-        
-        // Find product by SKU or name
-        const product = data.find((p: any) => 
-          p.sku?.toLowerCase() === searchQuery.toLowerCase() || 
-          p.productCode?.toLowerCase() === searchQuery.toLowerCase() ||
-          p.barcode?.toLowerCase() === searchQuery.toLowerCase()
-        );
-
-        if (product) {
-          const existingItem = items.find(i => i.id === product.id);
-          if (existingItem) {
-             setItems(items.map(i => i.id === product.id ? {...i, quantity: i.quantity + 1} : i));
-          } else {
-             setItems([...items, {
-               id: product.id,
-               name: product.name,
-               category: product.category,
-               sku: product.sku || product.productCode || "N/A",
-               quantity: 1,
-               weight: `${product.grossWeight || 0} g`,
-               reason: reason || "Sales"
-             }]);
-          }
-          setSearchQuery("");
-        } else {
-          alert("Product not found with this SKU/Barcode.");
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Error searching for product.");
-      } finally {
-        setIsSearching(false);
-      }
+  const fetchRecentStockOuts = async () => {
+    try {
+      const res = await fetch('/api/inventory/stock-out?limit=5');
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      setRecentStockOuts(data);
+    } catch (err) {
+      console.error('Failed to fetch recent stock outs', err);
     }
   };
 
+  useEffect(() => {
+    setStockOutNo(`SO-${new Date().getFullYear()}-${Math.floor(Math.random()*9000)+1000}`);
+    fetchRecentStockOuts();
+  }, []);
+
+  useEffect(() => {
+    if (isModalOpen && availableProducts.length === 0) {
+      setIsLoadingProducts(true);
+      fetch('/api/products')
+        .then(res => res.json())
+        .then(data => {
+          setAvailableProducts(data);
+          if (data.length > 0) setSelectedProductId(data[0].id);
+        })
+        .finally(() => setIsLoadingProducts(false));
+    }
+  }, [isModalOpen, availableProducts.length]);
+
+  const handleAddFromModal = () => {
+    const product = availableProducts.find(p => p.id === selectedProductId);
+    if (!product) return;
+    
+    const existingItem = items.find(i => i.id === product.id);
+    if (existingItem) {
+        setItems(items.map(i => i.id === product.id ? {...i, quantity: i.quantity + modalQuantity} : i));
+    } else {
+        setItems([...items, {
+            id: product.id,
+            name: product.name,
+            category: product.category,
+            sku: product.sku || product.productCode || "N/A",
+            quantity: modalQuantity,
+            weight: `${product.grossWeight || 0} g`,
+            reason: reason || "Stock Out"
+        }]);
+    }
+    setIsModalOpen(false);
+    setModalQuantity(1);
+  };
+
   const handleSave = async () => {
-    if (items.length === 0) return alert("Please add at least one item.");
     setIsSaving(true);
     try {
       const res = await fetch('/api/inventory/stock-out', {
@@ -89,7 +97,12 @@ export default function StockOut() {
       });
       if (res.ok) {
         alert("Stock Out processed successfully!");
-        router.push('/inventory');
+        setItems([]);
+        setReason("");
+        setReference("");
+        setNotes("");
+        setStockOutNo(`SO-${new Date().getFullYear()}-${Math.floor(Math.random()*9000)+1000}`);
+        fetchRecentStockOuts();
       } else {
         const err = await res.json();
         alert(err.error || "Failed to process stock out.");
@@ -130,10 +143,6 @@ export default function StockOut() {
               <X size={18} className="transition-transform group-hover:rotate-90" />
               Cancel
             </button>
-            <button onClick={handleSave} disabled={isSaving || items.length === 0} className="flex items-center gap-2 rounded-xl bg-accent-gold px-6 py-2.5 text-sm font-bold text-black transition-all hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed">
-              {isSaving ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
-              {isSaving ? "Saving..." : "Save Stock Out"}
-            </button>
           </div>
         </div>
 
@@ -158,8 +167,8 @@ export default function StockOut() {
               <input
                 type="text"
                 value={stockOutNo}
-                readOnly
-                className="w-full rounded-xl border border-border-theme bg-background-tertiary px-4 py-3.5 text-sm font-mono text-text-primary/70 outline-none transition-all cursor-not-allowed"
+                onChange={(e) => setStockOutNo(e.target.value)}
+                className="w-full rounded-xl border border-border-theme bg-text-primary/5 px-4 py-3.5 text-sm font-mono text-text-primary outline-none transition-all focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10"
               />
             </div>
 
@@ -178,17 +187,13 @@ export default function StockOut() {
             {/* REASON */}
             <div className="group">
               <label className="mb-2 block text-xs font-semibold tracking-wider text-text-secondary group-focus-within:text-accent-gold transition-colors">STOCK OUT REASON</label>
-              <div className="relative">
-                <select value={reason} onChange={e => setReason(e.target.value)} className="w-full appearance-none rounded-xl border border-border-theme bg-text-primary/5 px-4 py-3.5 text-sm text-text-primary outline-none transition-all focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10">
-                  <option className="bg-background-secondary text-text-primary" value="">Select Reason</option>
-                  <option className="bg-background-secondary text-text-primary" value="Sales">Sales</option>
-                  <option className="bg-background-secondary text-text-primary" value="Sales Return">Sales Return</option>
-                  <option className="bg-background-secondary text-text-primary" value="Damage">Damage</option>
-                  <option className="bg-background-secondary text-text-primary" value="Internal Use">Internal Use</option>
-                  <option className="bg-background-secondary text-text-primary" value="Manufacturing">Manufacturing</option>
-                </select>
-                <ChevronDown size={18} className="absolute right-4 top-3.5 text-text-secondary pointer-events-none" />
-              </div>
+              <input
+                type="text"
+                value={reason}
+                onChange={e => setReason(e.target.value)}
+                placeholder="Enter reason"
+                className="w-full rounded-xl border border-border-theme bg-text-primary/5 px-4 py-3.5 text-sm text-text-primary outline-none transition-all placeholder:text-text-primary/20 focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10"
+              />
             </div>
 
             {/* REFERENCE */}
@@ -203,9 +208,18 @@ export default function StockOut() {
               />
             </div>
           </div>
+
+          <div className="mt-6 flex justify-end border-t border-border-theme pt-6">
+            <button onClick={handleSave} disabled={isSaving} className="flex items-center gap-2 rounded-xl bg-accent-gold px-8 py-3 text-sm font-bold text-black transition-all hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed">
+              {isSaving ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
+              {isSaving ? "Saving..." : "Save Stock Out"}
+            </button>
+          </div>
         </div>
 
-        {/* PRODUCT SELECTION */}
+
+
+        {/* RECENT STOCK OUTS */}
         <div className="mt-6 rounded-2xl border border-border-theme bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl relative">
           <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border-theme pb-5">
             <div className="flex items-center gap-4">
@@ -213,98 +227,53 @@ export default function StockOut() {
                 <PackageMinus size={24} />
               </div>
               <div>
-                <h2 className="text-lg font-bold tracking-wide text-text-primary">STOCK OUT PRODUCTS</h2>
-                <p className="text-xs text-text-secondary mt-0.5">Select products to remove from inventory</p>
+                <h2 className="text-lg font-bold tracking-wide text-text-primary">RECENT STOCK OUTS</h2>
+                <p className="text-xs text-text-secondary mt-0.5">Latest stock out records</p>
               </div>
             </div>
-
-            {/* SEARCH */}
-            <div className="relative w-full md:w-80 flex items-center">
-              {isSearching ? <Loader2 size={18} className="absolute left-4 top-3.5 text-accent-gold animate-spin" /> : <Search size={18} className="absolute left-4 top-3.5 text-text-secondary" />}
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={handleSearch}
-                placeholder="Scan Barcode or Search SKU & Press Enter..."
-                className="w-full rounded-xl border border-border-theme bg-text-primary/5 py-3.5 pl-11 pr-4 text-sm text-text-primary outline-none transition-all placeholder:text-text-primary/30 focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10"
-              />
-            </div>
           </div>
-
-          {/* TABLE */}
           <div className="overflow-x-auto rounded-xl border border-border-theme bg-background-tertiary">
             <table className="w-full min-w-[1000px] text-left text-sm">
               <thead className="border-b border-border-theme bg-text-primary/5 text-xs font-semibold tracking-wider text-text-secondary">
                 <tr>
-                  <th className="px-5 py-4">PRODUCT</th>
-                  <th className="px-5 py-4">CATEGORY</th>
-                  <th className="px-5 py-4">SKU</th>
-                  <th className="px-5 py-4">QUANTITY</th>
-                  <th className="px-5 py-4">WEIGHT</th>
+                  <th className="px-5 py-4">SO NUMBER</th>
+                  <th className="px-5 py-4">DATE</th>
                   <th className="px-5 py-4">REASON</th>
-                  <th className="px-5 py-4 text-right">ACTION</th>
+                  <th className="px-5 py-4">REFERENCE</th>
+                  <th className="px-5 py-4">ITEMS OUT</th>
+                  <th className="px-5 py-4 text-right">STATUS</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border-theme">
-                {items.length === 0 ? (
+                {recentStockOuts.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="py-12 text-center text-text-secondary">
-                      Scan or search for a product to add it to the list.
+                    <td colSpan={6} className="py-12 text-center text-text-secondary">
+                      No recent stock outs found.
                     </td>
                   </tr>
-                ) : items.map((item) => (
-                  <tr key={item.id} className="transition-colors hover:bg-text-primary/5">
-                    <td className="px-5 py-4 font-semibold text-text-primary">{item.name}</td>
-                    <td className="px-5 py-4 text-text-secondary">{item.category}</td>
-                    <td className="px-5 py-4 font-mono text-accent-gold">{item.sku}</td>
-                    <td className="px-5 py-4 font-medium text-text-primary">{item.quantity}</td>
-                    <td className="px-5 py-4 text-text-primary/80">{item.weight}</td>
-                    <td className="px-5 py-4">
-                      <span className="inline-flex items-center rounded-full border border-accent-gold/30 bg-accent-gold/10 px-3 py-1 text-xs font-medium text-accent-gold">
-                        {item.reason}
-                      </span>
-                    </td>
-                    <td className="px-5 py-4 text-right">
-                      <button onClick={() => removeItem(item.id)} className="inline-flex items-center justify-center rounded-lg p-2 text-text-primary/40 transition-all hover:bg-red-500/20 hover:text-red-400">
-                        <Trash2 size={18} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                ) : (
+                  recentStockOuts.map((so) => (
+                    <tr key={so.id} className="transition-colors hover:bg-text-primary/5">
+                      <td className="px-5 py-4 font-mono font-medium text-accent-gold">{so.stockOutNumber}</td>
+                      <td className="px-5 py-4 text-text-primary">{new Date(so.stockOutDate).toLocaleDateString()}</td>
+                      <td className="px-5 py-4 text-text-secondary">{so.reason || 'N/A'}</td>
+                      <td className="px-5 py-4 text-text-secondary">{so.reference || 'N/A'}</td>
+                      <td className="px-5 py-4 text-text-primary font-medium">{so.items?.length || 0} Products</td>
+                      <td className="px-5 py-4 text-right">
+                        <span className="inline-flex items-center rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-xs font-medium text-green-500">
+                          Processed
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
         </div>
 
-        {/* SUMMARY & NOTES */}
-        <div className="mt-6 grid gap-6 lg:grid-cols-3">
-          <div className="col-span-2 rounded-2xl border border-border-theme bg-background-secondary/40 backdrop-blur-xl p-6 shadow-2xl">
-            <label className="mb-3 block text-xs font-semibold tracking-wider text-text-secondary">NOTES / REMARKS</label>
-            <textarea
-              rows={4}
-              value={notes}
-              onChange={e => setNotes(e.target.value)}
-              placeholder="Enter any additional notes or remarks..."
-              className="w-full resize-none rounded-xl border border-border-theme bg-text-primary/5 px-4 py-3.5 text-sm text-text-primary outline-none transition-all placeholder:text-text-primary/20 focus:border-accent-gold/50 focus:bg-text-primary/10 focus:ring-4 focus:ring-accent-gold/10"
-            />
-          </div>
-
-          <div className="rounded-2xl border border-accent-gold/20 bg-gradient-to-br from-accent-gold/10 to-transparent backdrop-blur-xl p-6 shadow-[0_0_30px_rgba(212,175,55,0.05)] flex flex-col justify-center">
-            <div className="space-y-6">
-              <div className="flex items-center justify-between border-b border-border-theme pb-4">
-                <span className="text-sm font-medium text-text-secondary">Total Products</span>
-                <span className="text-2xl font-bold text-text-primary">{items.length}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-accent-gold">Total Quantity</span>
-                <span className="text-3xl font-bold text-accent-gold">{totalQuantity} Units</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </main>
+
     </div>
   );
 }

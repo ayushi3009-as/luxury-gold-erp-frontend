@@ -71,3 +71,33 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: error.message || 'Failed to create transfer' }, { status: 500 });
   }
 }
+
+
+export async function GET(req: Request) {
+  try {
+    const session = await getSession();
+    if (!session || !session.userId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const transfers = await prisma.branchTransfer.findMany({
+      where: { tenantId: session.tenantId },
+      include: {
+        fromBranch: true,
+        toBranch: true,
+        items: {
+          include: {
+            product: true
+          }
+        }
+      },
+      orderBy: { createdAt: 'desc' },
+      take: 20
+    });
+
+    return NextResponse.json(transfers);
+  } catch (error: any) {
+    console.error('Error fetching transfers:', error);
+    return NextResponse.json({ error: error.message || 'Failed to fetch transfers' }, { status: 500 });
+  }
+}
