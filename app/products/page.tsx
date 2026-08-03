@@ -52,7 +52,7 @@ export default function ProductsPage() {
         {/* HEADER */}
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-accent-gold to-yellow-200 bg-clip-text text-transparent flex items-center gap-3">
+            <h1 className="text-3xl font-bold text-text-primary flex items-center gap-3">
               <Box size={28} className="text-accent-gold" />
               Product Management
             </h1>
@@ -151,7 +151,10 @@ export default function ProductsPage() {
                         </span>
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <button className="text-xs font-semibold text-text-secondary hover:text-accent-gold transition-colors mr-3">Edit</button>
+                        <Link href={`/products/edit/${p.id}`}>
+                          <button className="text-xs font-semibold text-text-secondary hover:text-accent-gold transition-colors mr-3">Edit</button>
+                        </Link>
+                        <button className="text-xs font-semibold text-red-400 hover:text-red-500 transition-colors">Delete</button>
                       </td>
                     </tr>
                   ))

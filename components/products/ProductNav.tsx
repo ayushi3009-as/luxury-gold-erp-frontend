@@ -27,12 +27,6 @@ const mainPages = [
 
 const morePages = [
   { name: "Collections", href: "/products/collections", icon: Layers },
-  { name: "Gold Products", href: "/products/gold", icon: CircleDollarSign },
-  { name: "Diamond Products", href: "/products/diamond", icon: Gem },
-  { name: "Product Images", href: "/products/images", icon: ImageIcon },
-  { name: "Barcode", href: "/products/barcode", icon: ScanBarcode },
-  { name: "QR Code", href: "/products/qrcode", icon: QrCode },
-  { name: "Pricing", href: "/products/pricing", icon: IndianRupee },
   { name: "History", href: "/products/history", icon: History },
 ];
 
@@ -52,7 +46,7 @@ export default function ProductNav() {
   }, []);
 
   return (
-    <nav className="relative z-[100] flex items-center justify-between border-b border-border-theme bg-[#111111]/80 backdrop-blur-xl px-6 py-4 w-full">
+    <nav className="relative z-[100] flex items-center justify-between border-b border-border-theme bg-background-secondary/80 backdrop-blur-xl px-6 py-4 w-full">
       <div className="flex items-center gap-6">
         <span className="text-sm font-bold tracking-widest uppercase text-accent-gold hidden md:block">
           Products
@@ -95,7 +89,7 @@ export default function ProductNav() {
             </button>
 
             {isDropdownOpen && (
-              <div className="absolute top-full left-0 mt-3 w-56 rounded-2xl border border-border-theme bg-[#1a1a1a] p-2 shadow-2xl z-50">
+              <div className="absolute top-full left-0 mt-3 w-56 rounded-2xl border border-border-theme bg-background-secondary p-2 shadow-2xl z-50">
                 <div className="grid grid-cols-1 gap-1">
                   {morePages.map((page) => {
                     const Icon = page.icon;
