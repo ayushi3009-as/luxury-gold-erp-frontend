@@ -164,11 +164,13 @@ export default function POSBilling() {
                     <div className="w-full h-32 bg-background-primary rounded-lg mb-3 flex items-center justify-center border border-border-theme overflow-hidden">
                        <span className="text-xs text-text-secondary">No Image</span>
                     </div>
-                    <div style={{ color: "red", border: "1px solid red", padding: "10px", marginTop: "10px" }}>
-                      <h3>TEST: {product.name || 'NO NAME'}</h3>
-                      <p>CODE: {product.productCode || 'NO CODE'}</p>
-                      <p>PRICE: {product.sellingPrice || 0}</p>
-                      <p>STOCK: {product.inventory?.quantity || 0}</p>
+                    <div>
+                      <h3 className="font-semibold text-text-primary text-sm line-clamp-1" title={product.name}>{product.name || 'Unnamed Product'}</h3>
+                      <p className="text-xs text-text-secondary mt-1">{product.productCode || 'N/A'}</p>
+                      <div className="flex justify-between items-center mt-3">
+                        <span className="text-accent-gold font-bold">₹{product.sellingPrice?.toLocaleString() || 0}</span>
+                        <span className="text-xs bg-background-primary px-2 py-1 rounded border border-border-theme">Stock: {product.inventory?.quantity || 0}</span>
+                      </div>
                     </div>
                   </div>
                 ))
