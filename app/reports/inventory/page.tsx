@@ -34,14 +34,14 @@ export default function InventoryReportPage() {
     const filtered = inventory.filter(
       (item) =>
         item.name?.toLowerCase().includes(q) ||
-        item.sku?.toLowerCase().includes(q) ||
-        item.category?.name?.toLowerCase().includes(q)
+        item.productCode?.toLowerCase().includes(q) ||
+        item.category?.toLowerCase().includes(q)
     );
     setFilteredData(filtered);
   }, [searchQuery, inventory]);
 
-  const totalStock = filteredData.reduce((acc, item) => acc + (item.stockQuantity || 0), 0);
-  const totalValue = filteredData.reduce((acc, item) => acc + ((item.stockQuantity || 0) * (item.price || 0)), 0);
+  const totalStock = filteredData.reduce((acc, item) => acc + (item.inventory?.quantity || 0), 0);
+  const totalValue = filteredData.reduce((acc, item) => acc + ((item.inventory?.quantity || 0) * (item.sellingPrice || 0)), 0);
 
   return (
     <main className="min-h-screen bg-background-primary text-text-primary p-8">
@@ -124,15 +124,15 @@ export default function InventoryReportPage() {
                 ) : (
                   filteredData.map((item) => (
                     <tr key={item.id} className="border-b border-border-theme hover:bg-background-tertiary/50 transition-colors">
-                      <td className="p-4 font-mono text-sm text-accent-gold">{item.sku}</td>
+                      <td className="p-4 font-mono text-sm text-accent-gold">{item.productCode || item.barcode || '-'}</td>
                       <td className="p-4 font-medium">{item.name}</td>
-                      <td className="p-4 text-sm text-text-secondary">{item.category?.name || '-'}</td>
+                      <td className="p-4 text-sm text-text-secondary">{item.category || '-'}</td>
                       <td className="p-4 text-sm">{item.purity || '-'}</td>
                       <td className="p-4 text-sm text-right">{item.weight || 0}</td>
-                      <td className="p-4 text-sm text-right font-medium text-green-500">₹ {(item.price || 0).toLocaleString("en-IN")}</td>
+                      <td className="p-4 text-sm text-right font-medium text-green-500">₹ {(item.sellingPrice || 0).toLocaleString("en-IN")}</td>
                       <td className="p-4 text-sm text-right font-bold">
-                        <span className={item.stockQuantity <= 0 ? "text-red-500" : "text-text-primary"}>
-                          {item.stockQuantity || 0}
+                        <span className={(item.inventory?.quantity || 0) <= 0 ? "text-red-500" : "text-text-primary"}>
+                          {item.inventory?.quantity || 0}
                         </span>
                       </td>
                     </tr>
