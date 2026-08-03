@@ -33,8 +33,8 @@ export default function RepairReportPage() {
     const q = searchQuery.toLowerCase();
     const filtered = repairs.filter(
       (item) =>
-        item.orderNumber?.toLowerCase().includes(q) ||
-        item.customer?.name?.toLowerCase().includes(q) ||
+        item.repairNumber?.toLowerCase().includes(q) ||
+        item.customerName?.toLowerCase().includes(q) ||
         item.itemName?.toLowerCase().includes(q)
     );
     setFilteredData(filtered);
@@ -112,8 +112,8 @@ export default function RepairReportPage() {
                 ) : (
                   filteredData.map((item) => (
                     <tr key={item.id} className="border-b border-border-theme hover:bg-background-tertiary/50 transition-colors">
-                      <td className="p-4 font-mono text-sm text-accent-gold">{item.orderNumber}</td>
-                      <td className="p-4 font-medium">{item.customer?.name || '-'}</td>
+                      <td className="p-4 font-mono text-sm text-accent-gold">{item.repairNumber}</td>
+                      <td className="p-4 font-medium">{item.customerName || '-'}</td>
                       <td className="p-4 text-sm">{item.itemName || '-'}</td>
                       <td className="p-4 text-sm text-green-500 font-medium">₹ {(item.estimatedCost || 0).toLocaleString("en-IN")}</td>
                       <td className="p-4 text-sm">

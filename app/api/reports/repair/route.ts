@@ -25,9 +25,6 @@ export async function GET() {
 
     const repairs = await prisma.repairOrder.findMany({
       where,
-      include: {
-        customer: { select: { name: true, mobile: true } }
-      },
       orderBy: { createdAt: 'desc' }
     });
 
