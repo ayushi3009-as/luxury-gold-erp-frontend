@@ -14,20 +14,15 @@ export default function BackupRestore() {
   const handleBackup = async () => {
     setIsBackingUp(true);
     try {
-      const data = await generateBackupAction();
+      // Trigger a top-level navigation to the non-api export endpoint. 
+      // This ensures that sameSite: "lax" cookies are sent by the browser.
+      // And the non-api path (/backup/export) avoids the CDN stripping cookies.
+      window.location.assign("/backup/export");
       
-      const jsonString = JSON.stringify(data, null, 2);
-      const blob = new Blob([jsonString], { type: "application/json" });
-      const url = window.URL.createObjectURL(blob);
-      
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `luxury_gold_backup_${new Date().toISOString().split('T')[0]}.json`;
-      document.body.appendChild(a);
-      a.click();
-      
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
+      // We simulate a short delay for the UI to show the "Generating Backup..." state
+      setTimeout(() => {
+        setIsBackingUp(false);
+      }, 2000);
       
     } catch (error) {
       console.error(error);
