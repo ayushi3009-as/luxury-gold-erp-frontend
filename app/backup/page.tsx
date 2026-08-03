@@ -3,6 +3,8 @@
 import { useState, useRef } from "react";
 import { Database, Download, Upload, ShieldAlert, Loader2, CheckCircle2 } from "lucide-react";
 
+import { generateBackupAction } from "./actions";
+
 export default function BackupRestore() {
   const [isBackingUp, setIsBackingUp] = useState(false);
   const [isRestoring, setIsRestoring] = useState(false);
@@ -12,16 +14,20 @@ export default function BackupRestore() {
   const handleBackup = async () => {
     setIsBackingUp(true);
     try {
-      // Trigger a top-level navigation to the export endpoint. 
-      // This ensures that sameSite: "lax" cookies are sent by the browser.
-      // Since the endpoint returns a Content-Disposition: attachment, it will 
-      // trigger a download without leaving the current page.
-      window.location.assign("/api/backup/export");
+      const data = await generateBackupAction();
       
-      // We simulate a short delay for the UI to show the "Generating Backup..." state
-      setTimeout(() => {
-        setIsBackingUp(false);
-      }, 2000);
+      const jsonString = JSON.stringify(data, null, 2);
+      const blob = new Blob([jsonString], { type: "application/json" });
+      const url = window.URL.createObjectURL(blob);
+      
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `luxury_gold_backup_${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
       
     } catch (error) {
       console.error(error);
