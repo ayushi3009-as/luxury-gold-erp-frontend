@@ -15,8 +15,6 @@ model Tenant {
   logoUrl              String?
   themeSettings        Json?
   isActive             Boolean               @default(true)
-  approvalStatus       TenantApprovalStatus  @default(PENDING)
-  paymentReference     String?
   createdAt            DateTime              @default(now())
   updatedAt            DateTime              @updatedAt
   aboutUsText          String?
@@ -25,6 +23,8 @@ model Tenant {
   heroImageUrl         String?
   heroSubtitle         String?
   heroTitle            String?
+  approvalStatus       TenantApprovalStatus  @default(PENDING)
+  paymentReference     String?
   activityLogs         ActivityLog[]
   attendances          Attendance[]
   backupLogs           BackupLog[]
@@ -89,16 +89,15 @@ model Tenant {
   salaries             Salary[]
   salesReturns         SalesReturn[]
   securityLogs         SecurityLog[]
+  stockEntries         StockEntry[]
   stockTransferItems   StockTransferItem[]
   storeSettings        StoreSettings[]
   suppliers            Supplier[]
   supplierPayments     SupplierPayment[]
+  tasks                Task[]
   users                User[]
   userSessions         UserSession[]
   workOrders           WorkOrder[]
-  tasks                Task[]
-  stockEntries         StockEntry[]
-  stockOuts            StockOut[]
 }
 
 model Role {
@@ -202,11 +201,11 @@ model User {
   createdOffers       Offer[]
   resetTokens         PasswordResetToken[]
   securityLogs        SecurityLog[]
+  assignedTasks       Task[]
   branch              Branch?              @relation(fields: [branchId], references: [id])
   role                Role                 @relation(fields: [roleId], references: [id])
   tenant              Tenant?              @relation(fields: [tenantId], references: [id])
   sessions            UserSession[]
-  assignedTasks       Task[]
 }
 
 model DashboardSetting {
@@ -502,15 +501,15 @@ model StockEntry {
   id                String    @id @default(uuid())
   entryNumber       String    @unique
   supplierName      String?
-  supplierInvoiceNo String?
   entryDate         DateTime  @default(now())
   totalWeight       Float     @default(0)
   totalValue        Float     @default(0)
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
   tenantId          String?
-  tenant            Tenant?   @relation(fields: [tenantId], references: [id])
+  supplierInvoiceNo String?
   products          Product[]
+  tenant            Tenant?   @relation(fields: [tenantId], references: [id])
 }
 
 model Product {
@@ -531,17 +530,16 @@ model Product {
   tenantId            String?
   imageUrl            String?
   isPublished         Boolean              @default(false)
+  stockEntryId        String?
   inventory           Inventory?
   invoiceItems        InvoiceItem[]
   manufacturingOrders ManufacturingOrder[]
   offerProducts       OfferProduct[]
+  stockEntry          StockEntry?          @relation(fields: [stockEntryId], references: [id])
   tenant              Tenant?              @relation(fields: [tenantId], references: [id])
   purchaseItems       PurchaseOrderItem[]
   transferItems       StockTransferItem[]
   workOrders          WorkOrder[]
-  stockEntryId        String?
-  stockEntry          StockEntry?          @relation(fields: [stockEntryId], references: [id])
-  stockOutItems       StockOutItem[]
 }
 
 model Inventory {
@@ -1309,6 +1307,21 @@ model RepairOrder {
   tenant         Tenant?   @relation(fields: [tenantId], references: [id])
 }
 
+model Task {
+  id          String    @id @default(uuid())
+  title       String
+  description String?
+  assigneeId  String?
+  dueDate     DateTime?
+  priority    String    @default("Medium")
+  status      String    @default("Pending")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  tenantId    String?
+  assignee    User?     @relation(fields: [assigneeId], references: [id])
+  tenant      Tenant?   @relation(fields: [tenantId], references: [id])
+}
+
 enum UserStatus {
   ACTIVE
   INACTIVE
@@ -1395,47 +1408,4 @@ enum TenantApprovalStatus {
   PENDING
   APPROVED
   REJECTED
-}
-
-model Task {
-  id          String    @id @default(uuid())
-  title       String
-  description String?
-  assigneeId  String?
-  dueDate     DateTime?
-  priority    String    @default("Medium")
-  status      String    @default("Pending")
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  tenantId    String?
-  tenant      Tenant?   @relation(fields: [tenantId], references: [id])
-  assignee    User?     @relation(fields: [assigneeId], references: [id])
-}
-
-
-model StockOut {
-  id              String         @id @default(uuid())
-  stockOutNumber  String         @unique
-  stockOutDate    DateTime       @default(now())
-  reason          String?
-  reference       String?
-  notes           String?
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
-  tenantId        String?
-  tenant          Tenant?        @relation(fields: [tenantId], references: [id])
-  items           StockOutItem[]
-}
-
-model StockOutItem {
-  id              String    @id @default(uuid())
-  stockOutId      String
-  stockOut        StockOut  @relation(fields: [stockOutId], references: [id], onDelete: Cascade)
-  productId       String?
-  product         Product?  @relation(fields: [productId], references: [id], onDelete: SetNull)
-  sku             String
-  name            String
-  quantity        Int
-  weight          String?
-  reason          String?
 }

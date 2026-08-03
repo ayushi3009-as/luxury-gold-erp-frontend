@@ -35,12 +35,16 @@ export default function ProductsPage() {
     );
   }
 
-  const m = data?.metrics || { totalProducts: 0, goldProducts: 0, diamondProducts: 0 };
-  const products = data?.products || [];
+  const products = Array.isArray(data) ? data : (data?.products || []);
+  const m = data?.metrics || { 
+    totalProducts: products.length, 
+    goldProducts: products.filter((p: any) => p.category === 'Gold Jewellery').length, 
+    diamondProducts: products.filter((p: any) => p.category === 'Diamond Jewellery').length 
+  };
 
   const filteredProducts = products.filter((p: any) => 
-    p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-    p.sku.toLowerCase().includes(searchQuery.toLowerCase())
+    p.name?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    p.productCode?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -100,7 +104,7 @@ export default function ProductsPage() {
               <Search className="absolute left-3 top-2.5 text-text-primary/40" size={18} />
               <input 
                 type="text" 
-                placeholder="Search SKU or Name..." 
+                placeholder="Search Code or Name..." 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-background-tertiary border border-border-theme rounded-xl py-2 pl-10 pr-4 text-sm text-text-primary focus:outline-none focus:border-accent-gold/50 focus:ring-1 focus:ring-accent-gold/50 transition-all placeholder-text-secondary/50"
@@ -115,7 +119,7 @@ export default function ProductsPage() {
             <table className="w-full text-left text-sm">
               <thead className="border-b border-border-theme bg-text-primary/5 text-xs font-semibold tracking-wider text-text-secondary uppercase">
                 <tr>
-                  <th className="px-6 py-4">SKU</th>
+                  <th className="px-6 py-4">Code</th>
                   <th className="px-6 py-4">Product Name</th>
                   <th className="px-6 py-4">Category</th>
                   <th className="px-6 py-4">Type</th>
@@ -134,7 +138,7 @@ export default function ProductsPage() {
                 ) : (
                   filteredProducts.map((p: any) => (
                     <tr key={p.id} className="transition-colors hover:bg-text-primary/5 group">
-                      <td className="px-6 py-4 font-mono font-medium text-text-primary/60 group-hover:text-text-primary transition-colors">{p.sku}</td>
+                      <td className="px-6 py-4 font-mono font-medium text-text-primary/60 group-hover:text-text-primary transition-colors">{p.productCode}</td>
                       <td className="px-6 py-4 font-bold text-text-primary">{p.name}</td>
                       <td className="px-6 py-4 text-text-secondary">{p.category}</td>
                       <td className="px-6 py-4">
