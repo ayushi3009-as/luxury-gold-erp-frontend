@@ -21,79 +21,162 @@ async function getTenantId() {
 export async function GET() {
   try {
     const tenantId = await getTenantId();
-
-    // Build a where clause: tenant-specific if we have one, otherwise global
     const where = tenantId ? { tenantId } : {};
 
-    // 1. Total Revenue
-    const incomes = await prisma.financeIncome.aggregate({
+    // ── 1. REVENUE from Sales Invoices ──
+    const salesAgg = await prisma.invoice.aggregate({
+      where,
+      _sum: { totalAmount: true },
+      _count: true
+    });
+    const totalRevenue = salesAgg._sum.totalAmount || 0;
+    const totalSalesCount = salesAgg._count;
+
+    // ── 2. EXPENSES from Purchase Invoices ──
+    const purchaseAgg = await prisma.purchaseInvoice.aggregate({
+      where,
+      _sum: { totalAmount: true },
+      _count: true
+    });
+    const totalPurchases = purchaseAgg._sum.totalAmount || 0;
+
+    // Also add manual expenses from FinanceExpense table
+    const manualExpAgg = await prisma.financeExpense.aggregate({
       where,
       _sum: { amount: true }
     });
-    const totalRevenue = incomes._sum.amount ? Number(incomes._sum.amount) : 0;
+    const manualExpenses = manualExpAgg._sum.amount ? Number(manualExpAgg._sum.amount) : 0;
+    const totalExpenses = totalPurchases + manualExpenses;
 
-    // 2. Total Expenses
-    const expenses = await prisma.financeExpense.aggregate({
-      where,
-      _sum: { amount: true }
-    });
-    const totalExpenses = expenses._sum.amount ? Number(expenses._sum.amount) : 0;
-
-    // 3. Net Profit
+    // ── 3. NET PROFIT ──
     const netProfit = totalRevenue - totalExpenses;
 
-    // 4. Cash Balance
-    const accounts = await prisma.financeAccount.findMany({ where });
-    const cashBalance = accounts.reduce((acc, account) => acc + Number(account.currentBalance), 0);
+    // ── 4. PAYMENTS RECEIVED (Cash collected) ──
+    const paymentsReceived = await prisma.payment.aggregate({
+      where,
+      _sum: { amount: true }
+    });
+    const totalPaymentsReceived = paymentsReceived._sum.amount || 0;
 
-    // 5. Expense Breakdown (Group by category)
-    const expenseBreakdownRaw = await prisma.financeExpense.groupBy({
+    // Payments made to suppliers
+    const paymentsMade = await prisma.supplierPayment.aggregate({
+      where,
+      _sum: { amount: true }
+    });
+    const totalPaymentsMade = paymentsMade._sum.amount || 0;
+    const cashBalance = totalPaymentsReceived - totalPaymentsMade;
+
+    // ── 5. MONTHLY REVENUE (last 6 months from Invoices) ──
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 5);
+    sixMonthsAgo.setDate(1);
+    sixMonthsAgo.setHours(0, 0, 0, 0);
+
+    const recentInvoices = await prisma.invoice.findMany({
+      where: { ...where, createdAt: { gte: sixMonthsAgo } },
+      select: { totalAmount: true, createdAt: true }
+    });
+
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const monthlyMap: Record<string, number> = {};
+    
+    // Initialize last 6 months
+    for (let i = 5; i >= 0; i--) {
+      const d = new Date();
+      d.setMonth(d.getMonth() - i);
+      const key = `${d.getFullYear()}-${d.getMonth()}`;
+      monthlyMap[key] = 0;
+    }
+
+    recentInvoices.forEach(inv => {
+      const d = new Date(inv.createdAt);
+      const key = `${d.getFullYear()}-${d.getMonth()}`;
+      if (monthlyMap[key] !== undefined) {
+        monthlyMap[key] += inv.totalAmount;
+      }
+    });
+
+    const maxMonthly = Math.max(...Object.values(monthlyMap), 1);
+    const monthlyData = Object.entries(monthlyMap).map(([key, amount]) => {
+      const [, monthIdx] = key.split('-');
+      return {
+        month: monthNames[parseInt(monthIdx)],
+        value: Math.round((amount / maxMonthly) * 100),
+        amount
+      };
+    });
+
+    // ── 6. EXPENSE BREAKDOWN by purchase category ──
+    const purchaseItems = await prisma.purchaseInvoiceItem.groupBy({
       by: ['category'],
       where,
       _sum: { amount: true }
     });
-    const expenseBreakdown = expenseBreakdownRaw.map(item => ({
+    const expenseBreakdown = purchaseItems.map(item => ({
       category: item.category,
-      amount: item._sum.amount ? Number(item._sum.amount) : 0
-    }));
+      amount: item._sum.amount || 0
+    })).sort((a, b) => b.amount - a.amount).slice(0, 5);
 
-    // 6. Recent Transactions
-    const recentTransactionsRaw = await prisma.financeTransaction.findMany({
+    // ── 7. RECENT TRANSACTIONS (last 8 from invoices + purchases) ──
+    const recentSales = await prisma.invoice.findMany({
       where,
-      orderBy: { transactionDate: 'desc' },
-      take: 4
+      orderBy: { createdAt: 'desc' },
+      take: 4,
+      select: { id: true, invoiceNo: true, totalAmount: true, createdAt: true, status: true }
     });
-    const recentTransactions = recentTransactionsRaw.map(tx => ({
-      id: tx.id,
-      txId: `TXN-${tx.id.substring(0, 4).toUpperCase()}`,
-      type: tx.transactionType,
-      amount: Number(tx.amount),
-      date: tx.transactionDate,
-      isPositive: tx.transactionType === 'INCOME' || tx.transactionType === 'CREDIT'
-    }));
+    const recentPurchases = await prisma.purchaseInvoice.findMany({
+      where,
+      orderBy: { createdAt: 'desc' },
+      take: 4,
+      select: { id: true, invoiceNumber: true, totalAmount: true, createdAt: true }
+    });
 
-    // Monthly Data
-    const monthlyData = [
-      { month: "Jan", value: 45 },
-      { month: "Feb", value: 60 },
-      { month: "Mar", value: 52 },
-      { month: "Apr", value: 72 },
-      { month: "May", value: 65 },
-      { month: "Jun", value: 88 },
-      { month: "Jul", value: 76 },
-      { month: "Aug", value: totalRevenue > 0 ? 100 : 94 },
-    ];
+    const recentTransactions = [
+      ...recentSales.map(s => ({
+        id: s.id,
+        txId: s.invoiceNo,
+        type: 'Sale',
+        amount: s.totalAmount,
+        date: s.createdAt,
+        isPositive: true
+      })),
+      ...recentPurchases.map(p => ({
+        id: p.id,
+        txId: p.invoiceNumber,
+        type: 'Purchase',
+        amount: p.totalAmount,
+        date: p.createdAt,
+        isPositive: false
+      }))
+    ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 4);
+
+    // ── 8. PENDING AMOUNTS ──
+    const pendingInvoices = await prisma.invoice.aggregate({
+      where: { ...where, status: 'PENDING' },
+      _sum: { totalAmount: true },
+      _count: true
+    });
+
+    const pendingPurchases = await prisma.purchaseInvoice.aggregate({
+      where: { ...where, paymentStatus: 'PENDING' },
+      _sum: { totalAmount: true },
+      _count: true
+    });
 
     return NextResponse.json({
       totalRevenue,
       totalExpenses,
       netProfit,
       cashBalance,
-      accounts: accounts.map(a => ({ name: a.accountName, balance: Number(a.currentBalance) })),
+      totalSalesCount,
+      monthlyData,
       expenseBreakdown,
       recentTransactions,
-      monthlyData,
-      profitMargin: totalRevenue > 0 ? ((netProfit / totalRevenue) * 100).toFixed(1) : "0.0"
+      profitMargin: totalRevenue > 0 ? ((netProfit / totalRevenue) * 100).toFixed(1) : "0.0",
+      pendingReceivables: pendingInvoices._sum.totalAmount || 0,
+      pendingReceivablesCount: pendingInvoices._count,
+      pendingPayables: pendingPurchases._sum.totalAmount || 0,
+      pendingPayablesCount: pendingPurchases._count,
     });
 
   } catch (error) {
