@@ -36,6 +36,11 @@ const menuItems = [
     href: "/reports/repair",
     icon: Wrench,
   },
+  {
+    title: "Purchase Reports",
+    href: "/reports/purchase",
+    icon: Package, // or another appropriate icon like ShoppingBag, but Package is imported already. Let's use Package.
+  },
 ];
 
 export default function ReportsNav() {
@@ -71,7 +76,7 @@ export default function ReportsNav() {
       })}
       
       {/* Spacer to prevent right side from cutting off in overflow */}
-      <div className="w-6 flex-shrink-0" />
+      <div className="min-w-[24px] w-6 flex-shrink-0 text-transparent select-none">.</div>
     </nav>
   );
 }
