@@ -26,12 +26,19 @@ export async function GET() {
     const purchases = await prisma.purchaseInvoice.findMany({
       where,
       include: {
-        supplier: { select: { name: true } }
+        supplier: { select: { supplierName: true } }
       },
       orderBy: { invoiceDate: 'desc' }
     });
 
-    return NextResponse.json(purchases);
+    const mappedPurchases = purchases.map(p => ({
+      ...p,
+      supplier: {
+        name: p.supplier?.supplierName
+      }
+    }));
+
+    return NextResponse.json(mappedPurchases);
   } catch (error) {
     console.error('Error fetching purchase report data:', error);
     return NextResponse.json({ error: 'Failed to fetch purchases' }, { status: 500 });
