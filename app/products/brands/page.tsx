@@ -15,6 +15,7 @@ export default function BrandsPage() {
   const [editId, setEditId] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [productCount, setProductCount] = useState(0);
 
   useEffect(() => {
     fetchBrands();
@@ -38,6 +39,7 @@ export default function BrandsPage() {
     setEditId(null);
     setName("");
     setDescription("");
+    setProductCount(0);
     setIsModalOpen(true);
   }
 
@@ -45,6 +47,7 @@ export default function BrandsPage() {
     setEditId(b.id);
     setName(b.name);
     setDescription(b.description || "");
+    setProductCount(b._count?.products || 0);
     setIsModalOpen(true);
   }
 
@@ -185,9 +188,16 @@ export default function BrandsPage() {
           <div className="w-full max-w-md rounded-2xl border border-border-theme bg-background-secondary p-6 shadow-[0_0_40px_rgba(212,175,55,0.15)] relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/50 via-yellow-300 to-accent-gold/50"></div>
             
-            <h2 className="text-xl font-bold text-text-primary mb-6">
-              {editId ? 'Edit Brand' : 'Create New Brand'}
-            </h2>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-bold text-text-primary">
+                {editId ? 'Edit Brand' : 'Create New Brand'}
+              </h2>
+              {editId && (
+                <span className="bg-text-primary/10 px-3 py-1 rounded-full text-xs font-bold text-text-primary">
+                  {productCount} {productCount === 1 ? 'Product' : 'Products'}
+                </span>
+              )}
+            </div>
             
             <form onSubmit={handleSaveBrand} className="space-y-4">
               <div>
