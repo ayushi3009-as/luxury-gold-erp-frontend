@@ -117,7 +117,7 @@ export default function ManufacturingPage() {
 
         {/* METRICS */}
         <div className="grid gap-6 md:grid-cols-4 mb-10">
-          <div className="bg-[#111111]/80 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
+          <div className="bg-background-secondary/80 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 rounded-lg bg-accent-gold/10 text-accent-gold">
                 <Factory size={20} />
@@ -126,7 +126,7 @@ export default function ManufacturingPage() {
             </div>
             <p className="text-4xl font-bold text-text-primary group-hover:text-accent-gold transition-colors">{metrics.totalOrders}</p>
           </div>
-          <div className="bg-[#111111]/80 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
+          <div className="bg-background-secondary/80 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 rounded-lg bg-yellow-500/10 text-yellow-500">
                 <Wrench size={20} />
@@ -135,7 +135,7 @@ export default function ManufacturingPage() {
             </div>
             <p className="text-4xl font-bold text-text-primary">{metrics.pendingCards}</p>
           </div>
-          <div className="bg-[#111111]/80 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
+          <div className="bg-background-secondary/80 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 rounded-lg bg-green-500/10 text-green-500">
                 <PackageCheck size={20} />
@@ -144,7 +144,7 @@ export default function ManufacturingPage() {
             </div>
             <p className="text-4xl font-bold text-text-primary">{metrics.completedItems}</p>
           </div>
-          <div className="bg-[#111111]/80 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
+          <div className="bg-background-secondary/80 backdrop-blur-xl rounded-2xl p-6 border border-border-theme relative overflow-hidden group hover:border-accent-gold/30 transition-all shadow-xl">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500">
                 <Users size={20} />
@@ -156,7 +156,7 @@ export default function ManufacturingPage() {
         </div>
 
         {/* TABLE */}
-        <div className="rounded-2xl border border-border-theme bg-[#111111]/60 backdrop-blur-xl p-8 shadow-2xl relative overflow-hidden">
+        <div className="rounded-2xl border border-border-theme bg-background-secondary/60 backdrop-blur-xl p-8 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/40 via-transparent to-transparent"></div>
           
           <h2 className="text-lg font-bold text-accent-gold mb-6 tracking-wider uppercase flex items-center gap-2">
@@ -215,7 +215,7 @@ export default function ManufacturingPage() {
       {/* CREATE ORDER MODAL */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background-primary backdrop-blur-sm p-4">
-          <div className="w-full max-w-md rounded-3xl border border-border-theme bg-[#111111] p-8 shadow-[0_0_50px_rgba(212,175,55,0.15)] relative overflow-hidden transform transition-all">
+          <div className="w-full max-w-md rounded-3xl border border-border-theme bg-background-secondary p-8 shadow-[0_0_50px_rgba(212,175,55,0.15)] relative overflow-hidden transform transition-all">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/50 via-yellow-300 to-accent-gold/50"></div>
             
             <h2 className="text-2xl font-bold text-text-primary mb-2">New Production Job</h2>
