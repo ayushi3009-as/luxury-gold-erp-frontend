@@ -4,33 +4,28 @@ import { getSession } from '@/lib/session';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET() {
+async function getTenantId() {
   try {
     const session = await getSession();
-    console.log("Session in GET:", session);
-    if (!session || !session.userId) {
-      console.log("No session or userId");
-      return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
-    }
-
-    let tenantId = session.tenantId;
-    if (!tenantId) {
-      // Fallback for older sessions without tenantId
+    if (session?.tenantId) return session.tenantId;
+    if (session?.userId) {
       const user = await prisma.user.findUnique({ where: { id: session.userId } });
-      console.log("User from DB for fallback:", user);
-      if (user?.tenantId) {
-        tenantId = user.tenantId;
-      } else if (session.role !== 'Super Admin' && session.role !== 'SUPER_ADMIN') {
-        console.log("No tenantId in DB user");
-        return NextResponse.json({ error: 'Unauthorized. No Tenant ID found.' }, { status: 401 });
-      }
+      if (user?.tenantId) return user.tenantId;
     }
+  } catch (e) {
+    console.error('Session error:', e);
+  }
+  return null;
+}
 
-    // Get the most recent gold rate FOR THIS TENANT
-    const latestRate = await prisma.goldRate.findFirst({
-      where: { tenantId },
-      orderBy: { createdAt: 'desc' }
-    });
+export async function GET() {
+  try {
+    const tenantId = await getTenantId();
+
+    // Try tenant-specific first, then global fallback
+    const latestRate = tenantId
+      ? await prisma.goldRate.findFirst({ where: { tenantId }, orderBy: { createdAt: 'desc' } })
+      : await prisma.goldRate.findFirst({ orderBy: { createdAt: 'desc' } });
 
     return NextResponse.json(latestRate || { 
       gold24k: 74250, 
@@ -48,32 +43,13 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
-    const session = await getSession();
-    console.log("Session in POST:", session);
-    if (!session || !session.userId) {
-      console.log("No session or userId in POST");
-      return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
-    }
-
-    let tenantId = session.tenantId;
-    if (!tenantId) {
-      // Fallback for older sessions without tenantId
-      const user = await prisma.user.findUnique({ where: { id: session.userId } });
-      console.log("User from DB for fallback in POST:", user);
-      if (user?.tenantId) {
-        tenantId = user.tenantId;
-      } else if (session.role !== 'Super Admin' && session.role !== 'SUPER_ADMIN') {
-        console.log("No tenantId in DB user for POST");
-        return NextResponse.json({ error: 'Unauthorized. No Tenant ID found.' }, { status: 401 });
-      }
-    }
-
+    const tenantId = await getTenantId();
     const data = await req.json();
     
-    // Create new rate linked to THIS TENANT
+    // Create new rate, linked to tenant if available
     const newRate = await prisma.goldRate.create({
       data: {
-        tenantId,
+        tenantId: tenantId || undefined,
         gold24k: Number(data.gold24k),
         gold22k: Number(data.gold22k),
         gold18k: Number(data.gold18k),
