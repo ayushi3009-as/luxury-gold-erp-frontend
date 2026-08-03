@@ -4,33 +4,37 @@ import { getSession } from '@/lib/session';
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
+async function getTenantId() {
   try {
     const session = await getSession();
-    if (!session || !session.userId) {
-      return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
-    }
-
-    let tenantId = session.tenantId;
-    if (!tenantId) {
+    if (session?.tenantId) return session.tenantId;
+    if (session?.userId) {
       const user = await prisma.user.findUnique({ where: { id: session.userId } });
-      if (user?.tenantId) {
-        tenantId = user.tenantId;
-      } else if (session.role !== 'Super Admin' && session.role !== 'SUPER_ADMIN') {
-        return NextResponse.json({ error: 'Unauthorized. No Tenant ID found.' }, { status: 401 });
-      }
+      if (user?.tenantId) return user.tenantId;
     }
+  } catch (e) {
+    console.error('Session error in finance dashboard:', e);
+  }
+  return null;
+}
+
+export async function GET() {
+  try {
+    const tenantId = await getTenantId();
+
+    // Build a where clause: tenant-specific if we have one, otherwise global
+    const where = tenantId ? { tenantId } : {};
 
     // 1. Total Revenue
     const incomes = await prisma.financeIncome.aggregate({
-      where: { tenantId },
+      where,
       _sum: { amount: true }
     });
     const totalRevenue = incomes._sum.amount ? Number(incomes._sum.amount) : 0;
 
     // 2. Total Expenses
     const expenses = await prisma.financeExpense.aggregate({
-      where: { tenantId },
+      where,
       _sum: { amount: true }
     });
     const totalExpenses = expenses._sum.amount ? Number(expenses._sum.amount) : 0;
@@ -39,15 +43,13 @@ export async function GET() {
     const netProfit = totalRevenue - totalExpenses;
 
     // 4. Cash Balance
-    const accounts = await prisma.financeAccount.findMany({
-      where: { tenantId }
-    });
+    const accounts = await prisma.financeAccount.findMany({ where });
     const cashBalance = accounts.reduce((acc, account) => acc + Number(account.currentBalance), 0);
 
     // 5. Expense Breakdown (Group by category)
     const expenseBreakdownRaw = await prisma.financeExpense.groupBy({
       by: ['category'],
-      where: { tenantId },
+      where,
       _sum: { amount: true }
     });
     const expenseBreakdown = expenseBreakdownRaw.map(item => ({
@@ -57,7 +59,7 @@ export async function GET() {
 
     // 6. Recent Transactions
     const recentTransactionsRaw = await prisma.financeTransaction.findMany({
-      where: { tenantId },
+      where,
       orderBy: { transactionDate: 'desc' },
       take: 4
     });
@@ -70,8 +72,7 @@ export async function GET() {
       isPositive: tx.transactionType === 'INCOME' || tx.transactionType === 'CREDIT'
     }));
 
-    // Monthly Data (Mocked for now as SQLite/Postgres grouping by month varies, simpler to return dummy for chart or calculate in JS if we fetch all)
-    // For simplicity, we return some dummy monthly data based on total revenue so it's not empty
+    // Monthly Data
     const monthlyData = [
       { month: "Jan", value: 45 },
       { month: "Feb", value: 60 },

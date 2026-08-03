@@ -71,7 +71,7 @@ export default function FinanceDashboard() {
           <h1 className="mt-2 text-3xl font-bold">Finance Dashboard</h1>
           <p className="mt-1 text-text-secondary">Monitor revenue, expenses, profit and financial performance.</p>
         </div>
-        <button onClick={fetchDashboardData} className="flex items-center gap-2 rounded-lg border border-[#6d5318] bg-[#17150d] px-4 py-2 text-sm text-accent-gold hover:bg-[#2a2414] transition-colors">
+        <button onClick={fetchDashboardData} className="flex items-center gap-2 rounded-lg border border-border-theme bg-background-secondary px-4 py-2 text-sm text-accent-gold hover:bg-background-tertiary transition-colors">
           <RefreshCw size={16} className={isLoading ? "animate-spin" : ""} />
           Refresh
         </button>
@@ -186,7 +186,7 @@ export default function FinanceDashboard() {
           </div>
           <div className="mt-5 space-y-4">
             {dashboardData.accounts.length > 0 ? dashboardData.accounts.map((acc: any) => (
-              <div key={acc.name} className="flex items-center justify-between border-b border-[#29261c] pb-3">
+              <div key={acc.name} className="flex items-center justify-between border-b border-border-theme pb-3">
                 <span className="text-sm text-text-secondary">{acc.name}</span>
                 <span className="font-semibold text-accent-gold">₹ {acc.balance.toLocaleString("en-IN")}</span>
               </div>
@@ -254,7 +254,7 @@ function ExpenseRow({ label, value, percentage }: { label: string; value: string
         <span className="text-text-secondary">{label}</span>
         <span className="text-accent-gold">{percentage}</span>
       </div>
-      <div className="mt-2 h-2 rounded-full bg-[#29271d]">
+      <div className="mt-2 h-2 rounded-full bg-background-tertiary">
         <div className="h-2 rounded-full bg-accent-gold" style={{ width: percentage }} />
       </div>
       <p className="mt-1 text-xs text-text-secondary">{value}</p>
