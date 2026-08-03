@@ -100,7 +100,7 @@ export default function GoldRatePage() {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="rounded-xl border border-border-theme bg-[#111111]/80 px-4 py-2 shadow-lg">
+            <div className="rounded-xl border border-border-theme bg-background-secondary px-4 py-2 shadow-lg">
               <p className="text-[10px] text-text-secondary tracking-wider uppercase">Last Updated</p>
               <p className="text-sm font-bold text-accent-gold flex items-center gap-2">
                 <RefreshCw size={12} className="animate-spin-slow" />
@@ -122,7 +122,7 @@ export default function GoldRatePage() {
           {rates.map((rate) => (
             <div
               key={rate.metal}
-              className="rounded-2xl border border-border-theme bg-[#111111]/80 backdrop-blur-xl p-6 shadow-xl relative overflow-hidden group hover:border-accent-gold/30 transition-all"
+              className="rounded-2xl border border-border-theme bg-background-secondary backdrop-blur-xl p-6 shadow-xl relative overflow-hidden group hover:border-accent-gold/30 transition-all"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent-gold/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="flex items-center justify-between">
@@ -143,7 +143,7 @@ export default function GoldRatePage() {
 
         {/* Market Overview */}
         <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-2">
-          <div className="rounded-2xl border border-border-theme bg-[#111111]/60 backdrop-blur-xl p-8 shadow-xl">
+          <div className="rounded-2xl border border-border-theme bg-background-tertiary backdrop-blur-xl p-8 shadow-xl">
             <h2 className="text-lg font-bold text-accent-gold mb-6 uppercase tracking-wider">
               Market Overview
             </h2>
@@ -171,8 +171,8 @@ export default function GoldRatePage() {
 
       {/* UPDATE MODAL */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-background-primary backdrop-blur-sm">
-          <div className="bg-[#111111] border border-border-theme rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-background-secondary border border-border-theme rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in fade-in zoom-in-95 duration-200">
             <h2 className="text-2xl font-bold text-text-primary mb-6">Update Market Rates</h2>
             <form onSubmit={handleUpdateRate} className="space-y-4">
               <div>
