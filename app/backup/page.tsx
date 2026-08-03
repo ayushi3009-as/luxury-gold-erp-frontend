@@ -12,39 +12,20 @@ export default function BackupRestore() {
   const handleBackup = async () => {
     setIsBackingUp(true);
     try {
-      const response = await fetch("/api/backup/export", { credentials: "include" });
-      if (response.status === 401) {
-        console.warn('Unauthorized fetch to backup export');
-      }
+      // Trigger a top-level navigation to the export endpoint. 
+      // This ensures that sameSite: "lax" cookies are sent by the browser.
+      // Since the endpoint returns a Content-Disposition: attachment, it will 
+      // trigger a download without leaving the current page.
+      window.location.assign("/api/backup/export");
       
-      if (!response.ok) throw new Error("Backup failed");
+      // We simulate a short delay for the UI to show the "Generating Backup..." state
+      setTimeout(() => {
+        setIsBackingUp(false);
+      }, 2000);
       
-      // Trigger download
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      
-      // Get filename from header or use default
-      const disposition = response.headers.get('content-disposition');
-      let filename = `luxury_gold_backup_${new Date().toISOString().split('T')[0]}.json`;
-      if (disposition && disposition.indexOf('attachment') !== -1) {
-        const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-        const matches = filenameRegex.exec(disposition);
-        if (matches != null && matches[1]) {
-          filename = matches[1].replace(/['"]/g, '');
-        }
-      }
-      
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
     } catch (error) {
       console.error(error);
       alert("Failed to generate backup.");
-    } finally {
       setIsBackingUp(false);
     }
   };
