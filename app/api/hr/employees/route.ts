@@ -44,18 +44,26 @@ export async function POST(req: Request) {
       department = await prisma.department.create({ data: { name: departmentName || 'General' } });
     }
 
-    // 2. Auto-create a User account for this employee
-    const username = `${firstName.toLowerCase()}.${lastName.toLowerCase()}`;
+    // 2. Find or create 'Employee' role
+    let role = await prisma.role.findUnique({ where: { name: 'Employee' } });
+    if (!role) {
+      role = await prisma.role.create({ data: { name: 'Employee', description: 'Standard employee role' } });
+    }
+
+    // 3. Auto-create a User account for this employee
+    const username = `${firstName.toLowerCase()}.${lastName.toLowerCase()}.${Math.floor(Math.random() * 1000)}`;
     const user = await prisma.user.create({
       data: {
-        name: `${firstName} ${lastName}`,
+        fullName: `${firstName} ${lastName}`,
+        username,
         email,
-        password: '$2b$10$defaulthashedpassword000000000000000000000000000', // placeholder
-        role: 'Employee',
+        mobile: phone,
+        passwordHash: '$2b$10$defaulthashedpassword000000000000000000000000000', // placeholder
+        roleId: role.id,
       },
     });
 
-    // 3. Create the employee
+    // 4. Create the employee
     const newEmployee = await prisma.employee.create({
       data: {
         employeeCode,
@@ -79,7 +87,7 @@ export async function POST(req: Request) {
   } catch (error: any) {
     console.error('Error creating employee:', error);
     const msg = error?.code === 'P2002' 
-      ? 'Employee code or email already exists' 
+      ? 'Employee code, email or phone already exists' 
       : 'Failed to create employee';
     return NextResponse.json({ error: msg }, { status: 500 });
   }
