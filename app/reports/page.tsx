@@ -51,6 +51,7 @@ export default function ReportsDashboardPage() {
     sales: 0,
     customers: 0,
     repairs: 0,
+    purchases: 0,
     recentActivity: []
   };
 
@@ -74,6 +75,14 @@ export default function ReportsDashboardPage() {
       color: "text-green-500"
     },
     {
+      title: "Purchase Reports",
+      value: reportsData.purchases.toLocaleString("en-IN"),
+      description: "Purchase Invoices",
+      icon: FileSpreadsheet,
+      href: "/reports/purchase",
+      color: "text-yellow-400"
+    },
+    {
       title: "Customer Reports",
       value: reportsData.customers.toLocaleString("en-IN"),
       description: "Registered Customers",
@@ -92,7 +101,7 @@ export default function ReportsDashboardPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-background-primary text-text-primary p-8">
+    <main className="min-h-screen bg-background-primary text-text-primary p-8 overflow-x-hidden">
       {/* Header */}
       <div className="mb-8 flex flex-col md:flex-row justify-between md:items-end gap-4">
         <div>
@@ -113,30 +122,32 @@ export default function ReportsDashboardPage() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 lg:gap-6 mb-8 w-full">
         {reportCards.map((report) => {
           const Icon = report.icon;
           return (
-            <div key={report.title} className="bg-background-secondary border border-border-theme rounded-2xl p-6 relative overflow-hidden group hover:-translate-y-1 hover:shadow-lg transition-all">
-              <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-text-secondary text-sm">{report.title}</h3>
-                  <span className={`text-3xl font-bold mt-2 block ${report.color}`}>
-                    {report.value}
-                  </span>
-                  <p className="text-xs text-text-secondary mt-1">{report.description}</p>
+            <Link key={report.title} href={report.href} className="block w-full">
+              <div className="bg-background-secondary border border-border-theme rounded-2xl p-4 lg:p-6 h-full relative overflow-hidden group hover:-translate-y-1 hover:shadow-lg transition-all cursor-pointer">
+                <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="text-text-secondary text-xs lg:text-sm">{report.title}</h3>
+                    <span className={`text-2xl lg:text-3xl font-bold mt-2 block ${report.color}`}>
+                      {report.value}
+                    </span>
+                    <p className="text-xs text-text-secondary mt-1 line-clamp-1">{report.description}</p>
+                  </div>
+                  <div className="p-2 lg:p-3 bg-background-tertiary rounded-xl border border-border-theme shrink-0">
+                    <Icon size={20} className={report.color} />
+                  </div>
                 </div>
-                <div className="p-3 bg-background-tertiary rounded-xl border border-border-theme">
-                  <Icon size={24} className={report.color} />
+
+                <div className="mt-4 lg:mt-6 flex items-center justify-between text-xs lg:text-sm text-accent-gold group-hover:underline group-hover:gap-1 transition-all">
+                  <span>View Full Report</span>
+                  <ArrowRight size={14} />
                 </div>
               </div>
-
-              <Link href={report.href} className="mt-6 flex items-center justify-between text-sm text-accent-gold hover:underline group-hover:gap-1 transition-all">
-                <span>View Full Report</span>
-                <ArrowRight size={16} />
-              </Link>
-            </div>
+            </Link>
           );
         })}
       </div>

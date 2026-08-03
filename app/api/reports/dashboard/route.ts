@@ -35,6 +35,9 @@ export async function GET() {
     // 4. Repair Orders Count
     const repairOrdersCount = await prisma.repairOrder.count({ where });
 
+    // 5. Purchase Invoices Count
+    const purchasesCount = await prisma.purchaseInvoice.count({ where });
+
     // Also fetch last 5 invoices for a recent activity list
     const recentSales = await prisma.invoice.findMany({
       where,
@@ -53,6 +56,7 @@ export async function GET() {
       sales: allSalesCount,
       customers: customersCount,
       repairs: repairOrdersCount,
+      purchases: purchasesCount,
       recentActivity: recentSales
     });
 
