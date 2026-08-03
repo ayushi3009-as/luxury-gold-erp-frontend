@@ -1,11 +1,16 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import { getSession } from '@/lib/session';
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
+    const session = await getSession();
+    const where = session?.tenantId ? { tenantId: session.tenantId } : {};
+    
     const customers = await prisma.customer.findMany({
+      where,
       orderBy: {
         createdAt: 'desc',
       }
@@ -19,6 +24,9 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    const session = await getSession();
+    const tenantId = session?.tenantId;
+    
     const body = await request.json();
     const { 
       firstName, 
@@ -50,8 +58,21 @@ export async function POST(request: Request) {
         mobile: mobileNo,
         email: body.email,
         address: body.address,
+        ...(tenantId ? { tenantId } : {})
       }
     });
+
+    if (session?.userId && tenantId) {
+      await prisma.activityLog.create({
+        data: {
+          action: 'CREATE',
+          module: 'CUSTOMER',
+          description: `Added or updated customer: ${nameStr}`,
+          userId: session.userId,
+          tenantId: tenantId,
+        }
+      }).catch(err => console.error("Failed to log activity:", err));
+    }
 
     return NextResponse.json(newCustomer, { status: 200 });
   } catch (error) {

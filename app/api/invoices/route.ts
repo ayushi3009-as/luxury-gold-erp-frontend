@@ -1,11 +1,16 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import { getSession } from '@/lib/session';
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
+    const session = await getSession();
+    const where = session?.tenantId ? { tenantId: session.tenantId } : {};
+    
     const invoices = await prisma.invoice.findMany({
+      where,
       include: {
         customer: true,
         items: true,
@@ -23,6 +28,9 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    const session = await getSession();
+    const tenantId = session?.tenantId;
+    
     const body = await request.json();
     const { 
       invoiceNumber,
@@ -47,6 +55,7 @@ export async function POST(request: Request) {
           discountTotal,
           totalAmount: grandTotal,
           status: "COMPLETED",
+          ...(tenantId ? { tenantId } : {}),
           payments: {
             create: {
               paymentMode: paymentMethod || "CASH",
@@ -62,6 +71,7 @@ export async function POST(request: Request) {
               makingCharge: item.makingCharge || 0,
               metalRate: item.metalRate || 0,
               taxPercent: item.taxPercent || 3, // Default 3% GST for jewelry
+              ...(tenantId ? { tenantId } : {})
             }))
           }
         },
@@ -74,12 +84,12 @@ export async function POST(request: Request) {
 
       // Update Inventory safely
       for (const item of items) {
-        const inv = await prisma.inventory.findUnique({
-          where: { productId: item.productId }
+        const inv = await prisma.inventory.findFirst({
+          where: { productId: item.productId, ...(tenantId ? { tenantId } : {}) }
         });
         if (inv) {
           await prisma.inventory.update({
-            where: { productId: item.productId },
+            where: { id: inv.id },
             data: {
               quantity: {
                 decrement: item.quantity
@@ -87,6 +97,18 @@ export async function POST(request: Request) {
             }
           });
         }
+      }
+
+      if (session?.userId && tenantId) {
+        await prisma.activityLog.create({
+          data: {
+            action: 'CREATE',
+            module: 'INVOICE',
+            description: `Generated new sales invoice ${invoiceNumber} for ₹${grandTotal}`,
+            userId: session.userId,
+            tenantId: tenantId,
+          }
+        });
       }
 
       return invoice;

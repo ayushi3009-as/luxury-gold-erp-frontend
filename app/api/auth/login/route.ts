@@ -35,6 +35,19 @@ export async function POST(request: Request) {
     }
 
     await createSession(user.id, user.role.name, user.tenantId);
+
+    // Create Audit Log
+    if (user.tenantId) {
+      await prisma.activityLog.create({
+        data: {
+          action: 'LOGIN',
+          module: 'AUTH',
+          description: `User ${user.email} logged in.`,
+          userId: user.id,
+          tenantId: user.tenantId,
+        }
+      }).catch(err => console.error("Failed to log activity:", err));
+    }
     
     return NextResponse.json({
       message: 'Login successful',
@@ -45,8 +58,6 @@ export async function POST(request: Request) {
         role: user.role.name,
       }
     });
-
-    return response;
 
   } catch (error) {
     console.error('Login error:', error);
