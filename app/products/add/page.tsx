@@ -74,13 +74,13 @@ export default function AddProductPage() {
             <Link href="/products" className="inline-flex items-center gap-2 text-xs font-semibold text-text-secondary hover:text-accent-gold transition-colors mb-4">
               <ArrowLeft size={14} /> Back to Products
             </Link>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-accent-gold to-yellow-200 bg-clip-text text-transparent">Add New Product</h1>
+            <h1 className="text-3xl font-bold text-text-primary">Add New Product</h1>
             <p className="mt-1 text-sm text-text-secondary">Enter details to add a new jewellery piece to inventory.</p>
           </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="bg-[#111] border border-border-theme rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+          <div className="bg-background-secondary border border-border-theme rounded-2xl p-8 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/50 via-yellow-300 to-accent-gold/50"></div>
             
             <h2 className="text-lg font-bold text-text-primary mb-6">Basic Information</h2>
@@ -143,7 +143,7 @@ export default function AddProductPage() {
             </div>
           </div>
 
-          <div className="bg-[#111] border border-border-theme rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+          <div className="bg-background-secondary border border-border-theme rounded-2xl p-8 shadow-2xl relative overflow-hidden">
             <h2 className="text-lg font-bold text-text-primary mb-6">Weight & Pricing</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
