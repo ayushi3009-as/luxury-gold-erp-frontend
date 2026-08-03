@@ -12,25 +12,14 @@ export default function AddProductPage() {
 
   // Form State
   const [name, setName] = useState("");
-  const [categoryId, setCategoryId] = useState("");
+  const [category, setCategory] = useState("");
   const [metalType, setMetalType] = useState("Gold");
   const [purity, setPurity] = useState("22K");
   const [grossWeight, setGrossWeight] = useState("");
   const [netWeight, setNetWeight] = useState("");
   const [makingCharge, setMakingCharge] = useState("");
 
-  useEffect(() => {
-    fetch('/api/categories')
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data)) {
-          setCategories(data);
-        } else if (data && Array.isArray(data.categories)) {
-          setCategories(data.categories);
-        }
-      })
-      .catch(console.error);
-  }, []);
+  // Use free-text for category instead of fetching from API
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -42,7 +31,7 @@ export default function AddProductPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name,
-          categoryId,
+          category,
           metalType,
           purity,
           grossWeight: Number(grossWeight),
@@ -99,17 +88,14 @@ export default function AddProductPage() {
 
               <div>
                 <label className="block text-xs font-semibold text-text-secondary mb-2 uppercase tracking-wider">Category</label>
-                <select 
+                <input 
+                  type="text"
                   required
-                  value={categoryId}
-                  onChange={(e) => setCategoryId(e.target.value)}
-                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all"
-                >
-                  <option value="">-- Select Category --</option>
-                  {categories.map((c: any) => (
-                    <option key={c.id} value={c.id}>{c.name}</option>
-                  ))}
-                </select>
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  placeholder="e.g. Necklace, Ring, etc."
+                  className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-sm text-text-primary focus:border-accent-gold/50 focus:outline-none focus:ring-1 focus:ring-accent-gold/50 transition-all placeholder-text-secondary/50"
+                />
               </div>
 
               <div>

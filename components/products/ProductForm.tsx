@@ -58,15 +58,11 @@ export default function ProductForm({
             Category
           </label>
 
-          <select
+          <input
+            type="text"
+            placeholder="e.g. Necklace, Ring, etc."
             className="w-full rounded-xl bg-background-primary border border-gray-700 px-4 py-3 text-text-primary focus:border-yellow-500 outline-none"
-          >
-            <option>Select Category</option>
-            <option>Gold Jewellery</option>
-            <option>Diamond Jewellery</option>
-            <option>Silver Jewellery</option>
-            <option>Platinum Jewellery</option>
-          </select>
+          />
 
         </div>
 
