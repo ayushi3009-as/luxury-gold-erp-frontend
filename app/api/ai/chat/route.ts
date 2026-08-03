@@ -2,22 +2,26 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { getSession } from '@/lib/session';
 
-export async function POST(req: Request) {
+export const dynamic = "force-dynamic";
+
+async function getTenantId() {
   try {
     const session = await getSession();
-    if (!session || !session.userId) {
-      return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
-    }
-
-    let tenantId = session.tenantId;
-    if (!tenantId) {
+    if (session?.tenantId) return session.tenantId;
+    if (session?.userId) {
       const user = await prisma.user.findUnique({ where: { id: session.userId } });
-      if (user?.tenantId) {
-        tenantId = user.tenantId;
-      } else if (session.role !== 'Super Admin' && session.role !== 'SUPER_ADMIN') {
-        return NextResponse.json({ error: 'Unauthorized. No Tenant ID found.' }, { status: 401 });
-      }
+      if (user?.tenantId) return user.tenantId;
     }
+  } catch (e) {
+    console.error('Session error:', e);
+  }
+  return null;
+}
+
+export async function POST(req: Request) {
+  try {
+    const tenantId = await getTenantId();
+    const where = tenantId ? { tenantId } : {};
 
     const { message } = await req.json();
     if (!message) {
@@ -33,10 +37,10 @@ export async function POST(req: Request) {
     // Rule-Based Logic
     if (text.includes("sales") || text.includes("revenue")) {
       const invoices = await prisma.invoice.findMany({
-        where: { tenantId, status: { in: ['COMPLETED', 'PAID', 'DELIVERED'] } }
+        where: { ...where, status: { in: ['COMPLETED', 'PAID', 'DELIVERED'] } }
       });
       // fallback if no completed
-      const allInvoices = await prisma.invoice.findMany({ where: { tenantId } });
+      const allInvoices = await prisma.invoice.findMany({ where });
       const activeInvoices = invoices.length > 0 ? invoices : allInvoices;
       
       const totalAmount = activeInvoices.reduce((sum, inv) => sum + (inv.totalAmount || 0), 0);
@@ -45,19 +49,19 @@ export async function POST(req: Request) {
       
     } else if (text.includes("customer") || text.includes("client")) {
       const customers = await prisma.customer.count({
-        where: { tenantId }
+        where
       });
       reply = `You currently have ${customers} registered customers in your database.`;
       
     } else if (text.includes("stock") || text.includes("inventory") || text.includes("product")) {
       const products = await prisma.product.count({
-        where: { tenantId }
+        where
       });
       reply = `Your inventory currently holds ${products} active products.`;
       
     } else if (text.includes("repair")) {
       const repairs = await prisma.repairOrder.count({
-        where: { tenantId }
+        where
       });
       reply = `You have ${repairs} total repair orders logged in the system.`;
       

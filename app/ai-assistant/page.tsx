@@ -74,9 +74,8 @@ export default function AIAssistantPage() {
       <AIHeader />
 
       {/* Main Content */}
-      <div className="grid grid-cols-1 xl:grid-cols-4 gap-8 mt-8">
-        {/* Left Section */}
-        <section className="xl:col-span-3">
+      <div className="mt-8 max-w-5xl mx-auto">
+        <section className="w-full">
           <SuggestedPrompts onPromptClick={handleSendMessage} />
 
           <div className="mt-6">
@@ -85,36 +84,6 @@ export default function AIAssistantPage() {
 
           <ChatInput onSendMessage={handleSendMessage} disabled={isLoading} />
         </section>
-
-        {/* Right Sidebar */}
-        <aside className="xl:col-span-1">
-          {/* We can put context info here later */}
-          <div className="bg-background-secondary border border-border-theme rounded-2xl p-6">
-            <h3 className="font-semibold text-accent-gold mb-4">System Status</h3>
-            <div className="space-y-4 text-sm text-text-secondary">
-              <div className="flex justify-between">
-                <span>Database Connection</span>
-                <span className="text-green-400">Online</span>
-              </div>
-              <div className="flex justify-between">
-                <span>AI Module</span>
-                <span className="text-green-400">Active</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Tenant Isolation</span>
-                <span className="text-green-400">Secured</span>
-              </div>
-            </div>
-            
-            <h3 className="font-semibold text-accent-gold mt-8 mb-4">Capabilities</h3>
-            <ul className="list-disc list-inside space-y-2 text-sm text-text-secondary">
-              <li>Fetch real-time sales revenue</li>
-              <li>Count active customers</li>
-              <li>Check inventory stock levels</li>
-              <li>View pending repair orders</li>
-            </ul>
-          </div>
-        </aside>
       </div>
     </main>
   );
