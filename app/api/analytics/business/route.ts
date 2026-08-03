@@ -29,12 +29,12 @@ export async function GET() {
         ...where,
         status: { in: ['COMPLETED', 'PAID', 'DELIVERED'] }
       },
-      select: { totalAmount: true }
+      select: { totalAmount: true, createdAt: true }
     });
     // In case no status matches, get all to show some data for demo
     const allInvoices = await prisma.invoice.findMany({
       where,
-      select: { totalAmount: true }
+      select: { totalAmount: true, createdAt: true }
     });
     
     const revenueInvoices = invoices.length > 0 ? invoices : allInvoices;
@@ -58,15 +58,23 @@ export async function GET() {
        inventoryValue += (price * quantity);
     });
 
-    // Generate some dummy monthly data for the chart to look good
-    const revenueData = [
-      { month: "Jan", revenue: Math.floor(totalRevenue * 0.1), sales: Math.floor(totalSales * 0.1) },
-      { month: "Feb", revenue: Math.floor(totalRevenue * 0.15), sales: Math.floor(totalSales * 0.15) },
-      { month: "Mar", revenue: Math.floor(totalRevenue * 0.12), sales: Math.floor(totalSales * 0.12) },
-      { month: "Apr", revenue: Math.floor(totalRevenue * 0.18), sales: Math.floor(totalSales * 0.18) },
-      { month: "May", revenue: Math.floor(totalRevenue * 0.2), sales: Math.floor(totalSales * 0.2) },
-      { month: "Jun", revenue: Math.floor(totalRevenue * 0.25), sales: Math.floor(totalSales * 0.25) },
-    ];
+    const revenueData = [];
+    const d = new Date();
+    for (let i = 5; i >= 0; i--) {
+      const monthStart = new Date(d.getFullYear(), d.getMonth() - i, 1);
+      const monthEnd = new Date(d.getFullYear(), d.getMonth() - i + 1, 0, 23, 59, 59);
+      
+      const monthInvoices = revenueInvoices.filter((inv: any) => {
+        const invDate = new Date(inv.createdAt);
+        return invDate >= monthStart && invDate <= monthEnd;
+      });
+      
+      revenueData.push({
+        month: monthStart.toLocaleString('default', { month: 'short' }),
+        revenue: monthInvoices.reduce((sum: number, inv: any) => sum + (inv.totalAmount || 0), 0),
+        sales: monthInvoices.length
+      });
+    }
 
     return NextResponse.json({
       totalRevenue,

@@ -156,10 +156,9 @@ export default function BusinessAnalyticsPage() {
         </div>
 
         {/* MAIN ANALYTICS GRID */}
-        <div className="mt-6 grid grid-cols-3 gap-6">
-
+        <div className="mt-6">
           {/* REVENUE CHART */}
-          <div className="col-span-2 rounded-xl border border-border-theme bg-background-secondary p-6">
+          <div className="rounded-xl border border-border-theme bg-background-secondary p-6">
             <div className="flex items-start justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-accent-gold">Revenue Performance</h2>
@@ -195,58 +194,6 @@ export default function BusinessAnalyticsPage() {
                 <span className="h-2 w-2 rounded-full bg-[#4d4427]" />
                 Sales
               </span>
-            </div>
-          </div>
-
-          {/* BUSINESS HEALTH */}
-          <div className="rounded-xl border border-border-theme bg-background-secondary p-6">
-            <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-background-tertiary p-3">
-                <Crown size={20} className="text-accent-gold" />
-              </div>
-              <div>
-                <h2 className="font-semibold text-accent-gold">Business Health</h2>
-                <p className="text-xs text-text-secondary">Overall performance score</p>
-              </div>
-            </div>
-
-            <div className="mt-8 flex justify-center">
-              <div className="flex h-40 w-40 items-center justify-center rounded-full border-[14px] border-[#b98c20]">
-                <div className="text-center">
-                  <p className="text-3xl font-bold">86</p>
-                  <p className="text-xs text-text-secondary">Excellent</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-7 space-y-4">
-              <div>
-                <div className="flex justify-between text-xs">
-                  <span className="text-text-secondary">Sales Growth</span>
-                  <span className="text-green-400">Good</span>
-                </div>
-                <div className="mt-2 h-1 rounded-full bg-border-theme">
-                  <div className="h-full w-[80%] rounded-full bg-green-400" />
-                </div>
-              </div>
-              <div>
-                <div className="flex justify-between text-xs">
-                  <span className="text-text-secondary">Customer Retention</span>
-                  <span className="text-accent-gold">Stable</span>
-                </div>
-                <div className="mt-2 h-1 rounded-full bg-border-theme">
-                  <div className="h-full w-[65%] rounded-full bg-accent-gold" />
-                </div>
-              </div>
-              <div>
-                <div className="flex justify-between text-xs">
-                  <span className="text-text-secondary">Inventory Turnover</span>
-                  <span className="text-red-400">Needs Attention</span>
-                </div>
-                <div className="mt-2 h-1 rounded-full bg-border-theme">
-                  <div className="h-full w-[30%] rounded-full bg-red-400" />
-                </div>
-              </div>
             </div>
           </div>
         </div>
