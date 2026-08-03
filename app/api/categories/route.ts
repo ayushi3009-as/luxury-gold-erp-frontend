@@ -15,7 +15,9 @@ export async function GET() {
     });
 
     const categoriesWithCount = categories.map((c: any) => {
-      const count = productCounts.find((pc: any) => pc.category === c.name)?._count.category || 0;
+      const count = productCounts
+        .filter((pc: any) => pc.category?.toLowerCase() === c.name?.toLowerCase())
+        .reduce((sum: number, pc: any) => sum + pc._count.category, 0);
       return { ...c, _count: { products: count } };
     });
 

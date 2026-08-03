@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Loader2, Plus, ListTree, Search, CheckCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState<any[]>([]);
@@ -10,7 +11,8 @@ export default function CategoriesPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // New Category State
+  // New/Edit Category State
+  const [editId, setEditId] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
@@ -32,17 +34,34 @@ export default function CategoriesPage() {
     }
   }
 
-  async function handleCreateCategory(e: React.FormEvent) {
+  function openCreateModal() {
+    setEditId(null);
+    setName("");
+    setDescription("");
+    setIsModalOpen(true);
+  }
+
+  function openEditModal(c: any) {
+    setEditId(c.id);
+    setName(c.name);
+    setDescription(c.description || "");
+    setIsModalOpen(true);
+  }
+
+  async function handleSaveCategory(e: React.FormEvent) {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const res = await fetch('/api/categories', {
-        method: 'POST',
+      const url = editId ? `/api/categories/${editId}` : '/api/categories';
+      const method = editId ? 'PUT' : 'POST';
+      const res = await fetch(url, {
+        method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, description })
       });
       if (res.ok) {
         setIsModalOpen(false);
+        setEditId(null);
         setName("");
         setDescription("");
         fetchCategories(); // Refresh list
@@ -82,7 +101,7 @@ export default function CategoriesPage() {
           </div>
 
           <button 
-            onClick={() => setIsModalOpen(true)}
+            onClick={openCreateModal}
             className="flex items-center gap-2 rounded-xl bg-accent-gold px-6 py-2.5 text-sm font-bold text-black transition-all hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-[1.02]"
           >
             <Plus size={18} />
@@ -149,7 +168,7 @@ export default function CategoriesPage() {
                         </span>
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <button className="text-xs font-semibold text-text-secondary hover:text-accent-gold transition-colors mr-3">Edit</button>
+                        <button onClick={() => openEditModal(c)} className="text-xs font-semibold text-text-secondary hover:text-accent-gold transition-colors mr-3">Edit</button>
                       </td>
                     </tr>
                   ))
@@ -166,9 +185,11 @@ export default function CategoriesPage() {
           <div className="w-full max-w-md rounded-2xl border border-border-theme bg-background-secondary p-6 shadow-[0_0_40px_rgba(212,175,55,0.15)] relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/50 via-yellow-300 to-accent-gold/50"></div>
             
-            <h2 className="text-xl font-bold text-text-primary mb-6">Create New Category</h2>
+            <h2 className="text-xl font-bold text-text-primary mb-6">
+              {editId ? 'Edit Category' : 'Create New Category'}
+            </h2>
             
-            <form onSubmit={handleCreateCategory} className="space-y-4">
+            <form onSubmit={handleSaveCategory} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-text-secondary mb-1">Category Name</label>
                 <input 
