@@ -143,15 +143,15 @@ export default function ProductsPage() {
                       <td className="px-6 py-4 text-text-secondary">{p.category}</td>
                       <td className="px-6 py-4">
                         <span className={`px-2.5 py-1 rounded-md text-xs font-semibold ${
-                          p.metalType === 'Gold' ? 'bg-yellow-500/10 text-yellow-500' : 'bg-blue-400/10 text-blue-400'
+                          p.purity?.includes('22K') ? 'bg-yellow-500/10 text-yellow-500' : 'bg-blue-400/10 text-blue-400'
                         }`}>
-                          {p.metalType}
+                          {p.purity || 'N/A'}
                         </span>
                       </td>
-                      <td className="px-6 py-4 font-medium text-accent-gold">{p.grossWeight} g</td>
+                      <td className="px-6 py-4 font-medium text-accent-gold">{p.weight || 0} g</td>
                       <td className="px-6 py-4">
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold border bg-green-400/10 text-green-400 border-green-400/20">
-                          {p.status.replace('_', ' ')}
+                        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold border ${p.isPublished ? 'bg-green-400/10 text-green-400 border-green-400/20' : 'bg-gray-400/10 text-gray-400 border-gray-400/20'}`}>
+                          {p.isPublished ? 'Published' : 'Draft'}
                         </span>
                       </td>
                       <td className="px-6 py-4 text-right">
