@@ -76,12 +76,12 @@ export async function POST(request: Request) {
         invoiceNo: data.invoiceNumber || "INV-" + Date.now(),
         totalAmount: Number(data.amount) || 0,
         status: data.paymentStatus || "PAID",
-        tenantId: tenantId,
+        tenant: tenantId ? { connect: { id: tenantId } } : undefined,
         customer: {
           create: {
             name: data.customerName || "Walk-in Customer",
             mobile: "0000000000",
-            tenantId: tenantId
+            tenant: tenantId ? { connect: { id: tenantId } } : undefined
           }
         }
       }
