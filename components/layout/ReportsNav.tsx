@@ -69,6 +69,9 @@ export default function ReportsNav() {
           </Link>
         );
       })}
+      
+      {/* Spacer to prevent right side from cutting off in overflow */}
+      <div className="w-6 flex-shrink-0" />
     </nav>
   );
 }
