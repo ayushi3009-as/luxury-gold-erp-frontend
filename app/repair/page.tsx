@@ -349,6 +349,7 @@ export default function RepairDashboard() {
                     {['PENDING', 'IN_PROGRESS', 'COMPLETED', 'DELIVERED'].map((status) => (
                       <label 
                         key={status}
+                        onClick={() => setEditStatus(status)}
                         className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer border transition-colors ${
                           editStatus === status 
                             ? 'border-accent-gold bg-accent-gold/5' 
