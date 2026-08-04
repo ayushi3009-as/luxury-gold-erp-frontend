@@ -1,6 +1,7 @@
 "use client";
 
-import { Diamond } from "lucide-react";
+import Link from "next/link";
+import { Diamond, Eye, Pencil, Trash2 } from "lucide-react";
 
 const records = [
   {
@@ -30,6 +31,9 @@ const records = [
 ];
 
 export default function StoneConsumption() {
+  const handleDelete = async (id: string) => {
+    alert("Delete not implemented for static data");
+  };
   return (
     <div className="rounded-2xl border border-border-theme bg-background-secondary">
 
@@ -55,6 +59,7 @@ export default function StoneConsumption() {
               <th className="px-6 py-4 text-left text-text-secondary">Issued</th>
               <th className="px-6 py-4 text-left text-text-secondary">Used</th>
               <th className="px-6 py-4 text-left text-text-secondary">Balance</th>
+              <th className="px-6 py-4 text-center text-text-secondary">Actions</th>
             </tr>
           </thead>
 
@@ -90,6 +95,28 @@ export default function StoneConsumption() {
                   {item.balance}
                 </td>
 
+              <td className="px-6 py-4">
+                <div className="flex justify-center gap-2">
+                  <Link
+                    href={`/manufacturing-manager/material?tab=details&id=${item.id}`}
+                    className="rounded-lg bg-background-tertiary p-2 text-blue-400 hover:bg-blue-500 hover:text-text-primary"
+                  >
+                    <Eye size={18} />
+                  </Link>
+                  <Link
+                    href={`/manufacturing-manager/material?tab=edit&id=${item.id}`}
+                    className="rounded-lg bg-background-tertiary p-2 text-yellow-400 hover:bg-yellow-500 hover:text-text-primary"
+                  >
+                    <Pencil size={18} />
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    className="rounded-lg bg-background-tertiary p-2 text-red-400 hover:bg-red-500 hover:text-text-primary"
+                  >
+                    <Trash2 size={18} />
+                  </button>
+                </div>
+              </td>
               </tr>
 
             ))}

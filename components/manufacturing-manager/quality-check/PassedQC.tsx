@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import api from "@/lib/api";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Eye, Pencil, Trash2 } from "lucide-react";
 
 interface QualityCheck {
   id: string;
@@ -52,7 +53,20 @@ export default function PassedQC() {
 
   };
 
-  const passedQC =
+  
+  const handleDelete = async (id: string) => {
+    const confirmDelete = window.confirm("Delete Quality Check?");
+    if (!confirmDelete) return;
+    try {
+      await api.delete(`/quality-checks/${id}`);
+      alert("Quality Check Deleted Successfully");
+      fetchQualityChecks();
+    } catch (error) {
+      console.error(error);
+      alert("Delete Failed");
+    }
+  };
+const passedQC =
     qualityChecks.filter(
       (item) => item.qualityStatus === "Passed"
     );
@@ -102,6 +116,9 @@ export default function PassedQC() {
 
           <th className="px-6 py-4 text-left text-text-secondary">
             Status
+          </th>
+          <th className="px-6 py-4 text-center text-text-secondary">
+            Actions
           </th>
 
         </tr>
@@ -171,7 +188,30 @@ export default function PassedQC() {
 
               </td>
 
-            </tr>
+            
+              <td className="px-6 py-4">
+                <div className="flex justify-center gap-2">
+                  <Link
+                    href={`/manufacturing-manager/quality-check?tab=details&id=${item.id}`}
+                    className="rounded-lg bg-background-tertiary p-2 text-blue-400 hover:bg-blue-500 hover:text-text-primary"
+                  >
+                    <Eye size={18} />
+                  </Link>
+                  <Link
+                    href={`/manufacturing-manager/quality-check?tab=edit&id=${item.id}`}
+                    className="rounded-lg bg-background-tertiary p-2 text-yellow-400 hover:bg-yellow-500 hover:text-text-primary"
+                  >
+                    <Pencil size={18} />
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    className="rounded-lg bg-background-tertiary p-2 text-red-400 hover:bg-red-500 hover:text-text-primary"
+                  >
+                    <Trash2 size={18} />
+                  </button>
+                </div>
+              </td>
+</tr>
 
           ))
 
