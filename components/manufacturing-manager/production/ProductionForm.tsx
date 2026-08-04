@@ -52,18 +52,25 @@ export default function ProductionForm({ id }: Props) {
       HTMLTextAreaElement
     >
   ) => {
-
     const { name, value } = e.target;
 
-    setFormData((prev) => ({
-      ...prev,
-      [name]:
-        name === "quantity" ||
-        name === "completedQty"
-          ? Number(value)
-          : value,
-    }));
+    setFormData((prev) => {
+      const updates: any = {
+        [name]:
+          name === "quantity" || name === "completedQty"
+            ? Number(value)
+            : value,
+      };
 
+      if (name === "status" && value === "Completed" && prev.completedQty === 0) {
+        updates.completedQty = prev.quantity;
+        if (!prev.endDate) {
+          updates.endDate = new Date().toISOString().slice(0, 10);
+        }
+      }
+
+      return { ...prev, ...updates };
+    });
   };
 
   useEffect(() => {
