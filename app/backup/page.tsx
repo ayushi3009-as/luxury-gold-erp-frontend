@@ -46,20 +46,42 @@ export default function BackupRestore() {
       return;
     }
 
-    // Reset input so the same file can be selected again
-    e.target.value = "";
-    
-    // Simulate restore process
-    setIsRestoring(true);
-    setRestoreStatus("idle");
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      try {
+        const json = JSON.parse(event.target?.result as string);
+        
+        setIsRestoring(true);
+        setRestoreStatus("idle");
 
-    setTimeout(() => {
-      setIsRestoring(false);
-      setRestoreStatus("success");
-      
-      // Reset status after a few seconds
-      setTimeout(() => setRestoreStatus("idle"), 5000);
-    }, 3000);
+        const response = await fetch('/api/backup/restore', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(json)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          setRestoreStatus("success");
+          alert("Database restored successfully.");
+        } else {
+          setRestoreStatus("error");
+          alert(result.error || "Failed to restore database.");
+        }
+      } catch (error) {
+        console.error(error);
+        setRestoreStatus("error");
+        alert("Failed to parse or restore backup file.");
+      } finally {
+        setIsRestoring(false);
+        if (fileInputRef.current) fileInputRef.current.value = "";
+        
+        // Reset status after a few seconds if it was successful
+        setTimeout(() => setRestoreStatus("idle"), 5000);
+      }
+    };
+    reader.readAsText(file);
   };
 
   return (
