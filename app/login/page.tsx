@@ -31,6 +31,8 @@ export default function LoginPage() {
           window.location.href = "/billing";
         } else if (data.user.role === "Super Admin" || data.user.role === "SUPER_ADMIN") {
           window.location.href = "/saas-admin";
+        } else if (data.user.role === "Manufacturing Manager") {
+          window.location.href = "/manufacturing-manager";
         } else {
           window.location.href = "/dashboard";
         }
