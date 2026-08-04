@@ -128,6 +128,9 @@ export default function POSBilling() {
           <p className="text-text-secondary mt-1">Point of Sale System for Fast Checkout</p>
         </div>
       </div>
+      <div style={{ backgroundColor: 'red', color: 'white', padding: '20px', fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>
+        IF YOU CAN SEE THIS RED BOX, THE SERVER IS WORKING!
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Side: Product Selection */}
