@@ -59,6 +59,11 @@ export default function LoginPage() {
     setPassword("Sales@123");
   };
 
+  const loginAsMfg = () => {
+    setEmail("mfg@gold-erp.com");
+    setPassword("Mfg@123");
+  };
+
   return (
     <div className="min-h-screen bg-background-primary flex items-center justify-center p-5 text-text-primary">
       <div className="w-full max-w-md">
@@ -148,6 +153,9 @@ export default function LoginPage() {
               </button>
               <button onClick={loginAsSales} type="button" className="text-xs px-3 py-1.5 rounded-full border border-border-theme bg-background-tertiary hover:border-accent-gold transition-colors text-text-secondary">
                 Sales Staff
+              </button>
+              <button onClick={loginAsMfg} type="button" className="text-xs px-3 py-1.5 rounded-full border border-border-theme bg-background-tertiary hover:border-accent-gold transition-colors text-text-secondary">
+                Manufacturing
               </button>
             </div>
           </div>
