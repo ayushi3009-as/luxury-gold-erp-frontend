@@ -18,7 +18,18 @@ export async function POST(req: NextRequest) {
     const session = await getSession();
     if (!session || !session.tenantId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     const body = await req.json();
-    const data = await prisma.productionOrder.create({ data: { ...body, tenantId: session.tenantId, id: undefined, createdAt: undefined, updatedAt: undefined } });
+
+    const formattedData = {
+      ...body,
+      tenantId: session.tenantId,
+      startDate: body.startDate ? new Date(body.startDate) : null,
+      endDate: body.endDate ? new Date(body.endDate) : null,
+      id: undefined,
+      createdAt: undefined,
+      updatedAt: undefined
+    };
+
+    const data = await prisma.productionOrder.create({ data: formattedData });
     return NextResponse.json({ success: true, data });
   } catch (error: any) {
     return NextResponse.json({ success: false, message: error.message }, { status: 500 });
