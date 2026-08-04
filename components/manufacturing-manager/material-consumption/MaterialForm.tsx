@@ -192,11 +192,11 @@ const handleSubmit = async (
 
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-6"
+      className="rounded-2xl border border-border-theme bg-background-secondary p-6"
     >
 
 
-      <h2 className="mb-8 text-2xl font-bold text-white">
+      <h2 className="mb-8 text-2xl font-bold text-text-primary">
 
         {id
           ? "Edit Material Consumption"
@@ -211,7 +211,7 @@ const handleSubmit = async (
 
         <div>
 
-          <label className="mb-2 block text-sm text-gray-400">
+          <label className="mb-2 block text-sm text-text-secondary">
             Job Card ID
           </label>
 
@@ -223,7 +223,7 @@ const handleSubmit = async (
 
             onChange={handleChange}
 
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary outline-none focus:border-[#D4AF37]"
 
             required
 
@@ -235,7 +235,7 @@ const handleSubmit = async (
 
         <div>
 
-          <label className="mb-2 block text-sm text-gray-400">
+          <label className="mb-2 block text-sm text-text-secondary">
             Material Name
           </label>
 
@@ -247,7 +247,7 @@ const handleSubmit = async (
 
             onChange={handleChange}
 
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary outline-none focus:border-[#D4AF37]"
 
             required
 
@@ -260,7 +260,7 @@ const handleSubmit = async (
 
         <div>
 
-          <label className="mb-2 block text-sm text-gray-400">
+          <label className="mb-2 block text-sm text-text-secondary">
             Required Quantity
           </label>
 
@@ -274,7 +274,7 @@ const handleSubmit = async (
 
             onChange={handleChange}
 
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white"
+            className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary"
 
           />
 
@@ -285,7 +285,7 @@ const handleSubmit = async (
 
         <div>
 
-          <label className="mb-2 block text-sm text-gray-400">
+          <label className="mb-2 block text-sm text-text-secondary">
             Issued Quantity
           </label>
 
@@ -299,7 +299,7 @@ const handleSubmit = async (
 
             onChange={handleChange}
 
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white"
+            className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary"
 
           />
 
@@ -307,7 +307,7 @@ const handleSubmit = async (
 
         <div>
 
-          <label className="mb-2 block text-sm text-gray-400">
+          <label className="mb-2 block text-sm text-text-secondary">
             Consumed Quantity
           </label>
 
@@ -321,7 +321,7 @@ const handleSubmit = async (
 
             onChange={handleChange}
 
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white"
+            className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary"
 
           />
 
@@ -332,7 +332,7 @@ const handleSubmit = async (
 
         <div>
 
-          <label className="mb-2 block text-sm text-gray-400">
+          <label className="mb-2 block text-sm text-text-secondary">
             Remaining Quantity
           </label>
 
@@ -342,7 +342,7 @@ const handleSubmit = async (
 
             readOnly
 
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#222] px-4 py-3 text-gray-300"
+            className="w-full rounded-xl border border-border-theme bg-[#222] px-4 py-3 text-text-secondary"
 
           />
 
@@ -353,7 +353,7 @@ const handleSubmit = async (
 
         <div>
 
-          <label className="mb-2 block text-sm text-gray-400">
+          <label className="mb-2 block text-sm text-text-secondary">
             Unit
           </label>
 
@@ -365,7 +365,7 @@ const handleSubmit = async (
 
             onChange={handleChange}
 
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white"
+            className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary"
 
           >
 
@@ -388,7 +388,7 @@ const handleSubmit = async (
 
       <div className="mt-6">
 
-        <label className="mb-2 block text-sm text-gray-400">
+        <label className="mb-2 block text-sm text-text-secondary">
           Remarks
         </label>
 
@@ -401,7 +401,7 @@ const handleSubmit = async (
 
           onChange={handleChange}
 
-          className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white"
+          className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary"
 
         />
 

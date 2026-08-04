@@ -76,7 +76,7 @@ export default function ProductionDetails() {
 
   if (loading) {
     return (
-      <div className="p-10 text-center text-white">
+      <div className="p-10 text-center text-text-primary">
         Loading...
       </div>
     );
@@ -92,17 +92,17 @@ export default function ProductionDetails() {
 
   return (
 
-    <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-8">
+    <div className="rounded-2xl border border-border-theme bg-background-secondary p-8">
 
       <div className="mb-8 flex items-center justify-between">
 
         <div>
 
-          <h2 className="text-3xl font-bold text-white">
+          <h2 className="text-3xl font-bold text-text-primary">
             Production Details
           </h2>
 
-          <p className="mt-2 text-gray-400">
+          <p className="mt-2 text-text-secondary">
             Complete Production Information
           </p>
 
@@ -126,15 +126,15 @@ export default function ProductionDetails() {
 
                 {/* Production Number */}
 
-        <div className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-primary p-5">
 
           <Factory className="mb-3 text-[#D4AF37]" size={28} />
 
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-text-secondary">
             Production Number
           </p>
 
-          <h3 className="mt-2 text-xl font-semibold text-white">
+          <h3 className="mt-2 text-xl font-semibold text-text-primary">
             {production.productionNumber}
           </h3>
 
@@ -142,15 +142,15 @@ export default function ProductionDetails() {
 
         {/* Job Card */}
 
-        <div className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-primary p-5">
 
           <ClipboardList className="mb-3 text-[#D4AF37]" size={28} />
 
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-text-secondary">
             Job Card
           </p>
 
-          <h3 className="mt-2 text-xl font-semibold text-white">
+          <h3 className="mt-2 text-xl font-semibold text-text-primary">
             {production.jobCard.jobCardNumber}
           </h3>
 
@@ -158,15 +158,15 @@ export default function ProductionDetails() {
 
         {/* Product */}
 
-        <div className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-primary p-5">
 
           <Package className="mb-3 text-[#D4AF37]" size={28} />
 
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-text-secondary">
             Product
           </p>
 
-          <h3 className="mt-2 text-xl font-semibold text-white">
+          <h3 className="mt-2 text-xl font-semibold text-text-primary">
             {production.jobCard.productName}
           </h3>
 
@@ -174,15 +174,15 @@ export default function ProductionDetails() {
 
         {/* Quantity */}
 
-        <div className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-primary p-5">
 
           <Package className="mb-3 text-[#D4AF37]" size={28} />
 
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-text-secondary">
             Quantity
           </p>
 
-          <h3 className="mt-2 text-xl font-semibold text-white">
+          <h3 className="mt-2 text-xl font-semibold text-text-primary">
             {production.quantity}
           </h3>
 
@@ -190,15 +190,15 @@ export default function ProductionDetails() {
 
         {/* Completed */}
 
-        <div className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-primary p-5">
 
           <CircleCheck className="mb-3 text-[#D4AF37]" size={28} />
 
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-text-secondary">
             Completed Qty
           </p>
 
-          <h3 className="mt-2 text-xl font-semibold text-white">
+          <h3 className="mt-2 text-xl font-semibold text-text-primary">
             {production.completedQty}
           </h3>
 
@@ -206,15 +206,15 @@ export default function ProductionDetails() {
 
         {/* Stage */}
 
-        <div className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-primary p-5">
 
           <Factory className="mb-3 text-[#D4AF37]" size={28} />
 
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-text-secondary">
             Stage
           </p>
 
-          <h3 className="mt-2 text-xl font-semibold text-white">
+          <h3 className="mt-2 text-xl font-semibold text-text-primary">
             {production.stage}
           </h3>
 
@@ -222,15 +222,15 @@ export default function ProductionDetails() {
 
         {/* Start Date */}
 
-        <div className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-primary p-5">
 
           <CalendarDays className="mb-3 text-[#D4AF37]" size={28} />
 
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-text-secondary">
             Start Date
           </p>
 
-          <h3 className="mt-2 text-xl font-semibold text-white">
+          <h3 className="mt-2 text-xl font-semibold text-text-primary">
             {production.startDate
               ? new Date(
                   production.startDate
@@ -242,15 +242,15 @@ export default function ProductionDetails() {
 
         {/* End Date */}
 
-        <div className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-primary p-5">
 
           <CalendarDays className="mb-3 text-[#D4AF37]" size={28} />
 
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-text-secondary">
             End Date
           </p>
 
-          <h3 className="mt-2 text-xl font-semibold text-white">
+          <h3 className="mt-2 text-xl font-semibold text-text-primary">
             {production.endDate
               ? new Date(
                   production.endDate
@@ -264,13 +264,13 @@ export default function ProductionDetails() {
 
       {/* Remarks */}
 
-      <div className="mt-8 rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-6">
+      <div className="mt-8 rounded-xl border border-border-theme bg-background-primary p-6">
 
-        <h3 className="mb-4 text-xl font-semibold text-white">
+        <h3 className="mb-4 text-xl font-semibold text-text-primary">
           Remarks
         </h3>
 
-        <p className="leading-8 text-gray-300">
+        <p className="leading-8 text-text-secondary">
           {production.remarks || "No Remarks"}
         </p>
 

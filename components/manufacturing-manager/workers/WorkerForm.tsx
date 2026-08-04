@@ -140,16 +140,16 @@ export default function WorkerForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-8"
+      className="rounded-2xl border border-border-theme bg-background-secondary p-8"
     >
-      <h2 className="mb-8 text-2xl font-bold text-white">
+      <h2 className="mb-8 text-2xl font-bold text-text-primary">
         {id ? "Edit Worker" : "Add Worker"}
       </h2>
 
       <div className="grid gap-6 md:grid-cols-2">
 
         <div>
-          <label className="mb-2 block text-sm text-gray-300">
+          <label className="mb-2 block text-sm text-text-secondary">
             Employee ID
           </label>
 
@@ -160,12 +160,12 @@ export default function WorkerForm({
             onChange={handleChange}
             placeholder="EMP001"
             required
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
           />
         </div>
 
         <div>
-          <label className="mb-2 block text-sm text-gray-300">
+          <label className="mb-2 block text-sm text-text-secondary">
             Full Name
           </label>
 
@@ -176,12 +176,12 @@ export default function WorkerForm({
             onChange={handleChange}
             placeholder="Rahul Patel"
             required
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
           />
         </div>
 
         <div>
-          <label className="mb-2 block text-sm text-gray-300">
+          <label className="mb-2 block text-sm text-text-secondary">
             Phone
           </label>
 
@@ -192,12 +192,12 @@ export default function WorkerForm({
             onChange={handleChange}
             placeholder="9876543210"
             required
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
           />
         </div>
 
         <div>
-          <label className="mb-2 block text-sm text-gray-300">
+          <label className="mb-2 block text-sm text-text-secondary">
             Email
           </label>
 
@@ -207,12 +207,12 @@ export default function WorkerForm({
             value={formData.email}
             onChange={handleChange}
             placeholder="worker@gmail.com"
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
           />
         </div>
 
         <div>
-          <label className="mb-2 block text-sm text-gray-300">
+          <label className="mb-2 block text-sm text-text-secondary">
             Specialization
           </label>
 
@@ -222,12 +222,12 @@ export default function WorkerForm({
             value={formData.specialization}
             onChange={handleChange}
             placeholder="Casting"
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
           />
         </div>
 
         <div>
-          <label className="mb-2 block text-sm text-gray-300">
+          <label className="mb-2 block text-sm text-text-secondary">
             Experience
           </label>
 
@@ -237,12 +237,12 @@ export default function WorkerForm({
             value={formData.experience}
             onChange={handleChange}
             placeholder="5"
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
           />
         </div>
 
         <div>
-          <label className="mb-2 block text-sm text-gray-300">
+          <label className="mb-2 block text-sm text-text-secondary">
             Salary
           </label>
 
@@ -252,12 +252,12 @@ export default function WorkerForm({
             value={formData.salary}
             onChange={handleChange}
             placeholder="25000"
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
           />
         </div>
 
         <div>
-          <label className="mb-2 block text-sm text-gray-300">
+          <label className="mb-2 block text-sm text-text-secondary">
             Status
           </label>
 
@@ -265,7 +265,7 @@ export default function WorkerForm({
             name="status"
             value={formData.status}
             onChange={handleChange}
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
           >
             <option value="Active">
               Active
@@ -288,7 +288,7 @@ export default function WorkerForm({
               "/manufacturing-manager/workers"
             )
           }
-          className="rounded-xl border border-[#2A2A2A] px-6 py-3 text-white hover:border-[#D4AF37]"
+          className="rounded-xl border border-border-theme px-6 py-3 text-text-primary hover:border-[#D4AF37]"
         >
           Cancel
         </button>

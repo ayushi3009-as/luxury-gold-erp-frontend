@@ -11,7 +11,7 @@ export default function ManufacturingLayout({
   children,
 }: ManufacturingLayoutProps) {
   return (
-    <div className="min-h-screen bg-[#0B0B0B]">
+    <div className="min-h-screen bg-background-primary">
 
       {/* Topbar */}
 

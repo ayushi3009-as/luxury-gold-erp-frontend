@@ -193,9 +193,9 @@ const handleSubmit = async (
 return (
   <form
     onSubmit={handleSubmit}
-    className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-6"
+    className="rounded-2xl border border-border-theme bg-background-secondary p-6"
   >
-    <h2 className="mb-6 text-2xl font-bold text-white">
+    <h2 className="mb-6 text-2xl font-bold text-text-primary">
       {id ? "Edit Production Order" : "Add Production Order"}
     </h2>
 
@@ -204,7 +204,7 @@ return (
       {/* Production Number */}
 
       <div>
-        <label className="mb-2 block text-sm text-gray-400">
+        <label className="mb-2 block text-sm text-text-secondary">
           Production Number
         </label>
 
@@ -213,14 +213,14 @@ return (
           name="productionNumber"
           value={formData.productionNumber}
           onChange={handleChange}
-          className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+          className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
         />
       </div>
 
       {/* Job Card */}
 
       <div>
-        <label className="mb-2 block text-sm text-gray-400">
+        <label className="mb-2 block text-sm text-text-secondary">
           Job Card
         </label>
 
@@ -228,7 +228,7 @@ return (
           name="jobCardId"
           value={formData.jobCardId}
           onChange={handleChange}
-          className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white"
+          className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary"
         >
           <option value="">
             Select Job Card
@@ -250,7 +250,7 @@ return (
       {/* Stage */}
 
       <div>
-        <label className="mb-2 block text-sm text-gray-400">
+        <label className="mb-2 block text-sm text-text-secondary">
           Stage
         </label>
 
@@ -259,14 +259,14 @@ return (
           name="stage"
           value={formData.stage}
           onChange={handleChange}
-          className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white"
+          className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary"
         />
       </div>
 
       {/* Status */}
 
       <div>
-        <label className="mb-2 block text-sm text-gray-400">
+        <label className="mb-2 block text-sm text-text-secondary">
           Status
         </label>
 
@@ -274,7 +274,7 @@ return (
           name="status"
           value={formData.status}
           onChange={handleChange}
-          className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white"
+          className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary"
         >
           <option value="Pending">Pending</option>
           <option value="In Progress">In Progress</option>
@@ -285,7 +285,7 @@ return (
       {/* Quantity */}
 
       <div>
-        <label className="mb-2 block text-sm text-gray-400">
+        <label className="mb-2 block text-sm text-text-secondary">
           Quantity
         </label>
 
@@ -294,14 +294,14 @@ return (
           name="quantity"
           value={formData.quantity}
           onChange={handleChange}
-          className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white"
+          className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary"
         />
       </div>
 
       {/* Completed Qty */}
 
       <div>
-        <label className="mb-2 block text-sm text-gray-400">
+        <label className="mb-2 block text-sm text-text-secondary">
           Completed Qty
         </label>
 
@@ -310,14 +310,14 @@ return (
           name="completedQty"
           value={formData.completedQty}
           onChange={handleChange}
-          className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white"
+          className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary"
         />
       </div>
 
       {/* Start Date */}
 
       <div>
-        <label className="mb-2 block text-sm text-gray-400">
+        <label className="mb-2 block text-sm text-text-secondary">
           Start Date
         </label>
 
@@ -326,14 +326,14 @@ return (
           name="startDate"
           value={formData.startDate}
           onChange={handleChange}
-          className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white"
+          className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary"
         />
       </div>
 
       {/* End Date */}
 
       <div>
-        <label className="mb-2 block text-sm text-gray-400">
+        <label className="mb-2 block text-sm text-text-secondary">
           End Date
         </label>
 
@@ -342,7 +342,7 @@ return (
           name="endDate"
           value={formData.endDate}
           onChange={handleChange}
-          className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white"
+          className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary"
         />
       </div>
 
@@ -350,7 +350,7 @@ return (
 
       <div className="md:col-span-2">
 
-        <label className="mb-2 block text-sm text-gray-400">
+        <label className="mb-2 block text-sm text-text-secondary">
           Remarks
         </label>
 
@@ -359,7 +359,7 @@ return (
           value={formData.remarks}
           onChange={handleChange}
           rows={4}
-          className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+          className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
         />
 
       </div>
@@ -373,7 +373,7 @@ return (
       <button
         type="button"
         onClick={() => router.back()}
-        className="rounded-xl border border-[#2A2A2A] px-6 py-3 text-white hover:border-[#D4AF37]"
+        className="rounded-xl border border-border-theme px-6 py-3 text-text-primary hover:border-[#D4AF37]"
       >
         Cancel
       </button>

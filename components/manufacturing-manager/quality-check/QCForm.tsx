@@ -152,9 +152,9 @@ export default function QCForm({ id }: QCFormProps) {
     return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-8"
+      className="rounded-2xl border border-border-theme bg-background-secondary p-8"
     >
-      <h2 className="mb-8 text-2xl font-bold text-white">
+      <h2 className="mb-8 text-2xl font-bold text-text-primary">
         {id ? "Update Quality Check" : "Add Quality Check"}
       </h2>
 
@@ -163,7 +163,7 @@ export default function QCForm({ id }: QCFormProps) {
         {/* Job Card */}
 
         <div>
-          <label className="mb-2 block text-sm text-gray-300">
+          <label className="mb-2 block text-sm text-text-secondary">
             Job Card
           </label>
 
@@ -171,7 +171,7 @@ export default function QCForm({ id }: QCFormProps) {
             name="jobCardId"
             value={formData.jobCardId}
             onChange={handleChange}
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
             required
           >
             <option value="">Select Job Card</option>
@@ -190,7 +190,7 @@ export default function QCForm({ id }: QCFormProps) {
         {/* Inspector */}
 
         <div>
-          <label className="mb-2 block text-sm text-gray-300">
+          <label className="mb-2 block text-sm text-text-secondary">
             Inspector
           </label>
 
@@ -200,7 +200,7 @@ export default function QCForm({ id }: QCFormProps) {
             value={formData.inspectorName}
             onChange={handleChange}
             placeholder="Inspector Name"
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
             required
           />
         </div>
@@ -208,7 +208,7 @@ export default function QCForm({ id }: QCFormProps) {
         {/* QC Status */}
 
         <div>
-          <label className="mb-2 block text-sm text-gray-300">
+          <label className="mb-2 block text-sm text-text-secondary">
             QC Status
           </label>
 
@@ -216,7 +216,7 @@ export default function QCForm({ id }: QCFormProps) {
             name="qualityStatus"
             value={formData.qualityStatus}
             onChange={handleChange}
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
           >
             <option value="Pending">Pending</option>
             <option value="Passed">Passed</option>
@@ -228,7 +228,7 @@ export default function QCForm({ id }: QCFormProps) {
         {/* Defects */}
 
         <div>
-          <label className="mb-2 block text-sm text-gray-300">
+          <label className="mb-2 block text-sm text-text-secondary">
             Defects
           </label>
 
@@ -238,14 +238,14 @@ export default function QCForm({ id }: QCFormProps) {
             value={formData.defects}
             onChange={handleChange}
             placeholder="Defects"
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
           />
         </div>
 
         {/* Remarks */}
 
         <div className="md:col-span-2">
-          <label className="mb-2 block text-sm text-gray-300">
+          <label className="mb-2 block text-sm text-text-secondary">
             Remarks
           </label>
 
@@ -255,7 +255,7 @@ export default function QCForm({ id }: QCFormProps) {
             value={formData.remarks}
             onChange={handleChange}
             placeholder="Inspection remarks..."
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
           />
         </div>
 
@@ -266,7 +266,7 @@ export default function QCForm({ id }: QCFormProps) {
         <button
           type="button"
           onClick={() => router.back()}
-          className="rounded-xl border border-[#2A2A2A] px-6 py-3 text-white hover:border-[#D4AF37]"
+          className="rounded-xl border border-border-theme px-6 py-3 text-text-primary hover:border-[#D4AF37]"
         >
           Cancel
         </button>

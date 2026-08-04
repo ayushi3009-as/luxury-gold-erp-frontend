@@ -26,9 +26,9 @@ const workProgress = [
 
 export default function WorkInProgress() {
   return (
-    <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-6">
+    <div className="rounded-2xl border border-border-theme bg-background-secondary p-6">
 
-      <h2 className="mb-6 text-xl font-semibold text-white">
+      <h2 className="mb-6 text-xl font-semibold text-text-primary">
         Work In Progress
       </h2>
 
@@ -38,18 +38,18 @@ export default function WorkInProgress() {
 
           <div
             key={job.id}
-            className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5"
+            className="rounded-xl border border-border-theme bg-background-primary p-5"
           >
 
             <div className="mb-3 flex items-center justify-between">
 
               <div>
 
-                <h3 className="font-semibold text-white">
+                <h3 className="font-semibold text-text-primary">
                   {job.product}
                 </h3>
 
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-text-secondary">
                   {job.id}
                 </p>
 
@@ -61,7 +61,7 @@ export default function WorkInProgress() {
 
             </div>
 
-            <p className="mb-3 text-gray-300">
+            <p className="mb-3 text-text-secondary">
               Worker: {job.worker}
             </p>
 
@@ -74,7 +74,7 @@ export default function WorkInProgress() {
 
             </div>
 
-            <p className="mt-2 text-right text-sm text-gray-400">
+            <p className="mt-2 text-right text-sm text-text-secondary">
               {job.progress}% Completed
             </p>
 

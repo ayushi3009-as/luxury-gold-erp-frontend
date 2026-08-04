@@ -54,7 +54,7 @@ export default function JobCardDetails({ id }: Props) {
 
   if (loading) {
     return (
-      <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-6 text-white">
+      <div className="rounded-2xl border border-border-theme bg-background-secondary p-6 text-text-primary">
         Loading...
       </div>
     );
@@ -62,16 +62,16 @@ export default function JobCardDetails({ id }: Props) {
 
   if (!jobCard) {
     return (
-      <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-6 text-red-500">
+      <div className="rounded-2xl border border-border-theme bg-background-secondary p-6 text-red-500">
         Job Card Not Found
       </div>
     );
   }
 
   return (
-    <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-6">
+    <div className="rounded-2xl border border-border-theme bg-background-secondary p-6">
 
-      <h2 className="mb-8 text-2xl font-bold text-white">
+      <h2 className="mb-8 text-2xl font-bold text-text-primary">
         Job Card Details
       </h2>
 
@@ -134,11 +134,11 @@ function Info({
   return (
     <div>
 
-      <p className="mb-1 text-sm text-gray-400">
+      <p className="mb-1 text-sm text-text-secondary">
         {title}
       </p>
 
-      <p className="rounded-lg bg-[#1A1A1A] p-3 text-white">
+      <p className="rounded-lg bg-background-tertiary p-3 text-text-primary">
         {value}
       </p>
 

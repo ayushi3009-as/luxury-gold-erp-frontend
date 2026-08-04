@@ -87,17 +87,17 @@ export default function WorkerGoldSummary() {
           return (
             <div
               key={card.title}
-              className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-5 transition hover:border-[#D4AF37]"
+              className="rounded-2xl border border-border-theme bg-background-secondary p-5 transition hover:border-[#D4AF37]"
             >
               <div className="flex items-center justify-between">
 
                 <div>
 
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-text-secondary">
                     {card.title}
                   </p>
 
-                  <h2 className="mt-3 text-2xl font-bold text-white">
+                  <h2 className="mt-3 text-2xl font-bold text-text-primary">
                     {card.value}
                   </h2>
 
@@ -120,7 +120,7 @@ export default function WorkerGoldSummary() {
 
       {/* Summary Table */}
 
-      <div className="overflow-x-auto rounded-2xl border border-[#2A2A2A] bg-[#111111]">
+      <div className="overflow-x-auto rounded-2xl border border-border-theme bg-background-secondary">
 
         <table className="min-w-full">
 
@@ -128,23 +128,23 @@ export default function WorkerGoldSummary() {
 
             <tr>
 
-              <th className="px-6 py-4 text-left text-gray-300">
+              <th className="px-6 py-4 text-left text-text-secondary">
                 Worker
               </th>
 
-              <th className="px-6 py-4 text-left text-gray-300">
+              <th className="px-6 py-4 text-left text-text-secondary">
                 Gold Issued
               </th>
 
-              <th className="px-6 py-4 text-left text-gray-300">
+              <th className="px-6 py-4 text-left text-text-secondary">
                 Gold Used
               </th>
 
-              <th className="px-6 py-4 text-left text-gray-300">
+              <th className="px-6 py-4 text-left text-text-secondary">
                 Returned
               </th>
 
-              <th className="px-6 py-4 text-left text-gray-300">
+              <th className="px-6 py-4 text-left text-text-secondary">
                 Wastage
               </th>
 
@@ -158,18 +158,18 @@ export default function WorkerGoldSummary() {
 
               <tr
                 key={worker.id}
-                className="border-t border-[#2A2A2A] hover:bg-[#1A1A1A]"
+                className="border-t border-border-theme hover:bg-background-tertiary"
               >
 
                 <td className="px-6 py-4 font-semibold text-[#D4AF37]">
                   {worker.name}
                 </td>
 
-                <td className="px-6 py-4 text-white">
+                <td className="px-6 py-4 text-text-primary">
                   {worker.issued}
                 </td>
 
-                <td className="px-6 py-4 text-white">
+                <td className="px-6 py-4 text-text-primary">
                   {worker.used}
                 </td>
 

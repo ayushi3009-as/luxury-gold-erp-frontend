@@ -19,7 +19,7 @@ const cards = [
     title: "Silver Used",
     value: "715 g",
     icon: Package,
-    color: "text-gray-300",
+    color: "text-text-secondary",
   },
   {
     title: "Diamond Used",
@@ -51,17 +51,17 @@ export default function MaterialSummary() {
         return (
           <div
             key={card.title}
-            className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-6 hover:border-[#D4AF37]"
+            className="rounded-2xl border border-border-theme bg-background-secondary p-6 hover:border-[#D4AF37]"
           >
             <div className="flex items-center justify-between">
 
               <div>
 
-                <p className="text-gray-400">
+                <p className="text-text-secondary">
                   {card.title}
                 </p>
 
-                <h2 className="mt-3 text-3xl font-bold text-white">
+                <h2 className="mt-3 text-3xl font-bold text-text-primary">
                   {card.value}
                 </h2>
 

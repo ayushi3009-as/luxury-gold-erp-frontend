@@ -172,10 +172,10 @@ if (id) {
   return (
     <form
   onSubmit={handleSubmit}
-  className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-6"
+  className="rounded-2xl border border-border-theme bg-background-secondary p-6"
 >
 
-  <h2 className="mb-6 text-2xl font-bold text-white">
+  <h2 className="mb-6 text-2xl font-bold text-text-primary">
 
     {id ? "Edit Job Card" : "Add Job Card"}
 
@@ -187,7 +187,7 @@ if (id) {
 
     <div>
 
-      <label className="mb-2 block text-sm text-gray-400">
+      <label className="mb-2 block text-sm text-text-secondary">
         Job Card Number
       </label>
 
@@ -196,7 +196,7 @@ if (id) {
         name="jobCardNumber"
         value={formData.jobCardNumber}
         onChange={handleChange}
-        className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white outline-none focus:border-[#D4AF37]"
+        className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary outline-none focus:border-[#D4AF37]"
       />
 
     </div>
@@ -205,7 +205,7 @@ if (id) {
 
     <div>
 
-      <label className="mb-2 block text-sm text-gray-400">
+      <label className="mb-2 block text-sm text-text-secondary">
         Product Name
       </label>
 
@@ -214,7 +214,7 @@ if (id) {
         name="productName"
         value={formData.productName}
         onChange={handleChange}
-        className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white outline-none focus:border-[#D4AF37]"
+        className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary outline-none focus:border-[#D4AF37]"
       />
 
     </div>
@@ -223,7 +223,7 @@ if (id) {
 
     <div>
 
-      <label className="mb-2 block text-sm text-gray-400">
+      <label className="mb-2 block text-sm text-text-secondary">
         Design Number
       </label>
 
@@ -232,7 +232,7 @@ if (id) {
         name="designNumber"
         value={formData.designNumber}
         onChange={handleChange}
-        className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white outline-none focus:border-[#D4AF37]"
+        className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary outline-none focus:border-[#D4AF37]"
       />
 
     </div>
@@ -241,7 +241,7 @@ if (id) {
 
     <div>
 
-      <label className="mb-2 block text-sm text-gray-400">
+      <label className="mb-2 block text-sm text-text-secondary">
         Category
       </label>
 
@@ -250,7 +250,7 @@ if (id) {
         name="category"
         value={formData.category}
         onChange={handleChange}
-        className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white outline-none focus:border-[#D4AF37]"
+        className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary outline-none focus:border-[#D4AF37]"
       />
 
     </div>
@@ -259,7 +259,7 @@ if (id) {
 
     <div>
 
-      <label className="mb-2 block text-sm text-gray-400">
+      <label className="mb-2 block text-sm text-text-secondary">
         Purity
       </label>
 
@@ -268,7 +268,7 @@ if (id) {
         name="purity"
         value={formData.purity}
         onChange={handleChange}
-        className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white outline-none focus:border-[#D4AF37]"
+        className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary outline-none focus:border-[#D4AF37]"
       />
 
     </div>
@@ -277,7 +277,7 @@ if (id) {
 
     <div>
 
-      <label className="mb-2 block text-sm text-gray-400">
+      <label className="mb-2 block text-sm text-text-secondary">
         Gross Weight
       </label>
 
@@ -287,7 +287,7 @@ if (id) {
         name="grossWeight"
         value={formData.grossWeight}
         onChange={handleChange}
-        className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white outline-none focus:border-[#D4AF37]"
+        className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary outline-none focus:border-[#D4AF37]"
       />
 
     </div>
@@ -296,7 +296,7 @@ if (id) {
 
     <div>
 
-      <label className="mb-2 block text-sm text-gray-400">
+      <label className="mb-2 block text-sm text-text-secondary">
         Net Weight
       </label>
 
@@ -306,7 +306,7 @@ if (id) {
         name="netWeight"
         value={formData.netWeight}
         onChange={handleChange}
-        className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white outline-none focus:border-[#D4AF37]"
+        className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary outline-none focus:border-[#D4AF37]"
       />
 
     </div>
@@ -315,7 +315,7 @@ if (id) {
 
     <div>
 
-      <label className="mb-2 block text-sm text-gray-400">
+      <label className="mb-2 block text-sm text-text-secondary">
         Quantity
       </label>
 
@@ -324,7 +324,7 @@ if (id) {
         name="quantity"
         value={formData.quantity}
         onChange={handleChange}
-        className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white outline-none focus:border-[#D4AF37]"
+        className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary outline-none focus:border-[#D4AF37]"
       />
 
     </div>
@@ -333,7 +333,7 @@ if (id) {
 
     <div>
 
-      <label className="mb-2 block text-sm text-gray-400">
+      <label className="mb-2 block text-sm text-text-secondary">
         Priority
       </label>
 
@@ -341,7 +341,7 @@ if (id) {
         name="priority"
         value={formData.priority}
         onChange={handleChange}
-        className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white"
+        className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary"
       >
 
         <option>High</option>
@@ -356,7 +356,7 @@ if (id) {
 
     <div>
 
-      <label className="mb-2 block text-sm text-gray-400">
+      <label className="mb-2 block text-sm text-text-secondary">
         Status
       </label>
 
@@ -364,7 +364,7 @@ if (id) {
         name="status"
         value={formData.status}
         onChange={handleChange}
-        className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white"
+        className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary"
       >
 
         <option>Pending</option>
@@ -380,7 +380,7 @@ if (id) {
 
       <div className="mt-6">
 
-        <label className="mb-2 block text-sm text-gray-400">
+        <label className="mb-2 block text-sm text-text-secondary">
           Remarks
         </label>
 
@@ -390,7 +390,7 @@ if (id) {
           value={formData.remarks}
           onChange={handleChange}
           placeholder="Enter Remarks"
-          className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] px-4 py-3 text-white outline-none focus:border-[#D4AF37]"
+          className="w-full rounded-xl border border-border-theme bg-background-primary px-4 py-3 text-text-primary outline-none focus:border-[#D4AF37]"
         />
 
       </div>

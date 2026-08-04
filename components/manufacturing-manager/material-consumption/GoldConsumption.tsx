@@ -94,13 +94,13 @@ export default function GoldConsumption() {
 
   return (
 
-    <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111]">
+    <div className="rounded-2xl border border-border-theme bg-background-secondary">
 
 
-      <div className="flex flex-col gap-4 border-b border-[#2A2A2A] p-6 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-4 border-b border-border-theme p-6 md:flex-row md:items-center md:justify-between">
 
 
-        <h2 className="text-xl font-semibold text-white">
+        <h2 className="text-xl font-semibold text-text-primary">
           Gold Consumption
         </h2>
 
@@ -123,7 +123,7 @@ export default function GoldConsumption() {
 
             onChange={(e)=>setSearch(e.target.value)}
 
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] py-3 pl-10 pr-4 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary py-3 pl-10 pr-4 text-text-primary outline-none focus:border-[#D4AF37]"
 
           />
 
@@ -144,31 +144,31 @@ export default function GoldConsumption() {
 
             <tr>
 
-              <th className="px-6 py-4 text-left text-gray-300">
+              <th className="px-6 py-4 text-left text-text-secondary">
                 ID
               </th>
 
-              <th className="px-6 py-4 text-left text-gray-300">
+              <th className="px-6 py-4 text-left text-text-secondary">
                 Job Card
               </th>
 
-              <th className="px-6 py-4 text-left text-gray-300">
+              <th className="px-6 py-4 text-left text-text-secondary">
                 Worker
               </th>
 
-              <th className="px-6 py-4 text-left text-gray-300">
+              <th className="px-6 py-4 text-left text-text-secondary">
                 Issued
               </th>
 
-              <th className="px-6 py-4 text-left text-gray-300">
+              <th className="px-6 py-4 text-left text-text-secondary">
                 Consumed
               </th>
 
-              <th className="px-6 py-4 text-left text-gray-300">
+              <th className="px-6 py-4 text-left text-text-secondary">
                 Balance
               </th>
 
-              <th className="px-6 py-4 text-center text-gray-300">
+              <th className="px-6 py-4 text-center text-text-secondary">
                 Actions
               </th>
 
@@ -187,7 +187,7 @@ export default function GoldConsumption() {
 
                 <td
                   colSpan={7}
-                  className="px-6 py-10 text-center text-gray-400"
+                  className="px-6 py-10 text-center text-text-secondary"
                 >
                   Loading...
                 </td>
@@ -202,7 +202,7 @@ export default function GoldConsumption() {
 
                 <td
                   colSpan={7}
-                  className="px-6 py-10 text-center text-gray-400"
+                  className="px-6 py-10 text-center text-text-secondary"
                 >
                   No records found
                 </td>
@@ -218,7 +218,7 @@ export default function GoldConsumption() {
 
                 <tr
                   key={item.id}
-                  className="border-t border-[#2A2A2A] hover:bg-[#1A1A1A]"
+                  className="border-t border-border-theme hover:bg-background-tertiary"
                 >
 
 
@@ -227,12 +227,12 @@ export default function GoldConsumption() {
                   </td>
 
 
-                  <td className="px-6 py-4 text-white">
+                  <td className="px-6 py-4 text-text-primary">
                     {item.jobCard?.jobCardNumber || "-"}
                   </td>
 
 
-                  <td className="px-6 py-4 text-white">
+                  <td className="px-6 py-4 text-text-primary">
                     {item.materialName}
                   </td>
 
@@ -261,7 +261,7 @@ export default function GoldConsumption() {
 
                         href={`/manufacturing-manager/material-consumption?tab=details&id=${item.id}`}
 
-                        className="rounded-lg bg-[#1A1A1A] p-2 text-blue-400 hover:bg-blue-500 hover:text-white"
+                        className="rounded-lg bg-background-tertiary p-2 text-blue-400 hover:bg-blue-500 hover:text-text-primary"
 
                       >
                         <Eye size={18}/>
@@ -273,7 +273,7 @@ export default function GoldConsumption() {
 
                         href={`/manufacturing-manager/material-consumption?tab=edit&id=${item.id}`}
 
-                        className="rounded-lg bg-[#1A1A1A] p-2 text-yellow-400 hover:bg-yellow-500 hover:text-white"
+                        className="rounded-lg bg-background-tertiary p-2 text-yellow-400 hover:bg-yellow-500 hover:text-text-primary"
 
                       >
                         <Pencil size={18}/>
@@ -285,7 +285,7 @@ export default function GoldConsumption() {
 
                         onClick={()=>handleDelete(item.id)}
 
-                        className="rounded-lg bg-[#1A1A1A] p-2 text-red-400 hover:bg-red-500 hover:text-white"
+                        className="rounded-lg bg-background-tertiary p-2 text-red-400 hover:bg-red-500 hover:text-text-primary"
 
                       >
                         <Trash2 size={18}/>

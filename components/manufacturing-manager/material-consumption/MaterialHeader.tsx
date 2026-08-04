@@ -72,11 +72,11 @@ export default function MaterialHeader() {
         </div>
 
         <div>
-          <h1 className="text-3xl font-bold text-white">
+          <h1 className="text-3xl font-bold text-text-primary">
             Material Consumption
           </h1>
 
-          <p className="mt-1 text-gray-400">
+          <p className="mt-1 text-text-secondary">
             Monitor gold, silver, diamond and stone consumption in production.
           </p>
         </div>
@@ -86,7 +86,7 @@ export default function MaterialHeader() {
       <div className="flex gap-3">
         <button
           onClick={handleExport}
-          className="flex items-center gap-2 rounded-xl border border-[#2A2A2A] bg-[#111111] px-5 py-3 text-white hover:border-[#D4AF37]"
+          className="flex items-center gap-2 rounded-xl border border-border-theme bg-background-secondary px-5 py-3 text-text-primary hover:border-[#D4AF37]"
         >
           <Download size={18} />
           Export

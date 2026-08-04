@@ -2,9 +2,9 @@
 
 export default function AssignWorkers() {
   return (
-    <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-6">
+    <div className="rounded-2xl border border-border-theme bg-background-secondary p-6">
 
-      <h2 className="mb-6 text-2xl font-bold text-white">
+      <h2 className="mb-6 text-2xl font-bold text-text-primary">
         Assign Worker
       </h2>
 
@@ -14,11 +14,11 @@ export default function AssignWorkers() {
 
         <div>
 
-          <label className="mb-2 block text-sm font-medium text-gray-300">
+          <label className="mb-2 block text-sm font-medium text-text-secondary">
             Select Worker
           </label>
 
-          <select className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]">
+          <select className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]">
 
             <option>Rahul Patel</option>
             <option>Amit Shah</option>
@@ -32,11 +32,11 @@ export default function AssignWorkers() {
 
         <div>
 
-          <label className="mb-2 block text-sm font-medium text-gray-300">
+          <label className="mb-2 block text-sm font-medium text-text-secondary">
             Job Card
           </label>
 
-          <select className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]">
+          <select className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]">
 
             <option>JC-1001</option>
             <option>JC-1002</option>
@@ -50,11 +50,11 @@ export default function AssignWorkers() {
 
         <div>
 
-          <label className="mb-2 block text-sm font-medium text-gray-300">
+          <label className="mb-2 block text-sm font-medium text-text-secondary">
             Production Order
           </label>
 
-          <select className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]">
+          <select className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]">
 
             <option>PO-1001</option>
             <option>PO-1002</option>
@@ -68,11 +68,11 @@ export default function AssignWorkers() {
 
         <div>
 
-          <label className="mb-2 block text-sm font-medium text-gray-300">
+          <label className="mb-2 block text-sm font-medium text-text-secondary">
             Shift
           </label>
 
-          <select className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]">
+          <select className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]">
 
             <option>Morning</option>
             <option>Evening</option>
@@ -86,13 +86,13 @@ export default function AssignWorkers() {
 
         <div>
 
-          <label className="mb-2 block text-sm font-medium text-gray-300">
+          <label className="mb-2 block text-sm font-medium text-text-secondary">
             Start Date
           </label>
 
           <input
             type="date"
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]"
           />
 
         </div>
@@ -101,11 +101,11 @@ export default function AssignWorkers() {
 
         <div>
 
-          <label className="mb-2 block text-sm font-medium text-gray-300">
+          <label className="mb-2 block text-sm font-medium text-text-secondary">
             Priority
           </label>
 
-          <select className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-3 text-white outline-none focus:border-[#D4AF37]">
+          <select className="w-full rounded-xl border border-border-theme bg-background-primary p-3 text-text-primary outline-none focus:border-[#D4AF37]">
 
             <option>High</option>
             <option>Medium</option>
@@ -119,7 +119,7 @@ export default function AssignWorkers() {
 
       <div className="mt-8 flex justify-end gap-3">
 
-        <button className="rounded-xl border border-[#2A2A2A] px-6 py-3 text-white hover:border-[#D4AF37]">
+        <button className="rounded-xl border border-border-theme px-6 py-3 text-text-primary hover:border-[#D4AF37]">
           Cancel
         </button>
 

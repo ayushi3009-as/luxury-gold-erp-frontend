@@ -34,7 +34,7 @@ export default function MaterialTabs() {
   return (
     <div className="overflow-x-auto">
 
-      <div className="flex gap-3 rounded-xl border border-[#2A2A2A] bg-[#111111] p-2">
+      <div className="flex gap-3 rounded-xl border border-border-theme bg-background-secondary p-2">
 
         {tabs.map((tab) => (
 
@@ -44,7 +44,7 @@ export default function MaterialTabs() {
             className={`rounded-lg px-5 py-3 transition ${
               active === tab.value
                 ? "bg-[#D4AF37] text-black"
-                : "text-gray-300 hover:bg-[#1A1A1A] hover:text-[#D4AF37]"
+                : "text-text-secondary hover:bg-background-tertiary hover:text-[#D4AF37]"
             }`}
           >
             {tab.title}

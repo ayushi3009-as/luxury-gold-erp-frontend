@@ -105,13 +105,13 @@ export default function JobCardTable() {
 
    return (
 
-    <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111]">
+    <div className="rounded-2xl border border-border-theme bg-background-secondary">
 
       {/* Header */}
 
-      <div className="flex flex-col gap-4 border-b border-[#2A2A2A] p-6 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-4 border-b border-border-theme p-6 md:flex-row md:items-center md:justify-between">
 
-        <h2 className="text-xl font-semibold text-white">
+        <h2 className="text-xl font-semibold text-text-primary">
           All Job Cards
         </h2>
 
@@ -127,7 +127,7 @@ export default function JobCardTable() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search Job Card..."
-            className="w-full rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] py-3 pl-10 pr-4 text-white outline-none focus:border-[#D4AF37]"
+            className="w-full rounded-xl border border-border-theme bg-background-primary py-3 pl-10 pr-4 text-text-primary outline-none focus:border-[#D4AF37]"
           />
 
         </div>
@@ -138,7 +138,7 @@ export default function JobCardTable() {
 
       {loading && (
 
-        <div className="flex h-40 items-center justify-center text-white">
+        <div className="flex h-40 items-center justify-center text-text-primary">
           Loading Job Cards...
         </div>
 
@@ -162,35 +162,35 @@ export default function JobCardTable() {
 
           <table className="min-w-full">
 
-            <thead className="border-b border-[#2A2A2A] bg-[#181818]">
+            <thead className="border-b border-border-theme bg-[#181818]">
 
               <tr>
 
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-text-secondary">
                   Job Card
                 </th>
 
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-text-secondary">
                   Product
                 </th>
 
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-text-secondary">
                   Created By
                 </th>
 
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-text-secondary">
                   Status
                 </th>
 
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-text-secondary">
                   Priority
                 </th>
 
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-text-secondary">
                   Quantity
                 </th>
 
-                <th className="px-6 py-4 text-center text-sm font-semibold text-gray-300">
+                <th className="px-6 py-4 text-center text-sm font-semibold text-text-secondary">
                   Actions
                 </th>
 
@@ -204,7 +204,7 @@ export default function JobCardTable() {
 
     <td
       colSpan={7}
-      className="py-10 text-center text-gray-400"
+      className="py-10 text-center text-text-secondary"
     >
       No Job Cards Found
     </td>
@@ -217,18 +217,18 @@ export default function JobCardTable() {
 
     <tr
       key={job.id}
-      className="border-b border-[#2A2A2A] hover:bg-[#1A1A1A]"
+      className="border-b border-border-theme hover:bg-background-tertiary"
     >
 
       <td className="px-6 py-4 font-medium text-[#D4AF37]">
         {job.jobCardNumber}
       </td>
 
-      <td className="px-6 py-4 text-white">
+      <td className="px-6 py-4 text-text-primary">
         {job.productName}
       </td>
 
-      <td className="px-6 py-4 text-white">
+      <td className="px-6 py-4 text-text-primary">
         {job.createdBy.fullName}
       </td>
 
@@ -264,7 +264,7 @@ export default function JobCardTable() {
 
       </td>
 
-      <td className="px-6 py-4 text-white">
+      <td className="px-6 py-4 text-text-primary">
         {job.quantity}
       </td>
 
@@ -276,7 +276,7 @@ export default function JobCardTable() {
 
           <Link
             href={`/manufacturing-manager/job-cards?tab=details&id=${job.id}`}
-            className="rounded-lg bg-[#1A1A1A] p-2 text-blue-400 hover:bg-blue-500 hover:text-white"
+            className="rounded-lg bg-background-tertiary p-2 text-blue-400 hover:bg-blue-500 hover:text-text-primary"
           >
             <Eye size={18} />
           </Link>
@@ -285,7 +285,7 @@ export default function JobCardTable() {
 
           <Link
             href={`/manufacturing-manager/job-cards?tab=edit&id=${job.id}`}
-            className="rounded-lg bg-[#1A1A1A] p-2 text-yellow-400 hover:bg-yellow-500 hover:text-white"
+            className="rounded-lg bg-background-tertiary p-2 text-yellow-400 hover:bg-yellow-500 hover:text-text-primary"
           >
             <Pencil size={18} />
           </Link>
@@ -294,7 +294,7 @@ export default function JobCardTable() {
 
           <button
             onClick={() => handleDelete(job.id)}
-            className="rounded-lg bg-[#1A1A1A] p-2 text-red-400 hover:bg-red-500 hover:text-white"
+            className="rounded-lg bg-background-tertiary p-2 text-red-400 hover:bg-red-500 hover:text-text-primary"
           >
             <Trash2 size={18} />
           </button>

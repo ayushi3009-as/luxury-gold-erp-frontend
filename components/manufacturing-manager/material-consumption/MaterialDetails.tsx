@@ -89,7 +89,7 @@ export default function MaterialConsumptionDetails({
 
     return (
 
-      <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-8 text-center text-gray-400">
+      <div className="rounded-2xl border border-border-theme bg-background-secondary p-8 text-center text-text-secondary">
 
         Loading...
 
@@ -105,7 +105,7 @@ export default function MaterialConsumptionDetails({
 
     return (
 
-      <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-8 text-center text-gray-400">
+      <div className="rounded-2xl border border-border-theme bg-background-secondary p-8 text-center text-text-secondary">
 
         No Data Found
 
@@ -119,10 +119,10 @@ export default function MaterialConsumptionDetails({
 
   return (
 
-    <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-8">
+    <div className="rounded-2xl border border-border-theme bg-background-secondary p-8">
 
 
-      <h2 className="mb-8 text-3xl font-bold text-white">
+      <h2 className="mb-8 text-3xl font-bold text-text-primary">
 
         Material Consumption Details
 
@@ -134,18 +134,18 @@ export default function MaterialConsumptionDetails({
 
 
 
-        <div className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-primary p-5">
 
           <Package
             className="mb-3 text-[#D4AF37]"
             size={28}
           />
 
-          <p className="text-gray-400">
+          <p className="text-text-secondary">
             Job Card
           </p>
 
-          <h3 className="mt-2 text-xl font-semibold text-white">
+          <h3 className="mt-2 text-xl font-semibold text-text-primary">
 
             {data.jobCard?.jobCardNumber ||
              data.jobCardId}
@@ -157,18 +157,18 @@ export default function MaterialConsumptionDetails({
 
 
 
-        <div className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-primary p-5">
 
           <Coins
             className="mb-3 text-[#D4AF37]"
             size={28}
           />
 
-          <p className="text-gray-400">
+          <p className="text-text-secondary">
             Material
           </p>
 
-          <h3 className="mt-2 text-xl font-semibold text-white">
+          <h3 className="mt-2 text-xl font-semibold text-text-primary">
 
             {data.materialName}
 
@@ -180,14 +180,14 @@ export default function MaterialConsumptionDetails({
 
 
 
-        <div className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-primary p-5">
 
           <Scale
             className="mb-3 text-[#D4AF37]"
             size={28}
           />
 
-          <p className="text-gray-400">
+          <p className="text-text-secondary">
             Issued Quantity
           </p>
 
@@ -203,14 +203,14 @@ export default function MaterialConsumptionDetails({
 
 
 
-        <div className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-primary p-5">
 
           <Scale
             className="mb-3 text-[#D4AF37]"
             size={28}
           />
 
-          <p className="text-gray-400">
+          <p className="text-text-secondary">
             Consumed Quantity
           </p>
 
@@ -226,14 +226,14 @@ export default function MaterialConsumptionDetails({
 
 
 
-        <div className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-primary p-5">
 
           <Scale
             className="mb-3 text-[#D4AF37]"
             size={28}
           />
 
-          <p className="text-gray-400">
+          <p className="text-text-secondary">
             Remaining Quantity
           </p>
 
@@ -249,18 +249,18 @@ export default function MaterialConsumptionDetails({
 
 
 
-        <div className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+        <div className="rounded-xl border border-border-theme bg-background-primary p-5">
 
           <Calendar
             className="mb-3 text-[#D4AF37]"
             size={28}
           />
 
-          <p className="text-gray-400">
+          <p className="text-text-secondary">
             Issued Date
           </p>
 
-          <h3 className="mt-2 text-xl font-semibold text-white">
+          <h3 className="mt-2 text-xl font-semibold text-text-primary">
 
             {new Date(
               data.issuedDate
@@ -278,7 +278,7 @@ export default function MaterialConsumptionDetails({
 
 
 
-      <div className="mt-6 rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+      <div className="mt-6 rounded-xl border border-border-theme bg-background-primary p-5">
 
 
         <FileText
@@ -287,12 +287,12 @@ export default function MaterialConsumptionDetails({
         />
 
 
-        <p className="text-gray-400">
+        <p className="text-text-secondary">
           Remarks
         </p>
 
 
-        <h3 className="mt-2 text-lg text-white">
+        <h3 className="mt-2 text-lg text-text-primary">
 
           {data.remarks || "No remarks"}
 

@@ -1,0 +1,216 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  id          String  @id @default(uuid())
+  roleName    String  @unique
+  description String?
+
+  users User[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id String @id @default(uuid())
+
+  fullName String
+
+  email String @unique
+
+  phone String @unique
+
+  password String
+
+  roleId String
+
+  role Role @relation(fields: [roleId], references: [id])
+
+  jobCards JobCard[]
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+}
+
+model JobCard {
+  id String @id @default(uuid())
+
+  jobCardNumber String @unique
+
+  productName String
+
+  designNumber String?
+
+  category String?
+
+  purity String?
+
+  grossWeight Float?
+
+  netWeight Float?
+
+  quantity Int
+
+  priority String?
+
+  status String @default("Pending")
+
+  startDate DateTime?
+
+  dueDate DateTime?
+
+  remarks String?
+
+  createdById String
+
+  createdBy User @relation(fields: [createdById], references: [id])
+
+  productions ProductionOrder[]
+
+  assignments WorkerAssignment[]
+
+  qualityChecks QualityCheck[]
+
+  wastages WastageRecord[]
+
+  materials MaterialConsumption[]
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+}
+
+model Worker {
+  id String @id @default(uuid())
+
+  employeeId String @unique
+
+  fullName String
+
+  phone String @unique
+
+  email String? @unique
+
+  specialization String?
+
+  experience Int?
+
+  salary Float?
+
+  status String @default("Active")
+
+  assignments WorkerAssignment[]
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+}
+
+model WorkerAssignment {
+  id String @id @default(uuid())
+
+  jobCardId String
+
+  workerId String
+
+  assignedDate DateTime @default(now())
+
+  status String @default("Assigned")
+
+  remarks String?
+
+  jobCard JobCard @relation(fields: [jobCardId], references: [id], onDelete: Cascade)
+
+  worker Worker @relation(fields: [workerId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+}
+
+model ProductionOrder {
+  id String @id @default(uuid())
+
+  productionNumber String @unique
+
+  jobCardId String
+
+  stage String
+
+  status String @default("In Progress")
+
+  quantity Int
+
+  completedQty Int @default(0)
+
+  startDate DateTime?
+
+  endDate DateTime?
+
+  remarks String?
+
+  jobCard JobCard @relation(fields: [jobCardId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+}
+
+model QualityCheck {
+  id String @id @default(uuid())
+
+  jobCardId String
+
+  inspectionDate DateTime @default(now())
+
+  inspectorName String
+
+  qualityStatus String
+
+  defects String?
+
+  remarks String?
+
+  jobCard JobCard @relation(fields: [jobCardId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+}
+
+
+model MaterialConsumption {
+  id String @id @default(uuid())
+
+  jobCardId String
+
+  materialName String
+
+  requiredQuantity Float
+
+  issuedQuantity Float
+
+  consumedQuantity Float
+
+  remainingQuantity Float?
+
+  unit String
+
+  issuedDate DateTime @default(now())
+
+  remarks String?
+
+  jobCard JobCard @relation(fields: [jobCardId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  updatedAt DateTime @updatedAt
+}

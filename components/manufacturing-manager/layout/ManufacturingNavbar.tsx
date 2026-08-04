@@ -50,7 +50,7 @@ export default function ManufacturingNavbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="sticky top-20 z-40 border-b border-[#2A2A2A] bg-[#111111]">
+    <nav className="sticky top-20 z-40 border-b border-border-theme bg-background-secondary">
       <div className="overflow-x-auto">
         <div className="flex min-w-max items-center gap-2 px-6 py-3">
           {menuItems.map((item) => {
@@ -67,7 +67,7 @@ export default function ManufacturingNavbar() {
                 className={`group relative flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-medium transition-all duration-300 ${
                   active
                     ? "bg-[#D4AF37] text-black shadow-lg"
-                    : "text-gray-300 hover:bg-[#1A1A1A] hover:text-[#D4AF37]"
+                    : "text-text-secondary hover:bg-background-tertiary hover:text-[#D4AF37]"
                 }`}
               >
                 <Icon size={18} />

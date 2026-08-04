@@ -31,11 +31,11 @@ const records = [
 
 export default function StoneConsumption() {
   return (
-    <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111]">
+    <div className="rounded-2xl border border-border-theme bg-background-secondary">
 
-      <div className="flex items-center justify-between border-b border-[#2A2A2A] p-6">
+      <div className="flex items-center justify-between border-b border-border-theme p-6">
 
-        <h2 className="text-xl font-semibold text-white">
+        <h2 className="text-xl font-semibold text-text-primary">
           Stone Consumption
         </h2>
 
@@ -49,12 +49,12 @@ export default function StoneConsumption() {
 
           <thead className="bg-[#181818]">
             <tr>
-              <th className="px-6 py-4 text-left text-gray-300">ID</th>
-              <th className="px-6 py-4 text-left text-gray-300">Job Card</th>
-              <th className="px-6 py-4 text-left text-gray-300">Stone</th>
-              <th className="px-6 py-4 text-left text-gray-300">Issued</th>
-              <th className="px-6 py-4 text-left text-gray-300">Used</th>
-              <th className="px-6 py-4 text-left text-gray-300">Balance</th>
+              <th className="px-6 py-4 text-left text-text-secondary">ID</th>
+              <th className="px-6 py-4 text-left text-text-secondary">Job Card</th>
+              <th className="px-6 py-4 text-left text-text-secondary">Stone</th>
+              <th className="px-6 py-4 text-left text-text-secondary">Issued</th>
+              <th className="px-6 py-4 text-left text-text-secondary">Used</th>
+              <th className="px-6 py-4 text-left text-text-secondary">Balance</th>
             </tr>
           </thead>
 
@@ -64,17 +64,17 @@ export default function StoneConsumption() {
 
               <tr
                 key={item.id}
-                className="border-t border-[#2A2A2A] hover:bg-[#1A1A1A]"
+                className="border-t border-border-theme hover:bg-background-tertiary"
               >
                 <td className="px-6 py-4 font-semibold text-[#D4AF37]">
                   {item.id}
                 </td>
 
-                <td className="px-6 py-4 text-white">
+                <td className="px-6 py-4 text-text-primary">
                   {item.jobCard}
                 </td>
 
-                <td className="px-6 py-4 text-white">
+                <td className="px-6 py-4 text-text-primary">
                   {item.stone}
                 </td>
 

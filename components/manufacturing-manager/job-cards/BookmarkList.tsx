@@ -13,9 +13,9 @@ const bookmarkedJobs = [
 
 export default function BookmarkList() {
   return (
-    <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-6">
+    <div className="rounded-2xl border border-border-theme bg-background-secondary p-6">
 
-      <h2 className="mb-6 text-xl font-semibold text-white">
+      <h2 className="mb-6 text-xl font-semibold text-text-primary">
         Bookmarked Job Cards
       </h2>
 
@@ -25,7 +25,7 @@ export default function BookmarkList() {
 
           <div
             key={job.id}
-            className="flex items-center justify-between rounded-xl bg-[#1A1A1A] px-4 py-4"
+            className="flex items-center justify-between rounded-xl bg-background-tertiary px-4 py-4"
           >
             <div>
 
@@ -33,7 +33,7 @@ export default function BookmarkList() {
                 {job.id}
               </p>
 
-              <p className="text-gray-400">
+              <p className="text-text-secondary">
                 {job.product}
               </p>
 

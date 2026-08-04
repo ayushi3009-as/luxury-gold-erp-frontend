@@ -60,11 +60,11 @@ export default function ReworkQC() {
     );
 
   return (
-    <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111]">
+    <div className="rounded-2xl border border-border-theme bg-background-secondary">
 
-  <div className="flex items-center justify-between border-b border-[#2A2A2A] p-6">
+  <div className="flex items-center justify-between border-b border-border-theme p-6">
 
-    <h2 className="text-xl font-semibold text-white">
+    <h2 className="text-xl font-semibold text-text-primary">
       Rework Quality Checks
     </h2>
 
@@ -86,23 +86,23 @@ export default function ReworkQC() {
 
         <tr>
 
-          <th className="px-6 py-4 text-left text-gray-300">
+          <th className="px-6 py-4 text-left text-text-secondary">
             Job Card
           </th>
 
-          <th className="px-6 py-4 text-left text-gray-300">
+          <th className="px-6 py-4 text-left text-text-secondary">
             Product
           </th>
 
-          <th className="px-6 py-4 text-left text-gray-300">
+          <th className="px-6 py-4 text-left text-text-secondary">
             Stage
           </th>
 
-          <th className="px-6 py-4 text-left text-gray-300">
+          <th className="px-6 py-4 text-left text-text-secondary">
             Inspector
           </th>
 
-          <th className="px-6 py-4 text-left text-gray-300">
+          <th className="px-6 py-4 text-left text-text-secondary">
             Status
           </th>
 
@@ -118,7 +118,7 @@ export default function ReworkQC() {
 
             <td
               colSpan={5}
-              className="py-10 text-center text-gray-400"
+              className="py-10 text-center text-text-secondary"
             >
               Loading Quality Checks...
             </td>
@@ -131,7 +131,7 @@ export default function ReworkQC() {
 
             <td
               colSpan={5}
-              className="py-10 text-center text-gray-400"
+              className="py-10 text-center text-text-secondary"
             >
               No Rework Quality Checks Found
             </td>
@@ -144,14 +144,14 @@ export default function ReworkQC() {
 
             <tr
               key={item.id}
-              className="border-t border-[#2A2A2A] hover:bg-[#1A1A1A]"
+              className="border-t border-border-theme hover:bg-background-tertiary"
             >
 
               <td className="px-6 py-4 font-semibold text-[#D4AF37]">
                 {item.jobCardId}
               </td>
 
-              <td className="px-6 py-4 text-white">
+              <td className="px-6 py-4 text-text-primary">
                 {item.jobCard?.productName || "-"}
               </td>
 
@@ -159,7 +159,7 @@ export default function ReworkQC() {
                 {item.jobCard?.currentStage || "-"}
               </td>
 
-              <td className="px-6 py-4 text-white">
+              <td className="px-6 py-4 text-text-primary">
                 {item.inspectorName}
               </td>
 

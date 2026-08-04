@@ -63,7 +63,7 @@ export default function WorkerDetails() {
 
   if (loading) {
     return (
-      <div className="p-10 text-center text-white">
+      <div className="p-10 text-center text-text-primary">
         Loading...
       </div>
     );
@@ -78,17 +78,17 @@ export default function WorkerDetails() {
   }
 
   return (
-    <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-8">
+    <div className="rounded-2xl border border-border-theme bg-background-secondary p-8">
 
       <div className="mb-8 flex items-center justify-between">
 
         <div>
 
-          <h2 className="text-3xl font-bold text-white">
+          <h2 className="text-3xl font-bold text-text-primary">
             Worker Details
           </h2>
 
-          <p className="mt-2 text-gray-400">
+          <p className="mt-2 text-text-secondary">
             Complete Worker Information
           </p>
 
@@ -176,17 +176,17 @@ function Card({
   value: string;
 }) {
   return (
-    <div className="rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5">
+    <div className="rounded-xl border border-border-theme bg-background-primary p-5">
 
       <div className="mb-3">
         {icon}
       </div>
 
-      <p className="text-sm text-gray-400">
+      <p className="text-sm text-text-secondary">
         {title}
       </p>
 
-      <h3 className="mt-2 text-xl font-semibold text-white">
+      <h3 className="mt-2 text-xl font-semibold text-text-primary">
         {value}
       </h3>
 

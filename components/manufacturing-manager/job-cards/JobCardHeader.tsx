@@ -53,11 +53,11 @@ export default function JobCardHeader() {
 
       <div>
 
-        <h1 className="text-3xl font-bold text-white">
+        <h1 className="text-3xl font-bold text-text-primary">
           Job Cards
         </h1>
 
-        <p className="mt-2 text-gray-400">
+        <p className="mt-2 text-text-secondary">
           Create, manage and track all manufacturing job cards.
         </p>
 
@@ -67,7 +67,7 @@ export default function JobCardHeader() {
 
         <button
   onClick={handleExport}
-  className="flex items-center gap-2 rounded-xl border border-[#2A2A2A] bg-[#111111] px-5 py-3 text-white transition hover:border-[#D4AF37] hover:text-[#D4AF37]"
+  className="flex items-center gap-2 rounded-xl border border-border-theme bg-background-secondary px-5 py-3 text-text-primary transition hover:border-[#D4AF37] hover:text-[#D4AF37]"
 >
   <Download size={18} />
   Export

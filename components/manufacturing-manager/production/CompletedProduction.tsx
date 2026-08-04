@@ -25,9 +25,9 @@ const completedJobs = [
 
 export default function CompletedProduction() {
   return (
-    <div className="rounded-2xl border border-[#2A2A2A] bg-[#111111] p-6">
+    <div className="rounded-2xl border border-border-theme bg-background-secondary p-6">
 
-      <h2 className="mb-6 text-xl font-semibold text-white">
+      <h2 className="mb-6 text-xl font-semibold text-text-primary">
         Completed Production
       </h2>
 
@@ -37,16 +37,16 @@ export default function CompletedProduction() {
 
           <div
             key={job.id}
-            className="flex items-center justify-between rounded-xl border border-[#2A2A2A] bg-[#0B0B0B] p-5"
+            className="flex items-center justify-between rounded-xl border border-border-theme bg-background-primary p-5"
           >
 
             <div>
 
-              <h3 className="font-semibold text-white">
+              <h3 className="font-semibold text-text-primary">
                 {job.product}
               </h3>
 
-              <p className="mt-1 text-sm text-gray-400">
+              <p className="mt-1 text-sm text-text-secondary">
                 {job.id}
               </p>
 
@@ -54,11 +54,11 @@ export default function CompletedProduction() {
 
             <div className="text-center">
 
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-text-secondary">
                 Quantity
               </p>
 
-              <p className="font-semibold text-white">
+              <p className="font-semibold text-text-primary">
                 {job.quantity}
               </p>
 
@@ -66,11 +66,11 @@ export default function CompletedProduction() {
 
             <div className="text-center">
 
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-text-secondary">
                 Completed On
               </p>
 
-              <p className="font-semibold text-white">
+              <p className="font-semibold text-text-primary">
                 {job.completedOn}
               </p>
 
