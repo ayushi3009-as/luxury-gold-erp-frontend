@@ -28,11 +28,19 @@ async function main() {
   }
   console.log('Workers seeded.');
 
+  // Get the first user for createdById
+  const adminUser = await prisma.user.findFirst({ where: { tenantId } });
+  if (!adminUser) {
+    console.log("No user found to set createdById. Exiting.");
+    return;
+  }
+  const createdById = adminUser.id;
+
   // Create Job Cards
   const jobCardsData = [
-    { jobCardNumber: "JC-1001", productName: "22K Gold Ring", designCode: "DS-R001", expectedDate: new Date("2026-08-10"), status: "In Progress", priority: "High" },
-    { jobCardNumber: "JC-1002", productName: "Diamond Necklace", designCode: "DS-N005", expectedDate: new Date("2026-08-12"), status: "Pending", priority: "Medium" },
-    { jobCardNumber: "JC-1003", productName: "Gold Bracelet", designCode: "DS-B002", expectedDate: new Date("2026-08-05"), status: "Completed", priority: "Low" }
+    { jobCardNumber: "JC-1001", productName: "22K Gold Ring", designNumber: "DS-R001", dueDate: new Date("2026-08-10"), status: "In Progress", priority: "High", quantity: 15, createdById },
+    { jobCardNumber: "JC-1002", productName: "Diamond Necklace", designNumber: "DS-N005", dueDate: new Date("2026-08-12"), status: "Pending", priority: "Medium", quantity: 8, createdById },
+    { jobCardNumber: "JC-1003", productName: "Gold Bracelet", designNumber: "DS-B002", dueDate: new Date("2026-08-05"), status: "Completed", priority: "Low", quantity: 12, createdById }
   ];
 
   const createdJobCards = [];
