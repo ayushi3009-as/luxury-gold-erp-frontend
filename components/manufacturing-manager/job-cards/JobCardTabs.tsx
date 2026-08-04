@@ -6,9 +6,6 @@ import { useSearchParams } from "next/navigation";
 const tabs = [
   { label: "All Job Cards", tab: "all" },
   { label: "Add Job Card", tab: "add" },
-  { label: "Job Details", tab: "details" },
-  { label: "Edit Job Card", tab: "edit" },
-  { label: "Bookmarked", tab: "bookmark" },
 ];
 
 export default function JobCardTabs() {
