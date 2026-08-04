@@ -5,12 +5,7 @@ interface WorkerSummaryProps {
 }
 
 export default function WorkerSummary({ workersData }: WorkerSummaryProps) {
-  const workers = workersData && workersData.length > 0 ? workersData : [
-    { name: "Rahul Patel", jobs: 0 },
-    { name: "Amit Shah", jobs: 0 },
-    { name: "Kiran Joshi", jobs: 0 },
-    { name: "Rakesh Kumar", jobs: 0 },
-  ];
+  const workers = workersData || [];
 
   return (
     <div className="rounded-2xl border border-border-theme bg-background-secondary p-6">
@@ -22,17 +17,23 @@ export default function WorkerSummary({ workersData }: WorkerSummaryProps) {
       </p>
 
       <div className="mt-6 space-y-4">
-        {workers.map((worker) => (
-          <div
-            key={worker.name}
-            className="flex items-center justify-between rounded-xl bg-background-tertiary px-4 py-4"
-          >
-            <span className="text-text-primary">{worker.name}</span>
-            <span className="font-semibold text-[#D4AF37]">
-              {worker.jobs} Jobs
-            </span>
+        {workers.length === 0 ? (
+          <div className="flex h-32 items-center justify-center rounded-xl border border-dashed border-border-theme text-sm text-text-secondary">
+            No active workers today
           </div>
-        ))}
+        ) : (
+          workers.map((worker) => (
+            <div
+              key={worker.name}
+              className="flex items-center justify-between rounded-xl bg-background-tertiary px-4 py-4"
+            >
+              <span className="text-text-primary">{worker.name}</span>
+              <span className="font-semibold text-[#D4AF37]">
+                {worker.jobs} Jobs
+              </span>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
