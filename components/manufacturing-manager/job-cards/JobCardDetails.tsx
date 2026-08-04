@@ -35,6 +35,10 @@ export default function JobCardDetails({ id }: Props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!id) {
+      setLoading(false);
+      return;
+    }
     fetchJobCard();
   }, [id]);
 
@@ -56,6 +60,14 @@ export default function JobCardDetails({ id }: Props) {
     return (
       <div className="rounded-2xl border border-border-theme bg-background-secondary p-6 text-text-primary">
         Loading...
+      </div>
+    );
+  }
+
+  if (!id) {
+    return (
+      <div className="rounded-2xl border border-border-theme bg-background-secondary p-6 text-center text-text-secondary">
+        Please select a Job Card from the list to view its details.
       </div>
     );
   }
