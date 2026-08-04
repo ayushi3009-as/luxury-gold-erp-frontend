@@ -43,7 +43,7 @@ export default function middleware(req: NextRequest) {
 
   // ERP/Admin paths that should never be rewritten to the storefront
   const erpPaths = ['/login', '/logout', '/register', '/dashboard', '/inventory', '/products',
-    '/pos', '/reports', '/settings', '/hr', '/purchase', '/saas-admin',
+    '/billing', '/pos', '/reports', '/settings', '/hr', '/purchase', '/saas-admin',
     '/api', '/analytics', '/audit-logs', '/backup', '/gold-rate', '/notifications', '/ai-assistant', '/repair', '/manufacturing'];
   const isErpPath = erpPaths.some(p => url.pathname.startsWith(p));
 

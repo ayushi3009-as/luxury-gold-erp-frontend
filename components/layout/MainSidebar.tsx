@@ -24,7 +24,7 @@ import {
 
 const menuItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "POS Billing", href: "/pos", icon: Receipt },
+  { name: "POS Billing", href: "/billing", icon: Receipt },
   { name: "Inventory", href: "/inventory", icon: Package },
   { name: "Sales", href: "/dashboard/sales", icon: ShoppingCart },
   { name: "Purchase", href: "/purchase", icon: ShoppingCart },
