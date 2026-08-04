@@ -6,7 +6,11 @@ export async function GET(req: NextRequest) {
   try {
     const session = await getSession();
     if (!session || !session.tenantId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    const data = await prisma.productionOrder.findMany({ where: { tenantId: session.tenantId }, orderBy: { createdAt: 'desc' } });
+    const data = await prisma.productionOrder.findMany({
+      where: { tenantId: session.tenantId },
+      orderBy: { createdAt: 'desc' },
+      include: { jobCard: true }
+    });
     return NextResponse.json({ success: true, data });
   } catch (error: any) {
     return NextResponse.json({ success: false, message: error.message }, { status: 500 });
