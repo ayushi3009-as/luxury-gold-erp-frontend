@@ -100,6 +100,13 @@ model Tenant {
   users                User[]
   userSessions         UserSession[]
   workOrders           WorkOrder[]
+  
+  jobCards             JobCard[]
+  workers              Worker[]
+  workerAssignments    WorkerAssignment[]
+  productionOrders     ProductionOrder[]
+  qualityChecks        QualityCheck[]
+  materialConsumptions MaterialConsumption[]
 }
 
 model Role {
@@ -1482,6 +1489,9 @@ model JobCard {
   createdAt DateTime @default(now())
 
   updatedAt DateTime @updatedAt
+
+  tenantId String?
+  tenant Tenant? @relation(fields: [tenantId], references: [id])
 }
 
 model Worker {
@@ -1508,6 +1518,9 @@ model Worker {
   createdAt DateTime @default(now())
 
   updatedAt DateTime @updatedAt
+
+  tenantId String?
+  tenant Tenant? @relation(fields: [tenantId], references: [id])
 }
 
 model WorkerAssignment {
@@ -1530,6 +1543,9 @@ model WorkerAssignment {
   createdAt DateTime @default(now())
 
   updatedAt DateTime @updatedAt
+
+  tenantId String?
+  tenant Tenant? @relation(fields: [tenantId], references: [id])
 }
 
 model ProductionOrder {
@@ -1558,6 +1574,9 @@ model ProductionOrder {
   createdAt DateTime @default(now())
 
   updatedAt DateTime @updatedAt
+
+  tenantId String?
+  tenant Tenant? @relation(fields: [tenantId], references: [id])
 }
 
 model QualityCheck {
@@ -1580,6 +1599,9 @@ model QualityCheck {
   createdAt DateTime @default(now())
 
   updatedAt DateTime @updatedAt
+
+  tenantId String?
+  tenant Tenant? @relation(fields: [tenantId], references: [id])
 }
 
 model MaterialConsumption {
@@ -1608,4 +1630,7 @@ model MaterialConsumption {
   createdAt DateTime @default(now())
 
   updatedAt DateTime @updatedAt
+
+  tenantId String?
+  tenant Tenant? @relation(fields: [tenantId], references: [id])
 }
