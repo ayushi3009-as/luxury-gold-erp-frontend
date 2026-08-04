@@ -55,26 +55,27 @@ export default function MainSidebar({ userRole }: { userRole?: string }) {
   const pathname = usePathname();
 
   const filteredMenuItems = menuItems.filter(item => {
-    const isMfgSubItem = ["Mfg Dashboard", "Job Cards", "Production", "Workers", "Quality Check", "Material"].includes(item.name);
-
     if (userRole === "SUPER_ADMIN" || userRole === "Super Admin") {
-      // Keep it minimum: hide granular mfg sub-tabs from root view
+      // Minimal view for Super Admin
+      const isMfgSubItem = ["Mfg Dashboard", "Job Cards", "Production", "Workers", "Quality Check", "Material"].includes(item.name);
       return !isMfgSubItem;
     }
 
+    if (item.name === "SaaS Admin") {
+      return false; // Only Super Admins can see the SaaS Admin portal
+    }
+
     if (userRole === "Sales Staff") {
+      // Sales Staff only handles POS and basic sales
       return ["POS Billing", "Sales", "Customers", "Products"].includes(item.name);
     }
     
     if (userRole === "Manufacturing Manager") {
-      // Mfg Manager sees their specific dashboard items
-      return isMfgSubItem;
+      return ["Mfg Dashboard", "Job Cards", "Production", "Workers", "Quality Check", "Material"].includes(item.name);
     }
     
-    // Default fallback (Store Admin, etc.) sees everything EXCEPT SaaS Admin and Mfg sub-items
-    if (item.name === "SaaS Admin") return false;
-    
-    return !isMfgSubItem;
+    // Store Admin (and default fallback for others) sees everything EXCEPT SaaS Admin and specific Mfg pages
+    return !["Mfg Dashboard", "Job Cards", "Production", "Workers", "Quality Check", "Material"].includes(item.name);
   });
 
   return (
