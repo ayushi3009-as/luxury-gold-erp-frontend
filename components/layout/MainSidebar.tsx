@@ -59,8 +59,8 @@ export default function MainSidebar({ userRole }: { userRole?: string }) {
     }
 
     if (userRole === "Sales Staff") {
-      // Sales Staff only handles POS and basic sales
-      return ["Dashboard", "POS Billing", "Sales", "Customers", "Products"].includes(item.name);
+      // Sales Staff only handles POS and basic sales, they shouldn't see store-wide revenue
+      return ["POS Billing", "Sales", "Customers", "Products"].includes(item.name);
     }
     
     // Store Admin (and default fallback for others) sees everything EXCEPT SaaS Admin

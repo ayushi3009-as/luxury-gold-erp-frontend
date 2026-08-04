@@ -28,7 +28,7 @@ export default function LoginPage() {
       if (res.ok) {
         // Force a hard reload so the layout gets the new session cookie role
         if (data.user.role === "Sales Staff") {
-          window.location.href = "/pos";
+          window.location.href = "/billing";
         } else if (data.user.role === "Super Admin" || data.user.role === "SUPER_ADMIN") {
           window.location.href = "/saas-admin";
         } else {
