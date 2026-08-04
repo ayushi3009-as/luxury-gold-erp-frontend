@@ -36,7 +36,6 @@ export default function AppLayout({ children, userRole }: { children: React.Reac
   const isPublicPage =
     pathname === "/" ||
     pathname === "/login" ||
-    pathname.startsWith("/manufacturing-manager") ||
     storefrontPaths.some(p => pathname === p || pathname.startsWith(p + "/"));
 
   if (isPublicPage) {

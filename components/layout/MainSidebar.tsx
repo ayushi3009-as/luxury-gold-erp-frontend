@@ -42,6 +42,13 @@ const menuItems = [
   { name: "Website Settings", href: "/dashboard/settings", icon: Settings },
   { name: "Audit Logs", href: "/audit-logs", icon: FileText },
   { name: "Backup & Restore", href: "/backup", icon: Database },
+  // Manufacturing specific links
+  { name: "Mfg Dashboard", href: "/manufacturing-manager", icon: LayoutDashboard },
+  { name: "Job Cards", href: "/manufacturing-manager/job-cards", icon: FileText },
+  { name: "Production", href: "/manufacturing-manager/production", icon: Factory },
+  { name: "Workers", href: "/manufacturing-manager/workers", icon: Users },
+  { name: "Quality Check", href: "/manufacturing-manager/quality-check", icon: Box },
+  { name: "Material", href: "/manufacturing-manager/material-consumption", icon: Package },
 ];
 
 export default function MainSidebar({ userRole }: { userRole?: string }) {
@@ -63,8 +70,12 @@ export default function MainSidebar({ userRole }: { userRole?: string }) {
       return ["POS Billing", "Sales", "Customers", "Products"].includes(item.name);
     }
     
-    // Store Admin (and default fallback for others) sees everything EXCEPT SaaS Admin
-    return true;
+    if (userRole === "Manufacturing Manager") {
+      return ["Mfg Dashboard", "Job Cards", "Production", "Workers", "Quality Check", "Material"].includes(item.name);
+    }
+    
+    // Store Admin (and default fallback for others) sees everything EXCEPT SaaS Admin and specific Mfg pages
+    return !["Mfg Dashboard", "Job Cards", "Production", "Workers", "Quality Check", "Material"].includes(item.name);
   });
 
   return (
