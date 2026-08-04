@@ -128,9 +128,6 @@ export default function POSBilling() {
           <p className="text-text-secondary mt-1">Point of Sale System for Fast Checkout</p>
         </div>
       </div>
-      <div style={{ backgroundColor: 'red', color: 'white', padding: '20px', fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>
-        IF YOU CAN SEE THIS RED BOX, THE SERVER IS WORKING!
-      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left Side: Product Selection */}
@@ -161,18 +158,32 @@ export default function POSBilling() {
                   <div 
                     key={product.id} 
                     onClick={() => addToCart(product)}
-                    className="group border border-border-theme rounded-xl p-4 cursor-pointer hover:border-accent-gold/50 hover:bg-background-tertiary transition-all relative overflow-hidden"
+                    className="border-2 border-gray-300 rounded-xl p-4 cursor-pointer hover:border-yellow-500 bg-white"
+                    style={{ minHeight: '250px', display: 'flex', flexDirection: 'column' }}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                    <div className="w-full h-32 bg-background-primary rounded-lg mb-3 flex items-center justify-center border border-border-theme overflow-hidden">
-                       <span className="text-xs text-text-secondary">No Image</span>
+                    <div className="w-full h-32 bg-gray-100 rounded-lg mb-4 flex items-center justify-center border border-gray-200">
+                      {product.imageUrl ? (
+                        <img src={product.imageUrl} alt={product.name || 'Product'} className="w-full h-full object-cover rounded-lg" />
+                      ) : (
+                        <span className="text-gray-500 font-bold">No Image</span>
+                      )}
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-text-primary text-sm line-clamp-1" title={product.name}>{product.name || 'Unnamed Product'}</h3>
-                      <p className="text-xs text-text-secondary mt-1">{product.productCode || 'N/A'}</p>
-                      <div className="flex justify-between items-center mt-3">
-                        <span className="text-accent-gold font-bold">₹{product.sellingPrice?.toLocaleString() || 0}</span>
-                        <span className="text-xs bg-background-primary px-2 py-1 rounded border border-border-theme">Stock: {product.inventory?.quantity || 0}</span>
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 className="font-bold text-black text-lg m-0 p-0" style={{ color: 'black' }}>
+                          {product.name || 'Unnamed Product'}
+                        </h3>
+                        <p className="text-gray-800 text-sm m-0 p-0 font-medium" style={{ color: '#333' }}>
+                          {product.productCode || 'N/A'}
+                        </p>
+                      </div>
+                      <div className="flex justify-between items-end mt-4">
+                        <span className="text-yellow-700 font-bold text-xl" style={{ color: '#b45309' }}>
+                          ₹{product.sellingPrice?.toLocaleString() || 0}
+                        </span>
+                        <span className="text-sm bg-gray-200 text-black px-2 py-1 rounded font-bold">
+                          Stock: {product.inventory?.quantity || 0}
+                        </span>
                       </div>
                     </div>
                   </div>
