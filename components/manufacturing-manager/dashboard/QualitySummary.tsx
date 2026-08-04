@@ -9,6 +9,8 @@ interface QualitySummaryProps {
 }
 
 export default function QualitySummary({ qualityStats }: QualitySummaryProps) {
+  const hasData = qualityStats && (qualityStats.passed > 0 || qualityStats.pending > 0 || qualityStats.failed > 0);
+  
   const quality = [
     {
       status: "Passed",
@@ -37,17 +39,23 @@ export default function QualitySummary({ qualityStats }: QualitySummaryProps) {
       </p>
 
       <div className="mt-6 space-y-4">
-        {quality.map((item) => (
-          <div
-            key={item.status}
-            className="flex items-center justify-between rounded-xl bg-background-tertiary px-4 py-4"
-          >
-            <span className="text-text-primary">{item.status}</span>
-            <span className={`font-semibold ${item.color}`}>
-              {item.value}
-            </span>
+        {!hasData ? (
+          <div className="flex h-32 items-center justify-center rounded-xl border border-dashed border-border-theme text-sm text-text-secondary">
+            No quality checks found
           </div>
-        ))}
+        ) : (
+          quality.map((item) => (
+            <div
+              key={item.status}
+              className="flex items-center justify-between rounded-xl bg-background-tertiary px-4 py-4"
+            >
+              <span className="text-text-primary">{item.status}</span>
+              <span className={`font-semibold ${item.color}`}>
+                {item.value}
+              </span>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
