@@ -14,9 +14,9 @@ async function main() {
 
   // Create Workers
   const workersData = [
-    { name: "Rahul Patel", phone: "+91-9876543210", role: "Goldsmith", status: "Active", joinDate: new Date("2025-01-15") },
-    { name: "Amit Shah", phone: "+91-9876543211", role: "Stone Setter", status: "Active", joinDate: new Date("2025-02-20") },
-    { name: "Kiran Joshi", phone: "+91-9876543212", role: "Polisher", status: "Active", joinDate: new Date("2025-03-05") }
+    { fullName: "Rahul Patel", employeeId: "EMP-001", phone: "+91-9876543210", specialization: "Goldsmith", status: "Active" },
+    { fullName: "Amit Shah", employeeId: "EMP-002", phone: "+91-9876543211", specialization: "Stone Setter", status: "Active" },
+    { fullName: "Kiran Joshi", employeeId: "EMP-003", phone: "+91-9876543212", specialization: "Polisher", status: "Active" }
   ];
 
   for (const w of workersData) {
