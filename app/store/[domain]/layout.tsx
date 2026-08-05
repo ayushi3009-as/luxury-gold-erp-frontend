@@ -71,7 +71,7 @@ export default async function StoreLayout({
               <div className="flex flex-1 items-center justify-start gap-8 pr-8 xl:gap-10">
                 <a
                   className="group relative py-3 text-[10.5px] xl:text-[11px] tracking-[0.24em] uppercase transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] whitespace-nowrap text-[#15171b]"
-                  href="/store/[domain]/"
+                  href="/"
                   data-discover="true"
                 >
                   Home
@@ -105,7 +105,7 @@ export default async function StoreLayout({
               <a
                 className="absolute left-1/2 z-10 -translate-x-1/2 shrink-0 px-6 xl:px-10"
                 aria-label="Microtechnique IT Home"
-                href="/store/[domain]/"
+                href="/"
                 data-discover="true"
               >
                 <span className="text-lg md:text-xl font-serif tracking-widest text-[#111] font-bold uppercase">MICROTECHNIQUE IT</span>
@@ -285,7 +285,7 @@ export default async function StoreLayout({
               <a
                 className="absolute left-1/2 z-10 -translate-x-1/2"
                 aria-label="Microtechnique IT Home"
-                href="/store/[domain]/"
+                href="/"
                 data-discover="true"
               >
                 <span className="text-lg md:text-xl font-serif tracking-widest text-[#111] font-bold uppercase">MICROTECHNIQUE IT</span>
