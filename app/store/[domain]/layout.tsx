@@ -455,7 +455,7 @@ export default async function StoreLayout({
             <div className="flex flex-col gap-2 sm:gap-3">
               <a
                 className="text-xs sm:text-sm text-gray-400 hover:text-text-primary transition-colors"
-                href="/shipping-returns"
+                href="/policies/shipping"
                 data-discover="true"
               >
                 Shipping &amp; Returns
@@ -469,14 +469,14 @@ export default async function StoreLayout({
               </a>
               <a
                 className="text-xs sm:text-sm text-gray-400 hover:text-text-primary transition-colors"
-                href="/care-instructions"
+                href="/care"
                 data-discover="true"
               >
                 Care Instructions
               </a>
               <a
                 className="text-xs sm:text-sm text-gray-400 hover:text-text-primary transition-colors"
-                href="/faqs"
+                href="/faq"
                 data-discover="true"
               >
                 FAQs
@@ -717,15 +717,15 @@ export default async function StoreLayout({
             </span>
           </p>
           <div className="flex gap-4 sm:gap-6 text-[10px] sm:text-xs text-gray-500">
-            <span className="hover:text-text-primary transition-colors cursor-pointer">
+            <a href="/policies/privacy" className="hover:text-text-primary transition-colors cursor-pointer">
               Privacy
-            </span>
-            <span className="hover:text-text-primary transition-colors cursor-pointer">
+            </a>
+            <a href="/policies/terms" className="hover:text-text-primary transition-colors cursor-pointer">
               Terms
-            </span>
-            <span className="hover:text-text-primary transition-colors cursor-pointer">
+            </a>
+            <a href="/policies/returns" className="hover:text-text-primary transition-colors cursor-pointer">
               Refund
-            </span>
+            </a>
           </div>
         </div>
       </div>
