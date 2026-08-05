@@ -38,7 +38,16 @@ function MiniChart() {
   );
 }
 
+import { getSession } from "@/lib/session";
+import { redirect } from "next/navigation";
+
 export default async function Home() {
+  const session = await getSession();
+  
+  if (session?.role === "SUPER_ADMIN" || session?.role === "Super Admin") {
+    redirect("/saas-admin");
+  }
+
   const [statsData, categoryData, metalRates, transactions, lowStock] = await Promise.all([
     getDashboardStats(),
     getSalesByCategory(),
