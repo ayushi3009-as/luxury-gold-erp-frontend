@@ -57,7 +57,7 @@ export default function MainSidebar({ userRole }: { userRole?: string }) {
   const filteredMenuItems = menuItems.filter(item => {
     if (userRole === "SUPER_ADMIN" || userRole === "Super Admin") {
       // Minimal view for Super Admin: Only show SaaS management tools
-      const superAdminAllowed = ["Dashboard", "SaaS Admin", "Website Settings", "Audit Logs", "Backup & Restore"];
+      const superAdminAllowed = ["SaaS Admin", "Website Settings", "Audit Logs", "Backup & Restore"];
       return superAdminAllowed.includes(item.name);
     }
 
