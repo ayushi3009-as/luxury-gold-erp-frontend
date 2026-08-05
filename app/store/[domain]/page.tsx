@@ -2,7 +2,7 @@ import prisma from '@/lib/prisma';
 import HeroCarousel from './HeroCarousel';
 import { ProductCard } from '@/components/storefront/ProductCard';
 import Link from 'next/link';
-import { ShieldCheck, Truck, Gem, ArrowRight, Instagram } from 'lucide-react';
+import { ShieldCheck, Truck, Diamond, ArrowRight, Camera } from 'lucide-react';
 
 export default async function StorefrontHomePage({ params }: { params: { domain: string } }) {
   const tenant = await prisma.tenant.findUnique({
@@ -43,7 +43,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
             <p className="text-gray-500 text-sm mt-1">Fully Insured Nationwide Shipping</p>
           </div>
           <div className="flex flex-col items-center pt-8 md:pt-0">
-            <Gem className="text-[#D4AF37] w-8 h-8 mb-3" />
+            <Diamond className="text-[#D4AF37] w-8 h-8 mb-3" />
             <h4 className="font-bold text-sm tracking-widest uppercase text-[#111]">Lifetime Exchange</h4>
             <p className="text-gray-500 text-sm mt-1">Guaranteed Buyback Value</p>
           </div>
@@ -152,7 +152,7 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
       {/* 6. Instagram/Social Feed */}
       <section className="py-24 bg-[#FAFAFA] border-t border-gray-100">
         <div className="text-center mb-12">
-          <Instagram className="w-8 h-8 mx-auto text-[#D4AF37] mb-4" />
+          <Camera className="w-8 h-8 mx-auto text-[#D4AF37] mb-4" />
           <h2 className="text-3xl font-serif text-[#111] mb-2">Follow Our Journey</h2>
           <p className="text-gray-500 uppercase tracking-widest text-sm font-bold">@luxurygold_erp</p>
         </div>
@@ -166,9 +166,9 @@ export default async function StorefrontHomePage({ params }: { params: { domain:
             "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400",
           ].map((src, i) => (
             <div key={i} className="relative aspect-square group overflow-hidden bg-gray-100">
-              <img src={src} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Instagram post" />
+              <img src={src} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Social post" />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                <Instagram className="text-white opacity-0 group-hover:opacity-100 transition-opacity transform scale-50 group-hover:scale-100 duration-300 w-8 h-8" />
+                <Camera className="text-white opacity-0 group-hover:opacity-100 transition-opacity transform scale-50 group-hover:scale-100 duration-300 w-8 h-8" />
               </div>
             </div>
           ))}
